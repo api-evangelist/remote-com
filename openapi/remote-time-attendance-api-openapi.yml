@@ -1,0 +1,398 @@
+openapi: 3.1.0
+info:
+  title: Remote Time and Attendance API
+  description: |
+    Manage time off, leave policies, leave balances, and timesheets for
+    employees on Remote.com. The API exposes both manager-driven and
+    employee-driven flows and surfaces every state change via webhooks
+    (requested, approved, declined, cancellation_requested, started,
+    taken, etc.).
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Time Off
+    description: Time-off requests and approvals
+  - name: Leave Policies
+    description: Per-country leave policy definitions
+  - name: Leave Balances
+    description: Per-employee leave balances
+  - name: Timesheets
+    description: Hourly and salaried timesheets
+
+paths:
+  /timeoff:
+    get:
+      summary: List Time Off Requests
+      operationId: listTimeOffRequests
+      tags: [Time Off]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: status, in: query, schema: { $ref: '#/components/schemas/TimeOffStatus' } }
+        - { name: starts_after, in: query, schema: { type: string, format: date } }
+        - { name: ends_before, in: query, schema: { type: string, format: date } }
+      responses:
+        '200':
+          description: Time-off requests.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffList' }
+    post:
+      summary: Create A Time Off Request
+      operationId: createTimeOffRequest
+      tags: [Time Off]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TimeOffCreateRequest' }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffEnvelope' }
+
+  /timeoff/{timeoff_id}:
+    parameters:
+      - { name: timeoff_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Time Off Request
+      operationId: showTimeOffRequest
+      tags: [Time Off]
+      responses:
+        '200':
+          description: Request.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffEnvelope' }
+    patch:
+      summary: Update A Time Off Request
+      operationId: updateTimeOffRequest
+      tags: [Time Off]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TimeOffCreateRequest' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffEnvelope' }
+
+  /timeoff/{timeoff_id}/approve:
+    parameters:
+      - { name: timeoff_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Approve A Time Off Request
+      operationId: approveTimeOffRequest
+      tags: [Time Off]
+      responses:
+        '200':
+          description: Approved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffEnvelope' }
+
+  /timeoff/{timeoff_id}/decline:
+    parameters:
+      - { name: timeoff_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Decline A Time Off Request
+      operationId: declineTimeOffRequest
+      tags: [Time Off]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason: { type: string }
+      responses:
+        '200':
+          description: Declined.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffEnvelope' }
+
+  /timeoff/{timeoff_id}/cancel:
+    parameters:
+      - { name: timeoff_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Cancel A Time Off Request
+      operationId: cancelTimeOffRequest
+      tags: [Time Off]
+      responses:
+        '200':
+          description: Canceled.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeOffEnvelope' }
+
+  /leave_policies:
+    get:
+      summary: List Leave Policies
+      operationId: listLeavePolicies
+      tags: [Leave Policies]
+      parameters:
+        - { name: country_code, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Leave policies.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LeavePolicyList' }
+
+  /leave_policies/{leave_policy_id}:
+    parameters:
+      - { name: leave_policy_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Leave Policy
+      operationId: showLeavePolicy
+      tags: [Leave Policies]
+      responses:
+        '200':
+          description: Leave policy.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LeavePolicyEnvelope' }
+
+  /leave_balances:
+    get:
+      summary: List Leave Balances
+      operationId: listLeaveBalances
+      tags: [Leave Balances]
+      parameters:
+        - { name: employment_id, in: query, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Leave balances for the employment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      leave_balances:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            leave_type: { type: string }
+                            remaining_days: { type: number }
+                            used_days: { type: number }
+                            accrued_days: { type: number }
+                            unit:
+                              type: string
+                              enum: [days, hours]
+
+  /timesheets:
+    get:
+      summary: List Timesheets
+      operationId: listTimesheets
+      tags: [Timesheets]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: status, in: query, schema: { type: string, enum: [draft, submitted, approved, sent_back] } }
+        - { name: period_start, in: query, schema: { type: string, format: date } }
+      responses:
+        '200':
+          description: Timesheets.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimesheetList' }
+
+  /timesheets/{timesheet_id}:
+    parameters:
+      - { name: timesheet_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Timesheet
+      operationId: showTimesheet
+      tags: [Timesheets]
+      responses:
+        '200':
+          description: Timesheet.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimesheetEnvelope' }
+
+  /timesheets/{timesheet_id}/approve:
+    parameters:
+      - { name: timesheet_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Approve A Timesheet
+      operationId: approveTimesheet
+      tags: [Timesheets]
+      responses:
+        '200':
+          description: Approved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimesheetEnvelope' }
+
+  /timesheets/{timesheet_id}/send_back:
+    parameters:
+      - { name: timesheet_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Send A Timesheet Back For Revision
+      operationId: sendTimesheetBack
+      tags: [Timesheets]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason: { type: string }
+      responses:
+        '200':
+          description: Sent back.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimesheetEnvelope' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    TimeOffStatus:
+      type: string
+      enum: [requested, approved, declined, cancellation_requested, canceled, started, taken]
+
+    TimeOff:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        leave_type: { type: string }
+        leave_policy_id: { type: string, format: uuid }
+        status: { $ref: '#/components/schemas/TimeOffStatus' }
+        start_date: { type: string, format: date }
+        end_date: { type: string, format: date }
+        total_days: { type: number }
+        note: { type: string }
+        created_at: { type: string, format: date-time }
+
+    TimeOffList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timeoff:
+              type: array
+              items: { $ref: '#/components/schemas/TimeOff' }
+
+    TimeOffEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timeoff: { $ref: '#/components/schemas/TimeOff' }
+
+    TimeOffCreateRequest:
+      type: object
+      required: [employment_id, leave_type, start_date, end_date]
+      properties:
+        employment_id: { type: string, format: uuid }
+        leave_type: { type: string }
+        leave_policy_id: { type: string, format: uuid }
+        start_date: { type: string, format: date }
+        end_date: { type: string, format: date }
+        note: { type: string }
+
+    LeavePolicy:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        country_code: { type: string }
+        leave_type: { type: string }
+        accrual_method:
+          type: string
+          enum: [annual, monthly, per_period, statutory]
+        annual_allowance: { type: number }
+        unit:
+          type: string
+          enum: [days, hours]
+
+    LeavePolicyList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            leave_policies:
+              type: array
+              items: { $ref: '#/components/schemas/LeavePolicy' }
+
+    LeavePolicyEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            leave_policy: { $ref: '#/components/schemas/LeavePolicy' }
+
+    Timesheet:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        period_start: { type: string, format: date }
+        period_end: { type: string, format: date }
+        status:
+          type: string
+          enum: [draft, submitted, approved, sent_back]
+        total_hours: { type: number }
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              date: { type: string, format: date }
+              hours: { type: number }
+              notes: { type: string }
+
+    TimesheetList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timesheets:
+              type: array
+              items: { $ref: '#/components/schemas/Timesheet' }
+
+    TimesheetEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timesheet: { $ref: '#/components/schemas/Timesheet' }

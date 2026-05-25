@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://gateway.remote.com/oauth2/token",
+    "headers": { "Content-Type": "application/x-www-form-urlencoded" },
+    "body_form": {
+      "grant_type": "authorization_code",
+      "client_id": "{partner_client_id}",
+      "client_secret": "{partner_client_secret}",
+      "code": "{authorization_code}",
+      "redirect_uri": "https://example-partner.com/callback"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "access_token": "eyJhbGciOiJSUzI1NiIs...",
+      "token_type": "bearer",
+      "expires_in": 3600,
+      "refresh_token": "eyJhbGciOiJSUzI1NiIs...",
+      "scope": "company_admin",
+      "company_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    }
+  }
+}

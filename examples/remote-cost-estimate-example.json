@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://gateway.remote.com/v1/cost_calculator/estimate",
+    "headers": {
+      "Authorization": "Bearer {company_access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "country_code": "PRT",
+      "employment_model": "eor",
+      "annual_gross_salary": 6000000,
+      "currency": "EUR",
+      "include_benefits": true
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": {
+        "total_annual_cost": 7950000,
+        "employer_contributions": 1425000,
+        "remote_fee": 525000,
+        "currency": "EUR",
+        "breakdown": [
+          { "label": "Gross salary", "amount": 6000000, "recurrence": "annual" },
+          { "label": "Employer social security (TSU)", "amount": 1425000, "recurrence": "annual" },
+          { "label": "Remote EOR platform fee", "amount": 525000, "recurrence": "annual" }
+        ]
+      }
+    }
+  }
+}

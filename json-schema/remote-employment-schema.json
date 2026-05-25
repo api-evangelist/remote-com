@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/remote-com/main/json-schema/remote-employment-schema.json",
+  "title": "Employment",
+  "description": "An employment record on the Remote platform. Represents the relationship between a company and a worker under one of three models: Global Payroll, PEO, or EOR.",
+  "type": "object",
+  "required": ["id", "company_id", "full_name", "personal_email", "employment_type", "status"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "company_id": { "type": "string", "format": "uuid" },
+    "external_id": { "type": ["string", "null"] },
+    "full_name": { "type": "string" },
+    "personal_email": { "type": "string", "format": "email" },
+    "work_email": { "type": ["string", "null"], "format": "email" },
+    "job_title": { "type": ["string", "null"] },
+    "country": {
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "description": "ISO 3166-1 alpha-3 country code." },
+        "name": { "type": "string" }
+      }
+    },
+    "employment_type": {
+      "type": "string",
+      "enum": ["employee", "contractor", "director"]
+    },
+    "employment_model": {
+      "type": "string",
+      "enum": ["global_payroll", "peo", "eor"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["created", "invited", "initiated", "pending", "active", "probation", "offboarding_initiated", "offboarded", "archived"]
+    },
+    "lifecycle_stage": {
+      "type": "string",
+      "enum": ["employment_creation", "onboarding", "reserve_invoice", "probation", "active", "offboarding", "archived"]
+    },
+    "manager_id": { "type": ["string", "null"], "format": "uuid" },
+    "department_id": { "type": ["string", "null"], "format": "uuid" },
+    "start_date": { "type": "string", "format": "date" },
+    "provisional_start_date": { "type": ["string", "null"], "format": "date" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remote Contractors API — Contractors
+  description: 'Self-contained Naftiko capability for managing contractor subscriptions, invoices, and scheduled invoices on Remote.'
+  tags:
+  - Remote
+  - Contractors
+  - COR
+  - Invoices
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    REMOTE_ACCESS_TOKEN: REMOTE_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: contractors-contractors
+    baseUri: https://gateway.remote.com
+    description: Remote Contractors business capability.
+    resources:
+    - name: v1-contractor-invoices
+      path: /v1/contractor_invoices
+      operations:
+      - name: listcontractorinvoices
+        method: GET
+        description: List Contractor Invoices
+        inputParameters:
+        - name: employment_id
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-contractor-invoice
+      path: /v1/contractor_invoices/{contractor_invoice_id}
+      operations:
+      - name: showcontractorinvoice
+        method: GET
+        description: Show A Contractor Invoice
+        inputParameters:
+        - name: contractor_invoice_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-scheduled-invoices
+      path: /v1/scheduled_contractor_invoices
+      operations:
+      - name: listscheduledcontractorinvoices
+        method: GET
+        description: List Scheduled Contractor Invoices
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-eligibility
+      path: /v1/contract_eligibility
+      operations:
+      - name: createcontracteligibility
+        method: POST
+        description: Create A Contract Eligibility Check
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.REMOTE_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: contractors-contractors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remote Contractors.
+    tools:
+    - name: remote-list-contractor-invoices
+      description: List contractor invoices, optionally filtered by employment or status.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: contractors-contractors.listcontractorinvoices
+      with:
+        employment_id: tools.employment_id
+        status: tools.status
+    - name: remote-show-contractor-invoice
+      description: Show a contractor invoice by id.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: contractors-contractors.showcontractorinvoice
+      with:
+        contractor_invoice_id: tools.contractor_invoice_id
+    - name: remote-list-scheduled-contractor-invoices
+      description: List scheduled (recurring) contractor invoices.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: contractors-contractors.listscheduledcontractorinvoices
+    - name: remote-contractor-eligibility-check
+      description: Run a contractor-vs-employee misclassification eligibility check.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: contractors-contractors.createcontracteligibility
+      with:
+        body: tools.body

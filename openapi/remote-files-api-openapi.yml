@@ -1,0 +1,343 @@
+openapi: 3.1.0
+info:
+  title: Remote Files And Custom Fields API
+  description: |
+    Upload, download, and reference files attached to companies and
+    employments on Remote. Also covers custom-field definitions and values,
+    plus the supported-countries catalog used to look up jurisdiction-aware
+    JSON Schema forms across the rest of the platform.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Files
+    description: Document upload and retrieval
+  - name: Custom Fields
+    description: Customer-defined fields on companies and employments
+  - name: Countries
+    description: List of countries Remote supports
+  - name: Cost Calculator
+    description: Estimate the loaded cost of hiring in a given country
+
+paths:
+  /files:
+    post:
+      summary: Upload A File
+      operationId: uploadFile
+      tags: [Files]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, attachable_id, attachable_type]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                attachable_id:
+                  type: string
+                  format: uuid
+                attachable_type:
+                  type: string
+                  enum: [employment, company, expense, contract_document]
+                category:
+                  type: string
+                  description: Optional file category tag.
+      responses:
+        '201':
+          description: Uploaded.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileEnvelope' }
+
+  /files/{file_id}:
+    parameters:
+      - { name: file_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Download A File
+      operationId: downloadFile
+      tags: [Files]
+      responses:
+        '200':
+          description: File binary or signed URL.
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      download_url: { type: string, format: uri }
+                      expires_at: { type: string, format: date-time }
+
+  /custom_fields:
+    get:
+      summary: List Custom Field Definitions
+      operationId: listCustomFieldDefinitions
+      tags: [Custom Fields]
+      parameters:
+        - { name: scope, in: query, schema: { type: string, enum: [company, employment] } }
+      responses:
+        '200':
+          description: Custom field definitions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      custom_fields:
+                        type: array
+                        items: { $ref: '#/components/schemas/CustomFieldDefinition' }
+    post:
+      summary: Create A Custom Field Definition
+      operationId: createCustomFieldDefinition
+      tags: [Custom Fields]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomFieldDefinition' }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      custom_field: { $ref: '#/components/schemas/CustomFieldDefinition' }
+
+  /custom_fields/{custom_field_id}/values:
+    parameters:
+      - { name: custom_field_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: List Custom Field Values
+      operationId: listCustomFieldValues
+      tags: [Custom Fields]
+      parameters:
+        - { name: subject_id, in: query, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Values.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items: { $ref: '#/components/schemas/CustomFieldValue' }
+    put:
+      summary: Upsert A Custom Field Value
+      operationId: upsertCustomFieldValue
+      tags: [Custom Fields]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomFieldValue' }
+      responses:
+        '200':
+          description: Upserted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      value: { $ref: '#/components/schemas/CustomFieldValue' }
+
+  /countries:
+    get:
+      summary: List Supported Countries
+      operationId: listCountries
+      tags: [Countries]
+      responses:
+        '200':
+          description: Countries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      countries:
+                        type: array
+                        items: { $ref: '#/components/schemas/Country' }
+
+  /countries/{country_code}:
+    parameters:
+      - { name: country_code, in: path, required: true, schema: { type: string, description: ISO 3166-1 alpha-3 country code. } }
+    get:
+      summary: Show A Country
+      operationId: showCountry
+      tags: [Countries]
+      responses:
+        '200':
+          description: Country.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      country: { $ref: '#/components/schemas/Country' }
+
+  /cost_calculator/estimate:
+    post:
+      summary: Estimate Employment Cost
+      description: |
+        Returns the loaded cost of hiring an employee under EOR or Global
+        Payroll, including statutory contributions and Remote platform fees.
+      operationId: estimateEmploymentCost
+      tags: [Cost Calculator]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [country_code, employment_model, annual_gross_salary, currency]
+              properties:
+                country_code: { type: string }
+                employment_model:
+                  type: string
+                  enum: [global_payroll, peo, eor]
+                annual_gross_salary: { type: integer }
+                currency: { type: string }
+                include_benefits: { type: boolean, default: true }
+      responses:
+        '200':
+          description: Cost estimate.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      total_annual_cost: { type: integer }
+                      employer_contributions: { type: integer }
+                      remote_fee: { type: integer }
+                      currency: { type: string }
+                      breakdown:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label: { type: string }
+                            amount: { type: integer }
+                            recurrence:
+                              type: string
+                              enum: [monthly, annual, one_time]
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    File:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        filename: { type: string }
+        content_type: { type: string }
+        size: { type: integer }
+        attachable_id: { type: string, format: uuid }
+        attachable_type:
+          type: string
+          enum: [employment, company, expense, contract_document]
+        category: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+        download_url: { type: string, format: uri }
+
+    FileEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            file: { $ref: '#/components/schemas/File' }
+
+    CustomFieldDefinition:
+      type: object
+      required: [name, scope, type]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        scope:
+          type: string
+          enum: [company, employment]
+        type:
+          type: string
+          enum: [string, number, boolean, date, enum, multiselect]
+        options:
+          type: array
+          items: { type: string }
+          description: For enum/multiselect types.
+        required: { type: boolean, default: false }
+        description: { type: string }
+
+    CustomFieldValue:
+      type: object
+      required: [subject_id, value]
+      properties:
+        id: { type: string, format: uuid }
+        custom_field_id: { type: string, format: uuid }
+        subject_id: { type: string, format: uuid }
+        value:
+          oneOf:
+            - { type: string }
+            - { type: number }
+            - { type: boolean }
+            - { type: array, items: { type: string } }
+
+    Country:
+      type: object
+      properties:
+        code: { type: string, description: ISO 3166-1 alpha-3 country code. }
+        name: { type: string }
+        currency: { type: string }
+        supported_employment_models:
+          type: array
+          items:
+            type: string
+            enum: [global_payroll, peo, eor, contractor]
+        has_remote_entity: { type: boolean }

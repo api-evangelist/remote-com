@@ -1,0 +1,143 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "remote": "https://gateway.remote.com/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Company": {
+      "@id": "remote:Company",
+      "@context": {
+        "id": { "@id": "remote:Company/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "slug": { "@id": "remote:Company/slug", "@type": "xsd:string" },
+        "status": { "@id": "remote:Company/status", "@type": "xsd:string" },
+        "address": { "@id": "schema:address", "@type": "schema:PostalAddress" },
+        "tax_number": { "@id": "schema:taxID", "@type": "xsd:string" },
+        "external_id": { "@id": "schema:identifier", "@type": "xsd:string" },
+        "created_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+        "updated_at": { "@id": "schema:dateModified", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "Employment": {
+      "@id": "remote:Employment",
+      "@context": {
+        "id": { "@id": "remote:Employment/id", "@type": "xsd:string" },
+        "company_id": { "@id": "remote:Employment/companyId", "@type": "xsd:string" },
+        "full_name": { "@id": "schema:name", "@type": "xsd:string" },
+        "personal_email": { "@id": "schema:email", "@type": "xsd:string" },
+        "work_email": { "@id": "remote:Employment/workEmail", "@type": "xsd:string" },
+        "job_title": { "@id": "schema:jobTitle", "@type": "xsd:string" },
+        "employment_type": { "@id": "remote:Employment/employmentType", "@type": "xsd:string" },
+        "employment_model": { "@id": "remote:Employment/employmentModel", "@type": "xsd:string" },
+        "status": { "@id": "remote:Employment/status", "@type": "xsd:string" },
+        "lifecycle_stage": { "@id": "remote:Employment/lifecycleStage", "@type": "xsd:string" },
+        "country": { "@id": "schema:addressCountry" },
+        "start_date": { "@id": "schema:startDate", "@type": "xsd:date" },
+        "manager_id": { "@id": "schema:manager", "@type": "xsd:string" },
+        "department_id": { "@id": "schema:department", "@type": "xsd:string" }
+      }
+    },
+
+    "EmploymentContract": {
+      "@id": "remote:EmploymentContract",
+      "@context": {
+        "id": { "@id": "remote:EmploymentContract/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:EmploymentContract/employmentId", "@type": "xsd:string" },
+        "status": { "@id": "remote:EmploymentContract/status", "@type": "xsd:string" },
+        "contract_type": { "@id": "remote:EmploymentContract/contractType", "@type": "xsd:string" },
+        "annual_gross_salary": { "@id": "schema:baseSalary", "@type": "xsd:integer" },
+        "currency_code": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+        "weekly_hours": { "@id": "remote:EmploymentContract/weeklyHours", "@type": "xsd:decimal" }
+      }
+    },
+
+    "ContractAmendment": {
+      "@id": "remote:ContractAmendment",
+      "@context": {
+        "id": { "@id": "remote:ContractAmendment/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:ContractAmendment/employmentId", "@type": "xsd:string" },
+        "status": { "@id": "remote:ContractAmendment/status", "@type": "xsd:string" },
+        "effective_date": { "@id": "remote:ContractAmendment/effectiveDate", "@type": "xsd:date" }
+      }
+    },
+
+    "TimeOff": {
+      "@id": "remote:TimeOff",
+      "@context": {
+        "id": { "@id": "remote:TimeOff/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:TimeOff/employmentId", "@type": "xsd:string" },
+        "leave_type": { "@id": "remote:TimeOff/leaveType", "@type": "xsd:string" },
+        "status": { "@id": "remote:TimeOff/status", "@type": "xsd:string" },
+        "start_date": { "@id": "schema:startDate", "@type": "xsd:date" },
+        "end_date": { "@id": "schema:endDate", "@type": "xsd:date" },
+        "total_days": { "@id": "remote:TimeOff/totalDays", "@type": "xsd:decimal" }
+      }
+    },
+
+    "Timesheet": {
+      "@id": "remote:Timesheet",
+      "@context": {
+        "id": { "@id": "remote:Timesheet/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:Timesheet/employmentId", "@type": "xsd:string" },
+        "status": { "@id": "remote:Timesheet/status", "@type": "xsd:string" },
+        "period_start": { "@id": "schema:startDate", "@type": "xsd:date" },
+        "period_end": { "@id": "schema:endDate", "@type": "xsd:date" },
+        "total_hours": { "@id": "remote:Timesheet/totalHours", "@type": "xsd:decimal" }
+      }
+    },
+
+    "Expense": {
+      "@id": "remote:Expense",
+      "@context": {
+        "id": { "@id": "remote:Expense/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:Expense/employmentId", "@type": "xsd:string" },
+        "category": { "@id": "schema:category", "@type": "xsd:string" },
+        "amount": { "@id": "schema:price", "@type": "xsd:integer" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+        "status": { "@id": "remote:Expense/status", "@type": "xsd:string" }
+      }
+    },
+
+    "Incentive": {
+      "@id": "remote:Incentive",
+      "@context": {
+        "id": { "@id": "remote:Incentive/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:Incentive/employmentId", "@type": "xsd:string" },
+        "type": { "@id": "remote:Incentive/type", "@type": "xsd:string" },
+        "amount": { "@id": "schema:price", "@type": "xsd:integer" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+        "status": { "@id": "remote:Incentive/status", "@type": "xsd:string" }
+      }
+    },
+
+    "BillingDocument": {
+      "@id": "remote:BillingDocument",
+      "@context": {
+        "id": { "@id": "remote:BillingDocument/id", "@type": "xsd:string" },
+        "number": { "@id": "schema:identifier", "@type": "xsd:string" },
+        "status": { "@id": "remote:BillingDocument/status", "@type": "xsd:string" },
+        "amount": { "@id": "schema:price", "@type": "xsd:integer" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+        "issued_at": { "@id": "schema:dateIssued", "@type": "xsd:dateTime" },
+        "due_at": { "@id": "schema:dateDue", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "Payslip": {
+      "@id": "remote:Payslip",
+      "@context": {
+        "id": { "@id": "remote:Payslip/id", "@type": "xsd:string" },
+        "employment_id": { "@id": "remote:Payslip/employmentId", "@type": "xsd:string" },
+        "period_start": { "@id": "schema:startDate", "@type": "xsd:date" },
+        "period_end": { "@id": "schema:endDate", "@type": "xsd:date" },
+        "gross_amount": { "@id": "remote:Payslip/grossAmount", "@type": "xsd:integer" },
+        "net_amount": { "@id": "remote:Payslip/netAmount", "@type": "xsd:integer" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" }
+      }
+    }
+  }
+}

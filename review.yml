@@ -1,0 +1,53 @@
+aid: remote-com
+reviewer: API Evangelist
+reviewedAt: '2026-05-25'
+tier: 1
+verdict: |
+  Tier-1. Remote ships a developer-grade API with real OpenAPI-backed
+  documentation, a signed-webhook event surface for nearly every state
+  change, four OAuth 2.0 flows, a publicly maintained CLI, multiple
+  open-source SDKs, an AI Agent Toolkit, and an official MCP server.
+  This is one of the cleanest API surfaces in the global-payroll /
+  EOR space.
+scores:
+  documentation: 5
+  openapi: 5
+  authentication: 5
+  webhooks: 5
+  sdk: 5
+  cli: 4
+  mcp: 5
+  pricing_transparency: 5
+  status_page: 4
+  security_trust: 5
+  sandbox: 5
+  ai_readiness: 5
+strengths:
+  - "195+ documented endpoints with per-endpoint OAuth scope tables"
+  - "developer.remote.com/llms.txt exposes the whole docs surface to AI agents"
+  - "Per-country JSON Schema forms make localized data collection programmatic"
+  - "Sandbox at gateway.remote-sandbox.com with separate partner sandbox"
+  - "Signed webhooks (X-Remote-Signature) with explicit verification docs"
+  - "4 OAuth 2.0 flows including partner client-credentials and JWT assertion"
+  - "Official MCP server with OAuth 2.0 — no manual API-key setup required"
+  - "34+ tool TypeScript AI Agent Toolkit (@remoteoss/ai-agent-toolkit)"
+  - "React Embedded Flows SDK for Cost Calculator, Onboarding, Amendment, Termination"
+  - "Transparent pricing with annual/monthly tiers and 15% discounts for startups and social-purpose orgs"
+  - "SOC 2 Type 2 + ISO 27001 + dedicated trust portal at trust.remote.com"
+weaknesses:
+  - "No public, downloadable OpenAPI JSON/YAML file is linked from the developer portal — clients must reverse-engineer specs from the per-endpoint reference pages or llms.txt"
+  - "Rate limit policy is per-company at 300 rpm with no documented Retry-After header — clients must read x-ratelimit-reset (ms) and self-implement backoff"
+  - "Changelog requires logged-in access (the public summary page links out to component-specific changelogs only)"
+  - "Status page does not name the underlying provider (Statuspage/Atlassian or similar) — components are reported only as a single Remote Platform rollup"
+recommendations:
+  - "Publish a single canonical OpenAPI YAML/JSON at a stable URL"
+  - "Add a public RSS / Atom feed for the REST API changelog"
+  - "Document Retry-After semantics (or add the header) for 429 responses"
+  - "Expose per-API-resource rate limits if internally differentiated"
+notes: |
+  Remote's API surface is unusual for the HR space: it's built on
+  modern OAuth 2.0 patterns, exposes signed webhooks for nearly every
+  state change, and has been deliberately engineered to be consumed
+  by AI agents (MCP server, ai-agent-toolkit, llms.txt). The partner
+  story is also strong — separate client-credentials flow, dedicated
+  partners sandbox, and JWT bearer assertions for on-behalf-of access.

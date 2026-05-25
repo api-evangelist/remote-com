@@ -1,0 +1,142 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remote Time And Attendance API — Time Off
+  description: 'Self-contained Naftiko capability for managing employee time-off requests on Remote, including create, approve, decline, and cancel.'
+  tags:
+  - Remote
+  - Time Off
+  - HRIS
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    REMOTE_ACCESS_TOKEN: REMOTE_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: time-off
+    baseUri: https://gateway.remote.com
+    description: Remote Time-Off business capability.
+    resources:
+    - name: v1-timeoff
+      path: /v1/timeoff
+      operations:
+      - name: listtimeoff
+        method: GET
+        description: List Time Off Requests
+        inputParameters:
+        - name: employment_id
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createtimeoff
+        method: POST
+        description: Create A Time Off Request
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-timeoff-id
+      path: /v1/timeoff/{timeoff_id}
+      operations:
+      - name: showtimeoff
+        method: GET
+        description: Show A Time Off Request
+        inputParameters:
+        - name: timeoff_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-timeoff-approve
+      path: /v1/timeoff/{timeoff_id}/approve
+      operations:
+      - name: approvetimeoff
+        method: POST
+        description: Approve A Time Off Request
+        inputParameters:
+        - name: timeoff_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-timeoff-decline
+      path: /v1/timeoff/{timeoff_id}/decline
+      operations:
+      - name: declinetimeoff
+        method: POST
+        description: Decline A Time Off Request
+        inputParameters:
+        - name: timeoff_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.REMOTE_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: time-off-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remote Time-Off.
+    tools:
+    - name: remote-list-timeoff
+      description: List time-off requests, optionally filtered by employment and status.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: time-off.listtimeoff
+      with:
+        employment_id: tools.employment_id
+        status: tools.status
+    - name: remote-create-timeoff
+      description: Create a time-off request.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: time-off.createtimeoff
+      with:
+        body: tools.body
+    - name: remote-show-timeoff
+      description: Show a time-off request.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: time-off.showtimeoff
+      with:
+        timeoff_id: tools.timeoff_id
+    - name: remote-approve-timeoff
+      description: Approve a time-off request.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: time-off.approvetimeoff
+      with:
+        timeoff_id: tools.timeoff_id
+    - name: remote-decline-timeoff
+      description: Decline a time-off request with a reason.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: time-off.declinetimeoff
+      with:
+        timeoff_id: tools.timeoff_id
+        body: tools.body

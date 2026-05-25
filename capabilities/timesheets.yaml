@@ -1,0 +1,93 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remote Time And Attendance API — Timesheets
+  description: 'Self-contained Naftiko capability for listing, approving, and sending back employee timesheets on Remote.'
+  tags:
+  - Remote
+  - Timesheets
+  - HRIS
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    REMOTE_ACCESS_TOKEN: REMOTE_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: timesheets
+    baseUri: https://gateway.remote.com
+    description: Remote Timesheets business capability.
+    resources:
+    - name: v1-timesheets
+      path: /v1/timesheets
+      operations:
+      - name: listtimesheets
+        method: GET
+        description: List Timesheets
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-timesheet-approve
+      path: /v1/timesheets/{timesheet_id}/approve
+      operations:
+      - name: approvetimesheet
+        method: POST
+        description: Approve A Timesheet
+        inputParameters:
+        - name: timesheet_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-timesheet-sendback
+      path: /v1/timesheets/{timesheet_id}/send_back
+      operations:
+      - name: sendbacktimesheet
+        method: POST
+        description: Send A Timesheet Back For Revision
+        inputParameters:
+        - name: timesheet_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.REMOTE_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: timesheets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remote Timesheets.
+    tools:
+    - name: remote-list-timesheets
+      description: List timesheets for the company.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: timesheets.listtimesheets
+    - name: remote-approve-timesheet
+      description: Approve a timesheet.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: timesheets.approvetimesheet
+      with:
+        timesheet_id: tools.timesheet_id
+    - name: remote-sendback-timesheet
+      description: Send a timesheet back for revision with a reason.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: timesheets.sendbacktimesheet
+      with:
+        timesheet_id: tools.timesheet_id
+        body: tools.body

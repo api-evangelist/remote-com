@@ -1,0 +1,105 @@
+specification: API Commons FinOps
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/FinOps
+provider: Remote
+providerId: remote-com
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Allocation
+  - FOCUS
+description: |
+  Remote's billing surface mapped to the FinOps Framework / FOCUS 1.0 data
+  specification. Remote bills per-seat (per-employee, per-contractor) for
+  its core services plus pass-through costs for statutory contributions,
+  benefits, expenses, incentives, and payroll-delivery fees. Itemized
+  breakdowns are exposed via `/v1/billing_documents/{id}/breakdown` and
+  emitted via the `billing_document.issued` webhook.
+sources:
+  - https://remote.com/pricing
+  - https://developer.remote.com/reference/get_index_billing_document
+  - https://developer.remote.com/reference/get_get_breakdown_billing_document
+
+focusMapping:
+  BilledCost: data.billing_documents[].amount
+  EffectiveCost: data.billing_documents[].amount  # same as billed; Remote does not expose committed-use discounts via API
+  ListCost: data.billing_documents[].breakdown[].list_amount
+  ContractedCost: data.billing_documents[].breakdown[].contracted_amount
+  BillingCurrency: data.billing_documents[].currency
+  BillingPeriodStart: data.billing_documents[].period_start
+  BillingPeriodEnd: data.billing_documents[].period_end
+  ChargePeriodStart: data.billing_documents[].breakdown[].period_start
+  ChargePeriodEnd: data.billing_documents[].breakdown[].period_end
+  InvoiceId: data.billing_documents[].number
+  ProviderName: Remote
+  PublisherName: Remote
+  ServiceName: data.billing_documents[].breakdown[].service
+  ServiceCategory: HR & Payroll
+  SkuId: data.billing_documents[].breakdown[].sku
+  ChargeCategory: data.billing_documents[].breakdown[].charge_category
+  ChargeFrequency: data.billing_documents[].breakdown[].recurrence
+  PricingQuantity: data.billing_documents[].breakdown[].quantity
+  PricingUnit: data.billing_documents[].breakdown[].unit
+  UnitPrice: data.billing_documents[].breakdown[].unit_price
+  ResourceId: data.billing_documents[].breakdown[].employment_id
+  ResourceName: data.billing_documents[].breakdown[].employment_name
+  RegionId: data.billing_documents[].breakdown[].country_code
+
+chargeCategories:
+  - id: platform_fee
+    label: Platform fee (per seat)
+    description: Per-employee or per-contractor monthly Remote service fee.
+  - id: payroll_delivery_fee
+    label: Per-payroll delivery fee
+    description: Charged for each payroll cycle delivered on Global Payroll.
+  - id: implementation_fee
+    label: Entity implementation fee
+    description: One-time per-entity implementation/setup charge for Global Payroll.
+  - id: statutory_contributions
+    label: Statutory employer contributions
+    description: Employer-side taxes and statutory benefits (social security, pension, healthcare, etc.).
+  - id: gross_salary
+    label: Gross salary pass-through
+    description: Employee gross salary paid through Remote.
+  - id: benefits
+    label: Benefits pass-through
+    description: Localized benefit premiums (health, dental, pension, life, disability).
+  - id: incentives
+    label: Incentives & bonuses
+    description: One-time bonuses and recurring incentive amounts billed for the period.
+  - id: expenses
+    label: Expense reimbursements
+    description: Reimbursed employee expenses passed through to the customer.
+  - id: reserve_invoice
+    label: EOR onboarding reserve
+    description: Risk-reserve payment requested before activating a new EOR hire.
+  - id: fx_fees
+    label: Currency conversion fees
+    description: FX margin applied when the customer billing currency differs from the local employment currency.
+
+allocationDimensions:
+  - employment_id
+  - country_code
+  - department_id
+  - manager_id
+  - external_id
+
+ingestion:
+  pull:
+    endpoints:
+      - GET /v1/billing_documents
+      - GET /v1/billing_documents/{id}
+      - GET /v1/billing_documents/{id}/breakdown
+      - GET /v1/billing_documents/{id}/pdf
+  push:
+    webhook: billing_document.issued
+    verifySignature: true
+    signatureHeader: X-Remote-Signature
+
+notes: |
+  Remote's billing surface is seat-based; volume tiers and committed-use
+  discounts (annual EOR, startup discount, social-purpose discount) are
+  reflected as discrete pricing rows in `breakdown[]`, not as separate
+  FOCUS records.

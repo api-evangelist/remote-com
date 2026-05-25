@@ -1,0 +1,24 @@
+{
+  "method": "POST",
+  "url": "{customer_webhook_url}",
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Remote-Signature": "t=1748173200,v1=5257a869e7ecebeda32affa62cdca3fa..."
+  },
+  "body": {
+    "event_type": "employment.onboarding.completed",
+    "event_id": "evt_01HK3R5N2QF9JX5G8H8XJ8YT2Y",
+    "created_at": "2026-05-25T10:20:00Z",
+    "company_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "data": {
+      "employment": {
+        "id": "11111111-2222-3333-4444-555555555555",
+        "status": "active",
+        "lifecycle_stage": "active",
+        "full_name": "Ada Lovelace",
+        "country": { "code": "GBR", "name": "United Kingdom" },
+        "start_date": "2026-07-01"
+      }
+    }
+  }
+}

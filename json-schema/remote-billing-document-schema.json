@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/remote-com/main/json-schema/remote-billing-document-schema.json",
+  "title": "BillingDocument",
+  "description": "A customer-facing billing document (invoice or statement) issued by Remote.",
+  "type": "object",
+  "required": ["id", "number", "status", "amount", "currency", "type"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "number": { "type": "string", "description": "Human-readable invoice number." },
+    "status": {
+      "type": "string",
+      "enum": ["issued", "paid", "overdue", "void"]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["eor_invoice", "payroll_fee_invoice", "contractor_invoice", "reserve_invoice"]
+    },
+    "amount": { "type": "integer", "description": "Amount in the smallest unit of the billing currency." },
+    "currency": { "type": "string", "description": "ISO 4217 currency code." },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "due_at": { "type": "string", "format": "date-time" },
+    "period_start": { "type": "string", "format": "date" },
+    "period_end": { "type": "string", "format": "date" }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,50 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Remote
+providerId: remote-com
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Quotas
+description: 'Reconciled rate limits for the Remote API. Single per-company per-minute quota across all scopes; partner traffic shares the underlying company quota when acting on a company''s behalf.'
+sources:
+  - https://developer.remote.com/docs/rate-limit
+  - https://developer.remote.com/docs/rate-limit-for-partner
+headers:
+  count: x-ratelimit-count
+  remaining: x-ratelimit-remaining
+  reset: x-ratelimit-reset
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: fixed-window
+window:
+  seconds: 60
+scope: company
+limits:
+  - tier: All Customers
+    surface: REST API (all endpoints, all scopes)
+    rpm: 300
+    rps: null
+    burst: null
+    notes: 300 authenticated requests per 60-second window, shared across every token belonging to the same company.
+  - tier: All Partners
+    surface: REST API on behalf of a company
+    rpm: 300
+    rps: null
+    burst: null
+    notes: Partners share the company's 300 rpm budget when acting on its behalf; partner-scoped traffic that does not touch a company resource has a separate undisclosed quota.
+retry:
+  strategy: exponential-backoff
+  recommendedFirstRetryDelaySeconds: 5
+  recommendedMaxRetries: 5
+  honorRetryAfter: false
+  notes: Remote does not publish a `Retry-After` header; clients should back off using `x-ratelimit-reset` (milliseconds until window reset).
+errorPayload:
+  type: object
+  example:
+    errors:
+      detail: Customer rate-limit exceeded.

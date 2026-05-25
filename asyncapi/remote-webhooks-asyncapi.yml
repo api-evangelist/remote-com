@@ -1,0 +1,244 @@
+asyncapi: 2.6.0
+info:
+  title: Remote Webhooks
+  version: '2026-05-22'
+  description: |
+    Remote emits webhook events for nearly every state change across its
+    Companies, Employments, Contractors, Payroll, Billing, Time Off,
+    Timesheets, Benefits, Identity Verification, and SSO surfaces. All
+    events POST a signed JSON envelope to a customer-provided HTTPS URL.
+    Webhooks must be verified using the `X-Remote-Signature` header per
+    Remote's documentation.
+
+defaultContentType: application/json
+
+servers:
+  production:
+    url: https://gateway.remote.com
+    protocol: https
+    description: Remote production gateway
+
+channels:
+  company.activated:
+    description: Triggered when a company becomes active.
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.archived:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.eor_hiring.additional_information_required:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.eor_hiring.reserve_payment_requested:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.eor_hiring.no_reserve_payment_requested:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.eor_hiring.referred:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.eor_hiring.verification_completed:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.manager_created:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.manager_updated:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  company.manager_deleted:
+    subscribe:
+      message: { $ref: '#/components/messages/CompanyEvent' }
+  contract_amendment.submitted:
+    subscribe: { message: { $ref: '#/components/messages/ContractAmendmentEvent' } }
+  contract_amendment.review_started:
+    subscribe: { message: { $ref: '#/components/messages/ContractAmendmentEvent' } }
+  contract_amendment.done:
+    subscribe: { message: { $ref: '#/components/messages/ContractAmendmentEvent' } }
+  contract_amendment.canceled:
+    subscribe: { message: { $ref: '#/components/messages/ContractAmendmentEvent' } }
+  contract_amendment.deleted:
+    subscribe: { message: { $ref: '#/components/messages/ContractAmendmentEvent' } }
+  contract_document.status_changed:
+    subscribe: { message: { $ref: '#/components/messages/ContractDocumentEvent' } }
+  custom_field.value_updated:
+    subscribe: { message: { $ref: '#/components/messages/CustomFieldEvent' } }
+  employment.account.updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.employment_agreement.available:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment_company_structure_node.updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment_contract.active_contract_updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment_contract.adjusted_during_onboarding:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.administrative_details.updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.details.updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.work_email.updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.personal_information.updated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.eor_hiring.proof_of_payment_accepted:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.no_longer_eligible_for_onboarding_cancellation:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.onboarding.started:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.onboarding.completed:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.onboarding.cancelled:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.onboarding_task.completed:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation_completion_letter.submitted:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation_completion_letter.completed:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation_completion_letter.cancelled:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation_period_extension.submitted:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation_period_extension.completed:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation_period_extension.cancelled:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.probation.period_ending_reminder_sent:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.start_date.changed:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.user_status.activated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.user_status.deactivated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.user_status.initiated:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.user_status.invited:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  employment.eor_hiring.invoice_created:
+    subscribe: { message: { $ref: '#/components/messages/EmploymentEvent' } }
+  expense.created:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  expense.approved:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  expense.declined:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  expense.deleted:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  expense.reimbursed:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  expense.submitted:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  expense.updated:
+    subscribe: { message: { $ref: '#/components/messages/ExpenseEvent' } }
+  identity_verification.verification_required:
+    subscribe: { message: { $ref: '#/components/messages/IdentityVerificationEvent' } }
+  incentive.created:
+    subscribe: { message: { $ref: '#/components/messages/IncentiveEvent' } }
+  incentive.processing_started:
+    subscribe: { message: { $ref: '#/components/messages/IncentiveEvent' } }
+  incentive.paid:
+    subscribe: { message: { $ref: '#/components/messages/IncentiveEvent' } }
+  incentive.updated:
+    subscribe: { message: { $ref: '#/components/messages/IncentiveEvent' } }
+  incentive.deleted:
+    subscribe: { message: { $ref: '#/components/messages/IncentiveEvent' } }
+  offboarding.submitted:
+    subscribe: { message: { $ref: '#/components/messages/OffboardingEvent' } }
+  offboarding.review_started:
+    subscribe: { message: { $ref: '#/components/messages/OffboardingEvent' } }
+  offboarding.submitted_to_payroll:
+    subscribe: { message: { $ref: '#/components/messages/OffboardingEvent' } }
+  offboarding.completed:
+    subscribe: { message: { $ref: '#/components/messages/OffboardingEvent' } }
+  offboarding.deleted:
+    subscribe: { message: { $ref: '#/components/messages/OffboardingEvent' } }
+  payslip.released:
+    subscribe: { message: { $ref: '#/components/messages/PayslipEvent' } }
+  sso_configuration.enabled:
+    subscribe: { message: { $ref: '#/components/messages/SsoEvent' } }
+  sso_configuration.updated:
+    subscribe: { message: { $ref: '#/components/messages/SsoEvent' } }
+  sso_configuration.disabled:
+    subscribe: { message: { $ref: '#/components/messages/SsoEvent' } }
+  timeoff.requested:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.approved:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.cancellation_requested:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.date_changed:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.updated:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.declined:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.canceled:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.started:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timeoff.taken:
+    subscribe: { message: { $ref: '#/components/messages/TimeOffEvent' } }
+  timesheet.submitted:
+    subscribe: { message: { $ref: '#/components/messages/TimesheetEvent' } }
+  travel_letter.requested:
+    subscribe: { message: { $ref: '#/components/messages/TravelLetterEvent' } }
+  travel_letter.approved_by_manager:
+    subscribe: { message: { $ref: '#/components/messages/TravelLetterEvent' } }
+  travel_letter.approved_by_remote:
+    subscribe: { message: { $ref: '#/components/messages/TravelLetterEvent' } }
+  travel_letter.declined_by_manager:
+    subscribe: { message: { $ref: '#/components/messages/TravelLetterEvent' } }
+  travel_letter.declined_by_remote:
+    subscribe: { message: { $ref: '#/components/messages/TravelLetterEvent' } }
+  work_authorization.requested:
+    subscribe: { message: { $ref: '#/components/messages/WorkAuthEvent' } }
+  work_authorization.approved_by_manager:
+    subscribe: { message: { $ref: '#/components/messages/WorkAuthEvent' } }
+  work_authorization.approved_by_remote:
+    subscribe: { message: { $ref: '#/components/messages/WorkAuthEvent' } }
+  work_authorization.declined_by_manager:
+    subscribe: { message: { $ref: '#/components/messages/WorkAuthEvent' } }
+  work_authorization.declined_by_remote:
+    subscribe: { message: { $ref: '#/components/messages/WorkAuthEvent' } }
+  work_authorization.cancelled:
+    subscribe: { message: { $ref: '#/components/messages/WorkAuthEvent' } }
+  benefit_renewal_request.created:
+    subscribe: { message: { $ref: '#/components/messages/BenefitRenewalEvent' } }
+  billing_document.issued:
+    subscribe: { message: { $ref: '#/components/messages/BillingDocumentEvent' } }
+
+components:
+  messages:
+    CompanyEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    ContractAmendmentEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    ContractDocumentEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    CustomFieldEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    EmploymentEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    ExpenseEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    IdentityVerificationEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    IncentiveEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    OffboardingEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    PayslipEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    SsoEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    TimeOffEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    TimesheetEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    TravelLetterEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    WorkAuthEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    BenefitRenewalEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+    BillingDocumentEvent: { payload: { $ref: '#/components/schemas/Envelope' } }
+  schemas:
+    Envelope:
+      type: object
+      required: [event_type, event_id, created_at, data]
+      properties:
+        event_type: { type: string, description: Event name in dotted form. }
+        event_id: { type: string, format: uuid }
+        created_at: { type: string, format: date-time }
+        company_id: { type: string, format: uuid }
+        data:
+          type: object
+          additionalProperties: true

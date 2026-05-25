@@ -1,0 +1,160 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Remote
+providerId: remote-com
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Domain vocabulary, taxonomies, and key terms used across the Remote.com API surface.
+
+employment_models:
+  - id: eor
+    label: Employer of Record
+    description: Remote acts as the legal employer in a country where the customer has no entity. Customer directs day-to-day work; Remote handles payroll, taxes, benefits, and compliance.
+  - id: global_payroll
+    label: Global Payroll
+    description: Customer owns the local entity. Remote runs in-country compliant payroll and benefits via its global payroll infrastructure.
+  - id: peo
+    label: Professional Employer Organization
+    description: US-only co-employment model. Customer is the worksite employer; Remote PEO handles payroll, benefits, and HR compliance.
+  - id: contractor
+    label: Contractor Management
+    description: Customer engages an independent contractor; Remote issues localized contracts, processes invoices, and disburses payment.
+  - id: cor
+    label: Contractor of Record
+    description: Remote becomes the engaging party for an independent contractor, providing indemnity and IP transfer.
+
+employment_statuses:
+  - created
+  - invited
+  - initiated
+  - pending
+  - active
+  - probation
+  - offboarding_initiated
+  - offboarded
+  - archived
+
+lifecycle_stages:
+  - employment_creation
+  - onboarding
+  - reserve_invoice
+  - probation
+  - active
+  - offboarding
+  - archived
+
+billing_document_types:
+  - id: eor_invoice
+    description: EOR services + statutory pass-through.
+  - id: payroll_fee_invoice
+    description: Global Payroll service fees + delivery fees.
+  - id: contractor_invoice
+    description: Aggregated contractor payouts.
+  - id: reserve_invoice
+    description: EOR onboarding reserve payment required before activation.
+
+incentive_types:
+  - bonus
+  - commission
+  - signing_bonus
+  - recurring_incentive
+
+expense_statuses:
+  - submitted
+  - approved
+  - declined
+  - reimbursed
+  - deleted
+
+time_off_statuses:
+  - requested
+  - approved
+  - declined
+  - cancellation_requested
+  - canceled
+  - started
+  - taken
+
+authentication_grants:
+  - id: authorization_code
+    label: Authorization Code
+    description: Partner / customer app obtains a company-scoped token via redirect-based consent.
+  - id: client_credentials
+    label: Client Credentials
+    description: Partner-scoped token; partner acts across consenting companies.
+  - id: jwt_bearer_assertion
+    label: JWT Bearer Assertion
+    description: Signed JWT assertion identifying the company the partner is acting for.
+  - id: refresh_token
+    label: Refresh Token
+    description: Exchange a refresh token for a new access token.
+
+oauth_scopes:
+  - company_admin
+  - employment:read
+  - employment:write
+  - timeoff:read
+  - timeoff:write
+  - expense:read
+  - expense:write
+  - incentive:read
+  - incentive:write
+  - benefit_offer:read
+  - benefit_offer:write
+  - benefit_renewal:read
+  - benefit_renewal:write
+  - timesheet:read
+  - timesheet:write
+  - billing:read
+  - sso_configuration:read
+  - sso_configuration:write
+  - magic_link:write
+
+environments:
+  - id: production
+    base_url: https://gateway.remote.com/v1
+    ui_url: https://remote.com
+  - id: sandbox
+    base_url: https://gateway.remote-sandbox.com/v1
+    ui_url: https://remote-sandbox.com
+  - id: partners_sandbox
+    base_url: https://gateway.partners.remote-sandbox.com/v1
+    ui_url: https://partners.remote-sandbox.com
+
+webhook_event_categories:
+  - prefix: company.*
+    description: Company lifecycle and EOR hiring eligibility.
+  - prefix: contract_amendment.*
+    description: Contract amendment lifecycle.
+  - prefix: contract_document.*
+    description: Signed-document state changes.
+  - prefix: custom_field.*
+    description: Custom field value changes.
+  - prefix: employment.*
+    description: Employment lifecycle, onboarding, probation, user status, personal info updates.
+  - prefix: employment_contract.*
+    description: Active contract changes.
+  - prefix: expense.*
+    description: Expense reimbursement lifecycle.
+  - prefix: identity_verification.*
+    description: Identity verification requirements.
+  - prefix: incentive.*
+    description: Bonus and incentive lifecycle.
+  - prefix: offboarding.*
+    description: Offboarding workflow.
+  - prefix: payslip.*
+    description: Released payslips.
+  - prefix: sso_configuration.*
+    description: SSO enable/update/disable.
+  - prefix: timeoff.*
+    description: Time-off lifecycle.
+  - prefix: timesheet.*
+    description: Timesheet submissions.
+  - prefix: travel_letter.*
+    description: Travel letter requests.
+  - prefix: work_authorization.*
+    description: Visa / right-to-work requests.
+  - prefix: benefit_renewal_request.*
+    description: Annual benefit renewals.
+  - prefix: billing_document.*
+    description: Issued invoices.

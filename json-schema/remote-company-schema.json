@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/remote-com/main/json-schema/remote-company-schema.json",
+  "title": "Company",
+  "description": "A customer company on the Remote platform.",
+  "type": "object",
+  "required": ["id", "name", "status"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "slug": { "type": "string" },
+    "external_id": { "type": ["string", "null"] },
+    "status": {
+      "type": "string",
+      "enum": ["created", "draft", "profile_completed", "activation_pending", "activated", "archived"]
+    },
+    "company_owner_user_id": { "type": "string", "format": "uuid" },
+    "primary_billing_contact": { "type": ["string", "null"] },
+    "bank_account_currency_code": { "type": "string" },
+    "tax_number": { "type": ["string", "null"] },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address": { "type": "string" },
+        "address_line_2": { "type": ["string", "null"] },
+        "city": { "type": "string" },
+        "country_code": { "type": "string" },
+        "postal_code": { "type": "string" },
+        "local_details": { "type": "object" }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

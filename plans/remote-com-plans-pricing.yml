@@ -1,0 +1,217 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Remote
+providerId: remote-com
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Global Payroll
+  - EOR
+  - Contractor Management
+  - PEO
+  - HRIS
+  - Recruiting
+description: 'Reconciled plans and per-seat pricing for Remote.com. Source: remote.com/pricing.'
+sources:
+  - https://remote.com/pricing
+  - https://remote.com/employer-of-record
+  - https://remote.com/global-payroll
+  - https://remote.com/contractor-management
+plans:
+  - id: remote-eor-monthly
+    name: Employer of Record (Monthly)
+    type: seat-based
+    description: Hire employees in 90+ countries without setting up a local entity. Includes localized payroll, statutory benefits, compliance, and a dedicated onboarding specialist.
+    entries:
+      - label: Per employee per month
+        name: employee_seat
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '699.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-eor-annual
+    name: Employer of Record (Annual)
+    type: seat-based
+    description: Annual commitment for EOR — 14% savings vs monthly billing.
+    entries:
+      - label: Per employee per month, billed annually
+        name: employee_seat_annual
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '599.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-global-payroll
+    name: Global Payroll
+    type: seat-based
+    description: Run payroll across owned entities with local compliance, integrated benefits, and HR Core. Implementation and per-payroll delivery fees apply.
+    entries:
+      - label: Per employee per month
+        name: employee_seat
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '29.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+      - label: Entity implementation fee
+        name: implementation_fee
+        type: one-time
+        metric: entity
+        price: contact-sales
+      - label: Per payroll delivery fee
+        name: payroll_delivery_fee
+        type: recurring
+        metric: payroll_run
+        price: contact-sales
+        timeFrame: per-run
+  - id: remote-contractor-standard
+    name: Contractor Management (Standard)
+    type: seat-based
+    description: Localized contracts, invoice approval, payment transparency, HR Core.
+    entries:
+      - label: Per contractor per month
+        name: contractor_seat
+        type: recurring
+        metric: contractor
+        unit: 1
+        price: '29.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-contractor-plus
+    name: Contractor Management (Plus)
+    type: seat-based
+    description: Standard plus indemnity protection up to $100,000 per contractor and compliance coverage.
+    entries:
+      - label: Per contractor per month
+        name: contractor_seat
+        type: recurring
+        metric: contractor
+        unit: 1
+        price: '99.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-cor
+    name: Contractor of Record
+    type: seat-based
+    description: Remote becomes the engaging party. Uncapped indemnity, AI misclassification tools, IP transfer facilitation.
+    entries:
+      - label: Per contractor per month (starting at)
+        name: cor_seat
+        type: recurring
+        metric: contractor
+        unit: 1
+        price: '325.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-peo
+    name: PEO (US)
+    type: seat-based
+    description: US-only Professional Employer Organization. Federal/state/local compliance, group benefits, dedicated HR experts.
+    entries:
+      - label: Per employee per month (starting at)
+        name: employee_seat
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '99.00'
+        timeFrame: month
+        geo: US
+        userMultiplied: true
+  - id: remote-recruit
+    name: Recruit
+    type: subscription
+    description: AI-powered candidate sourcing across 800m+ profiles, job advertising, talent insights.
+    entries:
+      - label: Per month (starting at)
+        name: recruit_seat
+        type: recurring
+        metric: company
+        unit: 1
+        price: '199.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: false
+  - id: remote-equity
+    name: Equity
+    type: subscription
+    description: Equity grants administration — tax handling, legal docs, program insights.
+    entries:
+      - label: Per month (starting at)
+        name: equity_seat
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '39.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-hris-free
+    name: HR Management (HRIS) — Free
+    type: freemium
+    description: Free HRIS for direct employees of a company on Remote. Onboarding/offboarding, profiles, document management, time off, expenses, mobile app.
+    entries:
+      - label: Direct employees
+        name: hris_seat
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '0.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+  - id: remote-hris-plus
+    name: HR Management (HRIS) — Additional Features
+    type: seat-based
+    description: Advanced HRIS features on top of the free tier.
+    entries:
+      - label: Per employee per month
+        name: hris_plus_seat
+        type: recurring
+        metric: employee
+        unit: 1
+        price: '12.00'
+        timeFrame: month
+        geo: global
+        userMultiplied: true
+discounts:
+  - name: Startups
+    description: 15% discount on core services for qualifying startups.
+    amount: '15%'
+  - name: Social Purpose Organizations
+    description: 15% discount for non-profits and social-impact organizations.
+    amount: '15%'
+billingCurrencies:
+  - USD
+  - EUR
+  - GBP
+  - CAD
+  - AUD
+  - NZD
+  - SGD
+  - HKD
+  - CHF
+  - SEK
+  - DKK
+  - NOK
+api:
+  freeTier: false
+  apiAccessIncludedIn:
+    - Employer of Record
+    - Global Payroll
+    - Contractor Management
+    - Contractor of Record
+    - PEO
+  apiAccessCost: included
+  notes: API access is included with every Remote plan; partner-grade access requires a partner agreement.

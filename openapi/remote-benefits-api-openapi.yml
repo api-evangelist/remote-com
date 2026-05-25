@@ -1,0 +1,250 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits API
+  description: |
+    List, select, and renew localized employee benefits across the countries
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+    forms that vary per country and employment.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Benefit Offers
+    description: Country and employment benefit offers
+  - name: Benefit Renewals
+    description: Annual benefit-renewal requests
+
+paths:
+  /benefit_offers:
+    get:
+      summary: List Benefit Offers
+      description: List benefit offers grouped by country.
+      operationId: listBenefitOffers
+      tags: [Benefit Offers]
+      parameters:
+        - { name: country_code, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Benefit offers by country.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitOfferCountrySummary' }
+
+  /benefit_offers/by_employment:
+    get:
+      summary: List Benefit Offers By Employment
+      operationId: listBenefitOffersByEmployment
+      tags: [Benefit Offers]
+      parameters:
+        - { name: employment_id, in: query, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Benefit offers for the employment.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitOfferList' }
+
+  /benefit_offers/{employment_id}:
+    parameters:
+      - { name: employment_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Get Employment Benefit Offers
+      operationId: getEmploymentBenefitOffers
+      tags: [Benefit Offers]
+      responses:
+        '200':
+          description: Benefit offers.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitOfferList' }
+    put:
+      summary: Upsert Employment Benefit Offers
+      operationId: upsertEmploymentBenefitOffers
+      tags: [Benefit Offers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Upserted.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitOfferList' }
+
+  /benefit_offers/{employment_id}/schema:
+    parameters:
+      - { name: employment_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Get Employment Benefit Offers JSON Schema
+      operationId: getEmploymentBenefitOffersSchema
+      tags: [Benefit Offers]
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /benefit_renewal_requests:
+    get:
+      summary: List Benefit Renewal Requests
+      operationId: listBenefitRenewalRequests
+      tags: [Benefit Renewals]
+      parameters:
+        - { name: country_code, in: query, schema: { type: string } }
+        - { name: status, in: query, schema: { type: string, enum: [pending, in_progress, completed, expired] } }
+      responses:
+        '200':
+          description: Benefit renewal requests.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitRenewalList' }
+
+  /benefit_renewal_requests/{benefit_renewal_request_id}:
+    parameters:
+      - { name: benefit_renewal_request_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Benefit Renewal Request
+      operationId: showBenefitRenewalRequest
+      tags: [Benefit Renewals]
+      responses:
+        '200':
+          description: Benefit renewal request.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitRenewalEnvelope' }
+
+  /benefit_renewal_requests/{benefit_renewal_request_id}/schema:
+    parameters:
+      - { name: benefit_renewal_request_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Benefit Renewal Request Schema
+      operationId: showBenefitRenewalRequestSchema
+      tags: [Benefit Renewals]
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /benefit_renewal_requests/{benefit_renewal_request_id}/response:
+    parameters:
+      - { name: benefit_renewal_request_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Update A Benefit Renewal Request Response
+      operationId: updateBenefitRenewalRequestResponse
+      tags: [Benefit Renewals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BenefitRenewalEnvelope' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    BenefitOffer:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        country_code: { type: string }
+        name: { type: string }
+        provider: { type: string }
+        tier:
+          type: string
+          enum: [basic, standard, premium]
+        monthly_cost: { type: integer, description: Cost in smallest currency unit. }
+        currency: { type: string }
+        coverage_summary: { type: string }
+
+    BenefitOfferList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            benefit_offers:
+              type: array
+              items: { $ref: '#/components/schemas/BenefitOffer' }
+
+    BenefitOfferCountrySummary:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            countries:
+              type: array
+              items:
+                type: object
+                properties:
+                  country_code: { type: string }
+                  benefit_offers_count: { type: integer }
+                  has_health: { type: boolean }
+                  has_dental: { type: boolean }
+                  has_pension: { type: boolean }
+
+    BenefitRenewal:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        country_code: { type: string }
+        status:
+          type: string
+          enum: [pending, in_progress, completed, expired]
+        renewal_period_start: { type: string, format: date }
+        renewal_period_end: { type: string, format: date }
+        response: { type: object, additionalProperties: true }
+
+    BenefitRenewalList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            benefit_renewal_requests:
+              type: array
+              items: { $ref: '#/components/schemas/BenefitRenewal' }
+
+    BenefitRenewalEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            benefit_renewal_request: { $ref: '#/components/schemas/BenefitRenewal' }

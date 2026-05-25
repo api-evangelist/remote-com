@@ -1,0 +1,863 @@
+openapi: 3.1.0
+info:
+  title: Remote Employments API
+  description: |
+    Create and manage employment records across the EOR, Global Payroll, and
+    PEO employment models on Remote.com. Endpoints cover the full employment
+    lifecycle — onboarding, contract management, contract amendments,
+    employment status transitions, identity verification, travel letters,
+    work-authorization requests, and offboarding.
+
+    Every Remote customer hiring through the platform owns one employment
+    record per worker. This API is the authoritative source for that record.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Employments
+    description: Create, read, update, and invite employment records
+  - name: Employment Contracts
+    description: View active and pending employment contracts
+  - name: Contract Amendments
+    description: Submit and track contract amendments
+  - name: Contract Documents
+    description: Sign, retrieve, and manage employment contract documents
+  - name: Onboarding
+    description: Drive employee onboarding flows
+  - name: Offboarding
+    description: Drive employee offboarding flows
+  - name: Identity Verification
+    description: Identity-verification background checks
+  - name: Travel Letters
+    description: Travel letter requests for employees moving across borders
+  - name: Work Authorization
+    description: Work authorization (visa / right to work) requests
+  - name: Company Structure
+    description: Reporting hierarchy and structure nodes for employees
+
+paths:
+  /employments:
+    get:
+      summary: List Employments
+      description: List all non-deleted employments for the company, with filtering.
+      operationId: listEmployments
+      tags: [Employments]
+      parameters:
+        - { name: company_id, in: query, schema: { type: string, format: uuid } }
+        - { name: email, in: query, schema: { type: string, format: email } }
+        - { name: status, in: query, schema: { $ref: '#/components/schemas/EmploymentStatus' } }
+        - { name: employment_type, in: query, schema: { type: string, enum: [employee, contractor, director] } }
+        - { name: employment_model, in: query, schema: { type: string, enum: [global_payroll, peo, eor] } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+      responses:
+        '200':
+          description: A page of employments.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EmploymentList' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
+    post:
+      summary: Create An Employment
+      description: |
+        Create a new employment. Required fields depend on the employment
+        model (EOR vs. Global Payroll vs. PEO) and the country. Use
+        `/forms/employment` to fetch the per-country JSON Schema form.
+      operationId: createEmployment
+      tags: [Employments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EmploymentCreateRequest' }
+      responses:
+        '201':
+          description: Employment created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EmploymentEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+
+  /employments/{employment_id}:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Show An Employment
+      operationId: showEmployment
+      tags: [Employments]
+      responses:
+        '200':
+          description: Employment record.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EmploymentEnvelope' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      summary: Update An Employment
+      operationId: updateEmployment
+      tags: [Employments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EmploymentUpdateRequest' }
+      responses:
+        '200':
+          description: Employment updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EmploymentEnvelope' }
+
+  /employments/{employment_id}/invite:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Invite An Employment To Self-Serve Onboarding
+      operationId: inviteEmployment
+      tags: [Employments, Onboarding]
+      responses:
+        '202':
+          description: Invitation sent.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EmploymentEnvelope' }
+
+  /employments/{employment_id}/administrative_details:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Show Administrative Details
+      operationId: showAdministrativeDetails
+      tags: [Employments]
+      responses:
+        '200':
+          description: Administrative details.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    put:
+      summary: Update Administrative Details
+      operationId: updateAdministrativeDetails
+      tags: [Employments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /employments/{employment_id}/contracts:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: List Employment Contracts
+      operationId: listEmploymentContracts
+      tags: [Employment Contracts]
+      responses:
+        '200':
+          description: Contracts.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EmploymentContractList' }
+
+  /employments/{employment_id}/contracts/pending_changes:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Get Pending Contract Changes
+      operationId: getPendingContractChanges
+      tags: [Employment Contracts]
+      responses:
+        '200':
+          description: Pending changes.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /contract_amendments:
+    get:
+      summary: List Contract Amendments
+      operationId: listContractAmendments
+      tags: [Contract Amendments]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: status, in: query, schema: { type: string, enum: [draft, submitted, review_started, done, canceled, deleted] } }
+      responses:
+        '200':
+          description: Contract amendments.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractAmendmentList' }
+    post:
+      summary: Create A Contract Amendment
+      operationId: createContractAmendment
+      tags: [Contract Amendments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ContractAmendmentCreateRequest' }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractAmendmentEnvelope' }
+
+  /contract_amendments/automatable:
+    post:
+      summary: Submit An Automatable Contract Amendment
+      description: |
+        Automatable amendments use a structured payload that Remote can
+        approve without manual review. Use the `/contract_amendments/schema`
+        endpoint to learn the per-country form requirements.
+      operationId: createAutomatableContractAmendment
+      tags: [Contract Amendments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractAmendmentEnvelope' }
+
+  /contract_amendments/{contract_amendment_id}:
+    parameters:
+      - { name: contract_amendment_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Contract Amendment
+      operationId: showContractAmendment
+      tags: [Contract Amendments]
+      responses:
+        '200':
+          description: Amendment.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractAmendmentEnvelope' }
+
+  /contract_amendments/schema:
+    get:
+      summary: Show A Contract Amendment Schema
+      description: Returns the JSON Schema form definition for amendments in a given country and employment.
+      operationId: showContractAmendmentSchema
+      tags: [Contract Amendments]
+      parameters:
+        - { name: employment_id, in: query, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /contract_documents:
+    post:
+      summary: Create A Contract Document
+      operationId: createContractDocument
+      tags: [Contract Documents]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractDocumentEnvelope' }
+
+  /contract_documents/{contract_document_id}:
+    parameters:
+      - { name: contract_document_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Contract Document
+      operationId: showContractDocument
+      tags: [Contract Documents]
+      responses:
+        '200':
+          description: Contract document.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractDocumentEnvelope' }
+
+  /contract_documents/{contract_document_id}/sign:
+    parameters:
+      - { name: contract_document_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Sign A Contract Document
+      operationId: signContractDocument
+      tags: [Contract Documents]
+      responses:
+        '200':
+          description: Signed.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContractDocumentEnvelope' }
+
+  /employments/{employment_id}/eligibility:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Create An Eligibility Questionnaire
+      operationId: createEligibilityQuestionnaire
+      tags: [Onboarding]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Eligibility questionnaire created.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /employments/{employment_id}/eligibility/{questionnaire_id}:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+      - { name: questionnaire_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show An Eligibility Questionnaire
+      operationId: showEligibilityQuestionnaire
+      tags: [Onboarding]
+      responses:
+        '200':
+          description: Questionnaire.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /eor_hiring/risk_reserve/proof_of_payment:
+    post:
+      summary: Submit Risk Reserve Proof Of Payment
+      operationId: submitRiskReserveProofOfPayment
+      tags: [Onboarding]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '202':
+          description: Accepted.
+
+  /offboardings:
+    post:
+      summary: Submit An Offboarding
+      operationId: submitOffboarding
+      tags: [Offboarding]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OffboardingCreateRequest' }
+      responses:
+        '201':
+          description: Offboarding submitted.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OffboardingEnvelope' }
+
+  /offboardings/{offboarding_id}:
+    parameters:
+      - { name: offboarding_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show An Offboarding
+      operationId: showOffboarding
+      tags: [Offboarding]
+      responses:
+        '200':
+          description: Offboarding.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OffboardingEnvelope' }
+
+  /travel_letter_requests:
+    get:
+      summary: List Travel Letter Requests
+      operationId: listTravelLetterRequests
+      tags: [Travel Letters]
+      responses:
+        '200':
+          description: Travel letter requests.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TravelLetterRequestList' }
+    post:
+      summary: Create A Travel Letter Request
+      operationId: createTravelLetterRequest
+      tags: [Travel Letters]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TravelLetterRequestEnvelope' }
+
+  /travel_letter_requests/{travel_letter_request_id}:
+    parameters:
+      - { name: travel_letter_request_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Travel Letter Request
+      operationId: showTravelLetterRequest
+      tags: [Travel Letters]
+      responses:
+        '200':
+          description: Travel letter request.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TravelLetterRequestEnvelope' }
+    patch:
+      summary: Update A Travel Letter Request
+      operationId: updateTravelLetterRequest
+      tags: [Travel Letters]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TravelLetterRequestEnvelope' }
+
+  /work_authorization_requests:
+    get:
+      summary: List Work Authorization Requests
+      operationId: listWorkAuthorizationRequests
+      tags: [Work Authorization]
+      responses:
+        '200':
+          description: Work authorization requests.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WorkAuthorizationRequestList' }
+
+  /work_authorization_requests/{work_authorization_request_id}:
+    parameters:
+      - { name: work_authorization_request_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Work Authorization Request
+      operationId: showWorkAuthorizationRequest
+      tags: [Work Authorization]
+      responses:
+        '200':
+          description: Work authorization request.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WorkAuthorizationRequestEnvelope' }
+    patch:
+      summary: Update A Work Authorization Request
+      operationId: updateWorkAuthorizationRequest
+      tags: [Work Authorization]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WorkAuthorizationRequestEnvelope' }
+
+  /company_structure_nodes:
+    get:
+      summary: List Company Structure Nodes
+      operationId: listCompanyStructureNodes
+      tags: [Company Structure]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Structure nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors: { type: object, additionalProperties: true }
+        message: { type: string }
+
+    EmploymentStatus:
+      type: string
+      enum:
+        - created
+        - invited
+        - initiated
+        - pending
+        - active
+        - probation
+        - offboarding_initiated
+        - offboarded
+        - archived
+
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+        - employment_creation
+        - onboarding
+        - reserve_invoice
+        - probation
+        - active
+        - offboarding
+        - archived
+
+    Employment:
+      type: object
+      required: [id, status, employment_type]
+      properties:
+        id: { type: string, format: uuid }
+        company_id: { type: string, format: uuid }
+        external_id: { type: string, nullable: true }
+        full_name: { type: string }
+        personal_email: { type: string, format: email }
+        work_email: { type: string, format: email, nullable: true }
+        country:
+          type: object
+          properties:
+            code: { type: string }
+            name: { type: string }
+        employment_type:
+          type: string
+          enum: [employee, contractor, director]
+        employment_model:
+          type: string
+          enum: [global_payroll, peo, eor]
+        status: { $ref: '#/components/schemas/EmploymentStatus' }
+        lifecycle_stage: { $ref: '#/components/schemas/EmploymentLifecycleStage' }
+        job_title: { type: string }
+        manager_id: { type: string, format: uuid, nullable: true }
+        department_id: { type: string, format: uuid, nullable: true }
+        start_date: { type: string, format: date }
+        provisional_start_date: { type: string, format: date, nullable: true }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    EmploymentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employments:
+              type: array
+              items: { $ref: '#/components/schemas/Employment' }
+            current_page: { type: integer }
+            total_count: { type: integer }
+            total_pages: { type: integer }
+
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment: { $ref: '#/components/schemas/Employment' }
+
+    EmploymentCreateRequest:
+      type: object
+      required: [full_name, country_code, personal_email, employment_type]
+      properties:
+        full_name: { type: string }
+        country_code: { type: string }
+        personal_email: { type: string, format: email }
+        employment_type:
+          type: string
+          enum: [employee, contractor, director]
+        employment_model:
+          type: string
+          enum: [global_payroll, peo, eor]
+          default: eor
+        provisional_start_date: { type: string, format: date }
+        job_title: { type: string }
+        external_id: { type: string }
+        invite_user: { type: boolean, default: false }
+
+    EmploymentUpdateRequest:
+      type: object
+      properties:
+        full_name: { type: string }
+        work_email: { type: string, format: email }
+        manager_id: { type: string, format: uuid }
+        department_id: { type: string, format: uuid }
+        job_title: { type: string }
+
+    EmploymentContract:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        status:
+          type: string
+          enum: [draft, pending_signature, active, terminated]
+        contract_type:
+          type: string
+          enum: [indefinite, fixed_term]
+        currency_code: { type: string }
+        annual_gross_salary: { type: integer, description: Amount in smallest currency unit. }
+        weekly_hours: { type: number }
+
+    EmploymentContractList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment_contracts:
+              type: array
+              items: { $ref: '#/components/schemas/EmploymentContract' }
+
+    ContractAmendment:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        status:
+          type: string
+          enum: [draft, submitted, review_started, done, canceled, deleted]
+        effective_date: { type: string, format: date }
+        amendment_data: { type: object, additionalProperties: true }
+        created_at: { type: string, format: date-time }
+
+    ContractAmendmentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendments:
+              type: array
+              items: { $ref: '#/components/schemas/ContractAmendment' }
+
+    ContractAmendmentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendment: { $ref: '#/components/schemas/ContractAmendment' }
+
+    ContractAmendmentCreateRequest:
+      type: object
+      required: [employment_id, effective_date]
+      properties:
+        employment_id: { type: string, format: uuid }
+        effective_date: { type: string, format: date }
+        amendment_data: { type: object, additionalProperties: true }
+
+    ContractDocument:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        status:
+          type: string
+          enum: [draft, pending_signature, signed, voided]
+        document_url: { type: string, format: uri }
+        created_at: { type: string, format: date-time }
+
+    ContractDocumentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_document: { $ref: '#/components/schemas/ContractDocument' }
+
+    Offboarding:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        status:
+          type: string
+          enum: [submitted, review_started, submitted_to_payroll, completed, deleted]
+        offboarding_type:
+          type: string
+          enum: [resignation, termination, end_of_contract]
+        last_day_of_work: { type: string, format: date }
+        reason_for_offboarding: { type: string }
+
+    OffboardingEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            offboarding: { $ref: '#/components/schemas/Offboarding' }
+
+    OffboardingCreateRequest:
+      type: object
+      required: [employment_id, offboarding_type, last_day_of_work]
+      properties:
+        employment_id: { type: string, format: uuid }
+        offboarding_type:
+          type: string
+          enum: [resignation, termination, end_of_contract]
+        last_day_of_work: { type: string, format: date }
+        reason_for_offboarding: { type: string }
+        additional_information: { type: object, additionalProperties: true }
+
+    TravelLetterRequest:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        destination_country: { type: string }
+        purpose: { type: string }
+        status:
+          type: string
+          enum: [requested, approved_by_manager, approved_by_remote, declined_by_manager, declined_by_remote]
+        travel_start_date: { type: string, format: date }
+        travel_end_date: { type: string, format: date }
+
+    TravelLetterRequestList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            travel_letter_requests:
+              type: array
+              items: { $ref: '#/components/schemas/TravelLetterRequest' }
+
+    TravelLetterRequestEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            travel_letter_request: { $ref: '#/components/schemas/TravelLetterRequest' }
+
+    WorkAuthorizationRequest:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        country_code: { type: string }
+        status:
+          type: string
+          enum: [requested, approved_by_manager, approved_by_remote, declined_by_manager, declined_by_remote, cancelled]
+        visa_type: { type: string }
+        target_start_date: { type: string, format: date }
+
+    WorkAuthorizationRequestList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            work_authorization_requests:
+              type: array
+              items: { $ref: '#/components/schemas/WorkAuthorizationRequest' }
+
+    WorkAuthorizationRequestEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            work_authorization_request: { $ref: '#/components/schemas/WorkAuthorizationRequest' }

@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remote Employments API — Employments
+  description: 'Self-contained Naftiko capability for managing employment records across EOR, Global Payroll, and PEO models on Remote.'
+  tags:
+  - Remote
+  - Employments
+  - EOR
+  - Onboarding
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    REMOTE_ACCESS_TOKEN: REMOTE_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: employments-employments
+    baseUri: https://gateway.remote.com
+    description: Remote Employments business capability.
+    resources:
+    - name: v1-employments
+      path: /v1/employments
+      operations:
+      - name: listemployments
+        method: GET
+        description: List Employments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: company_id
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: employment_type
+          in: query
+          type: string
+        - name: employment_model
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: integer
+        - name: page_size
+          in: query
+          type: integer
+      - name: createemployment
+        method: POST
+        description: Create An Employment
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-employment
+      path: /v1/employments/{employment_id}
+      operations:
+      - name: showemployment
+        method: GET
+        description: Show An Employment
+        inputParameters:
+        - name: employment_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateemployment
+        method: PATCH
+        description: Update An Employment
+        inputParameters:
+        - name: employment_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-employment-invite
+      path: /v1/employments/{employment_id}/invite
+      operations:
+      - name: inviteemployment
+        method: POST
+        description: Invite An Employment To Self-Serve Onboarding
+        inputParameters:
+        - name: employment_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.REMOTE_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: employments-employments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remote Employments.
+    tools:
+    - name: remote-list-employments
+      description: List employments on Remote, filterable by company, status, type, or model.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: employments-employments.listemployments
+      with:
+        company_id: tools.company_id
+        status: tools.status
+        employment_type: tools.employment_type
+        employment_model: tools.employment_model
+        page: tools.page
+        page_size: tools.page_size
+    - name: remote-create-employment
+      description: Create a new employment record (EOR / Global Payroll / PEO).
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: employments-employments.createemployment
+      with:
+        body: tools.body
+    - name: remote-show-employment
+      description: Get an employment by id.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: employments-employments.showemployment
+      with:
+        employment_id: tools.employment_id
+    - name: remote-update-employment
+      description: Update an employment record.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: employments-employments.updateemployment
+      with:
+        employment_id: tools.employment_id
+        body: tools.body
+    - name: remote-invite-employment
+      description: Send the onboarding self-serve invitation to an employment.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: employments-employments.inviteemployment
+      with:
+        employment_id: tools.employment_id

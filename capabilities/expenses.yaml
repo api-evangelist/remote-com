@@ -1,0 +1,142 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remote Payroll And Billing API — Expenses
+  description: 'Self-contained Naftiko capability for listing, creating, approving, and declining employee expense reimbursements on Remote.'
+  tags:
+  - Remote
+  - Expenses
+  - Reimbursements
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    REMOTE_ACCESS_TOKEN: REMOTE_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: expenses
+    baseUri: https://gateway.remote.com
+    description: Remote Expenses business capability.
+    resources:
+    - name: v1-expenses
+      path: /v1/expenses
+      operations:
+      - name: listexpenses
+        method: GET
+        description: List Expenses
+        inputParameters:
+        - name: employment_id
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createexpense
+        method: POST
+        description: Create An Expense
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-expense
+      path: /v1/expenses/{expense_id}
+      operations:
+      - name: showexpense
+        method: GET
+        description: Show An Expense
+        inputParameters:
+        - name: expense_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-expense-approve
+      path: /v1/expenses/{expense_id}/approve
+      operations:
+      - name: approveexpense
+        method: POST
+        description: Approve An Expense
+        inputParameters:
+        - name: expense_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-expense-decline
+      path: /v1/expenses/{expense_id}/decline
+      operations:
+      - name: declineexpense
+        method: POST
+        description: Decline An Expense
+        inputParameters:
+        - name: expense_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.REMOTE_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: expenses-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remote Expenses.
+    tools:
+    - name: remote-list-expenses
+      description: List expenses for the company, optionally filtered by employment or status.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: expenses.listexpenses
+      with:
+        employment_id: tools.employment_id
+        status: tools.status
+    - name: remote-create-expense
+      description: Create an expense reimbursement request.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: expenses.createexpense
+      with:
+        body: tools.body
+    - name: remote-show-expense
+      description: Show a single expense.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: expenses.showexpense
+      with:
+        expense_id: tools.expense_id
+    - name: remote-approve-expense
+      description: Approve an expense reimbursement request.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: expenses.approveexpense
+      with:
+        expense_id: tools.expense_id
+    - name: remote-decline-expense
+      description: Decline an expense reimbursement request with a reason.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: expenses.declineexpense
+      with:
+        expense_id: tools.expense_id
+        body: tools.body

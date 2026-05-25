@@ -1,0 +1,441 @@
+aid: remote-com
+url: https://raw.githubusercontent.com/api-evangelist/remote-com/refs/heads/main/apis.yml
+name: Remote
+description: |
+  Remote.com is a global employment platform that lets companies hire,
+  pay, and manage employees and contractors in 90+ countries without
+  setting up local entities. Remote owns in-country legal entities
+  across its EOR footprint and runs its own global payroll and benefits
+  infrastructure rather than reselling third-party providers. The
+  platform layers a developer API, partner OAuth flows, webhooks, a
+  CLI, language SDKs, an AI agent toolkit, and an official MCP server
+  on top of these services so customers and partners can fully automate
+  hiring, onboarding, payroll, benefits, time off, expenses, and
+  offboarding.
+image: https://remote.com/favicon.ico
+humanURL: https://remote.com
+baseURL: https://gateway.remote.com/v1
+tags:
+  - Global Payroll
+  - EOR
+  - Contractor Management
+  - Contractor of Record
+  - PEO
+  - HRIS
+  - Recruiting
+  - Benefits
+  - Employment
+  - HR
+  - Compliance
+  - Workforce
+  - MCP
+  - AI Agents
+created: '2026-05-25'
+modified: '2026-05-25'
+apis:
+  - aid: remote-com:remote-companies-api
+    name: Remote Companies API
+    tags:
+      - Companies
+      - Compliance
+      - SSO
+      - Identity
+    humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      Create and manage companies on Remote. Entry point for every
+      Remote integration — partners use this API to provision new
+      customer companies and obtain company-scoped access tokens. Also
+      covers company managers, departments, legal entities, compliance
+      profile, hiring eligibility reserves, SSO configuration, token
+      identity, and magic-link generation.
+    properties:
+      - url: https://developer.remote.com/reference/welcome-to-remote-api
+        type: Documentation
+      - url: https://developer.remote.com/docs/creating-a-company
+        type: Documentation
+      - url: openapi/remote-companies-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/remote-company-schema.json
+        type: JSONSchema
+      - url: json-ld/remote-com-context.jsonld
+        type: JSONLD
+      - url: capabilities/companies-companies.yaml
+        type: NaftikoCapability
+
+  - aid: remote-com:remote-employments-api
+    name: Remote Employments API
+    tags:
+      - Employments
+      - Onboarding
+      - Offboarding
+      - Contracts
+      - Travel Letters
+      - Work Authorization
+    humanURL: https://developer.remote.com/docs/create-new-employment
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      Manage employment records across EOR, Global Payroll, and PEO
+      models. Covers the full lifecycle — create, invite, onboard,
+      sign contracts, amend contracts, run identity verification,
+      file travel-letter and work-authorization requests, manage
+      company structure, and offboard. Authoritative source of truth
+      for every worker record on Remote.
+    properties:
+      - url: https://developer.remote.com/docs/create-new-employment
+        type: Documentation
+      - url: https://developer.remote.com/docs/employment-lifecycle-stages
+        type: Documentation
+      - url: https://developer.remote.com/docs/employment-statuses
+        type: Documentation
+      - url: openapi/remote-employments-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/remote-employment-schema.json
+        type: JSONSchema
+      - url: json-ld/remote-com-context.jsonld
+        type: JSONLD
+      - url: capabilities/employments-employments.yaml
+        type: NaftikoCapability
+      - url: examples/remote-create-employment-example.json
+        type: Example
+
+  - aid: remote-com:remote-contractors-api
+    name: Remote Contractors API
+    tags:
+      - Contractors
+      - COR
+      - Contractor of Record
+      - Invoices
+      - Misclassification
+    humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      Manage contractor subscriptions across the Standard, Plus
+      (indemnity), and Contractor-of-Record plans. Surfaces include
+      contractor invoices, scheduled-invoice automation,
+      contract-eligibility checks (powered by Remote's AI
+      misclassification tooling), COR termination requests, and
+      contractor currency catalogs.
+    properties:
+      - url: https://developer.remote.com/reference/welcome-to-remote-api
+        type: Documentation
+      - url: openapi/remote-contractors-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/contractors-contractors.yaml
+        type: NaftikoCapability
+
+  - aid: remote-com:remote-payroll-billing-api
+    name: Remote Payroll and Billing API
+    tags:
+      - Payroll
+      - Billing
+      - Incentives
+      - Expenses
+      - Payslips
+      - FinOps
+    humanURL: https://developer.remote.com/docs/quick-start-guide-2
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      Inspect payroll calendars, billing documents (with itemized
+      breakdowns and PDF download), incentives (one-time bonuses and
+      recurring incentives), expenses (with approve/decline/reimburse
+      flows), payslips, and company billing currencies. The financial
+      backbone of every Remote engagement.
+    properties:
+      - url: https://developer.remote.com/docs/quick-start-guide-2
+        type: Documentation
+      - url: https://developer.remote.com/docs/working-with-expenses
+        type: Documentation
+      - url: https://developer.remote.com/docs/working-with-incentives
+        type: Documentation
+      - url: openapi/remote-payroll-billing-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/remote-billing-document-schema.json
+        type: JSONSchema
+      - url: capabilities/payroll-billing.yaml
+        type: NaftikoCapability
+      - url: capabilities/expenses.yaml
+        type: NaftikoCapability
+
+  - aid: remote-com:remote-time-attendance-api
+    name: Remote Time and Attendance API
+    tags:
+      - Time Off
+      - Leave
+      - Timesheets
+      - HRIS
+    humanURL: https://developer.remote.com/docs/working-with-time-off
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      Manage time-off requests, leave policies, leave balances, and
+      timesheets. Approve/decline/cancel flows for managers; submit
+      and self-serve flows for employees. Every state change is also
+      emitted via webhook events.
+    properties:
+      - url: https://developer.remote.com/docs/working-with-time-off
+        type: Documentation
+      - url: https://developer.remote.com/docs/leave-policies-summary
+        type: Documentation
+      - url: https://developer.remote.com/docs/working-with-timesheets
+        type: Documentation
+      - url: openapi/remote-time-attendance-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/remote-time-off-schema.json
+        type: JSONSchema
+      - url: capabilities/time-off.yaml
+        type: NaftikoCapability
+      - url: capabilities/timesheets.yaml
+        type: NaftikoCapability
+      - url: examples/remote-create-timeoff-example.json
+        type: Example
+
+  - aid: remote-com:remote-benefits-api
+    name: Remote Benefits API
+    tags:
+      - Benefits
+      - Health
+      - Pension
+      - Renewals
+    humanURL: https://developer.remote.com/docs/benefits-renewal
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      List localized benefit offers by country, attach offers to
+      employments using JSON Schema forms, and respond to annual
+      benefit-renewal requests. Backed by Remote's in-country
+      benefits infrastructure.
+    properties:
+      - url: https://developer.remote.com/docs/benefits-renewal
+        type: Documentation
+      - url: openapi/remote-benefits-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/benefits.yaml
+        type: NaftikoCapability
+
+  - aid: remote-com:remote-files-and-custom-fields-api
+    name: Remote Files and Custom Fields API
+    tags:
+      - Files
+      - Documents
+      - Custom Fields
+      - Countries
+      - Cost Calculator
+    humanURL: https://developer.remote.com/docs/working-with-files
+    baseURL: https://gateway.remote.com/v1
+    description: |
+      Upload and download files attached to employments, companies,
+      and expenses. Define and set customer-managed custom fields on
+      companies and employments. List supported countries and their
+      employment models. Estimate the loaded annual cost of hiring an
+      employee in any country via the cost calculator.
+    properties:
+      - url: https://developer.remote.com/docs/working-with-files
+        type: Documentation
+      - url: https://developer.remote.com/docs/custom-fields
+        type: Documentation
+      - url: https://developer.remote.com/docs/working-with-countries
+        type: Documentation
+      - url: https://developer.remote.com/docs/employment-cost-estimation
+        type: Documentation
+      - url: openapi/remote-files-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/cost-calculator.yaml
+        type: NaftikoCapability
+      - url: examples/remote-cost-estimate-example.json
+        type: Example
+
+  - aid: remote-com:remote-oauth-api
+    name: Remote OAuth 2.0 API
+    tags:
+      - OAuth
+      - Authentication
+      - Authorization
+      - Partners
+    humanURL: https://developer.remote.com/docs/authentication
+    baseURL: https://gateway.remote.com
+    description: |
+      OAuth 2.0 endpoints used to obtain access tokens for the Remote
+      API. Four supported flows — authorization code (customer apps
+      and partners), client credentials (partners), JWT bearer
+      assertion (partners acting for a specific company), and refresh
+      token. Plus magic-link generation for passwordless employee
+      sign-in.
+    properties:
+      - url: https://developer.remote.com/docs/authentication
+        type: Documentation
+      - url: https://developer.remote.com/docs/authorization-for-customers
+        type: Documentation
+      - url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+        type: Documentation
+      - url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+        type: Documentation
+      - url: https://developer.remote.com/docs/refresh-token-flow
+        type: Documentation
+      - url: openapi/remote-oauth-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/oauth.yaml
+        type: NaftikoCapability
+      - url: examples/remote-oauth-token-exchange-example.json
+        type: Example
+
+  - aid: remote-com:remote-webhooks
+    name: Remote Webhooks
+    tags:
+      - Webhooks
+      - Events
+      - AsyncAPI
+    humanURL: https://developer.remote.com/docs/available-webhooks
+    baseURL: https://gateway.remote.com
+    description: |
+      Remote emits webhook events for every meaningful state change
+      across companies, employments, contractors, payroll, billing,
+      time off, timesheets, benefits, identity verification, and SSO.
+      Webhooks are signed with `X-Remote-Signature` and delivered to a
+      customer-managed HTTPS endpoint. 90+ event types in total.
+    properties:
+      - url: https://developer.remote.com/docs/available-webhooks
+        type: Documentation
+      - url: https://developer.remote.com/docs/working-with-webhooks
+        type: Documentation
+      - url: https://developer.remote.com/docs/verifying-webhooks
+        type: Documentation
+      - url: asyncapi/remote-webhooks-asyncapi.yml
+        type: AsyncAPI
+      - url: examples/remote-employment-onboarding-completed-webhook-example.json
+        type: Example
+
+common:
+  - url: https://remote.com
+    type: WebSite
+  - url: https://developer.remote.com
+    type: DeveloperPortal
+  - url: https://developer.remote.com/llms.txt
+    type: LLMSText
+  - url: https://developer.remote.com/docs/changelogs
+    type: ChangeLog
+  - url: https://remote.com/status
+    type: StatusPage
+  - url: https://trust.remote.com
+    type: Security
+  - url: https://remote.com/pricing
+    type: Pricing
+  - url: https://remote.com/blog
+    type: Blog
+  - url: https://support.remote.com
+    type: Support
+  - url: https://remote.com/legal/terms
+    type: TermsOfService
+  - url: https://remote.com/legal/privacy
+    type: Privacy
+  - url: https://remote.com/careers
+    type: Careers
+  - url: https://twitter.com/remote
+    type: Twitter
+  - url: https://www.linkedin.com/company/remote-com
+    type: LinkedIn
+  - url: https://github.com/remoteoss
+    type: GitHub
+  - url: plans/remote-com-plans-pricing.yml
+    type: Plans
+  - url: rate-limits/remote-com-rate-limits.yml
+    type: RateLimits
+  - url: finops/remote-com-finops.yml
+    type: FinOps
+  - url: rules/remote-com-rules.yml
+    type: SpectralRules
+  - url: vocabulary/remote-com-vocabulary.yml
+    type: Vocabulary
+  - url: review.yml
+    type: Review
+  - url: https://github.com/remoteoss/remote-cli
+    type: CLI
+    description: Official Remote.com CLI for managing companies and employees from the terminal.
+  - url: https://github.com/remoteoss/ai-agent-toolkit
+    type: SDK
+    description: '@remoteoss/ai-agent-toolkit — TypeScript library exposing 34+ Remote tools to LangChain and MCP-based AI agents.'
+  - url: https://github.com/remoteoss/remote-flows
+    type: SDK
+    description: '@remoteoss/remote-flows — React SDK providing embedded employment flows (Cost Calculator, Onboarding, Amendment, Termination).'
+  - url: https://github.com/remoteoss/json-schema-form
+    type: SDK
+    description: '@remoteoss/json-schema-form — JavaScript library that renders Remote''s per-country JSON Schema forms.'
+  - url: https://github.com/remoteoss/react-url-modal
+    type: SDK
+    description: react-url-modal — Remote''s URL-backed modal state library for React.
+  - url: https://github.com/remoteoss/remote-for-ai
+    type: Integration
+    description: Official Remote-for-AI plugin marketplace (Claude Code, Cursor, Codex, Gemini CLI) shipping the Remote MCP server.
+  - url: https://developer.remote.com/docs/introduction-to-remote-mcp
+    type: MCP
+    description: Remote.com MCP server for AI agents — OAuth 2.0, scoped capabilities, PII protections.
+
+integrations:
+  - name: Workday
+    type: HRIS
+    url: https://remote.com/integrations
+  - name: HiBob
+    type: HRIS
+    url: https://remote.com/integrations
+  - name: BambooHR
+    type: HRIS
+    url: https://remote.com/integrations
+  - name: Personio
+    type: HRIS
+    url: https://remote.com/integrations
+  - name: Merge
+    type: Unified API
+    url: https://developer.remote.com/docs/build-with-merge
+
+useCases:
+  - name: Hire abroad without an entity
+    description: Use the EOR API to onboard an employee in any of 90+ countries through Remote's local entity.
+  - name: Run global payroll
+    description: Use the Global Payroll API to deliver compliant payroll across the customer's owned entities.
+  - name: Pay contractors compliantly
+    description: Issue localized contracts, approve invoices, and pay contractors via the Contractors API.
+  - name: Eliminate misclassification risk
+    description: Run pre-hire contractor-vs-employee eligibility checks via the Contract Eligibility endpoint.
+  - name: Automate offboarding
+    description: Use the Employments API offboarding endpoints to submit, review, and complete employee separations.
+  - name: Embed Remote in your product
+    description: Use the @remoteoss/remote-flows React SDK to embed Cost Calculator, Onboarding, Amendment, and Termination flows.
+  - name: Drive Remote from an AI agent
+    description: Use the Remote MCP server or the @remoteoss/ai-agent-toolkit to let Claude, Cursor, Codex, and Gemini act on Remote data with OAuth-scoped permissions.
+
+solutions:
+  - id: global-hiring
+    name: Global Hiring
+    description: End-to-end automated hiring across 90+ countries via EOR.
+  - id: global-payroll
+    name: Global Payroll
+    description: Compliant payroll across customer-owned entities.
+  - id: contractor-management
+    name: Contractor Management
+    description: Localized contracts, invoice approval, and payment for independent contractors.
+  - id: us-peo
+    name: US PEO
+    description: Co-employment in the United States with statutory benefits and compliance.
+  - id: equity
+    name: Equity Administration
+    description: Tax-aware equity grants and program management.
+  - id: recruit
+    name: Recruit
+    description: AI-powered candidate sourcing and applicant tracking across 800m+ profiles.
+  - id: ai-agents
+    name: AI Agents
+    description: Official MCP server and AI Agent Toolkit so AI agents can act on Remote with OAuth-scoped permissions.
+
+features:
+  - 90+ countries supported for EOR
+  - In-house legal and payroll teams (not outsourced)
+  - SOC 2 Type 2 and ISO 27001 certified
+  - 300 requests / minute per company API quota
+  - Sandbox environment at remote-sandbox.com
+  - OAuth 2.0 (authorization code, client credentials, assertion, refresh)
+  - JSON Schema forms for per-country localization
+  - Signed webhooks (X-Remote-Signature)
+  - Official MCP server with OAuth-scoped permissions
+  - TypeScript AI Agent Toolkit (34+ tools)
+  - React Embedded Flows SDK (Cost Calculator, Onboarding, Amendment, Termination)
+  - Shell-based remote-cli for terminal use
+  - 12 supported billing currencies
+  - LLMs.txt index for AI-discoverable docs

@@ -1,0 +1,669 @@
+openapi: 3.1.0
+info:
+  title: Remote Companies API
+  description: |
+    Create and manage companies on the Remote.com platform. Customers and
+    partners use this API to onboard new companies, retrieve compliance
+    profiles, manage company managers and departments, configure SSO, and
+    issue magic links for passwordless authentication.
+
+    The Companies API is the entry point for every Remote integration. A
+    company-scoped access token is required for nearly every other API call
+    in the Remote ecosystem.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  termsOfService: https://remote.com/legal/terms
+  license:
+    name: Remote API Terms
+    url: https://developer.remote.com/docs/api-terms
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Companies
+    description: Create, retrieve, and update company records
+  - name: Company Managers
+    description: Manage administrators and managers within a company
+  - name: Departments
+    description: Manage company-defined departments and org structure
+  - name: Compliance
+    description: Read compliance profiles and supported jurisdictions
+  - name: SSO
+    description: Configure SAML/OIDC single sign-on for a company
+  - name: Identity
+    description: Inspect the identity of the current access token
+  - name: Magic Links
+    description: Generate passwordless magic links for users and employees
+
+paths:
+  /companies:
+    get:
+      summary: List Companies
+      description: List companies accessible to the current partner or customer access token.
+      operationId: listCompanies
+      tags: [Companies]
+      parameters:
+        - $ref: '#/components/parameters/PageQuery'
+        - $ref: '#/components/parameters/PageSizeQuery'
+      responses:
+        '200':
+          description: A page of companies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyList'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
+    post:
+      summary: Create A Company
+      description: |
+        Create a new company on Remote. Returns the company resource together
+        with a company-scoped access token that the partner/customer may use
+        to call subsequent endpoints on the new company's behalf.
+      operationId: createCompany
+      tags: [Companies]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CompanyCreateRequest' }
+      responses:
+        '201':
+          description: Company created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CompanyCreateResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
+
+  /companies/{company_id}:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: Show A Company
+      description: Retrieve a company by id.
+      operationId: showCompany
+      tags: [Companies]
+      responses:
+        '200':
+          description: Company record.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CompanyEnvelope' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      summary: Update A Company
+      description: Update fields on an existing company.
+      operationId: updateCompany
+      tags: [Companies]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CompanyUpdateRequest' }
+      responses:
+        '200':
+          description: Company updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CompanyEnvelope' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /companies/{company_id}/compliance_profile:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: Show Company Compliance Profile
+      description: Returns the compliance profile for the company including hiring eligibility signals.
+      operationId: showCompanyComplianceProfile
+      tags: [Compliance]
+      responses:
+        '200':
+          description: Compliance profile.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ComplianceProfile' }
+
+  /companies/{company_id}/employment_onboarding_reserves_status:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: Show Employment Onboarding Reserves Status
+      description: Inspect the reserve payment status used to gate new EOR hires for the company.
+      operationId: showOnboardingReservesStatus
+      tags: [Compliance]
+      responses:
+        '200':
+          description: Reserves status.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReservesStatus' }
+
+  /companies/{company_id}/legal_entities:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: List Company Legal Entities
+      description: List the legal entities under which the company hires.
+      operationId: listCompanyLegalEntities
+      tags: [Companies]
+      responses:
+        '200':
+          description: Legal entities.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LegalEntityList' }
+
+  /companies/{company_id}/managers:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: List Company Managers
+      operationId: listCompanyManagers
+      tags: [Company Managers]
+      responses:
+        '200':
+          description: Managers list.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ManagerList' }
+    post:
+      summary: Create A Company Manager
+      operationId: createCompanyManager
+      tags: [Company Managers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ManagerCreateRequest' }
+      responses:
+        '201':
+          description: Manager created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ManagerEnvelope' }
+
+  /companies/{company_id}/managers/{manager_id}:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+      - $ref: '#/components/parameters/ManagerIdPath'
+    get:
+      summary: Show A Company Manager
+      operationId: showCompanyManager
+      tags: [Company Managers]
+      responses:
+        '200':
+          description: Manager record.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ManagerEnvelope' }
+    delete:
+      summary: Delete A Company Manager
+      operationId: deleteCompanyManager
+      tags: [Company Managers]
+      responses:
+        '204': { description: Manager deleted. }
+
+  /companies/{company_id}/departments:
+    parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: List Departments
+      operationId: listDepartments
+      tags: [Departments]
+      responses:
+        '200':
+          description: Departments.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DepartmentList' }
+    post:
+      summary: Create A Department
+      operationId: createDepartment
+      tags: [Departments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DepartmentCreateRequest' }
+      responses:
+        '201':
+          description: Department created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DepartmentEnvelope' }
+
+  /sso_configuration:
+    get:
+      summary: Show The Current SSO Configuration
+      operationId: showSsoConfiguration
+      tags: [SSO]
+      responses:
+        '200':
+          description: SSO configuration.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SsoConfiguration' }
+    post:
+      summary: Create The SSO Configuration
+      operationId: createSsoConfiguration
+      tags: [SSO]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SsoConfiguration' }
+      responses:
+        '201':
+          description: SSO configured.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SsoConfiguration' }
+
+  /sso_configuration/details:
+    get:
+      summary: Show The SSO Configuration Details
+      operationId: showSsoConfigurationDetails
+      tags: [SSO]
+      responses:
+        '200':
+          description: SSO details.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SsoConfiguration' }
+
+  /identity:
+    get:
+      summary: Get Token Identity
+      description: Shows the entities controllable by the current access token.
+      operationId: getTokenIdentity
+      tags: [Identity]
+      responses:
+        '200':
+          description: Identity.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Identity' }
+
+  /magic_links:
+    post:
+      summary: Generate A Magic Link
+      description: |
+        Generate a single-use magic link to log a user (`user_id`) or
+        employee (`employment_id`) into Remote without a password.
+      operationId: generateMagicLink
+      tags: [Magic Links]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MagicLinkRequest' }
+      responses:
+        '201':
+          description: Magic link.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MagicLinkResponse' }
+
+  /forms/{form_type}:
+    parameters:
+      - name: form_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum: [company, employment, contract_amendment, benefit_offer, benefit_renewal_request, offboarding, expense]
+    get:
+      summary: Show A JSON Schema Form
+      description: Returns the JSON Schema form definition used by Remote to collect localized data for the given resource type.
+      operationId: showSchemaForm
+      tags: [Companies]
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Company-scoped or partner-scoped OAuth 2.0 access token.
+
+  parameters:
+    CompanyIdPath:
+      name: company_id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    ManagerIdPath:
+      name: manager_id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    PageQuery:
+      name: page
+      in: query
+      schema: { type: integer, minimum: 1, default: 1 }
+    PageSizeQuery:
+      name: page_size
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    TooManyRequests:
+      description: Too Many Requests
+      headers:
+        x-ratelimit-count:
+          schema: { type: integer }
+          description: Requests made in the current 60-second window.
+        x-ratelimit-remaining:
+          schema: { type: integer }
+          description: Requests remaining in the current window.
+        x-ratelimit-reset:
+          schema: { type: integer }
+          description: Milliseconds until the rate limit resets.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [errors]
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+
+    Address:
+      type: object
+      properties:
+        address: { type: string }
+        address_line_2: { type: string }
+        city: { type: string }
+        country_code: { type: string, description: ISO 3166-1 alpha-3 country code. }
+        local_details: { type: object, additionalProperties: true }
+        postal_code: { type: string }
+
+    Company:
+      type: object
+      required: [id, name, status]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        slug: { type: string }
+        external_id: { type: string, nullable: true }
+        status:
+          type: string
+          enum: [created, draft, profile_completed, activation_pending, activated, archived]
+        company_owner_user_id: { type: string, format: uuid }
+        primary_billing_contact: { type: string, nullable: true }
+        bank_account_currency_code: { type: string }
+        tax_number: { type: string, nullable: true }
+        address: { $ref: '#/components/schemas/Address' }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    CompanyEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company: { $ref: '#/components/schemas/Company' }
+
+    CompanyList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            companies:
+              type: array
+              items: { $ref: '#/components/schemas/Company' }
+            current_page: { type: integer }
+            total_count: { type: integer }
+            total_pages: { type: integer }
+
+    CompanyCreateRequest:
+      type: object
+      required: [name, company_owner_email]
+      properties:
+        name: { type: string }
+        company_owner_email: { type: string, format: email }
+        company_owner_name: { type: string }
+        desired_currency: { type: string, default: USD }
+        external_id: { type: string }
+        terms_of_service_accepted_at: { type: string, format: date-time }
+
+    CompanyCreateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company: { $ref: '#/components/schemas/Company' }
+            access_token: { type: string, description: Company-scoped access token. }
+            refresh_token: { type: string }
+            expires_in: { type: integer }
+
+    CompanyUpdateRequest:
+      type: object
+      properties:
+        name: { type: string }
+        external_id: { type: string }
+        address: { $ref: '#/components/schemas/Address' }
+        tax_number: { type: string }
+
+    ComplianceProfile:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            hiring_eligibility_state:
+              type: string
+              enum: [pending, additional_information_required, referred, verified, denied]
+            reserves_required: { type: boolean }
+            sanctioned_countries:
+              type: array
+              items: { type: string }
+
+    ReservesStatus:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            reserve_payment_required: { type: boolean }
+            reserve_amount: { type: integer, description: Amount in the smallest currency unit. }
+            reserve_currency: { type: string }
+            status:
+              type: string
+              enum: [not_required, requested, paid, waived]
+
+    LegalEntity:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        country_code: { type: string }
+        type:
+          type: string
+          enum: [remote_entity, partner_entity, customer_entity]
+
+    LegalEntityList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            legal_entities:
+              type: array
+              items: { $ref: '#/components/schemas/LegalEntity' }
+
+    Manager:
+      type: object
+      required: [id, email, role]
+      properties:
+        id: { type: string, format: uuid }
+        email: { type: string, format: email }
+        name: { type: string }
+        role:
+          type: string
+          enum: [admin, manager, people_manager, finance_admin, owner]
+        status:
+          type: string
+          enum: [invited, active, deactivated]
+
+    ManagerCreateRequest:
+      type: object
+      required: [email, role]
+      properties:
+        email: { type: string, format: email }
+        name: { type: string }
+        role:
+          type: string
+          enum: [admin, manager, people_manager, finance_admin]
+
+    ManagerEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            manager: { $ref: '#/components/schemas/Manager' }
+
+    ManagerList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company_managers:
+              type: array
+              items: { $ref: '#/components/schemas/Manager' }
+
+    Department:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        parent_department_id: { type: string, format: uuid, nullable: true }
+
+    DepartmentCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        parent_department_id: { type: string, format: uuid }
+
+    DepartmentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            department: { $ref: '#/components/schemas/Department' }
+
+    DepartmentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            departments:
+              type: array
+              items: { $ref: '#/components/schemas/Department' }
+
+    SsoConfiguration:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            provider:
+              type: string
+              enum: [saml, oidc]
+            sso_url: { type: string, format: uri }
+            issuer: { type: string }
+            x509_certificate: { type: string }
+            enabled: { type: boolean }
+
+    Identity:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [company, partner, employment, user]
+            company_id: { type: string, format: uuid }
+            partner_id: { type: string, format: uuid }
+            employment_id: { type: string, format: uuid }
+            user_id: { type: string, format: uuid }
+            scopes:
+              type: array
+              items: { type: string }
+
+    MagicLinkRequest:
+      type: object
+      properties:
+        user_id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        timeout_in_minutes:
+          type: integer
+          minimum: 1
+          maximum: 1440
+          default: 15
+        target_section:
+          type: string
+          description: Optional Remote UI section to deep-link to.
+
+    MagicLinkResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            magic_link:
+              type: string
+              format: uri
+            expires_at: { type: string, format: date-time }

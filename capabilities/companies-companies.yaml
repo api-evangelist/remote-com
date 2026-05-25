@@ -1,0 +1,160 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remote Companies API — Companies
+  description: 'Remote Companies API — Companies. Self-contained Naftiko capability covering one Remote business surface.'
+  tags:
+  - Remote
+  - Companies
+  - EOR
+  - Payroll
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    REMOTE_ACCESS_TOKEN: REMOTE_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: companies-companies
+    baseUri: https://gateway.remote.com
+    description: Remote Companies business capability.
+    resources:
+    - name: v1-companies
+      path: /v1/companies
+      operations:
+      - name: listcompanies
+        method: GET
+        description: List Companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcompany
+        method: POST
+        description: Create A Company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Company create payload.
+          required: true
+    - name: v1-company
+      path: /v1/companies/{company_id}
+      operations:
+      - name: showcompany
+        method: GET
+        description: Show A Company
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecompany
+        method: PATCH
+        description: Update A Company
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      value: '{{env.REMOTE_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: companies-companies-rest
+    port: 8080
+    description: REST adapter for Remote Companies.
+    resources:
+    - path: /v1/companies
+      name: v1-companies
+      description: REST surface for v1-companies.
+      operations:
+      - method: GET
+        name: listcompanies
+        description: List Companies
+        call: companies-companies.listcompanies
+      - method: POST
+        name: createcompany
+        description: Create A Company
+        call: companies-companies.createcompany
+        with:
+          body: rest.body
+    - path: /v1/companies/{company_id}
+      name: v1-company
+      description: REST surface for a single company.
+      operations:
+      - method: GET
+        name: showcompany
+        description: Show A Company
+        call: companies-companies.showcompany
+        with:
+          company_id: rest.path.company_id
+      - method: PATCH
+        name: updatecompany
+        description: Update A Company
+        call: companies-companies.updatecompany
+        with:
+          company_id: rest.path.company_id
+          body: rest.body
+  - type: mcp
+    namespace: companies-companies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remote Companies.
+    tools:
+    - name: remote-list-companies
+      description: List Companies on Remote.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: companies-companies.listcompanies
+    - name: remote-create-company
+      description: Create A Company on Remote.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: companies-companies.createcompany
+      with:
+        body: tools.body
+    - name: remote-show-company
+      description: Show A Company on Remote.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: companies-companies.showcompany
+      with:
+        company_id: tools.company_id
+    - name: remote-update-company
+      description: Update A Company on Remote.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: companies-companies.updatecompany
+      with:
+        company_id: tools.company_id
+        body: tools.body
