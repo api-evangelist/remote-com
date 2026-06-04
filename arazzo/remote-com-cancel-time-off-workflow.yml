@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Remote Cancel A Time Off Request
+  summary: Find an employment's approved time off request and cancel it.
+  description: >-
+    Cancels an existing time off request for an employment. The workflow lists
+    the employment's time off filtered to the approved status, reads the first
+    match back to confirm it, and cancels it. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: timeAttendanceApi
+  url: ../openapi/remote-time-attendance-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-time-off
+  summary: Locate an approved time off request and cancel it.
+  description: >-
+    Lists approved time off for an employment, confirms the first match, and
+    cancels it.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment whose time off should be canceled.
+  steps:
+  - stepId: listTimeOff
+    description: List approved time off requests for the employment.
+    operationId: listTimeOffRequests
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: query
+      value: $inputs.employmentId
+    - name: status
+      in: query
+      value: approved
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      timeoffId: $response.body#/data/timeoff/0/id
+    onSuccess:
+    - name: hasMatch
+      type: goto
+      stepId: confirmTimeOff
+      criteria:
+      - context: $response.body
+        condition: $.data.timeoff.length > 0
+        type: jsonpath
+    - name: noMatch
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.timeoff.length == 0
+        type: jsonpath
+  - stepId: confirmTimeOff
+    description: Read the matched time off request back to confirm it before canceling.
+    operationId: showTimeOffRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timeoff_id
+      in: path
+      value: $steps.listTimeOff.outputs.timeoffId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timeoff/status
+  - stepId: cancelTimeOff
+    description: Cancel the matched time off request.
+    operationId: cancelTimeOffRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timeoff_id
+      in: path
+      value: $steps.listTimeOff.outputs.timeoffId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timeoff/status
+  outputs:
+    timeoffId: $steps.listTimeOff.outputs.timeoffId
+    status: $steps.cancelTimeOff.outputs.status

@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Remote Request And Resolve Time Off
+  summary: Create a time off request, confirm it, and approve or decline it.
+  description: >-
+    Handles a complete time off request lifecycle for an employment. The
+    workflow creates the request for the chosen leave type and date range, reads
+    it back to confirm the requested status, and then branches on a caller
+    decision flag: an approval calls the approve endpoint while a rejection
+    calls the decline endpoint with a reason. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: timeAttendanceApi
+  url: ../openapi/remote-time-attendance-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: request-time-off
+  summary: Create a time off request and approve or decline it.
+  description: >-
+    Creates a time off request, confirms it, and routes to approval or decline
+    based on the supplied decision.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - leaveType
+    - startDate
+    - endDate
+    - decision
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment requesting time off.
+      leaveType:
+        type: string
+        description: The leave type (e.g. paid_time_off, sick).
+      startDate:
+        type: string
+        description: First day of leave (YYYY-MM-DD).
+      endDate:
+        type: string
+        description: Last day of leave (YYYY-MM-DD).
+      note:
+        type: string
+        description: Optional note for the request.
+      decision:
+        type: string
+        description: Either approve or decline.
+      declineReason:
+        type: string
+        description: Reason used when the decision is decline.
+  steps:
+  - stepId: createTimeOff
+    description: Create the time off request for the employment and date range.
+    operationId: createTimeOffRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        employment_id: $inputs.employmentId
+        leave_type: $inputs.leaveType
+        start_date: $inputs.startDate
+        end_date: $inputs.endDate
+        note: $inputs.note
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      timeoffId: $response.body#/data/timeoff/id
+      status: $response.body#/data/timeoff/status
+  - stepId: confirmTimeOff
+    description: Read the request back and branch on the caller's decision.
+    operationId: showTimeOffRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timeoff_id
+      in: path
+      value: $steps.createTimeOff.outputs.timeoffId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timeoff/status
+      totalDays: $response.body#/data/timeoff/total_days
+    onSuccess:
+    - name: approveBranch
+      type: goto
+      stepId: approveTimeOff
+      criteria:
+      - condition: $inputs.decision == "approve"
+    - name: declineBranch
+      type: goto
+      stepId: declineTimeOff
+      criteria:
+      - condition: $inputs.decision == "decline"
+  - stepId: approveTimeOff
+    description: Approve the time off request.
+    operationId: approveTimeOffRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timeoff_id
+      in: path
+      value: $steps.createTimeOff.outputs.timeoffId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timeoff/status
+    onSuccess:
+    - name: approved
+      type: end
+  - stepId: declineTimeOff
+    description: Decline the time off request with the supplied reason.
+    operationId: declineTimeOffRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timeoff_id
+      in: path
+      value: $steps.createTimeOff.outputs.timeoffId
+    requestBody:
+      contentType: application/json
+      payload:
+        reason: $inputs.declineReason
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timeoff/status
+  outputs:
+    timeoffId: $steps.createTimeOff.outputs.timeoffId
+    approvedStatus: $steps.approveTimeOff.outputs.status
+    declinedStatus: $steps.declineTimeOff.outputs.status

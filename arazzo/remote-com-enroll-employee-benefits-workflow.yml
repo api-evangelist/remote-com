@@ -1,0 +1,87 @@
+arazzo: 1.0.1
+info:
+  title: Remote Enroll An Employee In Benefits
+  summary: Read the benefit offers schema for an employment, select offers, and upsert the elections.
+  description: >-
+    Drives a benefits enrollment for a single employment. The workflow fetches
+    the per-employment benefit offers JSON Schema form to learn the required
+    election shape, then upserts the employee's benefit elections, and reads the
+    resulting offers back to confirm what was saved. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: benefitsApi
+  url: ../openapi/remote-benefits-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: enroll-employee-benefits
+  summary: Fetch the benefits form, upsert elections, and confirm the saved offers.
+  description: >-
+    Reads the benefit offers schema for an employment, upserts the supplied
+    elections, and reads the offers back to confirm them.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - elections
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment being enrolled in benefits.
+      elections:
+        type: object
+        description: The benefit election payload conforming to the employment's schema form.
+  steps:
+  - stepId: getBenefitsSchema
+    description: Fetch the JSON Schema form describing the employment's benefit elections.
+    operationId: getEmploymentBenefitOffersSchema
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      schema: $response.body
+  - stepId: upsertOffers
+    description: Upsert the employee's benefit elections for the employment.
+    operationId: upsertEmploymentBenefitOffers
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.elections
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      benefitOffers: $response.body#/data/benefit_offers
+  - stepId: confirmOffers
+    description: Read the employment's benefit offers back to confirm what was saved.
+    operationId: getEmploymentBenefitOffers
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      benefitOffers: $response.body#/data/benefit_offers
+  outputs:
+    employmentId: $inputs.employmentId
+    benefitOffers: $steps.confirmOffers.outputs.benefitOffers

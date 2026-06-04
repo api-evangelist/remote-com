@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: Remote Offboard An Employee
+  summary: Submit an offboarding for an employment and confirm it entered review.
+  description: >-
+    Initiates the end of an employment relationship. The workflow submits an
+    offboarding of the given type with the worker's last day of work, then reads
+    the offboarding back to confirm it was accepted and to surface its current
+    status. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: employmentsApi
+  url: ../openapi/remote-employments-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: offboard-employee
+  summary: Submit an offboarding and confirm its status.
+  description: >-
+    Submits an offboarding for an employment and reads it back to confirm the
+    submitted status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - offboardingType
+    - lastDayOfWork
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment to offboard.
+      offboardingType:
+        type: string
+        description: One of resignation, termination, or end_of_contract.
+      lastDayOfWork:
+        type: string
+        description: The worker's last day of work (YYYY-MM-DD).
+      reasonForOffboarding:
+        type: string
+        description: Free-text reason for the offboarding.
+  steps:
+  - stepId: submitOffboarding
+    description: Submit the offboarding request with type and last day of work.
+    operationId: submitOffboarding
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        employment_id: $inputs.employmentId
+        offboarding_type: $inputs.offboardingType
+        last_day_of_work: $inputs.lastDayOfWork
+        reason_for_offboarding: $inputs.reasonForOffboarding
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      offboardingId: $response.body#/data/offboarding/id
+      status: $response.body#/data/offboarding/status
+  - stepId: confirmOffboarding
+    description: Read the offboarding back to confirm it was accepted.
+    operationId: showOffboarding
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: offboarding_id
+      in: path
+      value: $steps.submitOffboarding.outputs.offboardingId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/offboarding/status
+      lastDayOfWork: $response.body#/data/offboarding/last_day_of_work
+  outputs:
+    offboardingId: $steps.submitOffboarding.outputs.offboardingId
+    status: $steps.confirmOffboarding.outputs.status

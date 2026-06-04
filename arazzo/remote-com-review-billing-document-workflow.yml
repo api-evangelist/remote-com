@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Remote Review A Billing Document
+  summary: Find the latest issued billing document, confirm it, and pull its line-item breakdown.
+  description: >-
+    Reconciles a Remote invoice in one pass. The workflow lists billing
+    documents filtered to the issued status, reads the first document back to
+    confirm its amount and due date, and then fetches its line-item breakdown so
+    the charges can be reconciled. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: payrollBillingApi
+  url: ../openapi/remote-payroll-billing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: review-billing-document
+  summary: Locate an issued billing document and pull its breakdown.
+  description: >-
+    Lists issued billing documents, confirms the first match, and retrieves its
+    line-item breakdown.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      period:
+        type: string
+        description: Optional billing period filter in YYYY-MM form.
+  steps:
+  - stepId: listBillingDocuments
+    description: List issued billing documents, optionally filtered by period.
+    operationId: listBillingDocuments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: status
+      in: query
+      value: issued
+    - name: period
+      in: query
+      value: $inputs.period
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      billingDocumentId: $response.body#/data/billing_documents/0/id
+    onSuccess:
+    - name: hasDocument
+      type: goto
+      stepId: confirmDocument
+      criteria:
+      - context: $response.body
+        condition: $.data.billing_documents.length > 0
+        type: jsonpath
+    - name: noDocument
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.billing_documents.length == 0
+        type: jsonpath
+  - stepId: confirmDocument
+    description: Read the matched billing document back to confirm its amount and due date.
+    operationId: showBillingDocument
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: billing_document_id
+      in: path
+      value: $steps.listBillingDocuments.outputs.billingDocumentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      amount: $response.body#/data/billing_document/amount
+      currency: $response.body#/data/billing_document/currency
+      dueAt: $response.body#/data/billing_document/due_at
+  - stepId: getBreakdown
+    description: Fetch the line-item breakdown for the billing document.
+    operationId: getBillingDocumentBreakdown
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: billing_document_id
+      in: path
+      value: $steps.listBillingDocuments.outputs.billingDocumentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      breakdown: $response.body#/data
+  outputs:
+    billingDocumentId: $steps.listBillingDocuments.outputs.billingDocumentId
+    amount: $steps.confirmDocument.outputs.amount
+    breakdown: $steps.getBreakdown.outputs.breakdown

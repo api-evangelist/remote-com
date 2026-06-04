@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Remote Hire An EOR Employee
+  summary: Create an EOR employment, confirm it, and invite the worker to self-serve onboarding.
+  description: >-
+    Stands up a new Employer of Record employment in a single pass. The
+    workflow creates the employment record from the supplied worker details,
+    reads it back to confirm the created status and lifecycle stage, and then
+    branches: when the new employment is in an initiated/created state it sends
+    the self-serve onboarding invitation so the worker can complete their own
+    details, otherwise it ends after confirming the record. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: employmentsApi
+  url: ../openapi/remote-employments-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: hire-eor-employee
+  summary: Create an EOR employment and invite the worker to onboard.
+  description: >-
+    Creates an employment, confirms it was created, and conditionally sends the
+    onboarding invitation.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - fullName
+    - countryCode
+    - personalEmail
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      fullName:
+        type: string
+        description: The worker's full legal name.
+      countryCode:
+        type: string
+        description: ISO 3166-1 country code where the worker is hired.
+      personalEmail:
+        type: string
+        description: The worker's personal email address.
+      jobTitle:
+        type: string
+        description: The worker's job title.
+      provisionalStartDate:
+        type: string
+        description: Provisional start date (YYYY-MM-DD).
+  steps:
+  - stepId: createEmployment
+    description: >-
+      Create a new EOR employment for the worker. employment_type is fixed to
+      employee and employment_model to eor for an Employer of Record hire.
+    operationId: createEmployment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        full_name: $inputs.fullName
+        country_code: $inputs.countryCode
+        personal_email: $inputs.personalEmail
+        employment_type: employee
+        employment_model: eor
+        job_title: $inputs.jobTitle
+        provisional_start_date: $inputs.provisionalStartDate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      employmentId: $response.body#/data/employment/id
+      status: $response.body#/data/employment/status
+  - stepId: confirmEmployment
+    description: Read the new employment back to confirm its status and lifecycle stage.
+    operationId: showEmployment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $steps.createEmployment.outputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/employment/status
+      lifecycleStage: $response.body#/data/employment/lifecycle_stage
+    onSuccess:
+    - name: needsInvite
+      type: goto
+      stepId: inviteEmployment
+      criteria:
+      - context: $response.body
+        condition: $.data.employment.status != "active"
+        type: jsonpath
+    - name: alreadyActive
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.employment.status == "active"
+        type: jsonpath
+  - stepId: inviteEmployment
+    description: >-
+      Send the self-serve onboarding invitation so the worker can complete the
+      remaining details themselves.
+    operationId: inviteEmployment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $steps.createEmployment.outputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      status: $response.body#/data/employment/status
+  outputs:
+    employmentId: $steps.createEmployment.outputs.employmentId
+    finalStatus: $steps.confirmEmployment.outputs.status

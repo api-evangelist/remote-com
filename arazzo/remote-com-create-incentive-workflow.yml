@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Remote Create An Incentive
+  summary: Create a bonus or commission incentive for an employment and confirm it.
+  description: >-
+    Adds a one-time or recurring incentive such as a bonus or commission to an
+    employment's pay. The workflow creates the incentive with the supplied type,
+    amount, currency, and effective date, then reads it back to confirm its
+    created status. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: payrollBillingApi
+  url: ../openapi/remote-payroll-billing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-incentive
+  summary: Create an incentive and confirm it.
+  description: >-
+    Creates an incentive for an employment and reads it back to confirm its
+    created status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - type
+    - amount
+    - currency
+    - effectiveDate
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment receiving the incentive.
+      type:
+        type: string
+        description: One of bonus, commission, signing_bonus, or recurring_incentive.
+      amount:
+        type: integer
+        description: Amount in the smallest currency unit.
+      currency:
+        type: string
+        description: Currency code for the incentive.
+      effectiveDate:
+        type: string
+        description: Date the incentive takes effect (YYYY-MM-DD).
+      recurrence:
+        type: string
+        description: One of one_time, monthly, quarterly, or yearly.
+      note:
+        type: string
+        description: Optional note describing the incentive.
+  steps:
+  - stepId: createIncentive
+    description: Create the incentive for the employment.
+    operationId: createIncentive
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        employment_id: $inputs.employmentId
+        type: $inputs.type
+        amount: $inputs.amount
+        currency: $inputs.currency
+        effective_date: $inputs.effectiveDate
+        recurrence: $inputs.recurrence
+        note: $inputs.note
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      incentiveId: $response.body#/data/incentive/id
+      status: $response.body#/data/incentive/status
+  - stepId: confirmIncentive
+    description: Read the incentive back to confirm its created status.
+    operationId: showIncentive
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: incentive_id
+      in: path
+      value: $steps.createIncentive.outputs.incentiveId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/incentive/status
+      effectiveDate: $response.body#/data/incentive/effective_date
+  outputs:
+    incentiveId: $steps.createIncentive.outputs.incentiveId
+    status: $steps.confirmIncentive.outputs.status

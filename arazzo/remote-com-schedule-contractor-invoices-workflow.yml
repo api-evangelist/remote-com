@@ -1,0 +1,71 @@
+arazzo: 1.0.1
+info:
+  title: Remote Schedule Recurring Contractor Invoices
+  summary: Bulk-create scheduled contractor invoices, then confirm the first schedule.
+  description: >-
+    Sets up recurring pay schedules for contractors. The workflow bulk-creates
+    one or more scheduled contractor invoices from the supplied schedule list,
+    then reads the first created schedule back to confirm its recurrence and
+    next run date. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: contractorsApi
+  url: ../openapi/remote-contractors-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: schedule-contractor-invoices
+  summary: Bulk-create scheduled contractor invoices and confirm the first one.
+  description: >-
+    Creates a batch of scheduled contractor invoices and reads the first created
+    schedule back to confirm its recurrence and next run.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - scheduledInvoices
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      scheduledInvoices:
+        type: array
+        description: >-
+          Array of scheduled invoice definitions, each with employment_id,
+          amount, currency, and recurrence.
+        items:
+          type: object
+  steps:
+  - stepId: bulkCreate
+    description: Bulk-create the scheduled contractor invoices.
+    operationId: bulkCreateScheduledContractorInvoices
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        scheduled_contractor_invoices: $inputs.scheduledInvoices
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      scheduledInvoiceId: $response.body#/data/scheduled_contractor_invoices/0/id
+  - stepId: confirmSchedule
+    description: Read the first created schedule back to confirm its recurrence and next run.
+    operationId: showScheduledContractorInvoice
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: scheduled_invoice_id
+      in: path
+      value: $steps.bulkCreate.outputs.scheduledInvoiceId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recurrence: $response.body#/data/scheduled_contractor_invoice/recurrence
+      nextRunAt: $response.body#/data/scheduled_contractor_invoice/next_run_at
+  outputs:
+    scheduledInvoiceId: $steps.bulkCreate.outputs.scheduledInvoiceId
+    nextRunAt: $steps.confirmSchedule.outputs.nextRunAt

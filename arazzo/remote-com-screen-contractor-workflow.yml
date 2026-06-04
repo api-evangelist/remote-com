@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Remote Screen A Contractor For Misclassification
+  summary: Run a contractor misclassification check, then act on the recommendation.
+  description: >-
+    Uses Remote's misclassification tooling to de-risk a contractor engagement.
+    The workflow submits a contract eligibility check for the country and work
+    relationship, then branches on the returned recommendation: a low-risk
+    proceed_as_contractor result ends the flow, while a switch_to_eor result
+    starts a Contractor-of-Record subscription for the employment so the worker
+    can be moved onto a compliant footing. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: contractorsApi
+  url: ../openapi/remote-contractors-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: screen-contractor
+  summary: Run a misclassification check and start a COR subscription when recommended.
+  description: >-
+    Submits an eligibility check and, when the recommendation is to switch to
+    EOR, subscribes the employment to Contractor of Record.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - countryCode
+    - workRelationship
+    - employmentId
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      countryCode:
+        type: string
+        description: ISO country code where the contractor works.
+      workRelationship:
+        type: object
+        description: Structured answers to the misclassification questionnaire.
+      employmentId:
+        type: string
+        description: The employment to subscribe to COR if the check recommends switching.
+  steps:
+  - stepId: checkEligibility
+    description: Submit the misclassification eligibility check and branch on the recommendation.
+    operationId: createContractEligibility
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        country_code: $inputs.countryCode
+        work_relationship: $inputs.workRelationship
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      riskLevel: $response.body#/data/risk_level
+      riskScore: $response.body#/data/risk_score
+      recommendation: $response.body#/data/recommendation
+    onSuccess:
+    - name: switchToEor
+      type: goto
+      stepId: subscribeCor
+      criteria:
+      - context: $response.body
+        condition: $.data.recommendation == "switch_to_eor"
+        type: jsonpath
+    - name: proceedAsContractor
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.recommendation != "switch_to_eor"
+        type: jsonpath
+  - stepId: subscribeCor
+    description: >-
+      Subscribe the employment to the Contractor-of-Record plan to move the
+      worker onto a compliant arrangement.
+    operationId: manageCorSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        action: subscribe
+        plan: cor
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      subscription: $response.body#/data/subscription
+  outputs:
+    riskLevel: $steps.checkEligibility.outputs.riskLevel
+    recommendation: $steps.checkEligibility.outputs.recommendation
+    subscription: $steps.subscribeCor.outputs.subscription

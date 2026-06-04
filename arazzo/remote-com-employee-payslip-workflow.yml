@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: Remote Retrieve An Employee Payslip
+  summary: Find an active employee by email, list their payslips, and fetch the latest payslip detail.
+  description: >-
+    Resolves a worker to their latest payslip in one pass. The workflow looks up
+    the employment by email, lists that employment's payslips, and reads the
+    most recent payslip back to surface its gross, net, and document URL. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: employmentsApi
+  url: ../openapi/remote-employments-api-openapi.yml
+  type: openapi
+- name: payrollBillingApi
+  url: ../openapi/remote-payroll-billing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: employee-payslip
+  summary: Resolve an employment by email and fetch its latest payslip.
+  description: >-
+    Lists employments filtered by email, lists the matched employment's
+    payslips, and reads the first payslip back for its detail.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - email
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      email:
+        type: string
+        description: The worker's email used to resolve their employment.
+  steps:
+  - stepId: findEmployment
+    description: Look up the employment by email.
+    operationId: listEmployments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: email
+      in: query
+      value: $inputs.email
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      employmentId: $response.body#/data/employments/0/id
+    onSuccess:
+    - name: hasEmployment
+      type: goto
+      stepId: listPayslips
+      criteria:
+      - context: $response.body
+        condition: $.data.employments.length > 0
+        type: jsonpath
+    - name: noEmployment
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.employments.length == 0
+        type: jsonpath
+  - stepId: listPayslips
+    description: List the matched employment's payslips.
+    operationId: listPayslips
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: query
+      value: $steps.findEmployment.outputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      payslipId: $response.body#/data/payslips/0/id
+    onSuccess:
+    - name: hasPayslip
+      type: goto
+      stepId: showPayslip
+      criteria:
+      - context: $response.body
+        condition: $.data.payslips.length > 0
+        type: jsonpath
+    - name: noPayslip
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.payslips.length == 0
+        type: jsonpath
+  - stepId: showPayslip
+    description: Read the latest payslip back for its gross, net, and document URL.
+    operationId: showPayslip
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payslip_id
+      in: path
+      value: $steps.listPayslips.outputs.payslipId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      grossAmount: $response.body#/data/payslip/gross_amount
+      netAmount: $response.body#/data/payslip/net_amount
+      documentUrl: $response.body#/data/payslip/document_url
+  outputs:
+    employmentId: $steps.findEmployment.outputs.employmentId
+    payslipId: $steps.listPayslips.outputs.payslipId
+    documentUrl: $steps.showPayslip.outputs.documentUrl

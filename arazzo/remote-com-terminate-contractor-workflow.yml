@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Remote Terminate A Contractor Of Record Engagement
+  summary: Create a COR termination request, confirm it, and submit the termination.
+  description: >-
+    Winds down a Contractor-of-Record engagement in a compliant sequence. The
+    workflow creates a COR termination request with the last day of engagement
+    and reason, reads it back to confirm it was submitted, and then submits the
+    termination of the underlying employment. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: contractorsApi
+  url: ../openapi/remote-contractors-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: terminate-contractor
+  summary: Create and confirm a COR termination request, then terminate the engagement.
+  description: >-
+    Creates a COR termination request, confirms its submitted status, and
+    submits the termination of the engagement.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - lastDayOfEngagement
+    - reason
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The contractor employment to terminate.
+      lastDayOfEngagement:
+        type: string
+        description: The contractor's last day of engagement (YYYY-MM-DD).
+      reason:
+        type: string
+        description: Reason for the termination.
+  steps:
+  - stepId: createTermination
+    description: Create the COR termination request with the last day and reason.
+    operationId: createCorTerminationRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        employment_id: $inputs.employmentId
+        last_day_of_engagement: $inputs.lastDayOfEngagement
+        reason: $inputs.reason
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      terminationId: $response.body#/data/cor_termination_request/id
+      status: $response.body#/data/cor_termination_request/status
+  - stepId: confirmTermination
+    description: Read the termination request back to confirm it was submitted.
+    operationId: showCorTerminationRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/cor_termination_request/status
+  - stepId: submitTermination
+    description: Submit the termination of the Contractor-of-Record employment.
+    operationId: terminateContractorOfRecordEmployment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 202
+  outputs:
+    terminationId: $steps.createTermination.outputs.terminationId
+    status: $steps.confirmTermination.outputs.status

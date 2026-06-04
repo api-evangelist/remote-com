@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Remote Look Up A Country Leave Policy
+  summary: Confirm a country is supported, list its leave policies, and fetch one policy's detail.
+  description: >-
+    Surfaces statutory leave rules for a hiring country. The workflow confirms
+    the country is supported and reads its profile, lists the leave policies for
+    that country, and reads the first policy back for its accrual method and
+    allowance. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: filesApi
+  url: ../openapi/remote-files-api-openapi.yml
+  type: openapi
+- name: timeAttendanceApi
+  url: ../openapi/remote-time-attendance-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: country-leave-policy
+  summary: Resolve a country and inspect its first leave policy.
+  description: >-
+    Shows a country, lists its leave policies, and reads the first policy back
+    for its accrual detail.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - countryCode
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      countryCode:
+        type: string
+        description: ISO 3166-1 country code to inspect.
+  steps:
+  - stepId: showCountry
+    description: Confirm the country is supported and read its profile.
+    operationId: showCountry
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: country_code
+      in: path
+      value: $inputs.countryCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      countryName: $response.body#/data/country/name
+      currency: $response.body#/data/country/currency
+  - stepId: listLeavePolicies
+    description: List the leave policies for the country.
+    operationId: listLeavePolicies
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: country_code
+      in: query
+      value: $inputs.countryCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      leavePolicyId: $response.body#/data/leave_policies/0/id
+    onSuccess:
+    - name: hasPolicy
+      type: goto
+      stepId: showLeavePolicy
+      criteria:
+      - context: $response.body
+        condition: $.data.leave_policies.length > 0
+        type: jsonpath
+    - name: noPolicy
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.leave_policies.length == 0
+        type: jsonpath
+  - stepId: showLeavePolicy
+    description: Read the first leave policy back for its accrual method and allowance.
+    operationId: showLeavePolicy
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: leave_policy_id
+      in: path
+      value: $steps.listLeavePolicies.outputs.leavePolicyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      leaveType: $response.body#/data/leave_policy/leave_type
+      accrualMethod: $response.body#/data/leave_policy/accrual_method
+      annualAllowance: $response.body#/data/leave_policy/annual_allowance
+  outputs:
+    countryName: $steps.showCountry.outputs.countryName
+    leavePolicyId: $steps.listLeavePolicies.outputs.leavePolicyId
+    accrualMethod: $steps.showLeavePolicy.outputs.accrualMethod

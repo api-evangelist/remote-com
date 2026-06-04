@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Remote Onboard A New Company
+  summary: Create a company, then add an initial department and an admin manager under it.
+  description: >-
+    Bootstraps a brand new company on Remote and seeds its org structure. The
+    workflow creates the company (receiving a company-scoped access token in the
+    response), then uses that token to create an initial department and to add
+    an admin manager. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: companiesApi
+  url: ../openapi/remote-companies-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: onboard-company
+  summary: Create a company and seed a department and manager.
+  description: >-
+    Creates a company, captures its scoped access token, and creates an initial
+    department and admin manager under the new company.
+  inputs:
+    type: object
+    required:
+    - partnerToken
+    - companyName
+    - companyOwnerEmail
+    - departmentName
+    - managerEmail
+    - managerRole
+    properties:
+      partnerToken:
+        type: string
+        description: Partner or customer bearer access token used to create the company.
+      companyName:
+        type: string
+        description: The new company's name.
+      companyOwnerEmail:
+        type: string
+        description: Email of the company owner.
+      companyOwnerName:
+        type: string
+        description: Name of the company owner.
+      desiredCurrency:
+        type: string
+        description: The company's desired billing currency.
+      departmentName:
+        type: string
+        description: Name of the first department to create.
+      managerEmail:
+        type: string
+        description: Email of the manager to add.
+      managerRole:
+        type: string
+        description: One of admin, manager, people_manager, or finance_admin.
+  steps:
+  - stepId: createCompany
+    description: Create the company and capture the returned company-scoped access token.
+    operationId: createCompany
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.partnerToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.companyName
+        company_owner_email: $inputs.companyOwnerEmail
+        company_owner_name: $inputs.companyOwnerName
+        desired_currency: $inputs.desiredCurrency
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      companyId: $response.body#/data/company/id
+      companyToken: $response.body#/data/access_token
+  - stepId: createDepartment
+    description: Create the initial department under the new company using its scoped token.
+    operationId: createDepartment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $steps.createCompany.outputs.companyToken"
+    - name: company_id
+      in: path
+      value: $steps.createCompany.outputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.departmentName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      departmentId: $response.body#/data/department/id
+  - stepId: createManager
+    description: Add an admin manager to the new company using its scoped token.
+    operationId: createCompanyManager
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $steps.createCompany.outputs.companyToken"
+    - name: company_id
+      in: path
+      value: $steps.createCompany.outputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        email: $inputs.managerEmail
+        role: $inputs.managerRole
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      managerId: $response.body#/data/manager/id
+  outputs:
+    companyId: $steps.createCompany.outputs.companyId
+    departmentId: $steps.createDepartment.outputs.departmentId
+    managerId: $steps.createManager.outputs.managerId

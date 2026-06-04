@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Remote Amend An Employment Contract
+  summary: Submit a contract amendment for an employment and track it to a resolved state.
+  description: >-
+    Drives a contract change for an existing employment. The workflow lists the
+    current contracts to anchor the change, creates a contract amendment with
+    the supplied effective date and amendment data, then reads the amendment
+    back and branches on its status so done amendments end cleanly while
+    in-progress ones surface the current review state. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: employmentsApi
+  url: ../openapi/remote-employments-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: amend-contract
+  summary: Create a contract amendment and track its review status.
+  description: >-
+    Lists current contracts for the employment, creates an amendment, and reads
+    the amendment back to determine whether it is done or still under review.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - effectiveDate
+    - amendmentData
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment whose contract is being amended.
+      effectiveDate:
+        type: string
+        description: Date the amendment takes effect (YYYY-MM-DD).
+      amendmentData:
+        type: object
+        description: The structured per-country amendment fields.
+  steps:
+  - stepId: listContracts
+    description: List the current contracts for the employment to anchor the amendment.
+    operationId: listEmploymentContracts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $inputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contracts: $response.body#/data/employment_contracts
+  - stepId: createAmendment
+    description: Create the contract amendment with the supplied effective date and data.
+    operationId: createContractAmendment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        employment_id: $inputs.employmentId
+        effective_date: $inputs.effectiveDate
+        amendment_data: $inputs.amendmentData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      amendmentId: $response.body#/data/contract_amendment/id
+      status: $response.body#/data/contract_amendment/status
+  - stepId: confirmAmendment
+    description: Read the amendment back and branch on whether it is already done.
+    operationId: showContractAmendment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: contract_amendment_id
+      in: path
+      value: $steps.createAmendment.outputs.amendmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/contract_amendment/status
+      effectiveDate: $response.body#/data/contract_amendment/effective_date
+    onSuccess:
+    - name: amendmentDone
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.contract_amendment.status == "done"
+        type: jsonpath
+  outputs:
+    amendmentId: $steps.createAmendment.outputs.amendmentId
+    status: $steps.confirmAmendment.outputs.status

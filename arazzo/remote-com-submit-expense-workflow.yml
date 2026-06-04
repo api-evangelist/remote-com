@@ -1,0 +1,146 @@
+arazzo: 1.0.1
+info:
+  title: Remote Submit And Resolve An Expense
+  summary: Create an expense, confirm it, and approve or decline it.
+  description: >-
+    Handles an expense from submission through approval. The workflow creates an
+    expense for an employment, reads it back to confirm the submitted status,
+    and then branches on a caller decision flag: an approval calls the approve
+    endpoint while a rejection calls the decline endpoint with a reason. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: payrollBillingApi
+  url: ../openapi/remote-payroll-billing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: submit-expense
+  summary: Create an expense and approve or decline it.
+  description: >-
+    Creates an expense, confirms it, and routes to approval or decline based on
+    the supplied decision.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - category
+    - amount
+    - currency
+    - expenseDate
+    - decision
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment that incurred the expense.
+      category:
+        type: string
+        description: The expense category.
+      amount:
+        type: integer
+        description: Amount in the smallest currency unit.
+      currency:
+        type: string
+        description: Currency code for the expense.
+      expenseDate:
+        type: string
+        description: Date the expense was incurred (YYYY-MM-DD).
+      description:
+        type: string
+        description: Free-text description of the expense.
+      decision:
+        type: string
+        description: Either approve or decline.
+      declineReason:
+        type: string
+        description: Reason used when the decision is decline.
+  steps:
+  - stepId: createExpense
+    description: Create the expense for the employment.
+    operationId: createExpense
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        employment_id: $inputs.employmentId
+        category: $inputs.category
+        amount: $inputs.amount
+        currency: $inputs.currency
+        expense_date: $inputs.expenseDate
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      expenseId: $response.body#/data/expense/id
+      status: $response.body#/data/expense/status
+  - stepId: confirmExpense
+    description: Read the expense back and branch on the caller's decision.
+    operationId: showExpense
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: expense_id
+      in: path
+      value: $steps.createExpense.outputs.expenseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/expense/status
+    onSuccess:
+    - name: approveBranch
+      type: goto
+      stepId: approveExpense
+      criteria:
+      - condition: $inputs.decision == "approve"
+    - name: declineBranch
+      type: goto
+      stepId: declineExpense
+      criteria:
+      - condition: $inputs.decision == "decline"
+  - stepId: approveExpense
+    description: Approve the expense.
+    operationId: approveExpense
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: expense_id
+      in: path
+      value: $steps.createExpense.outputs.expenseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/expense/status
+    onSuccess:
+    - name: approved
+      type: end
+  - stepId: declineExpense
+    description: Decline the expense with the supplied reason.
+    operationId: declineExpense
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: expense_id
+      in: path
+      value: $steps.createExpense.outputs.expenseId
+    requestBody:
+      contentType: application/json
+      payload:
+        reason: $inputs.declineReason
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/expense/status
+  outputs:
+    expenseId: $steps.createExpense.outputs.expenseId
+    approvedStatus: $steps.approveExpense.outputs.status
+    declinedStatus: $steps.declineExpense.outputs.status

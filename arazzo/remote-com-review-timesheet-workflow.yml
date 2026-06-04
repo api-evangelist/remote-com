@@ -1,0 +1,138 @@
+arazzo: 1.0.1
+info:
+  title: Remote Review A Timesheet
+  summary: Find a submitted timesheet for an employment and approve it or send it back.
+  description: >-
+    Routes a submitted timesheet through manager review. The workflow lists the
+    employment's submitted timesheets, reads the first match back to confirm its
+    period and hours, and then branches on a caller decision flag: an approval
+    calls the approve endpoint while a rejection sends the timesheet back for
+    revision with a reason. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: timeAttendanceApi
+  url: ../openapi/remote-time-attendance-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: review-timesheet
+  summary: Locate a submitted timesheet and approve or send it back.
+  description: >-
+    Lists submitted timesheets for an employment, confirms the first match, and
+    routes to approval or send-back based on the supplied decision.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - employmentId
+    - decision
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      employmentId:
+        type: string
+        description: The employment whose timesheet is being reviewed.
+      decision:
+        type: string
+        description: Either approve or send_back.
+      sendBackReason:
+        type: string
+        description: Reason used when the decision is send_back.
+  steps:
+  - stepId: listTimesheets
+    description: List submitted timesheets for the employment.
+    operationId: listTimesheets
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: query
+      value: $inputs.employmentId
+    - name: status
+      in: query
+      value: submitted
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      timesheetId: $response.body#/data/timesheets/0/id
+    onSuccess:
+    - name: hasMatch
+      type: goto
+      stepId: confirmTimesheet
+      criteria:
+      - context: $response.body
+        condition: $.data.timesheets.length > 0
+        type: jsonpath
+    - name: noMatch
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data.timesheets.length == 0
+        type: jsonpath
+  - stepId: confirmTimesheet
+    description: Read the matched timesheet back and branch on the caller's decision.
+    operationId: showTimesheet
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timesheet_id
+      in: path
+      value: $steps.listTimesheets.outputs.timesheetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timesheet/status
+      totalHours: $response.body#/data/timesheet/total_hours
+    onSuccess:
+    - name: approveBranch
+      type: goto
+      stepId: approveTimesheet
+      criteria:
+      - condition: $inputs.decision == "approve"
+    - name: sendBackBranch
+      type: goto
+      stepId: sendBackTimesheet
+      criteria:
+      - condition: $inputs.decision == "send_back"
+  - stepId: approveTimesheet
+    description: Approve the timesheet.
+    operationId: approveTimesheet
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timesheet_id
+      in: path
+      value: $steps.listTimesheets.outputs.timesheetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timesheet/status
+    onSuccess:
+    - name: approved
+      type: end
+  - stepId: sendBackTimesheet
+    description: Send the timesheet back for revision with the supplied reason.
+    operationId: sendTimesheetBack
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: timesheet_id
+      in: path
+      value: $steps.listTimesheets.outputs.timesheetId
+    requestBody:
+      contentType: application/json
+      payload:
+        reason: $inputs.sendBackReason
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/timesheet/status
+  outputs:
+    timesheetId: $steps.listTimesheets.outputs.timesheetId
+    approvedStatus: $steps.approveTimesheet.outputs.status
+    sentBackStatus: $steps.sendBackTimesheet.outputs.status

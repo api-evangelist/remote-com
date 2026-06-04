@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Remote Estimate Cost Then Hire
+  summary: Estimate the loaded cost of a hire, then create the employment once the budget is confirmed.
+  description: >-
+    Pairs the cost calculator with employment creation so a hiring decision can
+    be made and acted on in one flow. The workflow first estimates the fully
+    loaded annual cost of the role under the chosen employment model, then
+    creates the employment for the same worker and country and reads it back to
+    confirm creation. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: filesApi
+  url: ../openapi/remote-files-api-openapi.yml
+  type: openapi
+- name: employmentsApi
+  url: ../openapi/remote-employments-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: estimate-and-hire
+  summary: Estimate employment cost and then create the employment.
+  description: >-
+    Runs a cost estimate for a country, employment model, and salary, then
+    creates the matching employment and confirms it.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - countryCode
+    - employmentModel
+    - annualGrossSalary
+    - currency
+    - fullName
+    - personalEmail
+    properties:
+      accessToken:
+        type: string
+        description: Company-scoped bearer access token.
+      countryCode:
+        type: string
+        description: ISO country code for the role.
+      employmentModel:
+        type: string
+        description: One of global_payroll, peo, or eor.
+      annualGrossSalary:
+        type: integer
+        description: Annual gross salary in the smallest currency unit.
+      currency:
+        type: string
+        description: Currency code for the salary and estimate.
+      fullName:
+        type: string
+        description: The worker's full legal name.
+      personalEmail:
+        type: string
+        description: The worker's personal email address.
+      jobTitle:
+        type: string
+        description: The worker's job title.
+  steps:
+  - stepId: estimateCost
+    description: Estimate the loaded annual cost of the role including contributions and Remote fees.
+    operationId: estimateEmploymentCost
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        country_code: $inputs.countryCode
+        employment_model: $inputs.employmentModel
+        annual_gross_salary: $inputs.annualGrossSalary
+        currency: $inputs.currency
+        include_benefits: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalAnnualCost: $response.body#/data/total_annual_cost
+      employerContributions: $response.body#/data/employer_contributions
+      remoteFee: $response.body#/data/remote_fee
+  - stepId: createEmployment
+    description: Create the employment for the same worker, country, and employment model.
+    operationId: createEmployment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        full_name: $inputs.fullName
+        country_code: $inputs.countryCode
+        personal_email: $inputs.personalEmail
+        employment_type: employee
+        employment_model: $inputs.employmentModel
+        job_title: $inputs.jobTitle
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      employmentId: $response.body#/data/employment/id
+  - stepId: confirmEmployment
+    description: Read the new employment back to confirm its created status.
+    operationId: showEmployment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: employment_id
+      in: path
+      value: $steps.createEmployment.outputs.employmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/data/employment/status
+  outputs:
+    totalAnnualCost: $steps.estimateCost.outputs.totalAnnualCost
+    employmentId: $steps.createEmployment.outputs.employmentId
+    status: $steps.confirmEmployment.outputs.status
