@@ -1,0 +1,351 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Contractors API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contractor Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Contractor Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/subscriptions",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "plan",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Contractor Subscriptions"
+        },
+        {
+          "info": {
+            "name": "Manage Contractor Plus Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/:employment_id/subscriptions/plus",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe, change, or cancel the Plus indemnity plan for a contractor."
+        },
+        {
+          "info": {
+            "name": "Manage Contractor Of Record Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/:employment_id/subscriptions/cor",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe, change, or cancel the Contractor-of-Record subscription."
+        },
+        {
+          "info": {
+            "name": "Delete Contractor Of Record Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/contractors/:employment_id/subscriptions/cor",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Contractor Of Record Subscription"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "COR Termination",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show COR Termination Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/:employment_id/cor_termination",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show COR Termination Request"
+        },
+        {
+          "info": {
+            "name": "Create COR Termination Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/:employment_id/cor_termination",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create COR Termination Request"
+        },
+        {
+          "info": {
+            "name": "Terminate A Contractor Of Record Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/:employment_id/terminate",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Terminate A Contractor Of Record Employment"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contractor Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Contractor Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor_invoices",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Contractor Invoices"
+        },
+        {
+          "info": {
+            "name": "Show A Contractor Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor_invoices/:contractor_invoice_id",
+            "params": [
+              {
+                "name": "contractor_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Contractor Invoice"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scheduled Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scheduled Contractor Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/scheduled_contractor_invoices"
+          },
+          "docs": "List Scheduled Contractor Invoices"
+        },
+        {
+          "info": {
+            "name": "Bulk Create Scheduled Contractor Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/scheduled_contractor_invoices/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Create Scheduled Contractor Invoices"
+        },
+        {
+          "info": {
+            "name": "Show A Scheduled Contractor Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/scheduled_contractor_invoices/:scheduled_invoice_id",
+            "params": [
+              {
+                "name": "scheduled_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Scheduled Contractor Invoice"
+        },
+        {
+          "info": {
+            "name": "Update A Scheduled Contractor Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/scheduled_contractor_invoices/:scheduled_invoice_id",
+            "params": [
+              {
+                "name": "scheduled_invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Scheduled Contractor Invoice"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contract Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Contract Eligibility Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_eligibility",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a contractor classification check that returns a misclassification\nrisk score and recommendations. Backed by Remote's AI misclassification tooling.\n"
+        },
+        {
+          "info": {
+            "name": "List Contractor Eligibility Legal Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_eligibility/legal_entities"
+          },
+          "docs": "List Contractor Eligibility Legal Entities"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contractor Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Contractor Currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor_currencies"
+          },
+          "docs": "List Contractor Currencies"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

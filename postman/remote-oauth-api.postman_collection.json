@@ -1,0 +1,401 @@
+{
+  "info": {
+    "_postman_id": "07a513ef-84ae-4c77-9bef-61e01719c9ea",
+    "name": "Remote OAuth 2.0 API",
+    "description": "OAuth 2.0 endpoints used to obtain access tokens for the Remote API.\nRemote supports four flows:\n\n- **Authorization Code Flow** \u2014 partners and customer apps authorize\n  individual companies and exchange a code for a company-scoped token.\n- **Client Credentials Flow** \u2014 partners obtain a partner-scoped token\n  and operate across all companies that have granted consent.\n- **Assertion Flow** \u2014 partners present a signed JWT assertion when\n  acting on behalf of a specific company.\n- **Refresh Token Flow** \u2014 exchange a long-lived refresh token for\n  a new access token.\n\n\nContact Support:\n Name: Remote API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:15:12.000Z",
+    "updatedAt": "2026-06-05T15:15:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-07a513ef-84ae-4c77-9bef-61e01719c9ea"
+  },
+  "item": [
+    {
+      "name": "oauth",
+      "item": [
+        {
+          "name": "authorize",
+          "item": [
+            {
+              "name": "Authorize A Company",
+              "id": "b951f040-b4e9-4db5-b95f-fa99d9fec3b5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/authorize?client_id=<string>&response_type=code&redirect_uri=<uri>&scope=<string>&state=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "authorize"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "response_type",
+                      "value": "code"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "redirect_uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Redirect the company admin to this endpoint to grant access. Remote\nreturns an authorization code to the partner's `redirect_uri` that\ncan then be exchanged at `/oauth2/token` for a company-scoped\naccess token.\n"
+              },
+              "response": [
+                {
+                  "id": "a32fe4e5-047b-48a4-9ae5-1478ba2c29c4",
+                  "name": "Redirect to the partner's `redirect_uri` with `code` and `state`.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/authorize?client_id=<string>&response_type=code&redirect_uri=<uri>&scope=<string>&state=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "authorize"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "response_type",
+                          "value": "code"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "redirect_uri",
+                          "value": "<uri>"
+                        },
+                        {
+                          "key": "scope",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "state",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Found",
+                  "code": 302,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:15:12.000Z",
+                  "updatedAt": "2026-06-05T15:15:12.000Z",
+                  "uid": "35240-a32fe4e5-047b-48a4-9ae5-1478ba2c29c4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:12.000Z",
+              "updatedAt": "2026-06-05T15:15:12.000Z",
+              "uid": "35240-b951f040-b4e9-4db5-b95f-fa99d9fec3b5"
+            }
+          ],
+          "id": "513b63a5-3095-4644-b9c7-d1c402071983",
+          "createdAt": "2026-06-05T15:15:12.000Z",
+          "updatedAt": "2026-06-05T15:15:12.000Z",
+          "uid": "35240-513b63a5-3095-4644-b9c7-d1c402071983"
+        }
+      ],
+      "id": "b2c012c0-7b0f-42f1-bcb9-8bc3773fe9a6",
+      "createdAt": "2026-06-05T15:15:12.000Z",
+      "updatedAt": "2026-06-05T15:15:12.000Z",
+      "uid": "35240-b2c012c0-7b0f-42f1-bcb9-8bc3773fe9a6"
+    },
+    {
+      "name": "oauth2",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "Exchange OAuth 2.0 Token",
+              "id": "64d1bf1d-ba30-47f6-b5f8-891d0d090c37",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "grant_type",
+                      "value": "authorization_code"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Signed JWT assertion.",
+                      "key": "assertion",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth2/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth2",
+                    "token"
+                  ]
+                },
+                "description": "Exchange tokens for Authorization Code, Client Credentials,\nAssertion, and Refresh Token flows.\n"
+              },
+              "response": [
+                {
+                  "id": "7727c2e3-60d4-44b0-b34e-191b6aa6aaa6",
+                  "name": "Access token.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "grant_type",
+                          "value": "authorization_code"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "code",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "redirect_uri",
+                          "value": "<uri>"
+                        },
+                        {
+                          "key": "refresh_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Signed JWT assertion.",
+                          "key": "assertion",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth2/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth2",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"company_id\": \"<uuid>\"\n}",
+                  "createdAt": "2026-06-05T15:15:12.000Z",
+                  "updatedAt": "2026-06-05T15:15:12.000Z",
+                  "uid": "35240-7727c2e3-60d4-44b0-b34e-191b6aa6aaa6"
+                },
+                {
+                  "id": "ee2d12f2-bb0b-41d9-b2a6-a9381aba7935",
+                  "name": "Invalid request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "grant_type",
+                          "value": "authorization_code"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "code",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "redirect_uri",
+                          "value": "<uri>"
+                        },
+                        {
+                          "key": "refresh_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Signed JWT assertion.",
+                          "key": "assertion",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth2/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth2",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:15:12.000Z",
+                  "updatedAt": "2026-06-05T15:15:12.000Z",
+                  "uid": "35240-ee2d12f2-bb0b-41d9-b2a6-a9381aba7935"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:12.000Z",
+              "updatedAt": "2026-06-05T15:15:12.000Z",
+              "uid": "35240-64d1bf1d-ba30-47f6-b5f8-891d0d090c37"
+            }
+          ],
+          "id": "e7c8bc7f-d211-4faf-8637-bfefbad086e7",
+          "createdAt": "2026-06-05T15:15:12.000Z",
+          "updatedAt": "2026-06-05T15:15:12.000Z",
+          "uid": "35240-e7c8bc7f-d211-4faf-8637-bfefbad086e7"
+        }
+      ],
+      "id": "cb0e1b10-1cbb-44b1-850b-aa32c51c42aa",
+      "createdAt": "2026-06-05T15:15:12.000Z",
+      "updatedAt": "2026-06-05T15:15:12.000Z",
+      "uid": "35240-cb0e1b10-1cbb-44b1-850b-aa32c51c42aa"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com"
+    }
+  ]
+}

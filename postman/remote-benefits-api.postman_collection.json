@@ -1,0 +1,951 @@
+{
+  "info": {
+    "_postman_id": "530f3685-41a9-4c4f-b7b0-d2cc4869652b",
+    "name": "Remote Benefits API",
+    "description": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:15:10.000Z",
+    "updatedAt": "2026-06-05T15:15:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-530f3685-41a9-4c4f-b7b0-d2cc4869652b"
+  },
+  "item": [
+    {
+      "name": "benefit_offers",
+      "item": [
+        {
+          "name": "by_employment",
+          "item": [
+            {
+              "name": "List Benefit Offers By Employment",
+              "id": "e683e433-8b7d-485c-b84d-1841fbcaf588",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/benefit_offers/by_employment?employment_id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "benefit_offers",
+                    "by_employment"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a997849c-231f-4ba9-ab02-46593455c3e5",
+                  "name": "Benefit offers for the employment.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_offers/by_employment?employment_id=<uuid>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_offers",
+                        "by_employment"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "employment_id",
+                          "value": "<uuid>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"benefit_offers\": [\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"provider\": \"<string>\",\n        \"tier\": \"basic\",\n        \"monthly_cost\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"coverage_summary\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"provider\": \"<string>\",\n        \"tier\": \"basic\",\n        \"monthly_cost\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"coverage_summary\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-a997849c-231f-4ba9-ab02-46593455c3e5"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-e683e433-8b7d-485c-b84d-1841fbcaf588"
+            }
+          ],
+          "id": "b9de5194-f7e7-4754-ab0b-a942f0f55965",
+          "createdAt": "2026-06-05T15:15:10.000Z",
+          "updatedAt": "2026-06-05T15:15:10.000Z",
+          "uid": "35240-b9de5194-f7e7-4754-ab0b-a942f0f55965"
+        },
+        {
+          "name": "{employment_id}",
+          "item": [
+            {
+              "name": "schema",
+              "item": [
+                {
+                  "name": "Get Employment Benefit Offers JSON Schema",
+                  "id": "a122d9a8-8555-4832-ab24-75c62732d2a0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_offers/:employment_id/schema",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_offers",
+                        ":employment_id",
+                        "schema"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0c6bbbca-7047-4f03-bcd1-d37402c0353a",
+                          "key": "employment_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "676d4669-b721-4359-b061-b9acd3b3fdf8",
+                      "name": "JSON Schema form.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/benefit_offers/:employment_id/schema",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "benefit_offers",
+                            ":employment_id",
+                            "schema"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"aliqua_8\": false,\n  \"Ut_e\": -59640728,\n  \"ullamco_5d\": 82744019.60778803\n}",
+                      "createdAt": "2026-06-05T15:15:10.000Z",
+                      "updatedAt": "2026-06-05T15:15:10.000Z",
+                      "uid": "35240-676d4669-b721-4359-b061-b9acd3b3fdf8"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-a122d9a8-8555-4832-ab24-75c62732d2a0"
+                }
+              ],
+              "id": "169afa5a-0868-4666-af2d-09ec9233e80e",
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-169afa5a-0868-4666-af2d-09ec9233e80e"
+            },
+            {
+              "name": "Get Employment Benefit Offers",
+              "id": "db4d1deb-7aa2-476c-b949-e96a4a82cb49",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/benefit_offers/:employment_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "benefit_offers",
+                    ":employment_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "17ab2d80-ac9b-4832-8b24-eacabf990843",
+                      "key": "employment_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0333bc36-2ba2-4a70-beb8-962596ce742c",
+                  "name": "Benefit offers.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_offers/:employment_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_offers",
+                        ":employment_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "employment_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"benefit_offers\": [\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"provider\": \"<string>\",\n        \"tier\": \"basic\",\n        \"monthly_cost\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"coverage_summary\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"provider\": \"<string>\",\n        \"tier\": \"basic\",\n        \"monthly_cost\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"coverage_summary\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-0333bc36-2ba2-4a70-beb8-962596ce742c"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-db4d1deb-7aa2-476c-b949-e96a4a82cb49"
+            },
+            {
+              "name": "Upsert Employment Benefit Offers",
+              "id": "94c9cef9-813c-474c-beb5-6b0bfbc06769",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliqua_8\": false,\n  \"Ut_e\": -59640728,\n  \"ullamco_5d\": 82744019.60778803\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/benefit_offers/:employment_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "benefit_offers",
+                    ":employment_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "138d7293-5959-41da-bf20-4e5a4f94ab51",
+                      "key": "employment_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "db8366d6-f85a-46da-84f8-175653eda02a",
+                  "name": "Upserted.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"aliqua_8\": false,\n  \"Ut_e\": -59640728,\n  \"ullamco_5d\": 82744019.60778803\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_offers/:employment_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_offers",
+                        ":employment_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "employment_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"benefit_offers\": [\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"provider\": \"<string>\",\n        \"tier\": \"basic\",\n        \"monthly_cost\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"coverage_summary\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"provider\": \"<string>\",\n        \"tier\": \"basic\",\n        \"monthly_cost\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"coverage_summary\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-db8366d6-f85a-46da-84f8-175653eda02a"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-94c9cef9-813c-474c-beb5-6b0bfbc06769"
+            }
+          ],
+          "id": "300be8c1-f3cb-4de7-a64d-ebfc8bc8df77",
+          "createdAt": "2026-06-05T15:15:10.000Z",
+          "updatedAt": "2026-06-05T15:15:10.000Z",
+          "uid": "35240-300be8c1-f3cb-4de7-a64d-ebfc8bc8df77"
+        },
+        {
+          "name": "List Benefit Offers",
+          "id": "dc1bf9ee-b56d-45cf-98ee-f4f76f336931",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/benefit_offers?country_code=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "benefit_offers"
+              ],
+              "query": [
+                {
+                  "key": "country_code",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List benefit offers grouped by country."
+          },
+          "response": [
+            {
+              "id": "d0cfb918-5576-4d3d-8401-41394c7742de",
+              "name": "Benefit offers by country.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/benefit_offers?country_code=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "benefit_offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"countries\": [\n      {\n        \"country_code\": \"<string>\",\n        \"benefit_offers_count\": \"<integer>\",\n        \"has_health\": \"<boolean>\",\n        \"has_dental\": \"<boolean>\",\n        \"has_pension\": \"<boolean>\"\n      },\n      {\n        \"country_code\": \"<string>\",\n        \"benefit_offers_count\": \"<integer>\",\n        \"has_health\": \"<boolean>\",\n        \"has_dental\": \"<boolean>\",\n        \"has_pension\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-d0cfb918-5576-4d3d-8401-41394c7742de"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:10.000Z",
+          "updatedAt": "2026-06-05T15:15:10.000Z",
+          "uid": "35240-dc1bf9ee-b56d-45cf-98ee-f4f76f336931"
+        }
+      ],
+      "id": "bfa1fbf7-d6ad-4c66-ac4c-5801e19559b2",
+      "createdAt": "2026-06-05T15:15:10.000Z",
+      "updatedAt": "2026-06-05T15:15:10.000Z",
+      "uid": "35240-bfa1fbf7-d6ad-4c66-ac4c-5801e19559b2"
+    },
+    {
+      "name": "benefit_renewal_requests",
+      "item": [
+        {
+          "name": "{benefit_renewal_request_id}",
+          "item": [
+            {
+              "name": "schema",
+              "item": [
+                {
+                  "name": "Show A Benefit Renewal Request Schema",
+                  "id": "5516d9ff-6a03-44f0-af32-10e6af0661ca",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_renewal_requests/:benefit_renewal_request_id/schema",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_renewal_requests",
+                        ":benefit_renewal_request_id",
+                        "schema"
+                      ],
+                      "variable": [
+                        {
+                          "id": "700af6e4-da31-449d-a648-d8dd95dfb642",
+                          "key": "benefit_renewal_request_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "02ba67ab-c390-41dd-8e51-12ae4a5efdca",
+                      "name": "JSON Schema form.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/benefit_renewal_requests/:benefit_renewal_request_id/schema",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "benefit_renewal_requests",
+                            ":benefit_renewal_request_id",
+                            "schema"
+                          ],
+                          "variable": [
+                            {
+                              "key": "benefit_renewal_request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"aliqua_8\": false,\n  \"Ut_e\": -59640728,\n  \"ullamco_5d\": 82744019.60778803\n}",
+                      "createdAt": "2026-06-05T15:15:10.000Z",
+                      "updatedAt": "2026-06-05T15:15:10.000Z",
+                      "uid": "35240-02ba67ab-c390-41dd-8e51-12ae4a5efdca"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-5516d9ff-6a03-44f0-af32-10e6af0661ca"
+                }
+              ],
+              "id": "2550abbd-2ce8-411c-9fb1-824caf12ae2d",
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-2550abbd-2ce8-411c-9fb1-824caf12ae2d"
+            },
+            {
+              "name": "response",
+              "item": [
+                {
+                  "name": "Update A Benefit Renewal Request Response",
+                  "id": "c24c7407-176d-43b3-b170-675ef7f03c3b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"aliqua_8\": false,\n  \"Ut_e\": -59640728,\n  \"ullamco_5d\": 82744019.60778803\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_renewal_requests/:benefit_renewal_request_id/response",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_renewal_requests",
+                        ":benefit_renewal_request_id",
+                        "response"
+                      ],
+                      "variable": [
+                        {
+                          "id": "16550c00-79ca-40cc-a335-7bc555e08803",
+                          "key": "benefit_renewal_request_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "14d051ce-2121-497d-a246-fd940ec982e7",
+                      "name": "Updated.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"aliqua_8\": false,\n  \"Ut_e\": -59640728,\n  \"ullamco_5d\": 82744019.60778803\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/benefit_renewal_requests/:benefit_renewal_request_id/response",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "benefit_renewal_requests",
+                            ":benefit_renewal_request_id",
+                            "response"
+                          ],
+                          "variable": [
+                            {
+                              "key": "benefit_renewal_request_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"benefit_renewal_request\": {\n      \"id\": \"<uuid>\",\n      \"country_code\": \"<string>\",\n      \"status\": \"in_progress\",\n      \"renewal_period_start\": \"<date>\",\n      \"renewal_period_end\": \"<date>\",\n      \"response\": {\n        \"deserunt7d2\": 8376747\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:10.000Z",
+                      "updatedAt": "2026-06-05T15:15:10.000Z",
+                      "uid": "35240-14d051ce-2121-497d-a246-fd940ec982e7"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-c24c7407-176d-43b3-b170-675ef7f03c3b"
+                }
+              ],
+              "id": "ce63bb02-9a80-4ced-add7-cde0aa6f951a",
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-ce63bb02-9a80-4ced-add7-cde0aa6f951a"
+            },
+            {
+              "name": "Show A Benefit Renewal Request",
+              "id": "53d8e2ea-e533-4c9a-a98b-91a4e1a992e9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/benefit_renewal_requests/:benefit_renewal_request_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "benefit_renewal_requests",
+                    ":benefit_renewal_request_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7debd08b-051b-449c-950b-cbf4e15e913d",
+                      "key": "benefit_renewal_request_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "d942df80-c016-4796-ba1d-77713944d0ad",
+                  "name": "Benefit renewal request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/benefit_renewal_requests/:benefit_renewal_request_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "benefit_renewal_requests",
+                        ":benefit_renewal_request_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "benefit_renewal_request_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"benefit_renewal_request\": {\n      \"id\": \"<uuid>\",\n      \"country_code\": \"<string>\",\n      \"status\": \"in_progress\",\n      \"renewal_period_start\": \"<date>\",\n      \"renewal_period_end\": \"<date>\",\n      \"response\": {\n        \"deserunt7d2\": 8376747\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:10.000Z",
+                  "updatedAt": "2026-06-05T15:15:10.000Z",
+                  "uid": "35240-d942df80-c016-4796-ba1d-77713944d0ad"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-53d8e2ea-e533-4c9a-a98b-91a4e1a992e9"
+            }
+          ],
+          "id": "e55dbe52-aa58-4fe2-b865-3ff078fec631",
+          "createdAt": "2026-06-05T15:15:10.000Z",
+          "updatedAt": "2026-06-05T15:15:10.000Z",
+          "uid": "35240-e55dbe52-aa58-4fe2-b865-3ff078fec631"
+        },
+        {
+          "name": "List Benefit Renewal Requests",
+          "id": "d6d51328-cbe9-4985-b655-2d11cccade77",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/benefit_renewal_requests?country_code=<string>&status=in_progress",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "benefit_renewal_requests"
+              ],
+              "query": [
+                {
+                  "key": "country_code",
+                  "value": "<string>"
+                },
+                {
+                  "key": "status",
+                  "value": "in_progress"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "903e67ec-e469-4b73-8f8c-b2ea98da781a",
+              "name": "Benefit renewal requests.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/benefit_renewal_requests?country_code=<string>&status=in_progress",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "benefit_renewal_requests"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "in_progress"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"benefit_renewal_requests\": [\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"status\": \"expired\",\n        \"renewal_period_start\": \"<date>\",\n        \"renewal_period_end\": \"<date>\",\n        \"response\": {\n          \"incididunt_0d6\": 97408685.80192369\n        }\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"country_code\": \"<string>\",\n        \"status\": \"in_progress\",\n        \"renewal_period_start\": \"<date>\",\n        \"renewal_period_end\": \"<date>\",\n        \"response\": {\n          \"enim8bb\": true,\n          \"nulla_a2\": \"ea veniam ulla\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:10.000Z",
+              "updatedAt": "2026-06-05T15:15:10.000Z",
+              "uid": "35240-903e67ec-e469-4b73-8f8c-b2ea98da781a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:10.000Z",
+          "updatedAt": "2026-06-05T15:15:10.000Z",
+          "uid": "35240-d6d51328-cbe9-4985-b655-2d11cccade77"
+        }
+      ],
+      "id": "ef3a52c1-0485-4a19-ad23-c2091c706ac5",
+      "createdAt": "2026-06-05T15:15:10.000Z",
+      "updatedAt": "2026-06-05T15:15:10.000Z",
+      "uid": "35240-ef3a52c1-0485-4a19-ad23-c2091c706ac5"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/v1"
+    }
+  ]
+}

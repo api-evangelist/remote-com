@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Files And Custom Fields API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload A File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/files",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "attachable_id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "attachable_type",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload A File"
+        },
+        {
+          "info": {
+            "name": "Download A File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/files/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download A File"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Custom Field Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/custom_fields",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Custom Field Definitions"
+        },
+        {
+          "info": {
+            "name": "Create A Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/custom_fields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Custom Field Definition"
+        },
+        {
+          "info": {
+            "name": "List Custom Field Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/custom_fields/:custom_field_id/values",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Custom Field Values"
+        },
+        {
+          "info": {
+            "name": "Upsert A Custom Field Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/custom_fields/:custom_field_id/values",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upsert A Custom Field Value"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Countries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Supported Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/countries"
+          },
+          "docs": "List Supported Countries"
+        },
+        {
+          "info": {
+            "name": "Show A Country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/countries/:country_code",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Country"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cost Calculator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Estimate Employment Cost",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost_calculator/estimate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the loaded cost of hiring an employee under EOR or Global\nPayroll, including statutory contributions and Remote platform fees.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

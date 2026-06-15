@@ -1,0 +1,470 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Payroll and Billing API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payroll Calendars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll/calendars",
+            "params": [
+              {
+                "name": "starts_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ends_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Payroll Calendar"
+        },
+        {
+          "info": {
+            "name": "List Company Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll/calendars/company"
+          },
+          "docs": "List Company Payroll Calendar"
+        },
+        {
+          "info": {
+            "name": "List EOR Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll/calendars/eor"
+          },
+          "docs": "List EOR Payroll Calendar"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Billing Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Billing Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/billing_documents",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Billing Documents"
+        },
+        {
+          "info": {
+            "name": "Show A Billing Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/billing_documents/:billing_document_id",
+            "params": [
+              {
+                "name": "billing_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Billing Document"
+        },
+        {
+          "info": {
+            "name": "Get Billing Document Breakdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/billing_documents/:billing_document_id/breakdown",
+            "params": [
+              {
+                "name": "billing_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Billing Document Breakdown"
+        },
+        {
+          "info": {
+            "name": "Download Billing Document PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/billing_documents/:billing_document_id/pdf",
+            "params": [
+              {
+                "name": "billing_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download Billing Document PDF"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Incentives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Incentives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Incentives"
+        },
+        {
+          "info": {
+            "name": "Create An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/incentives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create An Incentive"
+        },
+        {
+          "info": {
+            "name": "Show An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives/:incentive_id",
+            "params": [
+              {
+                "name": "incentive_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Incentive"
+        },
+        {
+          "info": {
+            "name": "Update An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/incentives/:incentive_id",
+            "params": [
+              {
+                "name": "incentive_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update An Incentive"
+        },
+        {
+          "info": {
+            "name": "Delete An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/incentives/:incentive_id",
+            "params": [
+              {
+                "name": "incentive_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete An Incentive"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Expenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Expenses"
+        },
+        {
+          "info": {
+            "name": "Create An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create An Expense"
+        },
+        {
+          "info": {
+            "name": "Show An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Expense"
+        },
+        {
+          "info": {
+            "name": "Update An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update An Expense"
+        },
+        {
+          "info": {
+            "name": "Delete An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete An Expense"
+        },
+        {
+          "info": {
+            "name": "Approve An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/approve",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve An Expense"
+        },
+        {
+          "info": {
+            "name": "Decline An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/decline",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decline An Expense"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payslips",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payslips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payslips",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Payslips"
+        },
+        {
+          "info": {
+            "name": "Show A Payslip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payslips/:payslip_id",
+            "params": [
+              {
+                "name": "payslip_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Payslip"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Company Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Company Currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company_currencies"
+          },
+          "docs": "List Company Currencies"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

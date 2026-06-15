@@ -1,0 +1,3443 @@
+{
+  "item": [
+    {
+      "id": "09350e87-c36f-4566-ab02-751005dec34a",
+      "name": "Employments",
+      "description": {
+        "content": "Create, read, update, and invite employment records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cfb95df8-bec4-4718-af85-38ab59a47c52",
+          "name": "List Employments",
+          "request": {
+            "name": "List Employments",
+            "description": {
+              "content": "List all non-deleted employments for the company, with filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "employment_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "employment_model",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8100d793-99fc-4895-bc6e-7a9312f7af24",
+              "name": "A page of employments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "offboarded"
+                    },
+                    {
+                      "key": "employment_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_model",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employments\": [\n      {\n        \"id\": \"1534c052-0202-6f34-8815-146fc1fe2b47\",\n        \"status\": \"invited\",\n        \"employment_type\": \"contractor\",\n        \"company_id\": \"cda6c0a6-1b22-5f4d-52ec-aa97442caba2\",\n        \"external_id\": \"string\",\n        \"full_name\": \"string\",\n        \"personal_email\": \"eBWqC@Rypvgt.lhab\",\n        \"work_email\": \"ASNb8UxlNO@jKiNlJSZlaWfYAVPHdq.bscf\",\n        \"country\": {\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"employment_model\": \"peo\",\n        \"lifecycle_stage\": \"probation\",\n        \"job_title\": \"string\",\n        \"manager_id\": \"98ef2264-d5ad-8833-c1ce-95e5adc80b66\",\n        \"department_id\": \"33b9a860-0466-0513-3d82-abfe31f6926c\",\n        \"start_date\": \"1996-10-19\",\n        \"provisional_start_date\": \"1988-03-16\",\n        \"created_at\": \"1967-01-03T00:25:50.602Z\",\n        \"updated_at\": \"2025-12-07T11:50:21.429Z\"\n      },\n      {\n        \"id\": \"ecd96baf-5384-fe8a-a8f9-ae6ee696d0d8\",\n        \"status\": \"created\",\n        \"employment_type\": \"director\",\n        \"company_id\": \"7629236a-c51b-88bf-981c-da89a9611513\",\n        \"external_id\": \"string\",\n        \"full_name\": \"string\",\n        \"personal_email\": \"hKV@nGGiXvWhIxqDkSPQWt.al\",\n        \"work_email\": \"1f0yD3@YLLBSzyRcfyrahoyZKF.sxk\",\n        \"country\": {\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"employment_model\": \"eor\",\n        \"lifecycle_stage\": \"archived\",\n        \"job_title\": \"string\",\n        \"manager_id\": \"80987bd7-e44f-b533-935e-9bcf2381f97c\",\n        \"department_id\": \"39f307fc-1715-c046-d87a-fece5924a2d3\",\n        \"start_date\": \"1984-11-29\",\n        \"provisional_start_date\": \"1996-10-06\",\n        \"created_at\": \"1961-04-05T07:56:54.310Z\",\n        \"updated_at\": \"2011-03-18T04:53:59.028Z\"\n      }\n    ],\n    \"current_page\": 9434,\n    \"total_count\": 4879,\n    \"total_pages\": 5260\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38d4388e-f7d9-4e75-a085-d7269e0febc6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "offboarded"
+                    },
+                    {
+                      "key": "employment_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_model",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": false\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b0fc70-b089-4862-a43b-2368e883af87",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "offboarded"
+                    },
+                    {
+                      "key": "employment_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_model",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": false\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca5ebdbd-ea08-4025-9695-2b9eb6d0ae2e",
+          "name": "Create An Employment",
+          "request": {
+            "name": "Create An Employment",
+            "description": {
+              "content": "Create a new employment. Required fields depend on the employment\nmodel (EOR vs. Global Payroll vs. PEO) and the country. Use\n`/forms/employment` to fetch the per-country JSON Schema form.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"personal_email\": \"<email>\",\n  \"employment_type\": \"<string>\",\n  \"employment_model\": \"eor\",\n  \"provisional_start_date\": \"<date>\",\n  \"job_title\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"invite_user\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85c2d814-ed0c-433d-a6bc-33e305baf5e5",
+              "name": "Employment created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"personal_email\": \"<email>\",\n  \"employment_type\": \"<string>\",\n  \"employment_model\": \"eor\",\n  \"provisional_start_date\": \"<date>\",\n  \"job_title\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"invite_user\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"829478b7-1048-b500-d7ed-264d4693b997\",\n      \"status\": \"invited\",\n      \"employment_type\": \"director\",\n      \"company_id\": \"c6283450-dad7-ee7a-3896-59b935b12467\",\n      \"external_id\": \"string\",\n      \"full_name\": \"string\",\n      \"personal_email\": \"e4bK5fo3HBc7@jXVbrrhhaNKHdrjpbfgvGJoZ.uwx\",\n      \"work_email\": \"f0RaR7@TyUrzhw.wcu\",\n      \"country\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"employment_model\": \"eor\",\n      \"lifecycle_stage\": \"onboarding\",\n      \"job_title\": \"string\",\n      \"manager_id\": \"b5020404-5b45-4ede-764b-c3e4ffc25794\",\n      \"department_id\": \"cf915259-cbc7-b6ea-17f8-5e8236630418\",\n      \"start_date\": \"2006-07-11\",\n      \"provisional_start_date\": \"1968-08-22\",\n      \"created_at\": \"1997-05-23T12:40:55.918Z\",\n      \"updated_at\": \"1973-06-16T06:40:38.442Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dc17c77-6824-45b2-94a4-2c26c243769a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"personal_email\": \"<email>\",\n  \"employment_type\": \"<string>\",\n  \"employment_model\": \"eor\",\n  \"provisional_start_date\": \"<date>\",\n  \"job_title\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"invite_user\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": false\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8135ef58-f69a-469a-a4fb-b01323421214",
+          "name": "Show An Employment",
+          "request": {
+            "name": "Show An Employment",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea6559d6-b828-455b-8575-ee8c95550cf3",
+              "name": "Employment record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"829478b7-1048-b500-d7ed-264d4693b997\",\n      \"status\": \"invited\",\n      \"employment_type\": \"director\",\n      \"company_id\": \"c6283450-dad7-ee7a-3896-59b935b12467\",\n      \"external_id\": \"string\",\n      \"full_name\": \"string\",\n      \"personal_email\": \"e4bK5fo3HBc7@jXVbrrhhaNKHdrjpbfgvGJoZ.uwx\",\n      \"work_email\": \"f0RaR7@TyUrzhw.wcu\",\n      \"country\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"employment_model\": \"eor\",\n      \"lifecycle_stage\": \"onboarding\",\n      \"job_title\": \"string\",\n      \"manager_id\": \"b5020404-5b45-4ede-764b-c3e4ffc25794\",\n      \"department_id\": \"cf915259-cbc7-b6ea-17f8-5e8236630418\",\n      \"start_date\": \"2006-07-11\",\n      \"provisional_start_date\": \"1968-08-22\",\n      \"created_at\": \"1997-05-23T12:40:55.918Z\",\n      \"updated_at\": \"1973-06-16T06:40:38.442Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08b0c732-19dd-4f55-8594-54715e64b682",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"key_0\": false\n  },\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8344bbf-6217-4398-940a-20278c218eb2",
+          "name": "Update An Employment",
+          "request": {
+            "name": "Update An Employment",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"<string>\",\n  \"work_email\": \"<email>\",\n  \"manager_id\": \"<uuid>\",\n  \"department_id\": \"<uuid>\",\n  \"job_title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "29ecbfda-4da6-415d-a6a5-2fd253ffc175",
+              "name": "Employment updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"full_name\": \"<string>\",\n  \"work_email\": \"<email>\",\n  \"manager_id\": \"<uuid>\",\n  \"department_id\": \"<uuid>\",\n  \"job_title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"829478b7-1048-b500-d7ed-264d4693b997\",\n      \"status\": \"invited\",\n      \"employment_type\": \"director\",\n      \"company_id\": \"c6283450-dad7-ee7a-3896-59b935b12467\",\n      \"external_id\": \"string\",\n      \"full_name\": \"string\",\n      \"personal_email\": \"e4bK5fo3HBc7@jXVbrrhhaNKHdrjpbfgvGJoZ.uwx\",\n      \"work_email\": \"f0RaR7@TyUrzhw.wcu\",\n      \"country\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"employment_model\": \"eor\",\n      \"lifecycle_stage\": \"onboarding\",\n      \"job_title\": \"string\",\n      \"manager_id\": \"b5020404-5b45-4ede-764b-c3e4ffc25794\",\n      \"department_id\": \"cf915259-cbc7-b6ea-17f8-5e8236630418\",\n      \"start_date\": \"2006-07-11\",\n      \"provisional_start_date\": \"1968-08-22\",\n      \"created_at\": \"1997-05-23T12:40:55.918Z\",\n      \"updated_at\": \"1973-06-16T06:40:38.442Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4b0dc73-85ad-4a8b-bfe1-9493db08c7e4",
+          "name": "Invite An Employment To Self-Serve Onboarding",
+          "request": {
+            "name": "Invite An Employment To Self-Serve Onboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "invite"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "822843a3-6647-42df-88e2-5e1348fab848",
+              "name": "Invitation sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "invite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"829478b7-1048-b500-d7ed-264d4693b997\",\n      \"status\": \"invited\",\n      \"employment_type\": \"director\",\n      \"company_id\": \"c6283450-dad7-ee7a-3896-59b935b12467\",\n      \"external_id\": \"string\",\n      \"full_name\": \"string\",\n      \"personal_email\": \"e4bK5fo3HBc7@jXVbrrhhaNKHdrjpbfgvGJoZ.uwx\",\n      \"work_email\": \"f0RaR7@TyUrzhw.wcu\",\n      \"country\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"employment_model\": \"eor\",\n      \"lifecycle_stage\": \"onboarding\",\n      \"job_title\": \"string\",\n      \"manager_id\": \"b5020404-5b45-4ede-764b-c3e4ffc25794\",\n      \"department_id\": \"cf915259-cbc7-b6ea-17f8-5e8236630418\",\n      \"start_date\": \"2006-07-11\",\n      \"provisional_start_date\": \"1968-08-22\",\n      \"created_at\": \"1997-05-23T12:40:55.918Z\",\n      \"updated_at\": \"1973-06-16T06:40:38.442Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23792142-a3e9-45cd-b8f7-6ac4abe9bd1b",
+          "name": "Show Administrative Details",
+          "request": {
+            "name": "Show Administrative Details",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "administrative_details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "094418eb-7b15-431e-b4d4-a89ce630fc79",
+              "name": "Administrative details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "administrative_details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f039665a-e479-4218-adae-6f68524a0b7b",
+          "name": "Update Administrative Details",
+          "request": {
+            "name": "Update Administrative Details",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "administrative_details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec6c2a4b-64f4-432e-b11c-98260ab94c10",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "administrative_details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b6c27cc3-eda3-4bd0-91b1-0eb4ec42d370",
+      "name": "Employment Contracts",
+      "description": {
+        "content": "View active and pending employment contracts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "33b760f2-b4ee-48fe-aed7-5764c864b55d",
+          "name": "List Employment Contracts",
+          "request": {
+            "name": "List Employment Contracts",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e420b313-26f4-4b06-b988-47dc297b329c",
+              "name": "Contracts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment_contracts\": [\n      {\n        \"id\": \"c05907fe-0e52-909a-9d2d-90f426e7c07c\",\n        \"employment_id\": \"073fa95e-1cc6-057d-605f-379fd3a8c063\",\n        \"status\": \"draft\",\n        \"contract_type\": \"indefinite\",\n        \"currency_code\": \"string\",\n        \"annual_gross_salary\": 7580,\n        \"weekly_hours\": 1479.5596533966138\n      },\n      {\n        \"id\": \"bcc756e0-d5f1-a36b-be71-ead57736d45c\",\n        \"employment_id\": \"da2f598a-efc0-46eb-4342-a8829a881a83\",\n        \"status\": \"pending_signature\",\n        \"contract_type\": \"indefinite\",\n        \"currency_code\": \"string\",\n        \"annual_gross_salary\": 2324,\n        \"weekly_hours\": 927.2524655079228\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16994942-979c-45e7-9c0f-897ba4b9cc64",
+          "name": "Get Pending Contract Changes",
+          "request": {
+            "name": "Get Pending Contract Changes",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "contracts",
+                "pending_changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c2feff1-7b52-44cb-8406-4df239a7d598",
+              "name": "Pending changes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "contracts",
+                    "pending_changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "40e77e84-8aa5-4b14-aed3-d1fcfa6a7ee4",
+      "name": "Contract Amendments",
+      "description": {
+        "content": "Submit and track contract amendments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a3e9746-1505-48fd-9f6d-63f3f7699da6",
+          "name": "List Contract Amendments",
+          "request": {
+            "name": "List Contract Amendments",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_amendments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25ad8436-4b6a-4993-8a8a-ce4f579b6b3f",
+              "name": "Contract amendments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendments\": [\n      {\n        \"id\": \"8fe4b787-813d-4765-11db-a90e69806e85\",\n        \"employment_id\": \"733d8ede-3588-95ca-cd69-a038ea6d5076\",\n        \"status\": \"done\",\n        \"effective_date\": \"1948-10-21\",\n        \"amendment_data\": {\n          \"key_0\": 194,\n          \"key_1\": 2497\n        },\n        \"created_at\": \"2013-09-08T11:56:27.114Z\"\n      },\n      {\n        \"id\": \"71a72509-e0de-9678-1621-e9420e7bf50c\",\n        \"employment_id\": \"057f791d-3672-2bd6-18a9-d3831a0b394e\",\n        \"status\": \"submitted\",\n        \"effective_date\": \"1996-06-04\",\n        \"amendment_data\": {\n          \"key_0\": 1919\n        },\n        \"created_at\": \"2011-03-14T11:51:11.206Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4f1d856-a717-4434-8c55-3a456ae4b3ab",
+          "name": "Create A Contract Amendment",
+          "request": {
+            "name": "Create A Contract Amendment",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_amendments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"effective_date\": \"<date>\",\n  \"amendment_data\": {\n    \"key_0\": 3673,\n    \"key_1\": \"string\",\n    \"key_2\": false,\n    \"key_3\": 118\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f920612-1c1f-4010-9160-152811644911",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"effective_date\": \"<date>\",\n  \"amendment_data\": {\n    \"key_0\": 127.21249901321063\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendment\": {\n      \"id\": \"ad05e56b-20c8-8f4d-56c4-0234010b4cd7\",\n      \"employment_id\": \"e33bbb00-f997-0f0b-807a-f19abe5e7e5d\",\n      \"status\": \"done\",\n      \"effective_date\": \"2008-01-31\",\n      \"amendment_data\": {\n        \"key_0\": 9819,\n        \"key_1\": 8904.699619549901,\n        \"key_2\": 713\n      },\n      \"created_at\": \"2008-02-07T16:32:50.656Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0e14aaa-f2bc-48b3-81e9-0097ee88c066",
+          "name": "Submit An Automatable Contract Amendment",
+          "request": {
+            "name": "Submit An Automatable Contract Amendment",
+            "description": {
+              "content": "Automatable amendments use a structured payload that Remote can\napprove without manual review. Use the `/contract_amendments/schema`\nendpoint to learn the per-country form requirements.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contract_amendments",
+                "automatable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa25990b-99e6-40d6-b0ed-99958217c5d7",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments",
+                    "automatable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendment\": {\n      \"id\": \"ad05e56b-20c8-8f4d-56c4-0234010b4cd7\",\n      \"employment_id\": \"e33bbb00-f997-0f0b-807a-f19abe5e7e5d\",\n      \"status\": \"done\",\n      \"effective_date\": \"2008-01-31\",\n      \"amendment_data\": {\n        \"key_0\": 9819,\n        \"key_1\": 8904.699619549901,\n        \"key_2\": 713\n      },\n      \"created_at\": \"2008-02-07T16:32:50.656Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "363d5dd7-dcb8-4d9d-ad32-6ed1830df72c",
+          "name": "Show A Contract Amendment",
+          "request": {
+            "name": "Show A Contract Amendment",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_amendments",
+                ":contract_amendment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contract_amendment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd419ac1-65f8-446a-9439-f4ac421bd6be",
+              "name": "Amendment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments",
+                    ":contract_amendment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contract_amendment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendment\": {\n      \"id\": \"ad05e56b-20c8-8f4d-56c4-0234010b4cd7\",\n      \"employment_id\": \"e33bbb00-f997-0f0b-807a-f19abe5e7e5d\",\n      \"status\": \"done\",\n      \"effective_date\": \"2008-01-31\",\n      \"amendment_data\": {\n        \"key_0\": 9819,\n        \"key_1\": 8904.699619549901,\n        \"key_2\": 713\n      },\n      \"created_at\": \"2008-02-07T16:32:50.656Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ab1baef-b02f-4a39-8403-d1c329a15ef2",
+          "name": "Show A Contract Amendment Schema",
+          "request": {
+            "name": "Show A Contract Amendment Schema",
+            "description": {
+              "content": "Returns the JSON Schema form definition for amendments in a given country and employment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contract_amendments",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c9973dc-b432-4194-ba67-744959958deb",
+              "name": "JSON Schema form.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8f9f8244-5967-4aa6-b4ca-b37184524c61",
+      "name": "Contract Documents",
+      "description": {
+        "content": "Sign, retrieve, and manage employment contract documents",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "22ea6dae-fb37-41ae-a38b-4bbcd5553768",
+          "name": "Create A Contract Document",
+          "request": {
+            "name": "Create A Contract Document",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdbde799-f058-4a9d-8ada-aeb97aaf20fd",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_document\": {\n      \"id\": \"c2ce3ec4-4eb4-021f-dd76-b2eeb0109871\",\n      \"employment_id\": \"097b6cba-1436-45b3-d8d6-2622be05cd18\",\n      \"status\": \"pending_signature\",\n      \"document_url\": \"https://euVAwYhrjeHNQUJK.dafeJJTW+9g3HgNZbIYu\",\n      \"created_at\": \"2004-01-16T09:34:50.481Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92ec3bf9-aa41-42b5-bf5e-688fc5cb3afb",
+          "name": "Show A Contract Document",
+          "request": {
+            "name": "Show A Contract Document",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_documents",
+                ":contract_document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contract_document_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f3aeb0c-6e55-40fb-9ba7-2a599db65bd8",
+              "name": "Contract document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_documents",
+                    ":contract_document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contract_document_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_document\": {\n      \"id\": \"c2ce3ec4-4eb4-021f-dd76-b2eeb0109871\",\n      \"employment_id\": \"097b6cba-1436-45b3-d8d6-2622be05cd18\",\n      \"status\": \"pending_signature\",\n      \"document_url\": \"https://euVAwYhrjeHNQUJK.dafeJJTW+9g3HgNZbIYu\",\n      \"created_at\": \"2004-01-16T09:34:50.481Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38a7edbd-42ec-436a-af94-1902c2675895",
+          "name": "Sign A Contract Document",
+          "request": {
+            "name": "Sign A Contract Document",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_documents",
+                ":contract_document_id",
+                "sign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contract_document_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5b0fd7d-da0a-4e32-9401-f4382c4f99c7",
+              "name": "Signed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_documents",
+                    ":contract_document_id",
+                    "sign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contract_document_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_document\": {\n      \"id\": \"c2ce3ec4-4eb4-021f-dd76-b2eeb0109871\",\n      \"employment_id\": \"097b6cba-1436-45b3-d8d6-2622be05cd18\",\n      \"status\": \"pending_signature\",\n      \"document_url\": \"https://euVAwYhrjeHNQUJK.dafeJJTW+9g3HgNZbIYu\",\n      \"created_at\": \"2004-01-16T09:34:50.481Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6d852e6f-8d35-4776-af21-c01068ac4fbc",
+      "name": "Onboarding",
+      "description": {
+        "content": "Drive employee onboarding flows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c48002dc-74cc-4b40-98f0-4a54ec4bf0c7",
+          "name": "Invite An Employment To Self-Serve Onboarding",
+          "request": {
+            "name": "Invite An Employment To Self-Serve Onboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "invite"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78316963-a8b0-4b0f-a625-9ce09cdc32df",
+              "name": "Invitation sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "invite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"829478b7-1048-b500-d7ed-264d4693b997\",\n      \"status\": \"invited\",\n      \"employment_type\": \"director\",\n      \"company_id\": \"c6283450-dad7-ee7a-3896-59b935b12467\",\n      \"external_id\": \"string\",\n      \"full_name\": \"string\",\n      \"personal_email\": \"e4bK5fo3HBc7@jXVbrrhhaNKHdrjpbfgvGJoZ.uwx\",\n      \"work_email\": \"f0RaR7@TyUrzhw.wcu\",\n      \"country\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"employment_model\": \"eor\",\n      \"lifecycle_stage\": \"onboarding\",\n      \"job_title\": \"string\",\n      \"manager_id\": \"b5020404-5b45-4ede-764b-c3e4ffc25794\",\n      \"department_id\": \"cf915259-cbc7-b6ea-17f8-5e8236630418\",\n      \"start_date\": \"2006-07-11\",\n      \"provisional_start_date\": \"1968-08-22\",\n      \"created_at\": \"1997-05-23T12:40:55.918Z\",\n      \"updated_at\": \"1973-06-16T06:40:38.442Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd51d741-65db-49a0-8b5a-62f0d70c7026",
+          "name": "Create An Eligibility Questionnaire",
+          "request": {
+            "name": "Create An Eligibility Questionnaire",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a418302e-3c34-47d5-8233-a1c29449d39d",
+              "name": "Eligibility questionnaire created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cea50afe-93ed-48e0-978e-b75ae9387be3",
+          "name": "Show An Eligibility Questionnaire",
+          "request": {
+            "name": "Show An Eligibility Questionnaire",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "eligibility",
+                ":questionnaire_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f54fab60-58a1-4092-a379-f9f16503ca3f",
+              "name": "Questionnaire.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "eligibility",
+                    ":questionnaire_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd0a5deb-699d-4e85-a104-5e96afb8d4fb",
+          "name": "Submit Risk Reserve Proof Of Payment",
+          "request": {
+            "name": "Submit Risk Reserve Proof Of Payment",
+            "description": {},
+            "url": {
+              "path": [
+                "eor_hiring",
+                "risk_reserve",
+                "proof_of_payment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0788d4d0-c5f6-4133-b5e7-b867e0f69be6",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eor_hiring",
+                    "risk_reserve",
+                    "proof_of_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c06820c9-3a3f-4723-abb6-b6307285a7a1",
+      "name": "Offboarding",
+      "description": {
+        "content": "Drive employee offboarding flows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5de67b64-a134-408c-a749-6dad7bcb4708",
+          "name": "Submit An Offboarding",
+          "request": {
+            "name": "Submit An Offboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "offboardings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"offboarding_type\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"reason_for_offboarding\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": 8001\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "578ba357-0e63-4cd0-80a6-a7e82d6342fd",
+              "name": "Offboarding submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offboardings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"offboarding_type\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"reason_for_offboarding\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": 4989\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"c17a7d1a-b95a-3556-29fd-451826c14679\",\n      \"employment_id\": \"d5ff323a-69ab-55ae-7f66-34e186510912\",\n      \"status\": \"submitted\",\n      \"offboarding_type\": \"termination\",\n      \"last_day_of_work\": \"1950-11-24\",\n      \"reason_for_offboarding\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c49f83c1-3178-4ca7-96c6-c32e9a463cee",
+          "name": "Show An Offboarding",
+          "request": {
+            "name": "Show An Offboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "offboardings",
+                ":offboarding_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "offboarding_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "365b80c4-e79d-443a-ab1e-ee90496b126b",
+              "name": "Offboarding.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offboardings",
+                    ":offboarding_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "offboarding_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"c17a7d1a-b95a-3556-29fd-451826c14679\",\n      \"employment_id\": \"d5ff323a-69ab-55ae-7f66-34e186510912\",\n      \"status\": \"submitted\",\n      \"offboarding_type\": \"termination\",\n      \"last_day_of_work\": \"1950-11-24\",\n      \"reason_for_offboarding\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "012993e5-f2cb-4df4-a721-2b0ab6615a58",
+      "name": "Identity Verification",
+      "description": {
+        "content": "Identity-verification background checks",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "a62c8323-44d1-477f-b2c8-122ff51dcfb8",
+      "name": "Travel Letters",
+      "description": {
+        "content": "Travel letter requests for employees moving across borders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7b3b0f1-2ece-4e65-9a52-6ec5e5ba7a7f",
+          "name": "List Travel Letter Requests",
+          "request": {
+            "name": "List Travel Letter Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4fca492-49aa-4edc-af4c-18591ae3d657",
+              "name": "Travel letter requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_requests\": [\n      {\n        \"id\": \"c6abca43-7357-f25e-606c-36f7027b1714\",\n        \"employment_id\": \"30615d6a-8aee-6fa3-0f61-8e1eb688528d\",\n        \"destination_country\": \"string\",\n        \"purpose\": \"string\",\n        \"status\": \"declined_by_remote\",\n        \"travel_start_date\": \"2024-06-14\",\n        \"travel_end_date\": \"1976-02-26\"\n      },\n      {\n        \"id\": \"49c7dcda-2d4e-7840-7060-7a9087a6f450\",\n        \"employment_id\": \"811b25ad-26d8-56d6-0fdb-4131b1e99da4\",\n        \"destination_country\": \"string\",\n        \"purpose\": \"string\",\n        \"status\": \"approved_by_manager\",\n        \"travel_start_date\": \"2017-07-18\",\n        \"travel_end_date\": \"1988-07-21\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e0a05d5-86ea-4d8f-8eda-ba26b94d1727",
+          "name": "Create A Travel Letter Request",
+          "request": {
+            "name": "Create A Travel Letter Request",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a18d9e2f-87d2-4b99-a5f6-b3f66ed227cd",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"id\": \"5cabfbd1-4021-a133-cb7e-dbd7baf0b982\",\n      \"employment_id\": \"196df47b-580c-3dc1-a2b5-45c781d59c5d\",\n      \"destination_country\": \"string\",\n      \"purpose\": \"string\",\n      \"status\": \"declined_by_manager\",\n      \"travel_start_date\": \"1965-05-07\",\n      \"travel_end_date\": \"1947-10-15\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eab1413f-8351-47f4-b832-ff7e02d544de",
+          "name": "Show A Travel Letter Request",
+          "request": {
+            "name": "Show A Travel Letter Request",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests",
+                ":travel_letter_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "travel_letter_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78532101-e5be-4b06-af67-fedb55468514",
+              "name": "Travel letter request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests",
+                    ":travel_letter_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "travel_letter_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"id\": \"5cabfbd1-4021-a133-cb7e-dbd7baf0b982\",\n      \"employment_id\": \"196df47b-580c-3dc1-a2b5-45c781d59c5d\",\n      \"destination_country\": \"string\",\n      \"purpose\": \"string\",\n      \"status\": \"declined_by_manager\",\n      \"travel_start_date\": \"1965-05-07\",\n      \"travel_end_date\": \"1947-10-15\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25f56feb-cf96-492c-a115-cc7253d07927",
+          "name": "Update A Travel Letter Request",
+          "request": {
+            "name": "Update A Travel Letter Request",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests",
+                ":travel_letter_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "travel_letter_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8051fa9c-79b3-4bcf-951d-a622ef58672c",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests",
+                    ":travel_letter_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "travel_letter_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"id\": \"5cabfbd1-4021-a133-cb7e-dbd7baf0b982\",\n      \"employment_id\": \"196df47b-580c-3dc1-a2b5-45c781d59c5d\",\n      \"destination_country\": \"string\",\n      \"purpose\": \"string\",\n      \"status\": \"declined_by_manager\",\n      \"travel_start_date\": \"1965-05-07\",\n      \"travel_end_date\": \"1947-10-15\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b9b80161-863c-4a50-8883-5e119f66559a",
+      "name": "Work Authorization",
+      "description": {
+        "content": "Work authorization (visa / right to work) requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f4a773a-01b5-44d7-bde8-45e51b8b52b4",
+          "name": "List Work Authorization Requests",
+          "request": {
+            "name": "List Work Authorization Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "work_authorization_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c647b5b0-cac8-4f4d-a820-57fa29d8ff23",
+              "name": "Work authorization requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work_authorization_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"work_authorization_requests\": [\n      {\n        \"id\": \"c546d575-b829-f503-c6c5-768cf4ff46aa\",\n        \"employment_id\": \"a8eb276d-e58e-de89-e6a8-e7b199f1e9e1\",\n        \"country_code\": \"string\",\n        \"status\": \"declined_by_remote\",\n        \"visa_type\": \"string\",\n        \"target_start_date\": \"2011-05-28\"\n      },\n      {\n        \"id\": \"9ae1cd50-f67f-2b93-4584-9b55f8fbbd3e\",\n        \"employment_id\": \"e6700add-6e8a-8d28-55f3-8d3defcaedf2\",\n        \"country_code\": \"string\",\n        \"status\": \"requested\",\n        \"visa_type\": \"string\",\n        \"target_start_date\": \"1975-12-08\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4db1d5d-1e9e-4721-8d94-4dceec689aee",
+          "name": "Show A Work Authorization Request",
+          "request": {
+            "name": "Show A Work Authorization Request",
+            "description": {},
+            "url": {
+              "path": [
+                "work_authorization_requests",
+                ":work_authorization_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "work_authorization_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0a62d00-8c8e-4b27-8551-9267ab3259b7",
+              "name": "Work authorization request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work_authorization_requests",
+                    ":work_authorization_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "work_authorization_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"id\": \"681d9631-7edf-5d59-9235-e9441f8ca34d\",\n      \"employment_id\": \"77ad9ce6-8dee-319b-989a-d7f012d20103\",\n      \"country_code\": \"string\",\n      \"status\": \"approved_by_remote\",\n      \"visa_type\": \"string\",\n      \"target_start_date\": \"2022-05-04\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1d44d0b-dcdb-4a3c-a962-a3d6b7922f92",
+          "name": "Update A Work Authorization Request",
+          "request": {
+            "name": "Update A Work Authorization Request",
+            "description": {},
+            "url": {
+              "path": [
+                "work_authorization_requests",
+                ":work_authorization_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "work_authorization_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3273.7299590661173\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0905666-10e5-44f9-99d3-56420b6c7abb",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work_authorization_requests",
+                    ":work_authorization_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "work_authorization_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"id\": \"681d9631-7edf-5d59-9235-e9441f8ca34d\",\n      \"employment_id\": \"77ad9ce6-8dee-319b-989a-d7f012d20103\",\n      \"country_code\": \"string\",\n      \"status\": \"approved_by_remote\",\n      \"visa_type\": \"string\",\n      \"target_start_date\": \"2022-05-04\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bb7ec0cd-0b21-4083-8e75-e314fe438e4f",
+      "name": "Company Structure",
+      "description": {
+        "content": "Reporting hierarchy and structure nodes for employees",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86f7e145-d80c-4592-b217-5dd59b31b518",
+          "name": "List Company Structure Nodes",
+          "request": {
+            "name": "List Company Structure Nodes",
+            "description": {},
+            "url": {
+              "path": [
+                "company_structure_nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b8de2c0-8123-4a6a-8d6a-522325ad5026",
+              "name": "Structure nodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_structure_nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7989,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5fc2d70b-c26b-49cf-b9a4-11da853eb9e0",
+    "name": "Remote Employments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create and manage employment records across the EOR, Global Payroll, and\nPEO employment models on Remote.com. Endpoints cover the full employment\nlifecycle — onboarding, contract management, contract amendments,\nemployment status transitions, identity verification, travel letters,\nwork-authorization requests, and offboarding.\n\nEvery Remote customer hiring through the platform owns one employment\nrecord per worker. This API is the authoritative source for that record.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

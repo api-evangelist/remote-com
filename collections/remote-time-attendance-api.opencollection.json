@@ -1,0 +1,334 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Time and Attendance API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Off",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Time Off Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "starts_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ends_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Time Off Requests"
+        },
+        {
+          "info": {
+            "name": "Create A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Show A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Update A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Approve A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/approve",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Decline A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/decline",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decline A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Cancel A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/cancel",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel A Time Off Request"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Leave Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Leave Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/leave_policies",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Leave Policies"
+        },
+        {
+          "info": {
+            "name": "Show A Leave Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/leave_policies/:leave_policy_id",
+            "params": [
+              {
+                "name": "leave_policy_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Leave Policy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Leave Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Leave Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/leave_balances",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Leave Balances"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Timesheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Timesheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timesheets",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "period_start",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Timesheets"
+        },
+        {
+          "info": {
+            "name": "Show A Timesheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timesheets/:timesheet_id",
+            "params": [
+              {
+                "name": "timesheet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Timesheet"
+        },
+        {
+          "info": {
+            "name": "Approve A Timesheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timesheets/:timesheet_id/approve",
+            "params": [
+              {
+                "name": "timesheet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve A Timesheet"
+        },
+        {
+          "info": {
+            "name": "Send A Timesheet Back For Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timesheets/:timesheet_id/send_back",
+            "params": [
+              {
+                "name": "timesheet_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send A Timesheet Back For Revision"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

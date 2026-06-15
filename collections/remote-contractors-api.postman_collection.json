@@ -1,0 +1,1637 @@
+{
+  "item": [
+    {
+      "id": "ea4a5d81-88b6-4300-ae99-0c7d0fccb71e",
+      "name": "Contractor Subscriptions",
+      "description": {
+        "content": "Manage contractor plan subscriptions (Standard, Plus, COR)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3ccc01c4-69b5-4de5-bbaa-ee23d861aa66",
+          "name": "List Contractor Subscriptions",
+          "request": {
+            "name": "List Contractor Subscriptions",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "plan",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c426171-170e-41ed-946c-883c2d8b246c",
+              "name": "Subscriptions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "plan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"subscriptions\": [\n      {\n        \"id\": \"d5c2adb4-7b6d-8175-7963-dfd0e33f86bb\",\n        \"employment_id\": \"5a80429f-f96b-6a70-49a2-bae40ec9e7a5\",\n        \"plan\": \"cor\",\n        \"status\": \"active\",\n        \"starts_on\": \"1987-05-22\",\n        \"ends_on\": \"2008-08-20\"\n      },\n      {\n        \"id\": \"f14de8e1-f51f-bf9e-1d05-0c4dce7a231a\",\n        \"employment_id\": \"388ecb97-49fe-ce76-6a0e-ef0e1a139ce8\",\n        \"plan\": \"cor\",\n        \"status\": \"terminated\",\n        \"starts_on\": \"2014-07-24\",\n        \"ends_on\": \"2006-08-13\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da5e7ee0-f96c-474e-aa12-749073528748",
+          "name": "Manage Contractor Plus Subscription",
+          "request": {
+            "name": "Manage Contractor Plus Subscription",
+            "description": {
+              "content": "Subscribe, change, or cancel the Plus indemnity plan for a contractor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "subscriptions",
+                "plus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0b703ea-1963-4f6d-95dc-db723829616a",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "subscriptions",
+                    "plus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"subscription\": {\n      \"id\": \"94378247-b516-3a98-7183-04fbcc0a022b\",\n      \"employment_id\": \"0d0f575d-53f0-5fa4-3a85-d39ea55d9a89\",\n      \"plan\": \"standard\",\n      \"status\": \"terminated\",\n      \"starts_on\": \"2012-06-29\",\n      \"ends_on\": \"2018-09-29\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c004cd7-e65d-455a-bb8b-50bb478a6472",
+          "name": "Manage Contractor Of Record Subscription",
+          "request": {
+            "name": "Manage Contractor Of Record Subscription",
+            "description": {
+              "content": "Subscribe, change, or cancel the Contractor-of-Record subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "subscriptions",
+                "cor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7670f4b5-bac3-44a6-be45-ca27b5442172",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "subscriptions",
+                    "cor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"subscription\": {\n      \"id\": \"94378247-b516-3a98-7183-04fbcc0a022b\",\n      \"employment_id\": \"0d0f575d-53f0-5fa4-3a85-d39ea55d9a89\",\n      \"plan\": \"standard\",\n      \"status\": \"terminated\",\n      \"starts_on\": \"2012-06-29\",\n      \"ends_on\": \"2018-09-29\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07a63ec2-4af3-4a48-bb80-83f21faf1643",
+          "name": "Delete Contractor Of Record Subscription",
+          "request": {
+            "name": "Delete Contractor Of Record Subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "subscriptions",
+                "cor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b768c8d4-810d-42d7-b69b-b9733efddf7d",
+              "name": "Subscription canceled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "subscriptions",
+                    "cor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "56ba7470-2495-4bfb-9b37-3743f0a4f63e",
+      "name": "Contractor Invoices",
+      "description": {
+        "content": "List and inspect contractor invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "550f2d69-1404-4f59-88dd-18efb878ac8b",
+          "name": "List Contractor Invoices",
+          "request": {
+            "name": "List Contractor Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "contractor_invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afab4bf7-3a53-4b84-843e-2ec961f0e0b7",
+              "name": "Invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractor_invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contractor_invoices\": [\n      {\n        \"id\": \"63590688-799e-59ec-dcb4-5b20e98a8f2d\",\n        \"employment_id\": \"a1946b32-0d3f-9066-bc9a-d79b57156d52\",\n        \"amount\": 8392,\n        \"currency\": \"string\",\n        \"status\": \"void\",\n        \"period_start\": \"1957-04-15\",\n        \"period_end\": \"2018-08-07\",\n        \"issued_at\": \"1964-08-17T03:25:02.071Z\"\n      },\n      {\n        \"id\": \"01b6f4be-be14-0b25-946a-41d6f4842a55\",\n        \"employment_id\": \"c830a0fb-1f3b-66e3-2423-638fe4fb4ade\",\n        \"amount\": 1595,\n        \"currency\": \"string\",\n        \"status\": \"void\",\n        \"period_start\": \"1948-11-16\",\n        \"period_end\": \"1959-03-10\",\n        \"issued_at\": \"1959-04-17T12:09:03.208Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a285874e-aa0d-4d7b-be6c-679931f18b4d",
+          "name": "Show A Contractor Invoice",
+          "request": {
+            "name": "Show A Contractor Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "contractor_invoices",
+                ":contractor_invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contractor_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e86fe82-e6ff-4b67-be52-6b6bdd097727",
+              "name": "Invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractor_invoices",
+                    ":contractor_invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contractor_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contractor_invoice\": {\n      \"id\": \"82b64f37-637d-2d50-9c52-cc30e5a22bd2\",\n      \"employment_id\": \"38d1abe6-be94-50d0-bb28-9e2f23d0339f\",\n      \"amount\": 7866,\n      \"currency\": \"string\",\n      \"status\": \"submitted\",\n      \"period_start\": \"1995-05-31\",\n      \"period_end\": \"1987-09-25\",\n      \"issued_at\": \"1949-09-05T11:44:15.173Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b794255b-ec15-4667-9b40-a883b439f6b1",
+      "name": "Scheduled Invoices",
+      "description": {
+        "content": "Schedule recurring contractor invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40b48389-3ab5-4135-b728-de8d5634ea7e",
+          "name": "List Scheduled Contractor Invoices",
+          "request": {
+            "name": "List Scheduled Contractor Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0548f5be-e5c7-4ea4-9f6b-20491f748c14",
+              "name": "Scheduled invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoices\": [\n      {\n        \"id\": \"0ebf7c73-5939-bbec-44d2-a93d943047f1\",\n        \"employment_id\": \"b2c52aa8-068d-e71b-7570-f69b1d7ae8a2\",\n        \"amount\": 2268,\n        \"currency\": \"string\",\n        \"recurrence\": \"one_time\",\n        \"next_run_at\": \"2003-07-25T13:34:23.999Z\"\n      },\n      {\n        \"id\": \"7148b54c-bd37-d2fd-ca25-89b510429347\",\n        \"employment_id\": \"b6342a0a-410e-36b8-3933-836c0f0cceb8\",\n        \"amount\": 4616,\n        \"currency\": \"string\",\n        \"recurrence\": \"weekly\",\n        \"next_run_at\": \"2013-05-12T08:06:08.643Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63a7535f-2172-4270-be6e-7962f9822129",
+          "name": "Bulk Create Scheduled Contractor Invoices",
+          "request": {
+            "name": "Bulk Create Scheduled Contractor Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduled_contractor_invoices\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"<string>\",\n      \"starts_on\": \"<date>\",\n      \"ends_on\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"employment_id\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"<string>\",\n      \"starts_on\": \"<date>\",\n      \"ends_on\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c4a51f2-fb40-4d5a-9d10-13e4d2fcbd22",
+              "name": "Scheduled invoices created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_contractor_invoices\": [\n    {\n      \"employment_id\": \"941e3a5a-d300-150d-c56b-49f645e1e2d0\",\n      \"amount\": 6380,\n      \"currency\": \"string\",\n      \"recurrence\": \"monthly\",\n      \"starts_on\": \"2011-05-09\",\n      \"ends_on\": \"1957-02-14\",\n      \"description\": \"string\"\n    },\n    {\n      \"employment_id\": \"75e70d56-28af-c36c-8b61-320e57c3e94e\",\n      \"amount\": 226,\n      \"currency\": \"string\",\n      \"recurrence\": \"weekly\",\n      \"starts_on\": \"1976-09-03\",\n      \"ends_on\": \"1999-10-18\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoices\": [\n      {\n        \"id\": \"0ebf7c73-5939-bbec-44d2-a93d943047f1\",\n        \"employment_id\": \"b2c52aa8-068d-e71b-7570-f69b1d7ae8a2\",\n        \"amount\": 2268,\n        \"currency\": \"string\",\n        \"recurrence\": \"one_time\",\n        \"next_run_at\": \"2003-07-25T13:34:23.999Z\"\n      },\n      {\n        \"id\": \"7148b54c-bd37-d2fd-ca25-89b510429347\",\n        \"employment_id\": \"b6342a0a-410e-36b8-3933-836c0f0cceb8\",\n        \"amount\": 4616,\n        \"currency\": \"string\",\n        \"recurrence\": \"weekly\",\n        \"next_run_at\": \"2013-05-12T08:06:08.643Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3824784d-eb76-43bd-8cf9-334baf9bbe92",
+          "name": "Show A Scheduled Contractor Invoice",
+          "request": {
+            "name": "Show A Scheduled Contractor Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices",
+                ":scheduled_invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "scheduled_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49fb623f-87a5-4a6a-ab99-39a354c2e81d",
+              "name": "Scheduled invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices",
+                    ":scheduled_invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "scheduled_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoice\": {\n      \"id\": \"c73a1e19-45f8-b662-6c8d-0e8b13b3f8bf\",\n      \"employment_id\": \"f36e84f6-5260-0f39-58c2-df35d3eed928\",\n      \"amount\": 7299,\n      \"currency\": \"string\",\n      \"recurrence\": \"monthly\",\n      \"next_run_at\": \"1999-06-23T13:35:10.764Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69848304-7b79-4323-be4d-13d990cf43c8",
+          "name": "Update A Scheduled Contractor Invoice",
+          "request": {
+            "name": "Update A Scheduled Contractor Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices",
+                ":scheduled_invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "scheduled_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"recurrence\": \"<string>\",\n  \"starts_on\": \"<date>\",\n  \"ends_on\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0211e925-4f88-427c-a208-0d84a5e28124",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices",
+                    ":scheduled_invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "scheduled_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"recurrence\": \"<string>\",\n  \"starts_on\": \"<date>\",\n  \"ends_on\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoice\": {\n      \"id\": \"c73a1e19-45f8-b662-6c8d-0e8b13b3f8bf\",\n      \"employment_id\": \"f36e84f6-5260-0f39-58c2-df35d3eed928\",\n      \"amount\": 7299,\n      \"currency\": \"string\",\n      \"recurrence\": \"monthly\",\n      \"next_run_at\": \"1999-06-23T13:35:10.764Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "607fedde-95e1-4a2c-9adc-04b749926aa4",
+      "name": "Contract Eligibility",
+      "description": {
+        "content": "Verify contractor-vs-employee classification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "388b46be-b2fe-4bdd-97ba-d53512d60585",
+          "name": "Create A Contract Eligibility Check",
+          "request": {
+            "name": "Create A Contract Eligibility Check",
+            "description": {
+              "content": "Submit a contractor classification check that returns a misclassification\nrisk score and recommendations. Backed by Remote's AI misclassification tooling.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contract_eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"country_code\": \"<string>\",\n  \"work_relationship\": {\n    \"key_0\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa64072e-551e-4585-92b8-83b1deddb74a",
+              "name": "Eligibility result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country_code\": \"<string>\",\n  \"work_relationship\": {\n    \"key_0\": 5576,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"risk_level\": \"high\",\n    \"risk_score\": 70,\n    \"recommendation\": \"request_review\",\n    \"findings\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ac2ac4a-a84e-4f58-b3ad-6edc11a34272",
+          "name": "List Contractor Eligibility Legal Entities",
+          "request": {
+            "name": "List Contractor Eligibility Legal Entities",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_eligibility",
+                "legal_entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58499a33-2648-48f5-9186-50a0de6c7e6b",
+              "name": "Legal entities.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_eligibility",
+                    "legal_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 3107,\n  \"key_1\": 6958,\n  \"key_2\": 3646\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a8f31cdf-4bf7-4f13-9747-ba57ac3ed8c4",
+      "name": "COR Termination",
+      "description": {
+        "content": "Terminate Contractor-of-Record engagements",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99ddb7b1-5612-47b6-9b85-6140ab004e32",
+          "name": "Show COR Termination Request",
+          "request": {
+            "name": "Show COR Termination Request",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "cor_termination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "431de138-0dda-439f-b011-94b848f5b397",
+              "name": "Termination request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "cor_termination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"cor_termination_request\": {\n      \"id\": \"433cd684-cda3-76fb-e5aa-61c4e51d4d6d\",\n      \"employment_id\": \"d8993960-a1ae-7e1a-8495-e259d5f15f38\",\n      \"status\": \"canceled\",\n      \"last_day_of_engagement\": \"1983-04-03\",\n      \"reason\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa923d8c-5ce2-499d-ad93-a3b7ae9e6c15",
+          "name": "Create COR Termination Request",
+          "request": {
+            "name": "Create COR Termination Request",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "cor_termination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"last_day_of_engagement\": \"<date>\",\n  \"reason\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "829c411a-0afb-45b6-9829-31fee71af79a",
+              "name": "Termination created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "cor_termination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"last_day_of_engagement\": \"<date>\",\n  \"reason\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"cor_termination_request\": {\n      \"id\": \"433cd684-cda3-76fb-e5aa-61c4e51d4d6d\",\n      \"employment_id\": \"d8993960-a1ae-7e1a-8495-e259d5f15f38\",\n      \"status\": \"canceled\",\n      \"last_day_of_engagement\": \"1983-04-03\",\n      \"reason\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc1e4057-3dbc-4d0b-9b7d-ffa159e9747a",
+          "name": "Terminate A Contractor Of Record Employment",
+          "request": {
+            "name": "Terminate A Contractor Of Record Employment",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "terminate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afa7cc92-5333-4c65-9869-dda3432e1cfb",
+              "name": "Termination submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d7f99a03-9d4d-4b7d-b233-93d4064a7fdf",
+      "name": "Contractor Currencies",
+      "description": {
+        "content": "List currencies available for contractor payments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6edf0af-18c8-4e84-8271-5eb6e561b0c7",
+          "name": "List Contractor Currencies",
+          "request": {
+            "name": "List Contractor Currencies",
+            "description": {},
+            "url": {
+              "path": [
+                "contractor_currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29d5e9b5-bc31-4603-88b3-2012ed8c99cb",
+              "name": "Currencies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractor_currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"currencies\": [\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"symbol\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"symbol\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5d1adf16-52db-4eb6-a190-9ad5fdda7dc1",
+    "name": "Remote Contractors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage contractors and Contractor-of-Record (COR) subscriptions on\nRemote.com. The API supports two contractor offerings:\n\n- **Contractor Management** — Remote handles localized contracts,\n  invoice approval, and payments while the customer remains the\n  engaging party.\n- **Contractor of Record (COR)** — Remote becomes the legal engaging\n  party, providing uncapped indemnity and IP-transfer protection.\n\nThis API also exposes scheduled-invoice automation, contractor\ncurrency catalogs, contract-eligibility checks, and COR-termination\nrequests.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

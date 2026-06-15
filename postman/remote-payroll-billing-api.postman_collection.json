@@ -1,0 +1,2177 @@
+{
+  "info": {
+    "_postman_id": "f61dd780-a22b-452d-ad8d-92628a0e517f",
+    "name": "Remote Payroll and Billing API",
+    "description": "Inspect payroll calendars, billing documents, incentives, expenses,\npayslips, and timesheets across Remote's EOR, Global Payroll, PEO,\nand Contractor offerings. All financial events are exposed both\nvia REST and via webhooks.\n\n\nContact Support:\n Name: Remote API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:15:07.000Z",
+    "updatedAt": "2026-06-05T15:15:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f61dd780-a22b-452d-ad8d-92628a0e517f"
+  },
+  "item": [
+    {
+      "name": "payroll",
+      "item": [
+        {
+          "name": "calendars",
+          "item": [
+            {
+              "name": "company",
+              "item": [
+                {
+                  "name": "List Company Payroll Calendar",
+                  "id": "f381f290-6fbb-4add-a94c-bcd22c46bf24",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payroll/calendars/company",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payroll",
+                        "calendars",
+                        "company"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "45ca2ecc-8481-4f54-8330-8c95204fef2d",
+                      "name": "Calendar entries.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payroll/calendars/company",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payroll",
+                            "calendars",
+                            "company"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"payroll_calendars\": [\n      {\n        \"id\": \"<uuid>\",\n        \"scope\": \"global_payroll\",\n        \"country_code\": \"<string>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"cutoff_date\": \"<date>\",\n        \"payday\": \"<date>\",\n        \"currency\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"scope\": \"eor\",\n        \"country_code\": \"<string>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"cutoff_date\": \"<date>\",\n        \"payday\": \"<date>\",\n        \"currency\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:07.000Z",
+                      "updatedAt": "2026-06-05T15:15:07.000Z",
+                      "uid": "35240-45ca2ecc-8481-4f54-8330-8c95204fef2d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-f381f290-6fbb-4add-a94c-bcd22c46bf24"
+                }
+              ],
+              "id": "a331eeae-4629-43ff-a191-3ba18a0522f4",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-a331eeae-4629-43ff-a191-3ba18a0522f4"
+            },
+            {
+              "name": "eor",
+              "item": [
+                {
+                  "name": "List EOR Payroll Calendar",
+                  "id": "02e8d1ae-3e99-4811-b808-adbd34354765",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payroll/calendars/eor",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payroll",
+                        "calendars",
+                        "eor"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "41ff8384-04a3-4884-8059-16da18bf5a1f",
+                      "name": "Calendar entries.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payroll/calendars/eor",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payroll",
+                            "calendars",
+                            "eor"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"payroll_calendars\": [\n      {\n        \"id\": \"<uuid>\",\n        \"scope\": \"global_payroll\",\n        \"country_code\": \"<string>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"cutoff_date\": \"<date>\",\n        \"payday\": \"<date>\",\n        \"currency\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"scope\": \"eor\",\n        \"country_code\": \"<string>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"cutoff_date\": \"<date>\",\n        \"payday\": \"<date>\",\n        \"currency\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:07.000Z",
+                      "updatedAt": "2026-06-05T15:15:07.000Z",
+                      "uid": "35240-41ff8384-04a3-4884-8059-16da18bf5a1f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-02e8d1ae-3e99-4811-b808-adbd34354765"
+                }
+              ],
+              "id": "4c5a40ff-b125-405d-9773-de95d1138c3c",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-4c5a40ff-b125-405d-9773-de95d1138c3c"
+            },
+            {
+              "name": "List Payroll Calendar",
+              "id": "af196104-1c2c-4838-a020-7ce27c221503",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payroll/calendars?starts_after=<date>&ends_before=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payroll",
+                    "calendars"
+                  ],
+                  "query": [
+                    {
+                      "key": "starts_after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "ends_before",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9fd9e4b3-2aab-47f2-8dd2-0f4d7e8ada43",
+                  "name": "Calendar entries.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payroll/calendars?starts_after=<date>&ends_before=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payroll",
+                        "calendars"
+                      ],
+                      "query": [
+                        {
+                          "key": "starts_after",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "ends_before",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"payroll_calendars\": [\n      {\n        \"id\": \"<uuid>\",\n        \"scope\": \"global_payroll\",\n        \"country_code\": \"<string>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"cutoff_date\": \"<date>\",\n        \"payday\": \"<date>\",\n        \"currency\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"scope\": \"eor\",\n        \"country_code\": \"<string>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"cutoff_date\": \"<date>\",\n        \"payday\": \"<date>\",\n        \"currency\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-9fd9e4b3-2aab-47f2-8dd2-0f4d7e8ada43"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-af196104-1c2c-4838-a020-7ce27c221503"
+            }
+          ],
+          "id": "be022622-9ec5-46c1-a9a5-6c473b289200",
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-be022622-9ec5-46c1-a9a5-6c473b289200"
+        }
+      ],
+      "id": "54b75c76-1881-437d-aecc-13e04cbbfc42",
+      "createdAt": "2026-06-05T15:15:07.000Z",
+      "updatedAt": "2026-06-05T15:15:07.000Z",
+      "uid": "35240-54b75c76-1881-437d-aecc-13e04cbbfc42"
+    },
+    {
+      "name": "billing_documents",
+      "item": [
+        {
+          "name": "{billing_document_id}",
+          "item": [
+            {
+              "name": "breakdown",
+              "item": [
+                {
+                  "name": "Get Billing Document Breakdown",
+                  "id": "90a3da6d-aed4-4dbd-a8c2-5d283f04252f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/billing_documents/:billing_document_id/breakdown",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "billing_documents",
+                        ":billing_document_id",
+                        "breakdown"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1319a1be-be07-47af-9227-787f5c47a6b2",
+                          "key": "billing_document_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e616afd4-db2e-45fe-93b9-05524c59c01c",
+                      "name": "Line-item breakdown.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/billing_documents/:billing_document_id/breakdown",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "billing_documents",
+                            ":billing_document_id",
+                            "breakdown"
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"sunt__\": -77817131,\n  \"aliqua6_\": -5321636.3821326345\n}",
+                      "createdAt": "2026-06-05T15:15:07.000Z",
+                      "updatedAt": "2026-06-05T15:15:07.000Z",
+                      "uid": "35240-e616afd4-db2e-45fe-93b9-05524c59c01c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-90a3da6d-aed4-4dbd-a8c2-5d283f04252f"
+                }
+              ],
+              "id": "60cda06a-16ff-4bce-a13c-d211ec53f9ce",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-60cda06a-16ff-4bce-a13c-d211ec53f9ce"
+            },
+            {
+              "name": "pdf",
+              "item": [
+                {
+                  "name": "Download Billing Document PDF",
+                  "id": "9c9600b0-44d2-4a54-8714-619003d5c947",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/billing_documents/:billing_document_id/pdf",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "billing_documents",
+                        ":billing_document_id",
+                        "pdf"
+                      ],
+                      "variable": [
+                        {
+                          "id": "bf52594b-f9d1-41a4-b6ae-2fee163b2bae",
+                          "key": "billing_document_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "7cc9fd4c-3d96-424c-9e69-ea1303b9ccca",
+                      "name": "PDF binary.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/billing_documents/:billing_document_id/pdf",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "billing_documents",
+                            ":billing_document_id",
+                            "pdf"
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/pdf"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-06-05T15:15:07.000Z",
+                      "updatedAt": "2026-06-05T15:15:07.000Z",
+                      "uid": "35240-7cc9fd4c-3d96-424c-9e69-ea1303b9ccca"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-9c9600b0-44d2-4a54-8714-619003d5c947"
+                }
+              ],
+              "id": "76852e97-b8f5-4153-9f08-178594ae9227",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-76852e97-b8f5-4153-9f08-178594ae9227"
+            },
+            {
+              "name": "Show A Billing Document",
+              "id": "a64d5256-cda9-40ca-b12f-97cf8ec1a6ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/billing_documents/:billing_document_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "billing_documents",
+                    ":billing_document_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c9ee5fc1-5e8f-4c32-a96a-c2264ceabd0d",
+                      "key": "billing_document_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "2f6e85c3-1148-4a8e-81d3-90dacfc9ae39",
+                  "name": "Billing document.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/billing_documents/:billing_document_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "billing_documents",
+                        ":billing_document_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "billing_document_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"billing_document\": {\n      \"id\": \"<uuid>\",\n      \"number\": \"<string>\",\n      \"status\": \"issued\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"issued_at\": \"<dateTime>\",\n      \"due_at\": \"<dateTime>\",\n      \"period_start\": \"<date>\",\n      \"period_end\": \"<date>\",\n      \"type\": \"contractor_invoice\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-2f6e85c3-1148-4a8e-81d3-90dacfc9ae39"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-a64d5256-cda9-40ca-b12f-97cf8ec1a6ca"
+            }
+          ],
+          "id": "48bbbb0a-f130-470f-b8c3-e317270dc86b",
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-48bbbb0a-f130-470f-b8c3-e317270dc86b"
+        },
+        {
+          "name": "List Billing Documents",
+          "id": "85ae01b3-e107-4b47-be12-af614f40dfe4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/billing_documents?status=paid&period=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "billing_documents"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "paid"
+                },
+                {
+                  "key": "period",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "193c33bb-634a-40c9-bbd6-adf660a38e76",
+              "name": "Billing documents.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/billing_documents?status=paid&period=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "billing_documents"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "paid"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"billing_documents\": [\n      {\n        \"id\": \"<uuid>\",\n        \"number\": \"<string>\",\n        \"status\": \"paid\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"issued_at\": \"<dateTime>\",\n        \"due_at\": \"<dateTime>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"type\": \"contractor_invoice\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"number\": \"<string>\",\n        \"status\": \"void\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"issued_at\": \"<dateTime>\",\n        \"due_at\": \"<dateTime>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"type\": \"eor_invoice\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-193c33bb-634a-40c9-bbd6-adf660a38e76"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-85ae01b3-e107-4b47-be12-af614f40dfe4"
+        }
+      ],
+      "id": "322cfcfa-7c8c-42eb-97a5-1530c5bd5e4c",
+      "createdAt": "2026-06-05T15:15:07.000Z",
+      "updatedAt": "2026-06-05T15:15:07.000Z",
+      "uid": "35240-322cfcfa-7c8c-42eb-97a5-1530c5bd5e4c"
+    },
+    {
+      "name": "incentives",
+      "item": [
+        {
+          "name": "{incentive_id}",
+          "item": [
+            {
+              "name": "Show An Incentive",
+              "id": "4fab2182-a9db-4187-8379-93a5059c00d8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/incentives/:incentive_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "incentives",
+                    ":incentive_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "066ab04b-78f0-48cb-b9f4-cf6c541df6f9",
+                      "key": "incentive_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e183c8c8-02ec-46d8-a280-c915e0ccf19b",
+                  "name": "Incentive.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/incentives/:incentive_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "incentives",
+                        ":incentive_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "incentive_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"incentive\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"type\": \"commission\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"quarterly\",\n      \"effective_date\": \"<date>\",\n      \"status\": \"created\",\n      \"note\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-e183c8c8-02ec-46d8-a280-c915e0ccf19b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-4fab2182-a9db-4187-8379-93a5059c00d8"
+            },
+            {
+              "name": "Update An Incentive",
+              "id": "e40f4cfa-6e7f-4f5b-986d-31f9e3402ec5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"recurring_incentive\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"one_time\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/incentives/:incentive_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "incentives",
+                    ":incentive_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "81119b09-729d-4ea3-ab27-563cc308b43c",
+                      "key": "incentive_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "90f91d0b-4451-4d42-a020-df4acc17100a",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"recurring_incentive\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"one_time\",\n  \"note\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/incentives/:incentive_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "incentives",
+                        ":incentive_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "incentive_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"incentive\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"type\": \"commission\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"quarterly\",\n      \"effective_date\": \"<date>\",\n      \"status\": \"created\",\n      \"note\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-90f91d0b-4451-4d42-a020-df4acc17100a"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-e40f4cfa-6e7f-4f5b-986d-31f9e3402ec5"
+            },
+            {
+              "name": "Delete An Incentive",
+              "id": "d2a93295-c789-4396-bba2-eca5f73e83f5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/incentives/:incentive_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "incentives",
+                    ":incentive_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "587f4d2b-696c-48c6-a312-d1312fd563e1",
+                      "key": "incentive_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "44eb5786-15c2-4fd3-8552-4bcf9439ebcd",
+                  "name": "Deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/incentives/:incentive_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "incentives",
+                        ":incentive_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "incentive_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-44eb5786-15c2-4fd3-8552-4bcf9439ebcd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-d2a93295-c789-4396-bba2-eca5f73e83f5"
+            }
+          ],
+          "id": "94d199de-165f-415b-a5bb-d5ac5791611b",
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-94d199de-165f-415b-a5bb-d5ac5791611b"
+        },
+        {
+          "name": "List Incentives",
+          "id": "5cbec8a8-da05-4a17-a977-268a711a260f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/incentives?employment_id=<uuid>&type=bonus",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "incentives"
+              ],
+              "query": [
+                {
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "type",
+                  "value": "bonus"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "96bc2f74-09df-417a-b486-fbc2bab50b41",
+              "name": "Incentives.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/incentives?employment_id=<uuid>&type=bonus",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "incentives"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "bonus"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"incentives\": [\n      {\n        \"id\": \"<uuid>\",\n        \"employment_id\": \"<uuid>\",\n        \"type\": \"recurring_incentive\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"recurrence\": \"yearly\",\n        \"effective_date\": \"<date>\",\n        \"status\": \"paid\",\n        \"note\": \"<string>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"employment_id\": \"<uuid>\",\n        \"type\": \"bonus\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"recurrence\": \"one_time\",\n        \"effective_date\": \"<date>\",\n        \"status\": \"created\",\n        \"note\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-96bc2f74-09df-417a-b486-fbc2bab50b41"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-5cbec8a8-da05-4a17-a977-268a711a260f"
+        },
+        {
+          "name": "Create An Incentive",
+          "id": "67460755-4514-4139-b11d-2903a0b5fa28",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"recurring_incentive\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"one_time\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/incentives",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "incentives"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e26caba-b185-4d37-b150-19ec7611cd09",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"recurring_incentive\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"one_time\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/incentives",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "incentives"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"incentive\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"type\": \"commission\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"quarterly\",\n      \"effective_date\": \"<date>\",\n      \"status\": \"created\",\n      \"note\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-5e26caba-b185-4d37-b150-19ec7611cd09"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-67460755-4514-4139-b11d-2903a0b5fa28"
+        }
+      ],
+      "id": "b0dcf577-69ff-48b3-b5f4-ce2ed2eb35d7",
+      "createdAt": "2026-06-05T15:15:07.000Z",
+      "updatedAt": "2026-06-05T15:15:07.000Z",
+      "uid": "35240-b0dcf577-69ff-48b3-b5f4-ce2ed2eb35d7"
+    },
+    {
+      "name": "expenses",
+      "item": [
+        {
+          "name": "{expense_id}",
+          "item": [
+            {
+              "name": "approve",
+              "item": [
+                {
+                  "name": "Approve An Expense",
+                  "id": "fe591a24-ccee-4ba8-acf1-82a286929dd9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/expenses/:expense_id/approve",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "expenses",
+                        ":expense_id",
+                        "approve"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5bb8c521-12ac-4e4d-9c85-4f6eebf59bcd",
+                          "key": "expense_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c021967d-7843-4a64-9162-edfa3a833a79",
+                      "name": "Approved.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/expenses/:expense_id/approve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "expenses",
+                            ":expense_id",
+                            "approve"
+                          ],
+                          "variable": [
+                            {
+                              "key": "expense_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"expense\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"category\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"submitted\",\n      \"expense_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"receipt_url\": \"<uri>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:07.000Z",
+                      "updatedAt": "2026-06-05T15:15:07.000Z",
+                      "uid": "35240-c021967d-7843-4a64-9162-edfa3a833a79"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-fe591a24-ccee-4ba8-acf1-82a286929dd9"
+                }
+              ],
+              "id": "7f215d71-7a1f-4e04-836e-fb00ba059f48",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-7f215d71-7a1f-4e04-836e-fb00ba059f48"
+            },
+            {
+              "name": "decline",
+              "item": [
+                {
+                  "name": "Decline An Expense",
+                  "id": "0b09fd1d-523a-48f9-9a1c-5a34c80738ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"reason\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/expenses/:expense_id/decline",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "expenses",
+                        ":expense_id",
+                        "decline"
+                      ],
+                      "variable": [
+                        {
+                          "id": "529c8bff-4c0b-4bed-824e-7214c1aaa7f0",
+                          "key": "expense_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "da61c168-07f5-4629-b4f5-dcc95d0e5e2b",
+                      "name": "Declined.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/expenses/:expense_id/decline",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "expenses",
+                            ":expense_id",
+                            "decline"
+                          ],
+                          "variable": [
+                            {
+                              "key": "expense_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"expense\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"category\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"submitted\",\n      \"expense_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"receipt_url\": \"<uri>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:07.000Z",
+                      "updatedAt": "2026-06-05T15:15:07.000Z",
+                      "uid": "35240-da61c168-07f5-4629-b4f5-dcc95d0e5e2b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-0b09fd1d-523a-48f9-9a1c-5a34c80738ea"
+                }
+              ],
+              "id": "7f4cc7fa-c698-4f68-a12d-2b1a41b0bff3",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-7f4cc7fa-c698-4f68-a12d-2b1a41b0bff3"
+            },
+            {
+              "name": "Show An Expense",
+              "id": "89c8939f-92ce-4a73-9072-98cd95d13581",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/expenses/:expense_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "expenses",
+                    ":expense_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "de2a8c20-4c78-48c8-914d-f1b65878bb75",
+                      "key": "expense_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e605d17c-7b82-467f-a437-6a8c6c526a07",
+                  "name": "Expense.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/expenses/:expense_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "expenses",
+                        ":expense_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "expense_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"expense\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"category\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"submitted\",\n      \"expense_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"receipt_url\": \"<uri>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-e605d17c-7b82-467f-a437-6a8c6c526a07"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-89c8939f-92ce-4a73-9072-98cd95d13581"
+            },
+            {
+              "name": "Update An Expense",
+              "id": "04645e7f-1186-4a20-acb5-31b9e0acdbe2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"category\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"expense_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"receipt_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/expenses/:expense_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "expenses",
+                    ":expense_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8983be31-030b-4d61-a58a-802e629ad216",
+                      "key": "expense_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e85f0aaa-c5e7-4daa-b6b8-c9f3de3b35e4",
+                  "name": "Updated.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"category\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"expense_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"receipt_url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/expenses/:expense_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "expenses",
+                        ":expense_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "expense_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"expense\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"category\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"submitted\",\n      \"expense_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"receipt_url\": \"<uri>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-e85f0aaa-c5e7-4daa-b6b8-c9f3de3b35e4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-04645e7f-1186-4a20-acb5-31b9e0acdbe2"
+            },
+            {
+              "name": "Delete An Expense",
+              "id": "43c888b7-6075-4c97-b9e0-67a6167a07cd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/expenses/:expense_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "expenses",
+                    ":expense_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "11277eda-7aed-4bc1-9b63-2f136b7fa48c",
+                      "key": "expense_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "02dfacd5-91ca-456a-9165-f868e86f6ee8",
+                  "name": "Deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/expenses/:expense_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "expenses",
+                        ":expense_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "expense_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-02dfacd5-91ca-456a-9165-f868e86f6ee8"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-43c888b7-6075-4c97-b9e0-67a6167a07cd"
+            }
+          ],
+          "id": "9ecb1d6a-fea0-4304-af81-47b1f32e0643",
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-9ecb1d6a-fea0-4304-af81-47b1f32e0643"
+        },
+        {
+          "name": "List Expenses",
+          "id": "9f52d038-e35b-4dc5-a5df-24426a67263a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/expenses?employment_id=<uuid>&status=reimbursed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "expenses"
+              ],
+              "query": [
+                {
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "status",
+                  "value": "reimbursed"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "36322164-f509-4323-b095-5ea489ae160e",
+              "name": "Expenses.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/expenses?employment_id=<uuid>&status=reimbursed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "expenses"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "reimbursed"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"expenses\": [\n      {\n        \"id\": \"<uuid>\",\n        \"employment_id\": \"<uuid>\",\n        \"category\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"status\": \"deleted\",\n        \"expense_date\": \"<date>\",\n        \"description\": \"<string>\",\n        \"receipt_url\": \"<uri>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"employment_id\": \"<uuid>\",\n        \"category\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"status\": \"declined\",\n        \"expense_date\": \"<date>\",\n        \"description\": \"<string>\",\n        \"receipt_url\": \"<uri>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-36322164-f509-4323-b095-5ea489ae160e"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-9f52d038-e35b-4dc5-a5df-24426a67263a"
+        },
+        {
+          "name": "Create An Expense",
+          "id": "e26d195f-208b-478d-857e-7a6e02866380",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"category\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"expense_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"receipt_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expenses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "expenses"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f083279f-14f3-43ae-91e9-5cd84e789c5e",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"category\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"expense_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"receipt_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/expenses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "expenses"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"expense\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"category\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"submitted\",\n      \"expense_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"receipt_url\": \"<uri>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-f083279f-14f3-43ae-91e9-5cd84e789c5e"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-e26d195f-208b-478d-857e-7a6e02866380"
+        }
+      ],
+      "id": "4ad5c081-e2e4-4fc4-b338-7f2da944e406",
+      "createdAt": "2026-06-05T15:15:07.000Z",
+      "updatedAt": "2026-06-05T15:15:07.000Z",
+      "uid": "35240-4ad5c081-e2e4-4fc4-b338-7f2da944e406"
+    },
+    {
+      "name": "payslips",
+      "item": [
+        {
+          "name": "{payslip_id}",
+          "item": [
+            {
+              "name": "Show A Payslip",
+              "id": "514cb459-1215-451a-bddc-ec18eb578660",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payslips/:payslip_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payslips",
+                    ":payslip_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c193d9aa-3c39-4521-b5d7-4d1de857bf88",
+                      "key": "payslip_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "6591104b-3c76-4963-9103-f514424b2486",
+                  "name": "Payslip.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payslips/:payslip_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payslips",
+                        ":payslip_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payslip_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"payslip\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"period_start\": \"<date>\",\n      \"period_end\": \"<date>\",\n      \"gross_amount\": \"<integer>\",\n      \"net_amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"released_at\": \"<dateTime>\",\n      \"document_url\": \"<uri>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:07.000Z",
+                  "updatedAt": "2026-06-05T15:15:07.000Z",
+                  "uid": "35240-6591104b-3c76-4963-9103-f514424b2486"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-514cb459-1215-451a-bddc-ec18eb578660"
+            }
+          ],
+          "id": "428b5e1e-d868-44f4-8d3c-1a7542f8b893",
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-428b5e1e-d868-44f4-8d3c-1a7542f8b893"
+        },
+        {
+          "name": "List Payslips",
+          "id": "428233a9-b48e-49ec-a70a-7324908efc8e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payslips?employment_id=<uuid>&period=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payslips"
+              ],
+              "query": [
+                {
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "period",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5a4ba8c0-c864-43e9-bdd4-8f032e811a21",
+              "name": "Payslips.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payslips?employment_id=<uuid>&period=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payslips"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"payslips\": [\n      {\n        \"id\": \"<uuid>\",\n        \"employment_id\": \"<uuid>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"gross_amount\": \"<integer>\",\n        \"net_amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"released_at\": \"<dateTime>\",\n        \"document_url\": \"<uri>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"employment_id\": \"<uuid>\",\n        \"period_start\": \"<date>\",\n        \"period_end\": \"<date>\",\n        \"gross_amount\": \"<integer>\",\n        \"net_amount\": \"<integer>\",\n        \"currency\": \"<string>\",\n        \"released_at\": \"<dateTime>\",\n        \"document_url\": \"<uri>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-5a4ba8c0-c864-43e9-bdd4-8f032e811a21"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-428233a9-b48e-49ec-a70a-7324908efc8e"
+        }
+      ],
+      "id": "a39f53a7-c824-4441-bbfa-5e0c86a5c88a",
+      "createdAt": "2026-06-05T15:15:07.000Z",
+      "updatedAt": "2026-06-05T15:15:07.000Z",
+      "uid": "35240-a39f53a7-c824-4441-bbfa-5e0c86a5c88a"
+    },
+    {
+      "name": "company_currencies",
+      "item": [
+        {
+          "name": "List Company Currencies",
+          "id": "f6f97bea-c877-473c-ae0d-c6067f3c90c7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/company_currencies",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "company_currencies"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81487947-8d5a-4f0e-85da-95a4c98e9512",
+              "name": "Currencies.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/company_currencies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "company_currencies"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"currencies\": [\n      {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:07.000Z",
+              "updatedAt": "2026-06-05T15:15:07.000Z",
+              "uid": "35240-81487947-8d5a-4f0e-85da-95a4c98e9512"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:07.000Z",
+          "updatedAt": "2026-06-05T15:15:07.000Z",
+          "uid": "35240-f6f97bea-c877-473c-ae0d-c6067f3c90c7"
+        }
+      ],
+      "id": "06d2aad0-8b33-4d06-939a-37efbee7a710",
+      "createdAt": "2026-06-05T15:15:07.000Z",
+      "updatedAt": "2026-06-05T15:15:07.000Z",
+      "uid": "35240-06d2aad0-8b33-4d06-939a-37efbee7a710"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/v1"
+    }
+  ]
+}

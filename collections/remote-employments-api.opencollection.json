@@ -1,0 +1,653 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Employments API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "employment_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "employment_model",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all non-deleted employments for the company, with filtering."
+        },
+        {
+          "info": {
+            "name": "Create An Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new employment. Required fields depend on the employment\nmodel (EOR vs. Global Payroll vs. PEO) and the country. Use\n`/forms/employment` to fetch the per-country JSON Schema form.\n"
+        },
+        {
+          "info": {
+            "name": "Show An Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Employment"
+        },
+        {
+          "info": {
+            "name": "Update An Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update An Employment"
+        },
+        {
+          "info": {
+            "name": "Invite An Employment To Self-Serve Onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/invite",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Invite An Employment To Self-Serve Onboarding"
+        },
+        {
+          "info": {
+            "name": "Show Administrative Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/administrative_details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show Administrative Details"
+        },
+        {
+          "info": {
+            "name": "Update Administrative Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/administrative_details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Administrative Details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Employment Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Employment Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/contracts",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Employment Contracts"
+        },
+        {
+          "info": {
+            "name": "Get Pending Contract Changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/contracts/pending_changes",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Pending Contract Changes"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contract Amendments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Contract Amendments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_amendments",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Contract Amendments"
+        },
+        {
+          "info": {
+            "name": "Create A Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_amendments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Contract Amendment"
+        },
+        {
+          "info": {
+            "name": "Submit An Automatable Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_amendments/automatable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatable amendments use a structured payload that Remote can\napprove without manual review. Use the `/contract_amendments/schema`\nendpoint to learn the per-country form requirements.\n"
+        },
+        {
+          "info": {
+            "name": "Show A Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_amendments/:contract_amendment_id",
+            "params": [
+              {
+                "name": "contract_amendment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Contract Amendment"
+        },
+        {
+          "info": {
+            "name": "Show A Contract Amendment Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_amendments/schema",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the JSON Schema form definition for amendments in a given country and employment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contract Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Contract Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Contract Document"
+        },
+        {
+          "info": {
+            "name": "Show A Contract Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_documents/:contract_document_id",
+            "params": [
+              {
+                "name": "contract_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Contract Document"
+        },
+        {
+          "info": {
+            "name": "Sign A Contract Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_documents/:contract_document_id/sign",
+            "params": [
+              {
+                "name": "contract_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sign A Contract Document"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Onboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create An Eligibility Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/eligibility",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create An Eligibility Questionnaire"
+        },
+        {
+          "info": {
+            "name": "Show An Eligibility Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/eligibility/:questionnaire_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Eligibility Questionnaire"
+        },
+        {
+          "info": {
+            "name": "Submit Risk Reserve Proof Of Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/eor_hiring/risk_reserve/proof_of_payment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit Risk Reserve Proof Of Payment"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit An Offboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/offboardings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit An Offboarding"
+        },
+        {
+          "info": {
+            "name": "Show An Offboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/offboardings/:offboarding_id",
+            "params": [
+              {
+                "name": "offboarding_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Offboarding"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Travel Letters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Travel Letter Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests"
+          },
+          "docs": "List Travel Letter Requests"
+        },
+        {
+          "info": {
+            "name": "Create A Travel Letter Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Travel Letter Request"
+        },
+        {
+          "info": {
+            "name": "Show A Travel Letter Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests/:travel_letter_request_id",
+            "params": [
+              {
+                "name": "travel_letter_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Travel Letter Request"
+        },
+        {
+          "info": {
+            "name": "Update A Travel Letter Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests/:travel_letter_request_id",
+            "params": [
+              {
+                "name": "travel_letter_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Travel Letter Request"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Work Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Work Authorization Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/work_authorization_requests"
+          },
+          "docs": "List Work Authorization Requests"
+        },
+        {
+          "info": {
+            "name": "Show A Work Authorization Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/work_authorization_requests/:work_authorization_request_id",
+            "params": [
+              {
+                "name": "work_authorization_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Work Authorization Request"
+        },
+        {
+          "info": {
+            "name": "Update A Work Authorization Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/work_authorization_requests/:work_authorization_request_id",
+            "params": [
+              {
+                "name": "work_authorization_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Work Authorization Request"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Company Structure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Company Structure Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company_structure_nodes",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Company Structure Nodes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

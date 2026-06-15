@@ -1,0 +1,999 @@
+{
+  "info": {
+    "_postman_id": "9882a64c-576a-46d6-ac08-626e7012ebde",
+    "name": "Remote Files And Custom Fields API",
+    "description": "Upload, download, and reference files attached to companies and\nemployments on Remote. Also covers custom-field definitions and values,\nplus the supported-countries catalog used to look up jurisdiction-aware\nJSON Schema forms across the rest of the platform.\n\n\nContact Support:\n Name: Remote API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:15:11.000Z",
+    "updatedAt": "2026-06-05T15:15:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9882a64c-576a-46d6-ac08-626e7012ebde"
+  },
+  "item": [
+    {
+      "name": "files",
+      "item": [
+        {
+          "name": "{file_id}",
+          "item": [
+            {
+              "name": "Download A File",
+              "id": "e98735e0-4d1e-4153-a8f3-5c5b7c9420d6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:file_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":file_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6371be3c-88d3-4514-84be-349fd848ae8e",
+                      "key": "file_id",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a8fbfd20-8646-4545-b8f6-059f8b61ef02",
+                  "name": "File binary or signed URL.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:file_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":file_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "file_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"download_url\": \"<uri>\",\n    \"expires_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:11.000Z",
+                  "updatedAt": "2026-06-05T15:15:11.000Z",
+                  "uid": "35240-a8fbfd20-8646-4545-b8f6-059f8b61ef02"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-e98735e0-4d1e-4153-a8f3-5c5b7c9420d6"
+            }
+          ],
+          "id": "f6610f61-2750-49fd-87df-7f16585af30b",
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-f6610f61-2750-49fd-87df-7f16585af30b"
+        },
+        {
+          "name": "Upload A File",
+          "id": "dfd7fd61-2cf2-4f9c-9d51-a91eca5097bb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "description": "(Required) ",
+                  "key": "file",
+                  "type": "file",
+                  "value": null
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "attachable_id",
+                  "value": "<uuid>",
+                  "type": "text"
+                },
+                {
+                  "description": "(Required)  (This can only be one of employment,company,expense,contract_document)",
+                  "key": "attachable_type",
+                  "value": "employment",
+                  "type": "text"
+                },
+                {
+                  "description": "Optional file category tag.",
+                  "key": "category",
+                  "value": "<string>",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "files"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "05e7b100-34c7-40f4-a3f0-4f4b828665e3",
+              "name": "Uploaded.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "attachable_id",
+                      "value": "<uuid>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "(Required)  (This can only be one of employment,company,expense,contract_document)",
+                      "key": "attachable_type",
+                      "value": "employment",
+                      "type": "text"
+                    },
+                    {
+                      "description": "Optional file category tag.",
+                      "key": "category",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/files",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"file\": {\n      \"id\": \"<uuid>\",\n      \"filename\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"attachable_id\": \"<uuid>\",\n      \"attachable_type\": \"expense\",\n      \"category\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"download_url\": \"<uri>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-05e7b100-34c7-40f4-a3f0-4f4b828665e3"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-dfd7fd61-2cf2-4f9c-9d51-a91eca5097bb"
+        }
+      ],
+      "id": "9e41b440-4eab-44ad-83e2-c350b3cb978f",
+      "createdAt": "2026-06-05T15:15:11.000Z",
+      "updatedAt": "2026-06-05T15:15:11.000Z",
+      "uid": "35240-9e41b440-4eab-44ad-83e2-c350b3cb978f"
+    },
+    {
+      "name": "custom_fields",
+      "item": [
+        {
+          "name": "{custom_field_id}",
+          "item": [
+            {
+              "name": "values",
+              "item": [
+                {
+                  "name": "List Custom Field Values",
+                  "id": "88532697-a33f-4240-bb7e-fbb1d9efcf62",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:custom_field_id/values?subject_id=<uuid>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":custom_field_id",
+                        "values"
+                      ],
+                      "query": [
+                        {
+                          "key": "subject_id",
+                          "value": "<uuid>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "7dfda8c9-985c-4145-bb58-7b5052e847f6",
+                          "key": "custom_field_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "23f2b1fe-adb4-4ebc-8cd1-8635e98a8700",
+                      "name": "Values.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:custom_field_id/values?subject_id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":custom_field_id",
+                            "values"
+                          ],
+                          "query": [
+                            {
+                              "key": "subject_id",
+                              "value": "<uuid>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "custom_field_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"values\": [\n      {\n        \"subject_id\": \"<uuid>\",\n        \"value\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"custom_field_id\": \"<uuid>\"\n      },\n      {\n        \"subject_id\": \"<uuid>\",\n        \"value\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"custom_field_id\": \"<uuid>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:11.000Z",
+                      "updatedAt": "2026-06-05T15:15:11.000Z",
+                      "uid": "35240-23f2b1fe-adb4-4ebc-8cd1-8635e98a8700"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:11.000Z",
+                  "updatedAt": "2026-06-05T15:15:11.000Z",
+                  "uid": "35240-88532697-a33f-4240-bb7e-fbb1d9efcf62"
+                },
+                {
+                  "name": "Upsert A Custom Field Value",
+                  "id": "513d3f0e-44dc-414c-95e1-6028608af6cb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subject_id\": \"<uuid>\",\n  \"value\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"custom_field_id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/custom_fields/:custom_field_id/values",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "custom_fields",
+                        ":custom_field_id",
+                        "values"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a8674bd-9f4f-4c73-a9ad-20f9391f3421",
+                          "key": "custom_field_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e7adf786-a4df-40c2-a0a9-2d60d52b4446",
+                      "name": "Upserted.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"subject_id\": \"<uuid>\",\n  \"value\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"custom_field_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/custom_fields/:custom_field_id/values",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "custom_fields",
+                            ":custom_field_id",
+                            "values"
+                          ],
+                          "variable": [
+                            {
+                              "key": "custom_field_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"value\": {\n      \"subject_id\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"custom_field_id\": \"<uuid>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:15:11.000Z",
+                      "updatedAt": "2026-06-05T15:15:11.000Z",
+                      "uid": "35240-e7adf786-a4df-40c2-a0a9-2d60d52b4446"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:15:11.000Z",
+                  "updatedAt": "2026-06-05T15:15:11.000Z",
+                  "uid": "35240-513d3f0e-44dc-414c-95e1-6028608af6cb"
+                }
+              ],
+              "id": "74f64c2c-a370-4b03-9834-d5e7643971d4",
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-74f64c2c-a370-4b03-9834-d5e7643971d4"
+            }
+          ],
+          "id": "cd9f9d1b-1c5d-4dfc-ba16-27407803341e",
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-cd9f9d1b-1c5d-4dfc-ba16-27407803341e"
+        },
+        {
+          "name": "List Custom Field Definitions",
+          "id": "655ca340-f0d4-407c-88d4-fd3d2edaaa13",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/custom_fields?scope=employment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "custom_fields"
+              ],
+              "query": [
+                {
+                  "key": "scope",
+                  "value": "employment"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0ef964cc-ca3f-4539-bb03-f9c870a2bca6",
+              "name": "Custom field definitions.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields?scope=employment",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "employment"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"custom_fields\": [\n      {\n        \"name\": \"<string>\",\n        \"scope\": \"employment\",\n        \"type\": \"number\",\n        \"id\": \"<uuid>\",\n        \"options\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"required\": false,\n        \"description\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"scope\": \"employment\",\n        \"type\": \"multiselect\",\n        \"id\": \"<uuid>\",\n        \"options\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"required\": false,\n        \"description\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-0ef964cc-ca3f-4539-bb03-f9c870a2bca6"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-655ca340-f0d4-407c-88d4-fd3d2edaaa13"
+        },
+        {
+          "name": "Create A Custom Field Definition",
+          "id": "7f2b2484-5f84-4bf1-a666-d746eb1c3986",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"scope\": \"employment\",\n  \"type\": \"enum\",\n  \"id\": \"<uuid>\",\n  \"options\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"required\": false,\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/custom_fields",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "custom_fields"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0ea16992-db55-4640-9482-039e08bc41bc",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"scope\": \"employment\",\n  \"type\": \"enum\",\n  \"id\": \"<uuid>\",\n  \"options\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"required\": false,\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/custom_fields",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "custom_fields"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"custom_field\": {\n      \"name\": \"<string>\",\n      \"scope\": \"employment\",\n      \"type\": \"date\",\n      \"id\": \"<uuid>\",\n      \"options\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"required\": false,\n      \"description\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-0ea16992-db55-4640-9482-039e08bc41bc"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-7f2b2484-5f84-4bf1-a666-d746eb1c3986"
+        }
+      ],
+      "id": "71896a0a-b1af-4acf-838f-94a675d3d8cf",
+      "createdAt": "2026-06-05T15:15:11.000Z",
+      "updatedAt": "2026-06-05T15:15:11.000Z",
+      "uid": "35240-71896a0a-b1af-4acf-838f-94a675d3d8cf"
+    },
+    {
+      "name": "countries",
+      "item": [
+        {
+          "name": "{country_code}",
+          "item": [
+            {
+              "name": "Show A Country",
+              "id": "29ec49ce-8621-44ed-809e-906962693059",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/countries/:country_code",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "countries",
+                    ":country_code"
+                  ],
+                  "variable": [
+                    {
+                      "id": "78072cec-c87b-4ff5-89e5-07e084f55313",
+                      "key": "country_code",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "bb6e866c-45f8-4dbb-9b11-3b33541ce3d4",
+                  "name": "Country.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/countries/:country_code",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "countries",
+                        ":country_code"
+                      ],
+                      "variable": [
+                        {
+                          "key": "country_code"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"country\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"supported_employment_models\": [\n        \"global_payroll\",\n        \"eor\"\n      ],\n      \"has_remote_entity\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:11.000Z",
+                  "updatedAt": "2026-06-05T15:15:11.000Z",
+                  "uid": "35240-bb6e866c-45f8-4dbb-9b11-3b33541ce3d4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-29ec49ce-8621-44ed-809e-906962693059"
+            }
+          ],
+          "id": "8058d469-96b1-441b-a865-3ff929530cf2",
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-8058d469-96b1-441b-a865-3ff929530cf2"
+        },
+        {
+          "name": "List Supported Countries",
+          "id": "7abce2ad-124b-434b-9285-b4de7e470024",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/countries",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "countries"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0d95d413-f7fa-4fb4-a23b-58f8bb50052b",
+              "name": "Countries.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/countries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "countries"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"countries\": [\n      {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"supported_employment_models\": [\n          \"contractor\",\n          \"contractor\"\n        ],\n        \"has_remote_entity\": \"<boolean>\"\n      },\n      {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"supported_employment_models\": [\n          \"global_payroll\",\n          \"peo\"\n        ],\n        \"has_remote_entity\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-0d95d413-f7fa-4fb4-a23b-58f8bb50052b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-7abce2ad-124b-434b-9285-b4de7e470024"
+        }
+      ],
+      "id": "4414d294-6870-44ef-9684-b94481893829",
+      "createdAt": "2026-06-05T15:15:11.000Z",
+      "updatedAt": "2026-06-05T15:15:11.000Z",
+      "uid": "35240-4414d294-6870-44ef-9684-b94481893829"
+    },
+    {
+      "name": "cost_calculator",
+      "item": [
+        {
+          "name": "estimate",
+          "item": [
+            {
+              "name": "Estimate Employment Cost",
+              "id": "7c26dbd4-f1d5-4ff4-9fc5-c2ef3a87290e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country_code\": \"<string>\",\n  \"employment_model\": \"global_payroll\",\n  \"annual_gross_salary\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"include_benefits\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cost_calculator/estimate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cost_calculator",
+                    "estimate"
+                  ]
+                },
+                "description": "Returns the loaded cost of hiring an employee under EOR or Global\nPayroll, including statutory contributions and Remote platform fees.\n"
+              },
+              "response": [
+                {
+                  "id": "c0c2b20e-1c66-41f5-9dcc-d7623707a15e",
+                  "name": "Cost estimate.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"country_code\": \"<string>\",\n  \"employment_model\": \"global_payroll\",\n  \"annual_gross_salary\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"include_benefits\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/cost_calculator/estimate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cost_calculator",
+                        "estimate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"total_annual_cost\": \"<integer>\",\n    \"employer_contributions\": \"<integer>\",\n    \"remote_fee\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"breakdown\": [\n      {\n        \"label\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"recurrence\": \"monthly\"\n      },\n      {\n        \"label\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"recurrence\": \"monthly\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:15:11.000Z",
+                  "updatedAt": "2026-06-05T15:15:11.000Z",
+                  "uid": "35240-c0c2b20e-1c66-41f5-9dcc-d7623707a15e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:15:11.000Z",
+              "updatedAt": "2026-06-05T15:15:11.000Z",
+              "uid": "35240-7c26dbd4-f1d5-4ff4-9fc5-c2ef3a87290e"
+            }
+          ],
+          "id": "400dd826-c3ca-4e40-aaf8-342773dc73ca",
+          "createdAt": "2026-06-05T15:15:11.000Z",
+          "updatedAt": "2026-06-05T15:15:11.000Z",
+          "uid": "35240-400dd826-c3ca-4e40-aaf8-342773dc73ca"
+        }
+      ],
+      "id": "a483dd6e-5416-406e-821f-9f9b593b7b69",
+      "createdAt": "2026-06-05T15:15:11.000Z",
+      "updatedAt": "2026-06-05T15:15:11.000Z",
+      "uid": "35240-a483dd6e-5416-406e-821f-9f9b593b7b69"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/v1"
+    }
+  ]
+}
