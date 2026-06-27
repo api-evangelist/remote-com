@@ -92,7 +92,7 @@ apis:
       - url: json-ld/remote-com-context.jsonld
         type: JSONLD
       - url: examples/remote-create-employment-example.json
-        type: Example
+        type: Examples
   - aid: remote-com:remote-contractors-api
     name: Remote Contractors API
     tags:
@@ -169,7 +169,7 @@ apis:
       - url: json-schema/remote-time-off-schema.json
         type: JSONSchema
       - url: examples/remote-create-timeoff-example.json
-        type: Example
+        type: Examples
   - aid: remote-com:remote-benefits-api
     name: Remote Benefits API
     tags:
@@ -217,7 +217,7 @@ apis:
       - url: openapi/remote-files-api-openapi.yml
         type: OpenAPI
       - url: examples/remote-cost-estimate-example.json
-        type: Example
+        type: Examples
   - aid: remote-com:remote-oauth-api
     name: Remote OAuth 2.0 API
     tags:
@@ -248,7 +248,7 @@ apis:
       - url: openapi/remote-oauth-api-openapi.yml
         type: OpenAPI
       - url: examples/remote-oauth-token-exchange-example.json
-        type: Example
+        type: Examples
   - aid: remote-com:remote-webhooks
     name: Remote Webhooks
     tags:
@@ -273,70 +273,67 @@ apis:
       - url: asyncapi/remote-webhooks-asyncapi.yml
         type: AsyncAPI
       - url: examples/remote-employment-onboarding-completed-webhook-example.json
-        type: Example
+        type: Examples
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/remote/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/remote-com-amend-contract-workflow.yml
-        name: Remote Amend An Employment Contract
-        summary: Submit a contract amendment for an employment and track it to a resolved state.
-      - url: arazzo/remote-com-cancel-time-off-workflow.yml
-        name: Remote Cancel A Time Off Request
-        summary: Find an employment's approved time off request and cancel it.
-      - url: arazzo/remote-com-country-leave-policy-workflow.yml
-        name: Remote Look Up A Country Leave Policy
-        summary: Confirm a country is supported, list its leave policies, and fetch one policy's detail.
-      - url: arazzo/remote-com-create-incentive-workflow.yml
-        name: Remote Create An Incentive
-        summary: Create a bonus or commission incentive for an employment and confirm it.
-      - url: arazzo/remote-com-employee-payslip-workflow.yml
-        name: Remote Retrieve An Employee Payslip
-        summary: Find an active employee by email, list their payslips, and fetch the latest payslip detail.
-      - url: arazzo/remote-com-enroll-employee-benefits-workflow.yml
-        name: Remote Enroll An Employee In Benefits
-        summary: Read the benefit offers schema for an employment, select offers, and upsert the elections.
-      - url: arazzo/remote-com-estimate-and-hire-workflow.yml
-        name: Remote Estimate Cost Then Hire
-        summary: Estimate the loaded cost of a hire, then create the employment once the budget is confirmed.
-      - url: arazzo/remote-com-hire-eor-employee-workflow.yml
-        name: Remote Hire An EOR Employee
-        summary: Create an EOR employment, confirm it, and invite the worker to self-serve onboarding.
-      - url: arazzo/remote-com-offboard-employee-workflow.yml
-        name: Remote Offboard An Employee
-        summary: Submit an offboarding for an employment and confirm it entered review.
-      - url: arazzo/remote-com-onboard-company-workflow.yml
-        name: Remote Onboard A New Company
-        summary: Create a company, then add an initial department and an admin manager under it.
-      - url: arazzo/remote-com-request-time-off-workflow.yml
-        name: Remote Request And Resolve Time Off
-        summary: Create a time off request, confirm it, and approve or decline it.
-      - url: arazzo/remote-com-review-billing-document-workflow.yml
-        name: Remote Review A Billing Document
-        summary: Find the latest issued billing document, confirm it, and pull its line-item breakdown.
-      - url: arazzo/remote-com-review-timesheet-workflow.yml
-        name: Remote Review A Timesheet
-        summary: Find a submitted timesheet for an employment and approve it or send it back.
-      - url: arazzo/remote-com-schedule-contractor-invoices-workflow.yml
-        name: Remote Schedule Recurring Contractor Invoices
-        summary: Bulk-create scheduled contractor invoices, then confirm the first schedule.
-      - url: arazzo/remote-com-screen-contractor-workflow.yml
-        name: Remote Screen A Contractor For Misclassification
-        summary: Run a contractor misclassification check, then act on the recommendation.
-      - url: arazzo/remote-com-submit-expense-workflow.yml
-        name: Remote Submit And Resolve An Expense
-        summary: Create an expense, confirm it, and approve or decline it.
-      - url: arazzo/remote-com-terminate-contractor-workflow.yml
-        name: Remote Terminate A Contractor Of Record Engagement
-        summary: Create a COR termination request, confirm it, and submit the termination.
+  - type: Arazzo
+    url: arazzo/remote-com-amend-contract-workflow.yml
+    name: Remote Amend An Employment Contract
+  - type: Arazzo
+    url: arazzo/remote-com-cancel-time-off-workflow.yml
+    name: Remote Cancel A Time Off Request
+  - type: Arazzo
+    url: arazzo/remote-com-country-leave-policy-workflow.yml
+    name: Remote Look Up A Country Leave Policy
+  - type: Arazzo
+    url: arazzo/remote-com-create-incentive-workflow.yml
+    name: Remote Create An Incentive
+  - type: Arazzo
+    url: arazzo/remote-com-employee-payslip-workflow.yml
+    name: Remote Retrieve An Employee Payslip
+  - type: Arazzo
+    url: arazzo/remote-com-enroll-employee-benefits-workflow.yml
+    name: Remote Enroll An Employee In Benefits
+  - type: Arazzo
+    url: arazzo/remote-com-estimate-and-hire-workflow.yml
+    name: Remote Estimate Cost Then Hire
+  - type: Arazzo
+    url: arazzo/remote-com-hire-eor-employee-workflow.yml
+    name: Remote Hire An EOR Employee
+  - type: Arazzo
+    url: arazzo/remote-com-offboard-employee-workflow.yml
+    name: Remote Offboard An Employee
+  - type: Arazzo
+    url: arazzo/remote-com-onboard-company-workflow.yml
+    name: Remote Onboard A New Company
+  - type: Arazzo
+    url: arazzo/remote-com-request-time-off-workflow.yml
+    name: Remote Request And Resolve Time Off
+  - type: Arazzo
+    url: arazzo/remote-com-review-billing-document-workflow.yml
+    name: Remote Review A Billing Document
+  - type: Arazzo
+    url: arazzo/remote-com-review-timesheet-workflow.yml
+    name: Remote Review A Timesheet
+  - type: Arazzo
+    url: arazzo/remote-com-schedule-contractor-invoices-workflow.yml
+    name: Remote Schedule Recurring Contractor Invoices
+  - type: Arazzo
+    url: arazzo/remote-com-screen-contractor-workflow.yml
+    name: Remote Screen A Contractor For Misclassification
+  - type: Arazzo
+    url: arazzo/remote-com-submit-expense-workflow.yml
+    name: Remote Submit And Resolve An Expense
+  - type: Arazzo
+    url: arazzo/remote-com-terminate-contractor-workflow.yml
+    name: Remote Terminate A Contractor Of Record Engagement
   - url: https://remote.com
-    type: WebSite
+    type: Website
   - url: https://developer.remote.com
     type: DeveloperPortal
   - url: https://developer.remote.com/llms.txt
-    type: LLMSText
+    type: LlmsText
   - url: https://developer.remote.com/docs/changelogs
     type: ChangeLog
   - url: https://remote.com/status
@@ -377,21 +374,21 @@ common:
     type: CLI
     description: Official Remote.com CLI for managing companies and employees from the terminal.
   - url: https://github.com/remoteoss/ai-agent-toolkit
-    type: SDK
+    type: SDKs
     description: '@remoteoss/ai-agent-toolkit — TypeScript library exposing 34+ Remote tools to LangChain and MCP-based AI agents.'
   - url: https://github.com/remoteoss/remote-flows
-    type: SDK
+    type: SDKs
     description: >-
       @remoteoss/remote-flows — React SDK providing embedded employment flows (Cost Calculator, Onboarding, Amendment,
       Termination).
   - url: https://github.com/remoteoss/json-schema-form
-    type: SDK
+    type: SDKs
     description: '@remoteoss/json-schema-form — JavaScript library that renders Remote''s per-country JSON Schema forms.'
   - url: https://github.com/remoteoss/react-url-modal
-    type: SDK
+    type: SDKs
     description: react-url-modal — Remote''s URL-backed modal state library for React.
   - url: https://github.com/remoteoss/remote-for-ai
-    type: Integration
+    type: Integrations
     description: Official Remote-for-AI plugin marketplace (Claude Code, Cursor, Codex, Gemini CLI) shipping the Remote MCP server.
   - url: https://developer.remote.com/docs/introduction-to-remote-mcp
     type: MCP

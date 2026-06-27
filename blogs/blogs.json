@@ -2,20 +2,13 @@
   "repo": "remote-com",
   "feeds": [
     {
-      "source": "https://remote.com/blog/rss.xml",
-      "feed_url": "https://remote.com/blog/rss.xml",
-      "title": "",
-      "saved": 10,
-      "method": "feed"
-    },
-    {
       "source": "https://remote.com/blog",
-      "feed_url": "https://remote.com/blog/rss.xml",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 15,
+  "fetched": "2026-06-27T13:06:16Z",
+  "agent_pulled": "2026-06-27"
 }
