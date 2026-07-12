@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: remote.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 15 07:37:04 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: developer.remote.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  7 04:02:46 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: gateway.remote.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 24 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: remote.com
+  dnssec: false
+  caa:
+  - 0 issuewild "amazontrust.com"
+  - 0 issuewild "godaddy.com"
+  - 0 issuewild "letsencrypt.org"
+  - 0 iodef "mailto:sre-team@remote.com"
+  - 0 issue "amazontrust.com"
+  - 0 issue "godaddy.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

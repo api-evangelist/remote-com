@@ -275,6 +275,14 @@ apis:
       - url: examples/remote-employment-onboarding-completed-webhook-example.json
         type: Examples
 common:
+  - type: TrustCenter
+    url: security/remote-com-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/remote-com-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/remote-com-domain-security.yml
+  - type: Authentication
+    url: authentication/remote-com-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/remote/overview
   - type: Arazzo

@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/remote-benefits-api-openapi.yml, openapi/remote-companies-api-openapi.yml, openapi/remote-contractors-api-openapi.yml,
+  openapi/remote-employments-api-openapi.yml, openapi/remote-files-api-openapi.yml, openapi/remote-payroll-billing-api-openapi.yml,
+  openapi/remote-time-attendance-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/remote-benefits-api-openapi.yml
+  - openapi/remote-companies-api-openapi.yml
+  - openapi/remote-contractors-api-openapi.yml
+  - openapi/remote-employments-api-openapi.yml
+  - openapi/remote-files-api-openapi.yml
+  - openapi/remote-payroll-billing-api-openapi.yml
+  - openapi/remote-time-attendance-api-openapi.yml
