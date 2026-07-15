@@ -275,6 +275,8 @@ apis:
       - url: examples/remote-employment-onboarding-completed-webhook-example.json
         type: Examples
 common:
+  - type: AgenticAccess
+    url: agentic-access/remote-com-agentic-access.yml
   - type: TrustCenter
     url: security/remote-com-trust-center.yml
   - type: VulnerabilityDisclosure
