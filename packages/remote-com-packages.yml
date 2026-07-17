@@ -1,0 +1,59 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs/introduction-to-remote-sdks and the public
+  npm registry (registry.npmjs.org) + the remoteoss GitHub org
+  (https://github.com/remoteoss). All entries verified against the npm registry
+  metadata (name, latest version, repository) at fetch time.
+description: >-
+  First-party Remote.com client libraries, the AI agent toolkit, embedded-flows
+  SDK, form renderer, and CLI. Remote publishes its JavaScript/TypeScript
+  packages under the @remoteoss npm scope; there is no first-party Python, Java,
+  Go, Ruby, PHP, or Rust SDK — non-JS consumers call the REST API directly or
+  generate a client from the OpenAPI.
+packages:
+  - language: typescript
+    registry: npm
+    name: "@remoteoss/remote-flows"
+    url: https://www.npmjs.com/package/@remoteoss/remote-flows
+    source: https://github.com/remoteoss/remote-flows
+    install: npm install @remoteoss/remote-flows
+    latest: 1.42.2
+    official: true
+    note: React SDK for embedded employment flows (Cost Calculator, Onboarding, Contract Amendment, Termination). See components/remote-com-components.yml.
+  - language: typescript
+    registry: npm
+    name: "@remoteoss/ai-agent-toolkit"
+    url: https://www.npmjs.com/package/@remoteoss/ai-agent-toolkit
+    source: https://github.com/remoteoss/ai-agent-toolkit
+    install: npm install @remoteoss/ai-agent-toolkit
+    latest: 0.1.6
+    official: true
+    note: Exposes 34+ Remote tools to LangChain and MCP-based AI agents. Backs the local MCP server (mcp-v0.1.6).
+  - language: javascript
+    registry: npm
+    name: "@remoteoss/json-schema-form"
+    url: https://www.npmjs.com/package/@remoteoss/json-schema-form
+    source: https://github.com/remoteoss/json-schema-form
+    install: npm install @remoteoss/json-schema-form
+    latest: 1.2.14
+    official: true
+    note: Headless UI form renderer that turns Remote's per-country JSON Schema forms into UI.
+  - language: javascript
+    registry: npm
+    name: react-url-modal
+    url: https://www.npmjs.com/package/react-url-modal
+    source: https://github.com/remoteoss/react-url-modal
+    install: npm install react-url-modal
+    latest: 0.5.1
+    official: true
+    note: Remote's URL-backed modal-state library for React (general-purpose OSS, used by remote-flows).
+  - language: shell
+    registry: github-releases
+    name: remotecli
+    url: https://github.com/remoteoss/remote-cli
+    source: https://github.com/remoteoss/remote-cli
+    install: "curl -fsSL https://raw.githubusercontent.com/remoteoss/remote-cli/main/install.sh | sh"
+    latest: v0.1.2
+    official: true
+    note: Shell-based CLI (macOS Apple Silicon + Linux x86_64 binaries). Command surface in cli/remote-com-cli.yml.

@@ -1,0 +1,26 @@
+generated: '2026-06-20'
+method: searched
+source: https://github.com/remoteoss/remote-cli
+description: >-
+  The remotecli command surface — a shell-based CLI over the Remote partner API.
+  The binary itself is catalogued in packages/remote-com-packages.yml; this
+  artifact enumerates its command surface. Ships macOS Apple Silicon and Linux
+  x86_64 binaries. MIT licensed.
+repo: https://github.com/remoteoss/remote-cli
+language: shell
+latest: v0.1.2
+install:
+  script: "curl -fsSL https://raw.githubusercontent.com/remoteoss/remote-cli/main/install.sh | sh"
+  manual: Download the macOS (Apple Silicon) or Linux (x86_64) binary from the latest GitHub release.
+  version_pin: Set the VERSION environment variable before running install.sh.
+commands:
+  - {name: "--version", description: Print the installed remotecli version.}
+  - {name: skills list, description: List the Claude Code skills bundled with the CLI.}
+  - {name: skills install, description: "Install the bundled Claude Code skills into a project. Flags: --project, --dir, --dry-run. Needs no authentication."}
+bundled_skills:
+  - {name: remote-cli, description: Executes HR actions via the binary (e.g. hire someone, list time off, approve expenses).}
+  - {name: remote-api-builder, description: Guides building a custom Remote API client.}
+notes: >-
+  The CLI targets HR/employee-management flows over the Remote partner API
+  (hire, list time off, approve expenses). Authentication for API-backed actions
+  uses the standard Remote OAuth flow; the skills installer itself needs none.

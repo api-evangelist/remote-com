@@ -1,0 +1,35 @@
+generated: '2026-06-20'
+method: derived
+format: remote-error-object
+source: >-
+  Derived from the shared ErrorResponse schema and the BadRequest / Unauthorized
+  / NotFound / TooManyRequests reusable responses referenced by 4xx responses
+  across openapi/*.yml. Remote does NOT use RFC 9457 application/problem+json;
+  every error is returned as application/json with an {errors, message} envelope.
+envelope:
+  media_type: application/json
+  shape: '{ "errors": object, "message": string }'
+  notes: >-
+    `errors` is an object keyed by field/pointer with validation detail
+    (additionalProperties allowed); `message` is a human-readable summary.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: The request was unacceptable — malformed body or failed validation.
+    remediation: Inspect the `errors` object for per-field detail and correct the request payload.
+    response: BadRequest
+  - status: 401
+    title: Unauthorized
+    meaning: Missing, invalid, or expired bearer token / company-scoped access token.
+    remediation: Re-run the OAuth flow (see scopes/remote-com-scopes.yml) or refresh the token.
+    response: Unauthorized
+  - status: 404
+    title: Not Found
+    meaning: The referenced resource (company, employment, contractor, document, etc.) does not exist or is not visible to the token.
+    remediation: Verify the id and that the token is scoped to the owning company.
+    response: NotFound
+  - status: 429
+    title: Too Many Requests
+    meaning: The 300 requests/minute per-company quota was exceeded.
+    remediation: Back off and retry; see rate-limits/remote-com-rate-limits.yml.
+    response: TooManyRequests

@@ -1,0 +1,67 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the object schemas and id-reference fields (company_id,
+  employment_id, manager_id, department_id) and the resource paths across
+  openapi/*.yml, plus the Remote object model in the API reference
+  (developer.remote.com/reference). Company and Employment are the two hub
+  entities: nearly every other resource belongs to an Employment, which in turn
+  belongs to a Company.
+docs: https://developer.remote.com/reference/welcome-to-remote-api
+notation: >-
+  relationships use has_one / has_many / belongs_to with the foreign-key field
+  name; direction is from the entity that owns the reference. All ids are UUIDs
+  (no type prefixes).
+entities:
+  - {name: Company, domain: core, description: A customer company on Remote; the top of the ownership tree and the unit an access token is scoped to.}
+  - {name: LegalEntity, domain: core, description: An in-country legal entity owned by Remote or the company, used for hiring eligibility.}
+  - {name: Manager, domain: core, description: A company manager/admin user.}
+  - {name: Department, domain: core, description: An org-structure department within a company.}
+  - {name: Employment, domain: employment, description: A worker record (EOR, Global Payroll, or PEO); the hub for the worker lifecycle.}
+  - {name: EmploymentContract, domain: employment, description: The contract attached to an employment.}
+  - {name: ContractAmendment, domain: employment, description: A change to an existing employment contract.}
+  - {name: ContractDocument, domain: employment, description: A signable contract document.}
+  - {name: Offboarding, domain: employment, description: An offboarding/termination request for an employment.}
+  - {name: Subscription, domain: contractor, description: A contractor subscription (Standard, Plus, or Contractor-of-Record).}
+  - {name: ContractorInvoice, domain: contractor, description: An invoice raised for a contractor engagement.}
+  - {name: ScheduledInvoice, domain: contractor, description: A recurring/scheduled contractor invoice.}
+  - {name: CorTerminationRequest, domain: contractor, description: A termination request for a Contractor-of-Record engagement.}
+  - {name: BillingDocument, domain: finance, description: An itemized billing document with breakdown and PDF.}
+  - {name: PayrollCalendarEntry, domain: finance, description: A payroll calendar/period entry.}
+  - {name: Incentive, domain: finance, description: A one-time bonus or recurring incentive on an employment.}
+  - {name: Expense, domain: finance, description: An employee expense with approve/decline/reimburse flow.}
+  - {name: Payslip, domain: finance, description: A payslip document for an employment.}
+  - {name: TimeOff, domain: time, description: A time-off/leave request.}
+  - {name: LeavePolicy, domain: time, description: A leave policy applicable to an employment/country.}
+  - {name: Timesheet, domain: time, description: A submitted timesheet.}
+  - {name: BenefitOffer, domain: benefits, description: A localized benefit offer available by country.}
+  - {name: BenefitRenewal, domain: benefits, description: An annual benefit-renewal request/response.}
+  - {name: File, domain: files, description: A file attached to an employment, company, or expense.}
+  - {name: CustomFieldDefinition, domain: files, description: A customer-defined custom field on companies/employments.}
+  - {name: Country, domain: reference, description: A supported country and its employment models.}
+relationships:
+  - {from: Company, to: LegalEntity, kind: has_many, via: company_id}
+  - {from: Company, to: Manager, kind: has_many, via: company_id}
+  - {from: Company, to: Department, kind: has_many, via: company_id}
+  - {from: Company, to: Employment, kind: has_many, via: company_id}
+  - {from: Employment, to: Company, kind: belongs_to, via: company_id}
+  - {from: Employment, to: Department, kind: belongs_to, via: department_id}
+  - {from: Employment, to: EmploymentContract, kind: has_many, via: employment_id}
+  - {from: Employment, to: ContractAmendment, kind: has_many, via: employment_id}
+  - {from: Employment, to: ContractDocument, kind: has_many, via: employment_id}
+  - {from: Employment, to: Offboarding, kind: has_one, via: employment_id}
+  - {from: Employment, to: Incentive, kind: has_many, via: employment_id}
+  - {from: Employment, to: Expense, kind: has_many, via: employment_id}
+  - {from: Employment, to: Payslip, kind: has_many, via: employment_id}
+  - {from: Employment, to: TimeOff, kind: has_many, via: employment_id}
+  - {from: Employment, to: Timesheet, kind: has_many, via: employment_id}
+  - {from: Employment, to: BenefitOffer, kind: has_many, via: employment_id}
+  - {from: Employment, to: BenefitRenewal, kind: has_many, via: employment_id}
+  - {from: Employment, to: File, kind: has_many, via: employment_id}
+  - {from: Employment, to: Subscription, kind: has_many, via: employment_id}
+  - {from: Subscription, to: ContractorInvoice, kind: has_many, via: employment_id}
+  - {from: Subscription, to: ScheduledInvoice, kind: has_many, via: employment_id}
+  - {from: Subscription, to: CorTerminationRequest, kind: has_one, via: employment_id}
+  - {from: Manager, to: Company, kind: belongs_to, via: company_id}
+  - {from: Department, to: Company, kind: belongs_to, via: company_id}
+  - {from: LeavePolicy, to: Country, kind: belongs_to, via: country_code}

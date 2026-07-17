@@ -1,21 +1,61 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/remote-benefits-api-openapi.yml, openapi/remote-companies-api-openapi.yml, openapi/remote-contractors-api-openapi.yml,
-  openapi/remote-employments-api-openapi.yml, openapi/remote-files-api-openapi.yml, openapi/remote-payroll-billing-api-openapi.yml,
-  openapi/remote-time-attendance-api-openapi.yml
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs/authentication,
+  https://developer.remote.com/docs/authorization-code-flow,
+  https://developer.remote.com/docs/client-credentials-flow-for-partners,
+  https://developer.remote.com/docs/authorization-method-oauth-assertion,
+  https://developer.remote.com/docs/refresh-token-flow, upgrading the derived
+  OpenAPI securitySchemes (http bearer JWT) with the documented OAuth 2.0 model.
+docs: https://developer.remote.com/docs/authentication
 summary:
-  types:
-  - http
+  types: [oauth2, http]
+  http_bearer: JWT
+  oauth2_flows: [authorizationCode, clientCredentials, jwt-bearer-assertion, refreshToken]
+description: >-
+  Remote authenticates API calls with OAuth 2.0 bearer tokens (JWT). Resource
+  endpoints present the token as an HTTP bearer (the BearerAuth scheme in every
+  OpenAPI). Tokens are obtained through four flows: authorization code (customer
+  apps and partners, with company consent), client credentials (partners across
+  consented companies), JWT bearer assertion (partners acting for a specific
+  company), and refresh token. A single authorization-request scope,
+  https://gateway.remote.com/company.manage, is combined with a fine-grained
+  read/write permission model (see scopes/). Customers can also mint a Customer
+  API Token in the platform; a Client Token exists for marketing endpoints only.
 schemes:
-- name: BearerAuth
-  type: http
-  scheme: bearer
-  bearerFormat: JWT
-  sources:
-  - openapi/remote-benefits-api-openapi.yml
-  - openapi/remote-companies-api-openapi.yml
-  - openapi/remote-contractors-api-openapi.yml
-  - openapi/remote-employments-api-openapi.yml
-  - openapi/remote-files-api-openapi.yml
-  - openapi/remote-payroll-billing-api-openapi.yml
-  - openapi/remote-time-attendance-api-openapi.yml
+  - name: OAuth2
+    type: oauth2
+    flows:
+      authorizationCode:
+        authorizationUrl: https://gateway.remote.com/auth/oauth2/authorize
+        tokenUrl: https://gateway.remote.com/auth/oauth2/token
+        scopes_ref: scopes/remote-com-scopes.yml
+      clientCredentials:
+        tokenUrl: https://gateway.remote.com/auth/oauth2/token
+      jwtBearerAssertion:
+        grant_type: urn:ietf:params:oauth:grant-type:jwt-bearer
+        tokenUrl: https://gateway.remote.com/auth/oauth2/token
+      refreshToken:
+        tokenUrl: https://gateway.remote.com/auth/oauth2/token
+    sandbox:
+      authorizationUrl: https://gateway.remote-sandbox.com/auth/oauth2/authorize
+      tokenUrl: https://gateway.remote-sandbox.com/auth/oauth2/token
+    docs: https://developer.remote.com/docs/authentication
+  - name: BearerAuth
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    description: The access token from any OAuth flow is presented as an HTTP bearer on resource endpoints.
+    sources:
+      - openapi/remote-benefits-api-openapi.yml
+      - openapi/remote-companies-api-openapi.yml
+      - openapi/remote-contractors-api-openapi.yml
+      - openapi/remote-employments-api-openapi.yml
+      - openapi/remote-files-api-openapi.yml
+      - openapi/remote-payroll-billing-api-openapi.yml
+      - openapi/remote-time-attendance-api-openapi.yml
+token_types:
+  - {name: Company-scoped access token, note: Scoped to a single company; returned on company creation and OAuth authorization.}
+  - {name: Partner token, note: Client-credentials token operating across all companies that granted consent.}
+  - {name: Customer API Token, note: Generated in the Remote platform for user-authenticated requests.}
+  - {name: Client Token, note: Bearer token for marketing endpoints only; excludes sensitive-data access.}

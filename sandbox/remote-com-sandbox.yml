@@ -1,0 +1,37 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs/environment-setup,
+  https://developer.remote.com/docs/authorization-code-flow, and the OpenAPI
+  servers[] blocks. Only values Remote publishes are recorded — Remote does not
+  publish magic test identifiers or seeded fixture values, so none are invented.
+description: >-
+  Remote separates test and production by hostname, not by key prefix. The
+  sandbox is a full demonstration environment used for sales demos, client
+  showcases, and exploratory testing; it receives new features ahead of general
+  release. OAuth scope values are identical between environments.
+modes:
+  - name: sandbox
+    base_url: https://gateway.remote-sandbox.com
+    host: remote-sandbox.com
+    oauth_authorization_url: https://gateway.remote-sandbox.com/auth/oauth2/authorize
+    oauth_token_url: https://gateway.remote-sandbox.com/auth/oauth2/token
+    notes: >-
+      Isolated demonstration/testing environment. Often runs the latest features
+      ahead of production. Credentials/tokens are provisioned per account; Remote
+      does not publish shared test credentials.
+  - name: production
+    base_url: https://gateway.remote.com
+    host: remote.com
+    oauth_authorization_url: https://gateway.remote.com/auth/oauth2/authorize
+    oauth_token_url: https://gateway.remote.com/auth/oauth2/token
+oauth_scope:
+  value: https://gateway.remote.com/company.manage
+  environment_invariant: true
+  notes: The authorization-request scope value does not change when using the sandbox domain.
+test_values:
+  published: false
+  notes: >-
+    Remote does not publish magic test card numbers, test bank accounts, or
+    seeded company/employee fixtures in its public docs; sandbox data is
+    provisioned per account. Nothing fabricated here.

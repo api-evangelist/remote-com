@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: >-
+  https://developer.remote.com/docs/introduction-to-remote-mcp and
+  https://github.com/remoteoss/remote-for-ai. Remote operates an official
+  hosted/remote MCP server for AI agents. Tool families captured from the MCP
+  documentation; the server advertises its exact tool list to clients at
+  connection time via MCP discovery.
+description: >-
+  Remote.com's official MCP server lets MCP-standard AI agents act on Remote
+  data. Authentication is OAuth 2.0 Authorization Code with PKCE through the
+  normal Remote browser sign-in with Dynamic Client Registration — no API keys,
+  client secrets, or scope configuration; the agent inherits the permissions of
+  the signed-in Remote account. Read tools cover the full HR/payroll surface;
+  write tools are limited to employee self-service actions.
+server:
+  name: remote
+  transport: http
+  auth: oauth2
+  oauth:
+    flow: authorization_code_pkce
+    dynamic_client_registration: true
+    notes: Client registers dynamically, sends the user through Remote sign-in, and receives access scoped to that account; nothing to hardcode.
+install:
+  marketplace: https://github.com/remoteoss/remote-for-ai
+  clients: [Claude Desktop, claude.ai, Claude Code, Cursor, Codex, Gemini CLI]
+  local_toolkit:
+    name: "@remoteoss/ai-agent-toolkit"
+    install: npx -y @remoteoss/ai-agent-toolkit
+    source: https://github.com/remoteoss/ai-agent-toolkit
+    note: TypeScript toolkit (34+ tools) exposing the same surface to LangChain and MCP; backs a local/stdio server.
+tool_families:
+  read:
+    - Employment records and employees
+    - Contracts and amendments
+    - Payroll, schedules, and deadlines
+    - Time off and leave policies
+    - Org structure
+    - Legal entities and country requirements
+    - Timesheets, billing, and invoices
+  write:
+    - Submit time off requests
+    - Update personal details and contact info
+    - Create/update career goals and journal notes
+notes: >-
+  Clients discover the concrete tool list automatically at connection time.
+  Governance recommendations for each underlying operation are in
+  agentic-access/remote-com-agentic-access.yml.

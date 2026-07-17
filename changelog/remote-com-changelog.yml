@@ -1,0 +1,47 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs/changelogs (index of changelog locations)
+  plus the public GitHub releases for Remote's first-party SDK components. The
+  dated REST API changelog at developer.remote.com/update/changelog is behind a
+  login wall, so per-release REST entries are not captured verbatim; the SDK
+  component release history below is public and dated.
+docs: https://developer.remote.com/docs/changelogs
+versioning:
+  rest_api:
+    scheme: date-based
+    example_version: '2026-05-22'
+    changelog: https://developer.remote.com/update/changelog
+    detail: lifecycle/remote-com-lifecycle.yml
+  components:
+    scheme: semver
+    changelog: per-repo GitHub releases
+component_releases:
+  - component: "@remoteoss/remote-flows"
+    repo: https://github.com/remoteoss/remote-flows/releases
+    entries:
+      - {version: v1.42.2, date: '2026-07-16'}
+      - {version: v1.42.1, date: '2026-07-08'}
+      - {version: v1.42.0, date: '2026-07-03'}
+      - {version: v1.41.1, date: '2026-06-26'}
+      - {version: v1.41.0, date: '2026-06-24'}
+  - component: "@remoteoss/json-schema-form"
+    repo: https://github.com/remoteoss/json-schema-form/releases
+    entries:
+      - {version: 1.2.14, date: '2026-07-16'}
+      - {version: 1.2.13, date: '2026-06-19'}
+  - component: "@remoteoss/ai-agent-toolkit"
+    repo: https://github.com/remoteoss/ai-agent-toolkit/releases
+    entries:
+      - {version: mcp-v0.1.6, date: '2026-04-27'}
+      - {version: 0.1.5, date: '2025-07-31'}
+  - component: remotecli
+    repo: https://github.com/remoteoss/remote-cli/releases
+    entries:
+      - {version: v0.1.2, date: '2026-07-08'}
+      - {version: v0.1.1, date: '2026-07-07'}
+      - {version: v0.1.0, date: '2026-05-21'}
+notes: >-
+  Recent-window capture only; the live changelogs are the source of truth. A
+  deprecation recorded in the REST API reference (Show Time Off Balance,
+  deprecated Feb 2025) is tracked in lifecycle/remote-com-lifecycle.yml.

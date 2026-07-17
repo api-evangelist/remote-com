@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Remote Payroll and Billing API
+  version: 1.0.0
+extends: openapi/remote-payroll-billing-api-openapi.yml
+generated: '2026-06-20'
+method: generated
+source: openapi/remote-payroll-billing-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      catalog: https://apis.io/remote-com
+      provider: Remote
+      maintainer: Kin Lane <kin@apievangelist.com>
+      artifacts:
+      - apis.yml
+      - authentication/remote-com-authentication.yml
+      - scopes/remote-com-scopes.yml
+      - conventions/remote-com-conventions.yml
+      - errors/remote-com-problem-types.yml
+      - conformance/remote-com-conformance.yml
+      - lifecycle/remote-com-lifecycle.yml
+      - data-model/remote-com-data-model.yml
+      - packages/remote-com-packages.yml
+      - mcp/remote-com-mcp.yml
+      - agentic-access/remote-com-agentic-access.yml
+- target: $.info
+  update:
+    x-apievangelist-rating: 4

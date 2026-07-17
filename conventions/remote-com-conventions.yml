@@ -1,0 +1,76 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs (Authentication, Date and Time Format, Money
+  Format, How JSON Schemas Work, Working with Webhooks, Verifying Webhooks) and
+  derived from openapi/*.yml (pagination params, error schema, security
+  schemes). The cross-cutting request/response conventions that apply to every
+  Remote endpoint.
+description: >-
+  How Remote's REST API behaves across every operation: base URL, authentication
+  style, pagination, JSON Schema localization, money/date formats, error
+  envelope, webhooks/signing, versioning, and rate-limit signaling.
+base_url: https://gateway.remote.com/v1
+sandbox_base_url: https://gateway.remote-sandbox.com/v1
+api_style: REST over HTTPS, JSON request and response bodies (OpenAPI 3.1)
+authentication:
+  scheme: OAuth 2.0 bearer tokens (JWT), company-scoped or partner-scoped
+  flows: [authorization_code, client_credentials, jwt_bearer_assertion, refresh_token]
+  authorization_url: https://gateway.remote.com/auth/oauth2/authorize
+  token_url: https://gateway.remote.com/auth/oauth2/token
+  authorization_scope: https://gateway.remote.com/company.manage
+  docs: https://developer.remote.com/docs/authentication
+  detail: authentication/remote-com-authentication.yml
+  scopes: scopes/remote-com-scopes.yml
+authorization_model:
+  style: fine-grained read/write scopes grouped into 8 categories, documented per endpoint
+  write_implies_read: true
+  detail: scopes/remote-com-scopes.yml
+pagination:
+  style: page-number
+  request_params:
+    page: {type: integer, minimum: 1, default: 1}
+    page_size: {type: integer, minimum: 1, maximum: 100, default: 20}
+  response_fields:
+    data: object wrapping the named collection (e.g. data.companies, data.employments)
+    current_page: current page number
+    total_count: total number of records
+    total_pages: total number of pages
+  docs: https://developer.remote.com/reference/welcome-to-remote-api
+localization:
+  mechanism: JSON Schema forms
+  description: >-
+    Country- and product-specific fields (onboarding, benefits, amendments) are
+    described by per-country JSON Schemas returned from *_schema endpoints and
+    rendered client-side by @remoteoss/json-schema-form.
+  docs: https://developer.remote.com/docs/how-json-schemas-work
+formats:
+  dates:
+    description: ISO 8601 date and datetime formats.
+    docs: https://developer.remote.com/docs/date-and-time-format
+  money:
+    description: Money is represented as an integer amount in minor units plus an ISO 4217 currency code.
+    docs: https://developer.remote.com/docs/money-format
+  country_codes: ISO 3166-1 alpha-3 (e.g. country_code on Address)
+  ids: UUID v4 (no type prefixes)
+error_envelope:
+  media_type: application/json
+  shape: '{ "errors": object, "message": string }'
+  rfc9457: false
+  detail: errors/remote-com-problem-types.yml
+idempotency:
+  supported: false
+  notes: No Idempotency-Key header documented in the OpenAPI or docs.
+webhooks:
+  signing_header: X-Remote-Signature
+  verification: HMAC signature verification against the shared secret.
+  event_count: 90+ event types
+  spec: asyncapi/remote-webhooks-asyncapi.yml
+  docs: https://developer.remote.com/docs/verifying-webhooks
+versioning:
+  scheme: date-based API version
+  detail: lifecycle/remote-com-lifecycle.yml
+rate_limiting:
+  quota: 300 requests / minute per company
+  exceeded_status: 429
+  detail: rate-limits/remote-com-rate-limits.yml

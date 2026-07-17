@@ -1,0 +1,33 @@
+generated: '2026-06-20'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the API gateway
+  host (gateway.remote.com, from apis.yml baseURL and OpenAPI servers[]), the
+  developer portal host (developer.remote.com), and the marketing host
+  (remote.com). Status is the HTTP code observed at fetch time. No document
+  returned a real payload, so no raw files were saved. Remote's OAuth 2.0
+  authorization-server metadata is documented in the API reference rather than
+  published at /.well-known/oauth-authorization-server; see
+  authentication/remote-com-authentication.yml and scopes/remote-com-scopes.yml.
+hosts:
+  - host: https://gateway.remote.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://developer.remote.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://remote.com
+    documents:
+      - {path: /.well-known/security.txt, status: 500}
+      - {path: /.well-known/openid-configuration, status: 500}
+      - {path: /.well-known/oauth-authorization-server, status: 500}
+      - {path: /.well-known/api-catalog, status: 500}
+      - {path: /.well-known/ai-plugin.json, status: 500}

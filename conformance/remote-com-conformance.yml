@@ -1,0 +1,63 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/*.yml (securitySchemes, error schema, page/page_size
+  pagination parameters), asyncapi/remote-webhooks-asyncapi.yml, and Remote's
+  documented compliance claims (https://trust.remote.com,
+  https://developer.remote.com/docs/authentication,
+  https://developer.remote.com/docs/verifying-webhooks). Standards the API is
+  checked against for cross-cutting conformance.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      Remote documents four OAuth 2.0 flows (authorization code, client
+      credentials, JWT bearer assertion, refresh token) with authorize/token
+      endpoints under gateway.remote.com/auth/oauth2/*.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration served; OAuth is used for authorization, not OIDC identity.
+  - id: http-bearer-auth
+    conforms: true
+    evidence: OpenAPI securitySchemes define BearerAuth (http bearer, JWT) across all resource specs.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a Remote envelope {errors, message} with media type
+      application/json, not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Page-based pagination via page / page_size query params; list responses
+      carry data.<collection>, current_page, total_count, total_pages.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header documented in the OpenAPI or docs.
+  - id: webhooks-signed
+    conforms: true
+    evidence: >-
+      Webhooks are signed with X-Remote-Signature (HMAC) and verified per
+      developer.remote.com/docs/verifying-webhooks.
+  - id: asyncapi
+    conforms: true
+    evidence: Webhook event surface is described with AsyncAPI (asyncapi/remote-webhooks-asyncapi.yml).
+  - id: json-schema
+    conforms: true
+    evidence: >-
+      Per-country localization uses JSON Schema forms rendered by
+      @remoteoss/json-schema-form; request/response bodies described with JSON
+      Schema in OpenAPI 3.1.
+  - id: soc2-type2
+    conforms: true
+    evidence: SOC 2 Type 2 attested (trust.remote.com; security/remote-com-trust-center.yml).
+  - id: iso27001
+    conforms: true
+    evidence: ISO/IEC 27001 certified (trust.remote.com; security/remote-com-trust-center.yml).
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      Remote processes global employment PII under GDPR; data-protection terms
+      published at remote.com/legal (trust.remote.com).
+  - id: scim
+    conforms: false
+    evidence: No SCIM 2.0 provisioning endpoints in the OpenAPI (SSO configuration is proprietary).

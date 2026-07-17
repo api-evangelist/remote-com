@@ -1,0 +1,375 @@
+generated: '2026-06-20'
+method: searched
+source: https://developer.remote.com/llms.txt (per-endpoint Scopes tables) + https://developer.remote.com/docs/authorization-code-flow
+docs: https://developer.remote.com/docs/authentication
+notes: Remote uses OAuth 2.0 (authorization code, client credentials, JWT assertion, refresh). The single
+  authorization-request scope is https://gateway.remote.com/company.manage; the value does not change
+  between production and sandbox. Beyond that grant, Remote enforces a fine-grained permission model of
+  read/write scopes grouped into 8 categories, documented per-endpoint in the API reference. Write scopes
+  imply read access for the same resource. These were harvested from the per-endpoint Scopes tables in
+  the published llms.txt.
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://gateway.remote.com/auth/oauth2/authorize
+    tokenUrl: https://gateway.remote.com/auth/oauth2/token
+  - flow: clientCredentials
+    tokenUrl: https://gateway.remote.com/auth/oauth2/token
+  - flow: urn:ietf:params:oauth:grant-type:jwt-bearer
+    tokenUrl: https://gateway.remote.com/auth/oauth2/token
+  sandbox:
+    authorizationUrl: https://gateway.remote-sandbox.com/auth/oauth2/authorize
+    tokenUrl: https://gateway.remote-sandbox.com/auth/oauth2/token
+authorization_scopes:
+- scope: https://gateway.remote.com/company.manage
+  description: Grants an API partner permission to manage a company and its employments. The single scope
+    requested during the OAuth 2.0 authorization flow; unchanged between production and sandbox.
+categories:
+- category: company_admin
+  label: Manage company resources
+- category: company_management
+  label: Manage companies
+- category: employment_documents
+  label: Manage employment documents
+- category: employment_payments
+  label: Manage expenses
+- category: employments
+  label: Manage employments
+- category: invoices
+  label: Manage invoices
+- category: payroll
+  label: Manage payroll runs
+- category: time_and_attendance
+  label: Manage timeoffs
+scopes:
+- scope: address:read
+  description: View addresses
+  category: employments
+  access: read
+- scope: address:write
+  description: Manage addresses
+  category: employments
+  access: write
+  implies_read: true
+- scope: background_check:read
+  description: View background checks
+  category: employments
+  access: read
+- scope: bank_account:read
+  description: View bank accounts
+  category: employments
+  access: read
+- scope: bank_account:write
+  description: Manage bank accounts
+  category: employments
+  access: write
+  implies_read: true
+- scope: benefit_offer:read
+  description: View benefit offers
+  category: company_admin
+  access: read
+- scope: benefit_offer:write
+  description: Manage benefit offers
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: benefit_renewal:read
+  description: View benefit renewals
+  category: company_admin
+  access: read
+- scope: benefit_renewal:write
+  description: Manage benefit renewals
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: company:read
+  description: View companies
+  category: company_admin
+  access: read
+- scope: company:write
+  description: Manage companies
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: company_currencies:read
+  description: View company currencies
+  category: company_admin
+  access: read
+- scope: company_department:read
+  description: View departments
+  category: company_admin
+  access: read
+- scope: company_department:write
+  description: Manage departments
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: company_manager:read
+  description: View managers
+  category: company_admin
+  access: read
+- scope: company_manager:write
+  description: Manage managers
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: company_structure:read
+  description: View company structure
+  category: company_admin
+  access: read
+- scope: contract:read
+  description: View contracts
+  category: employments
+  access: read
+- scope: contract_amendment:read
+  description: View contract amendments
+  category: employments
+  access: read
+- scope: contract_amendment:write
+  description: Manage contract amendments
+  category: employments
+  access: write
+  implies_read: true
+- scope: contract_eligibility:write
+  description: Manage contract eligibility
+  category: employment_documents
+  access: write
+  implies_read: true
+- scope: convert_currency:read
+  description: Convert currencies
+  category: company_admin
+  access: read
+- scope: country:read
+  description: View countries
+  category: company_admin
+  access: read
+- scope: custom_field:read
+  description: View custom fields
+  category: employments
+  access: read
+- scope: custom_field:write
+  description: Manage custom fields
+  category: employments
+  access: write
+  implies_read: true
+- scope: custom_field_value:read
+  description: View custom field values
+  category: employments
+  access: read
+- scope: custom_field_value:write
+  description: Manage custom field values
+  category: employments
+  access: write
+  implies_read: true
+- scope: document:read
+  description: View documents
+  category: employment_documents
+  access: read
+- scope: document:write
+  description: Manage documents
+  category: employment_documents
+  access: write
+  implies_read: true
+- scope: emergency_contact:read
+  description: View emergency contacts
+  category: employments
+  access: read
+- scope: emergency_contact:write
+  description: Manage emergency contacts
+  category: employments
+  access: write
+  implies_read: true
+- scope: employment:read
+  description: View employments
+  category: employments
+  access: read
+- scope: employment:write
+  description: Manage employments
+  category: employments
+  access: write
+  implies_read: true
+- scope: expense:read
+  description: View expenses
+  category: employment_payments
+  access: read
+- scope: expense:write
+  description: Manage expenses
+  category: employment_payments
+  access: write
+  implies_read: true
+- scope: form:read
+  description: View forms
+  category: company_admin
+  access: read
+- scope: help_center_article:read
+  description: View help articles
+  category: company_admin
+  access: read
+- scope: identity_verification:read
+  description: View identity verification
+  category: employment_documents
+  access: read
+- scope: identity_verification:write
+  description: Manage identity verification
+  category: employment_documents
+  access: write
+  implies_read: true
+- scope: incentive:read
+  description: View incentives
+  category: employment_payments
+  access: read
+- scope: incentive:write
+  description: Manage incentives
+  category: employment_payments
+  access: write
+  implies_read: true
+- scope: invoices:read
+  description: View invoices
+  category: invoices
+  access: read
+- scope: invoices:write
+  description: Manage invoices
+  category: invoices
+  access: write
+  implies_read: true
+- scope: magic_link:write
+  description: Create magic links
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: offboarding:read
+  description: View offboarding requests
+  category: employments
+  access: read
+- scope: offboarding:write
+  description: Manage offboarding
+  category: employments
+  access: write
+  implies_read: true
+- scope: onboarding:write
+  description: Manage onboarding
+  category: employments
+  access: write
+  implies_read: true
+- scope: pay_item:read
+  description: View pay items
+  category: payroll
+  access: read
+- scope: pay_item:write
+  description: Manage pay items
+  category: payroll
+  access: write
+  implies_read: true
+- scope: payroll_calendar:read
+  description: View payroll calendars
+  category: payroll
+  access: read
+- scope: payroll_run:read
+  description: View payroll runs
+  category: payroll
+  access: read
+- scope: payslip:read
+  description: View payslips
+  category: employment_documents
+  access: read
+- scope: personal_detail:read
+  description: View personal details
+  category: employments
+  access: read
+- scope: personal_detail:write
+  description: Manage personal details
+  category: employments
+  access: write
+  implies_read: true
+- scope: pricing_plan:read
+  description: View pricing plans
+  category: company_management
+  access: read
+- scope: pricing_plan:write
+  description: Manage pricing plans
+  category: company_management
+  access: write
+  implies_read: true
+- scope: probation_document:read
+  description: View probation documents
+  category: employment_documents
+  access: read
+- scope: probation_document:write
+  description: Manage probation documents
+  category: employment_documents
+  access: write
+  implies_read: true
+- scope: resignation:read
+  description: View resignations
+  category: employments
+  access: read
+- scope: resignation:write
+  description: Manage resignations
+  category: employments
+  access: write
+  implies_read: true
+- scope: resignation_letter:read
+  description: View resignation letters
+  category: employment_documents
+  access: read
+- scope: risk_reserve:write
+  description: Manage risk reserves
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: sso_configuration:read
+  description: View SSO configuration
+  category: company_admin
+  access: read
+- scope: sso_configuration:write
+  description: Manage SSO
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: timeoff:read
+  description: View timeoffs
+  category: time_and_attendance
+  access: read
+- scope: timeoff:write
+  description: Manage timeoffs
+  category: time_and_attendance
+  access: write
+  implies_read: true
+- scope: timesheet:read
+  description: View timesheets
+  category: time_and_attendance
+  access: read
+- scope: timesheet:write
+  description: Manage timesheets
+  category: time_and_attendance
+  access: write
+  implies_read: true
+- scope: travel_letter:read
+  description: View travel letters
+  category: employment_documents
+  access: read
+- scope: travel_letter:write
+  description: Manage travel letters
+  category: employment_documents
+  access: write
+  implies_read: true
+- scope: webhook:read
+  description: View webhooks
+  category: company_admin
+  access: read
+- scope: webhook:write
+  description: Manage webhooks
+  category: company_admin
+  access: write
+  implies_read: true
+- scope: work_authorization:read
+  description: View work authorizations
+  category: employments
+  access: read
+- scope: work_authorization:write
+  description: Manage work authorizations
+  category: employments
+  access: write
+  implies_read: true

@@ -31,7 +31,7 @@ tags:
   - MCP
   - AI Agents
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-06-20'
 apis:
   - aid: remote-com:remote-companies-api
     name: Remote Companies API
@@ -56,6 +56,8 @@ apis:
         type: Documentation
       - url: openapi/remote-companies-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-companies-api-overlay.yaml
+        type: Overlay
       - url: json-schema/remote-company-schema.json
         type: JSONSchema
       - url: json-ld/remote-com-context.jsonld
@@ -87,6 +89,8 @@ apis:
         type: Documentation
       - url: openapi/remote-employments-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-employments-api-overlay.yaml
+        type: Overlay
       - url: json-schema/remote-employment-schema.json
         type: JSONSchema
       - url: json-ld/remote-com-context.jsonld
@@ -115,6 +119,8 @@ apis:
         type: Documentation
       - url: openapi/remote-contractors-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-contractors-api-overlay.yaml
+        type: Overlay
   - aid: remote-com:remote-payroll-billing-api
     name: Remote Payroll and Billing API
     tags:
@@ -141,6 +147,8 @@ apis:
         type: Documentation
       - url: openapi/remote-payroll-billing-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-payroll-billing-api-overlay.yaml
+        type: Overlay
       - url: json-schema/remote-billing-document-schema.json
         type: JSONSchema
   - aid: remote-com:remote-time-attendance-api
@@ -166,6 +174,8 @@ apis:
         type: Documentation
       - url: openapi/remote-time-attendance-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-time-attendance-api-overlay.yaml
+        type: Overlay
       - url: json-schema/remote-time-off-schema.json
         type: JSONSchema
       - url: examples/remote-create-timeoff-example.json
@@ -189,6 +199,8 @@ apis:
         type: Documentation
       - url: openapi/remote-benefits-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-benefits-api-overlay.yaml
+        type: Overlay
   - aid: remote-com:remote-files-and-custom-fields-api
     name: Remote Files and Custom Fields API
     tags:
@@ -216,6 +228,8 @@ apis:
         type: Documentation
       - url: openapi/remote-files-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-files-api-overlay.yaml
+        type: Overlay
       - url: examples/remote-cost-estimate-example.json
         type: Examples
   - aid: remote-com:remote-oauth-api
@@ -247,6 +261,8 @@ apis:
         type: Documentation
       - url: openapi/remote-oauth-api-openapi.yml
         type: OpenAPI
+      - url: overlays/remote-com-oauth-api-overlay.yaml
+        type: Overlay
       - url: examples/remote-oauth-token-exchange-example.json
         type: Examples
   - aid: remote-com:remote-webhooks
@@ -277,6 +293,34 @@ apis:
 common:
   - type: AgenticAccess
     url: agentic-access/remote-com-agentic-access.yml
+  - type: Packages
+    url: packages/remote-com-packages.yml
+  - type: WellKnown
+    url: well-known/remote-com-well-known.yml
+  - type: MCPServer
+    url: mcp/remote-com-mcp.yml
+  - type: LLMsTxt
+    url: llms/remote-com-llms.txt
+  - type: Conformance
+    url: conformance/remote-com-conformance.yml
+  - type: ErrorCatalog
+    url: errors/remote-com-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/remote-com-lifecycle.yml
+  - type: OAuthScopes
+    url: scopes/remote-com-scopes.yml
+  - type: Sandbox
+    url: sandbox/remote-com-sandbox.yml
+  - type: Conventions
+    url: conventions/remote-com-conventions.yml
+  - type: ChangeLog
+    url: changelog/remote-com-changelog.yml
+  - type: CLI
+    url: cli/remote-com-cli.yml
+  - type: Components
+    url: components/remote-com-components.yml
+  - type: DataModel
+    url: data-model/remote-com-data-model.yml
   - type: TrustCenter
     url: security/remote-com-trust-center.yml
   - type: VulnerabilityDisclosure

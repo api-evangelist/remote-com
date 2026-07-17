@@ -1,0 +1,36 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs/changelogs,
+  https://developer.remote.com/docs/authentication, https://remote.com/status,
+  and the OpenAPI info.version fields. Deprecated operations derived from the
+  published API reference (llms.txt).
+versioning:
+  scheme: date-based
+  mechanism: >-
+    The API surface is dated (OpenAPI info.version, e.g. '2026-05-22'). Remote
+    ships changes to the sandbox (remote-sandbox.com) ahead of production; the
+    live REST API changelog is the source of truth for dated releases.
+  docs: https://developer.remote.com/docs/changelogs
+  notes: >-
+    Component SDKs (@remoteoss/remote-flows, @remoteoss/json-schema-form,
+    @remoteoss/ai-agent-toolkit) are versioned independently via semver GitHub
+    releases; the REST API changelog is separate. See
+    changelog/remote-com-changelog.yml.
+deprecation:
+  policy_url: https://developer.remote.com/docs/changelogs
+  sunset_header: false
+  notes: >-
+    Deprecations are announced in the changelog and marked in the API reference
+    (e.g. "Deprecated since February 2025") rather than via RFC 8594
+    Sunset/Deprecation response headers.
+sla:
+  url: https://remote.com/status
+  public_uptime_target: null
+  notes: Remote publishes a public status page but does not publish a numeric uptime SLA for standard accounts.
+status_page: https://remote.com/status
+rate_limits: rate-limits/remote-com-rate-limits.yml
+deprecated_operations:
+  - operation: GET /v1/timeoff-balances/{employment_id} (Show Time Off Balance)
+    superseded_by: List Leave Policies Summary (GET /v1/leave-policies-summary)
+    evidence: API reference — "Deprecated since February 2025 in favour of List Leave Policies Summary endpoint."

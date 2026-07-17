@@ -1,0 +1,33 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.remote.com/docs/remote-flows-sdk,
+  https://developer.remote.com/docs/introduction-to-remote-sdks, and
+  https://github.com/remoteoss/remote-flows. Client-side, embeddable React
+  components — distinct from the server-side/API packages in
+  packages/remote-com-packages.yml.
+description: >-
+  Remote's embeddable UI layer is the Remote Flows React SDK: drop-in employment
+  flows mounted inside a <RemoteFlows> provider that handles auth and token
+  management via a supplied auth() function. Fields are rendered from Remote's
+  per-country JSON Schema forms (via @remoteoss/json-schema-form), styled with
+  Tailwind, and validated with React Hook Form.
+libraries:
+  - {name: "@remoteoss/remote-flows", purpose: React SDK that provides the embedded flows and the RemoteFlows provider. Catalogued in packages/.}
+  - {name: "@remoteoss/json-schema-form", purpose: Renders Remote's per-country JSON Schema forms into UI fields.}
+provider:
+  name: RemoteFlows
+  description: Wrapper component that supplies auth/token management to every embedded flow via an auth() function.
+families:
+  employment_flows:
+    description: Drop-in React flows that embed Remote's hiring and lifecycle operations directly in a partner product.
+    components:
+      - {name: Cost Calculator, id: CostCalculatorFlow, description: "Estimate the loaded annual cost of hiring in any country, with optional benefits and cost breakdown. Sub-components: CostCalculatorForm, CostCalculatorSubmitButton, CostCalculatorResetButton."}
+      - {name: Onboarding, id: OnboardingFlow, description: Embedded employee onboarding flow.}
+      - {name: Contract Amendment, id: AmendmentFlow, description: Embedded flow to amend an existing employment contract.}
+      - {name: Termination, id: TerminationFlow, description: Embedded offboarding/termination flow.}
+notes: >-
+  Component/flow names for Cost Calculator are confirmed in the docs; onboarding,
+  amendment, and termination flows are documented in the SDK overview and
+  apis.yml but their exact export names may vary by SDK version — consult the
+  remote-flows GitHub repo for the current API.
