@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Cost Calculator API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Cost Calculator
+  description: Estimate the loaded cost of hiring in a given country
+paths:
+  /cost_calculator/estimate:
+    post:
+      summary: Estimate Employment Cost
+      description: 'Returns the loaded cost of hiring an employee under EOR or Global
+
+        Payroll, including statutory contributions and Remote platform fees.
+
+        '
+      operationId: estimateEmploymentCost
+      tags:
+      - Cost Calculator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - country_code
+              - employment_model
+              - annual_gross_salary
+              - currency
+              properties:
+                country_code:
+                  type: string
+                employment_model:
+                  type: string
+                  enum:
+                  - global_payroll
+                  - peo
+                  - eor
+                annual_gross_salary:
+                  type: integer
+                currency:
+                  type: string
+                include_benefits:
+                  type: boolean
+                  default: true
+      responses:
+        '200':
+          description: Cost estimate.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      total_annual_cost:
+                        type: integer
+                      employer_contributions:
+                        type: integer
+                      remote_fee:
+                        type: integer
+                      currency:
+                        type: string
+                      breakdown:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            amount:
+                              type: integer
+                            recurrence:
+                              type: string
+                              enum:
+                              - monthly
+                              - annual
+                              - one_time
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

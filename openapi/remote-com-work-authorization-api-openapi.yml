@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Work Authorization API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Work Authorization
+  description: Work authorization (visa / right to work) requests
+paths:
+  /work_authorization_requests:
+    get:
+      summary: List Work Authorization Requests
+      operationId: listWorkAuthorizationRequests
+      tags:
+      - Work Authorization
+      responses:
+        '200':
+          description: Work authorization requests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkAuthorizationRequestList'
+  /work_authorization_requests/{work_authorization_request_id}:
+    parameters:
+    - name: work_authorization_request_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show A Work Authorization Request
+      operationId: showWorkAuthorizationRequest
+      tags:
+      - Work Authorization
+      responses:
+        '200':
+          description: Work authorization request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkAuthorizationRequestEnvelope'
+    patch:
+      summary: Update A Work Authorization Request
+      operationId: updateWorkAuthorizationRequest
+      tags:
+      - Work Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkAuthorizationRequestEnvelope'
+components:
+  schemas:
+    WorkAuthorizationRequestList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            work_authorization_requests:
+              type: array
+              items:
+                $ref: '#/components/schemas/WorkAuthorizationRequest'
+    WorkAuthorizationRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        country_code:
+          type: string
+        status:
+          type: string
+          enum:
+          - requested
+          - approved_by_manager
+          - approved_by_remote
+          - declined_by_manager
+          - declined_by_remote
+          - cancelled
+        visa_type:
+          type: string
+        target_start_date:
+          type: string
+          format: date
+    WorkAuthorizationRequestEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            work_authorization_request:
+              $ref: '#/components/schemas/WorkAuthorizationRequest'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

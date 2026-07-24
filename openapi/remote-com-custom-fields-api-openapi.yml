@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Custom Fields API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Custom Fields
+  description: Customer-defined fields on companies and employments
+paths:
+  /custom_fields:
+    get:
+      summary: List Custom Field Definitions
+      operationId: listCustomFieldDefinitions
+      tags:
+      - Custom Fields
+      parameters:
+      - name: scope
+        in: query
+        schema:
+          type: string
+          enum:
+          - company
+          - employment
+      responses:
+        '200':
+          description: Custom field definitions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      custom_fields:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CustomFieldDefinition'
+    post:
+      summary: Create A Custom Field Definition
+      operationId: createCustomFieldDefinition
+      tags:
+      - Custom Fields
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFieldDefinition'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      custom_field:
+                        $ref: '#/components/schemas/CustomFieldDefinition'
+  /custom_fields/{custom_field_id}/values:
+    parameters:
+    - name: custom_field_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: List Custom Field Values
+      operationId: listCustomFieldValues
+      tags:
+      - Custom Fields
+      parameters:
+      - name: subject_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Values.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      values:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CustomFieldValue'
+    put:
+      summary: Upsert A Custom Field Value
+      operationId: upsertCustomFieldValue
+      tags:
+      - Custom Fields
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFieldValue'
+      responses:
+        '200':
+          description: Upserted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      value:
+                        $ref: '#/components/schemas/CustomFieldValue'
+components:
+  schemas:
+    CustomFieldDefinition:
+      type: object
+      required:
+      - name
+      - scope
+      - type
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        scope:
+          type: string
+          enum:
+          - company
+          - employment
+        type:
+          type: string
+          enum:
+          - string
+          - number
+          - boolean
+          - date
+          - enum
+          - multiselect
+        options:
+          type: array
+          items:
+            type: string
+          description: For enum/multiselect types.
+        required:
+          type: boolean
+          default: false
+        description:
+          type: string
+    CustomFieldValue:
+      type: object
+      required:
+      - subject_id
+      - value
+      properties:
+        id:
+          type: string
+          format: uuid
+        custom_field_id:
+          type: string
+          format: uuid
+        subject_id:
+          type: string
+          format: uuid
+        value:
+          oneOf:
+          - type: string
+          - type: number
+          - type: boolean
+          - type: array
+            items:
+              type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

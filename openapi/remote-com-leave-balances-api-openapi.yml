@@ -1,0 +1,75 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Leave Balances API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Leave Balances
+  description: Per-employee leave balances
+paths:
+  /leave_balances:
+    get:
+      summary: List Leave Balances
+      operationId: listLeaveBalances
+      tags:
+      - Leave Balances
+      parameters:
+      - name: employment_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Leave balances for the employment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      leave_balances:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            leave_type:
+                              type: string
+                            remaining_days:
+                              type: number
+                            used_days:
+                              type: number
+                            accrued_days:
+                              type: number
+                            unit:
+                              type: string
+                              enum:
+                              - days
+                              - hours
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

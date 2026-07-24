@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Billing Documents API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Billing Documents
+  description: Customer-facing invoices and statements
+paths:
+  /billing_documents:
+    get:
+      summary: List Billing Documents
+      operationId: listBillingDocuments
+      tags:
+      - Billing Documents
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - issued
+          - paid
+          - overdue
+          - void
+      - name: period
+        in: query
+        schema:
+          type: string
+          description: YYYY-MM
+      responses:
+        '200':
+          description: Billing documents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingDocumentList'
+  /billing_documents/{billing_document_id}:
+    parameters:
+    - name: billing_document_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show A Billing Document
+      operationId: showBillingDocument
+      tags:
+      - Billing Documents
+      responses:
+        '200':
+          description: Billing document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingDocumentEnvelope'
+  /billing_documents/{billing_document_id}/breakdown:
+    parameters:
+    - name: billing_document_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Get Billing Document Breakdown
+      operationId: getBillingDocumentBreakdown
+      tags:
+      - Billing Documents
+      responses:
+        '200':
+          description: Line-item breakdown.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /billing_documents/{billing_document_id}/pdf:
+    parameters:
+    - name: billing_document_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Download Billing Document PDF
+      operationId: downloadBillingDocumentPdf
+      tags:
+      - Billing Documents
+      responses:
+        '200':
+          description: PDF binary.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    BillingDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+        status:
+          type: string
+          enum:
+          - issued
+          - paid
+          - overdue
+          - void
+        amount:
+          type: integer
+          description: Amount in smallest currency unit.
+        currency:
+          type: string
+        issued_at:
+          type: string
+          format: date-time
+        due_at:
+          type: string
+          format: date-time
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        type:
+          type: string
+          enum:
+          - eor_invoice
+          - payroll_fee_invoice
+          - contractor_invoice
+          - reserve_invoice
+    BillingDocumentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            billing_documents:
+              type: array
+              items:
+                $ref: '#/components/schemas/BillingDocument'
+    BillingDocumentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            billing_document:
+              $ref: '#/components/schemas/BillingDocument'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Onboarding API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Onboarding
+  description: Drive employee onboarding flows
+paths:
+  /employments/{employment_id}/invite:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Invite An Employment To Self-Serve Onboarding
+      operationId: inviteEmployment
+      tags:
+      - Onboarding
+      responses:
+        '202':
+          description: Invitation sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEnvelope'
+  /employments/{employment_id}/eligibility:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Create An Eligibility Questionnaire
+      operationId: createEligibilityQuestionnaire
+      tags:
+      - Onboarding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Eligibility questionnaire created.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /employments/{employment_id}/eligibility/{questionnaire_id}:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    - name: questionnaire_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show An Eligibility Questionnaire
+      operationId: showEligibilityQuestionnaire
+      tags:
+      - Onboarding
+      responses:
+        '200':
+          description: Questionnaire.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /eor_hiring/risk_reserve/proof_of_payment:
+    post:
+      summary: Submit Risk Reserve Proof Of Payment
+      operationId: submitRiskReserveProofOfPayment
+      tags:
+      - Onboarding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '202':
+          description: Accepted.
+components:
+  schemas:
+    EmploymentStatus:
+      type: string
+      enum:
+      - created
+      - invited
+      - initiated
+      - pending
+      - active
+      - probation
+      - offboarding_initiated
+      - offboarded
+      - archived
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+      - employment_creation
+      - onboarding
+      - reserve_invoice
+      - probation
+      - active
+      - offboarding
+      - archived
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment:
+              $ref: '#/components/schemas/Employment'
+    Employment:
+      type: object
+      required:
+      - id
+      - status
+      - employment_type
+      properties:
+        id:
+          type: string
+          format: uuid
+        company_id:
+          type: string
+          format: uuid
+        external_id:
+          type: string
+          nullable: true
+        full_name:
+          type: string
+        personal_email:
+          type: string
+          format: email
+        work_email:
+          type: string
+          format: email
+          nullable: true
+        country:
+          type: object
+          properties:
+            code:
+              type: string
+            name:
+              type: string
+        employment_type:
+          type: string
+          enum:
+          - employee
+          - contractor
+          - director
+        employment_model:
+          type: string
+          enum:
+          - global_payroll
+          - peo
+          - eor
+        status:
+          $ref: '#/components/schemas/EmploymentStatus'
+        lifecycle_stage:
+          $ref: '#/components/schemas/EmploymentLifecycleStage'
+        job_title:
+          type: string
+        manager_id:
+          type: string
+          format: uuid
+          nullable: true
+        department_id:
+          type: string
+          format: uuid
+          nullable: true
+        start_date:
+          type: string
+          format: date
+        provisional_start_date:
+          type: string
+          format: date
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

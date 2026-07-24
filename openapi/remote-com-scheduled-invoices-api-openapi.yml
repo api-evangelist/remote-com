@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Scheduled Invoices API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Scheduled Invoices
+  description: Schedule recurring contractor invoices
+paths:
+  /scheduled_contractor_invoices:
+    get:
+      summary: List Scheduled Contractor Invoices
+      operationId: listScheduledContractorInvoices
+      tags:
+      - Scheduled Invoices
+      responses:
+        '200':
+          description: Scheduled invoices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledInvoiceList'
+  /scheduled_contractor_invoices/bulk:
+    post:
+      summary: Bulk Create Scheduled Contractor Invoices
+      operationId: bulkCreateScheduledContractorInvoices
+      tags:
+      - Scheduled Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scheduled_contractor_invoices:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ScheduledInvoiceCreate'
+      responses:
+        '201':
+          description: Scheduled invoices created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledInvoiceList'
+  /scheduled_contractor_invoices/{scheduled_invoice_id}:
+    parameters:
+    - name: scheduled_invoice_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show A Scheduled Contractor Invoice
+      operationId: showScheduledContractorInvoice
+      tags:
+      - Scheduled Invoices
+      responses:
+        '200':
+          description: Scheduled invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledInvoiceEnvelope'
+    patch:
+      summary: Update A Scheduled Contractor Invoice
+      operationId: updateScheduledContractorInvoice
+      tags:
+      - Scheduled Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduledInvoiceCreate'
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledInvoiceEnvelope'
+components:
+  schemas:
+    ScheduledInvoiceCreate:
+      type: object
+      required:
+      - employment_id
+      - amount
+      - currency
+      - recurrence
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        amount:
+          type: integer
+        currency:
+          type: string
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - weekly
+          - biweekly
+          - monthly
+        starts_on:
+          type: string
+          format: date
+        ends_on:
+          type: string
+          format: date
+        description:
+          type: string
+    ScheduledInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        amount:
+          type: integer
+        currency:
+          type: string
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - weekly
+          - biweekly
+          - monthly
+        next_run_at:
+          type: string
+          format: date-time
+    ScheduledInvoiceList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            scheduled_contractor_invoices:
+              type: array
+              items:
+                $ref: '#/components/schemas/ScheduledInvoice'
+    ScheduledInvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            scheduled_contractor_invoice:
+              $ref: '#/components/schemas/ScheduledInvoice'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

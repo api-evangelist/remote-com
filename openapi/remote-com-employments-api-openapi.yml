@@ -1,0 +1,421 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Employments API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Employments
+  description: Create, read, update, and invite employment records
+paths:
+  /employments:
+    get:
+      summary: List Employments
+      description: List all non-deleted employments for the company, with filtering.
+      operationId: listEmployments
+      tags:
+      - Employments
+      parameters:
+      - name: company_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: email
+        in: query
+        schema:
+          type: string
+          format: email
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/EmploymentStatus'
+      - name: employment_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - employee
+          - contractor
+          - director
+      - name: employment_model
+        in: query
+        schema:
+          type: string
+          enum:
+          - global_payroll
+          - peo
+          - eor
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: A page of employments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    post:
+      summary: Create An Employment
+      description: 'Create a new employment. Required fields depend on the employment
+
+        model (EOR vs. Global Payroll vs. PEO) and the country. Use
+
+        `/forms/employment` to fetch the per-country JSON Schema form.
+
+        '
+      operationId: createEmployment
+      tags:
+      - Employments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmploymentCreateRequest'
+      responses:
+        '201':
+          description: Employment created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /employments/{employment_id}:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Show An Employment
+      operationId: showEmployment
+      tags:
+      - Employments
+      responses:
+        '200':
+          description: Employment record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEnvelope'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update An Employment
+      operationId: updateEmployment
+      tags:
+      - Employments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmploymentUpdateRequest'
+      responses:
+        '200':
+          description: Employment updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEnvelope'
+  /employments/{employment_id}/invite:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Invite An Employment To Self-Serve Onboarding
+      operationId: inviteEmployment
+      tags:
+      - Employments
+      responses:
+        '202':
+          description: Invitation sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEnvelope'
+  /employments/{employment_id}/administrative_details:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Show Administrative Details
+      operationId: showAdministrativeDetails
+      tags:
+      - Employments
+      responses:
+        '200':
+          description: Administrative details.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    put:
+      summary: Update Administrative Details
+      operationId: updateAdministrativeDetails
+      tags:
+      - Employments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    EmploymentStatus:
+      type: string
+      enum:
+      - created
+      - invited
+      - initiated
+      - pending
+      - active
+      - probation
+      - offboarding_initiated
+      - offboarded
+      - archived
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+      - employment_creation
+      - onboarding
+      - reserve_invoice
+      - probation
+      - active
+      - offboarding
+      - archived
+    EmploymentUpdateRequest:
+      type: object
+      properties:
+        full_name:
+          type: string
+        work_email:
+          type: string
+          format: email
+        manager_id:
+          type: string
+          format: uuid
+        department_id:
+          type: string
+          format: uuid
+        job_title:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+    EmploymentCreateRequest:
+      type: object
+      required:
+      - full_name
+      - country_code
+      - personal_email
+      - employment_type
+      properties:
+        full_name:
+          type: string
+        country_code:
+          type: string
+        personal_email:
+          type: string
+          format: email
+        employment_type:
+          type: string
+          enum:
+          - employee
+          - contractor
+          - director
+        employment_model:
+          type: string
+          enum:
+          - global_payroll
+          - peo
+          - eor
+          default: eor
+        provisional_start_date:
+          type: string
+          format: date
+        job_title:
+          type: string
+        external_id:
+          type: string
+        invite_user:
+          type: boolean
+          default: false
+    EmploymentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Employment'
+            current_page:
+              type: integer
+            total_count:
+              type: integer
+            total_pages:
+              type: integer
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment:
+              $ref: '#/components/schemas/Employment'
+    Employment:
+      type: object
+      required:
+      - id
+      - status
+      - employment_type
+      properties:
+        id:
+          type: string
+          format: uuid
+        company_id:
+          type: string
+          format: uuid
+        external_id:
+          type: string
+          nullable: true
+        full_name:
+          type: string
+        personal_email:
+          type: string
+          format: email
+        work_email:
+          type: string
+          format: email
+          nullable: true
+        country:
+          type: object
+          properties:
+            code:
+              type: string
+            name:
+              type: string
+        employment_type:
+          type: string
+          enum:
+          - employee
+          - contractor
+          - director
+        employment_model:
+          type: string
+          enum:
+          - global_payroll
+          - peo
+          - eor
+        status:
+          $ref: '#/components/schemas/EmploymentStatus'
+        lifecycle_stage:
+          $ref: '#/components/schemas/EmploymentLifecycleStage'
+        job_title:
+          type: string
+        manager_id:
+          type: string
+          format: uuid
+          nullable: true
+        department_id:
+          type: string
+          format: uuid
+          nullable: true
+        start_date:
+          type: string
+          format: date
+        provisional_start_date:
+          type: string
+          format: date
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

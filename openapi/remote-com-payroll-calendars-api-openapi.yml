@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Payroll Calendars API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Payroll Calendars
+  description: Inspect payroll calendars for company, EOR, and Global Payroll
+paths:
+  /payroll/calendars:
+    get:
+      summary: List Payroll Calendar
+      operationId: listPayrollCalendar
+      tags:
+      - Payroll Calendars
+      parameters:
+      - name: starts_after
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: ends_before
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Calendar entries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollCalendarList'
+  /payroll/calendars/company:
+    get:
+      summary: List Company Payroll Calendar
+      operationId: listCompanyPayrollCalendar
+      tags:
+      - Payroll Calendars
+      responses:
+        '200':
+          description: Calendar entries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollCalendarList'
+  /payroll/calendars/eor:
+    get:
+      summary: List EOR Payroll Calendar
+      operationId: listEorPayrollCalendar
+      tags:
+      - Payroll Calendars
+      responses:
+        '200':
+          description: Calendar entries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollCalendarList'
+components:
+  schemas:
+    PayrollCalendarEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        scope:
+          type: string
+          enum:
+          - company
+          - eor
+          - global_payroll
+        country_code:
+          type: string
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        cutoff_date:
+          type: string
+          format: date
+        payday:
+          type: string
+          format: date
+        currency:
+          type: string
+    PayrollCalendarList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payroll_calendars:
+              type: array
+              items:
+                $ref: '#/components/schemas/PayrollCalendarEntry'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

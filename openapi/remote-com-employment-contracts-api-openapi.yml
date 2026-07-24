@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Employment Contracts API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Employment Contracts
+  description: View active and pending employment contracts
+paths:
+  /employments/{employment_id}/contracts:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: List Employment Contracts
+      operationId: listEmploymentContracts
+      tags:
+      - Employment Contracts
+      responses:
+        '200':
+          description: Contracts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentContractList'
+  /employments/{employment_id}/contracts/pending_changes:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Get Pending Contract Changes
+      operationId: getPendingContractChanges
+      tags:
+      - Employment Contracts
+      responses:
+        '200':
+          description: Pending changes.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    EmploymentContract:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - draft
+          - pending_signature
+          - active
+          - terminated
+        contract_type:
+          type: string
+          enum:
+          - indefinite
+          - fixed_term
+        currency_code:
+          type: string
+        annual_gross_salary:
+          type: integer
+          description: Amount in smallest currency unit.
+        weekly_hours:
+          type: number
+    EmploymentContractList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment_contracts:
+              type: array
+              items:
+                $ref: '#/components/schemas/EmploymentContract'
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

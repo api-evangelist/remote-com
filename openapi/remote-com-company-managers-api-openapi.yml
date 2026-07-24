@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Company Managers API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Company Managers
+  description: Manage administrators and managers within a company
+paths:
+  /companies/{company_id}/managers:
+    parameters:
+    - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: List Company Managers
+      operationId: listCompanyManagers
+      tags:
+      - Company Managers
+      responses:
+        '200':
+          description: Managers list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagerList'
+    post:
+      summary: Create A Company Manager
+      operationId: createCompanyManager
+      tags:
+      - Company Managers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManagerCreateRequest'
+      responses:
+        '201':
+          description: Manager created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagerEnvelope'
+  /companies/{company_id}/managers/{manager_id}:
+    parameters:
+    - $ref: '#/components/parameters/CompanyIdPath'
+    - $ref: '#/components/parameters/ManagerIdPath'
+    get:
+      summary: Show A Company Manager
+      operationId: showCompanyManager
+      tags:
+      - Company Managers
+      responses:
+        '200':
+          description: Manager record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagerEnvelope'
+    delete:
+      summary: Delete A Company Manager
+      operationId: deleteCompanyManager
+      tags:
+      - Company Managers
+      responses:
+        '204':
+          description: Manager deleted.
+components:
+  parameters:
+    CompanyIdPath:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ManagerIdPath:
+      name: manager_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Manager:
+      type: object
+      required:
+      - id
+      - email
+      - role
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - manager
+          - people_manager
+          - finance_admin
+          - owner
+        status:
+          type: string
+          enum:
+          - invited
+          - active
+          - deactivated
+    ManagerEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            manager:
+              $ref: '#/components/schemas/Manager'
+    ManagerList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company_managers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Manager'
+    ManagerCreateRequest:
+      type: object
+      required:
+      - email
+      - role
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - manager
+          - people_manager
+          - finance_admin
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

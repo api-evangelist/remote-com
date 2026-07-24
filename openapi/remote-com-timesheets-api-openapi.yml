@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Timesheets API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Timesheets
+  description: Hourly and salaried timesheets
+paths:
+  /timesheets:
+    get:
+      summary: List Timesheets
+      operationId: listTimesheets
+      tags:
+      - Timesheets
+      parameters:
+      - name: employment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - submitted
+          - approved
+          - sent_back
+      - name: period_start
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Timesheets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetList'
+  /timesheets/{timesheet_id}:
+    parameters:
+    - name: timesheet_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show A Timesheet
+      operationId: showTimesheet
+      tags:
+      - Timesheets
+      responses:
+        '200':
+          description: Timesheet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetEnvelope'
+  /timesheets/{timesheet_id}/approve:
+    parameters:
+    - name: timesheet_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      summary: Approve A Timesheet
+      operationId: approveTimesheet
+      tags:
+      - Timesheets
+      responses:
+        '200':
+          description: Approved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetEnvelope'
+  /timesheets/{timesheet_id}/send_back:
+    parameters:
+    - name: timesheet_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      summary: Send A Timesheet Back For Revision
+      operationId: sendTimesheetBack
+      tags:
+      - Timesheets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - reason
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Sent back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetEnvelope'
+components:
+  schemas:
+    Timesheet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - draft
+          - submitted
+          - approved
+          - sent_back
+        total_hours:
+          type: number
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              hours:
+                type: number
+              notes:
+                type: string
+    TimesheetEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/Timesheet'
+    TimesheetList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timesheets:
+              type: array
+              items:
+                $ref: '#/components/schemas/Timesheet'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

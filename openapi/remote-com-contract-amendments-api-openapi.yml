@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Contract Amendments API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Contract Amendments
+  description: Submit and track contract amendments
+paths:
+  /contract_amendments:
+    get:
+      summary: List Contract Amendments
+      operationId: listContractAmendments
+      tags:
+      - Contract Amendments
+      parameters:
+      - name: employment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - submitted
+          - review_started
+          - done
+          - canceled
+          - deleted
+      responses:
+        '200':
+          description: Contract amendments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentList'
+    post:
+      summary: Create A Contract Amendment
+      operationId: createContractAmendment
+      tags:
+      - Contract Amendments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractAmendmentCreateRequest'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentEnvelope'
+  /contract_amendments/automatable:
+    post:
+      summary: Submit An Automatable Contract Amendment
+      description: 'Automatable amendments use a structured payload that Remote can
+
+        approve without manual review. Use the `/contract_amendments/schema`
+
+        endpoint to learn the per-country form requirements.
+
+        '
+      operationId: createAutomatableContractAmendment
+      tags:
+      - Contract Amendments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentEnvelope'
+  /contract_amendments/{contract_amendment_id}:
+    parameters:
+    - name: contract_amendment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show A Contract Amendment
+      operationId: showContractAmendment
+      tags:
+      - Contract Amendments
+      responses:
+        '200':
+          description: Amendment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentEnvelope'
+  /contract_amendments/schema:
+    get:
+      summary: Show A Contract Amendment Schema
+      description: Returns the JSON Schema form definition for amendments in a given country and employment.
+      operationId: showContractAmendmentSchema
+      tags:
+      - Contract Amendments
+      parameters:
+      - name: employment_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    ContractAmendmentCreateRequest:
+      type: object
+      required:
+      - employment_id
+      - effective_date
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        effective_date:
+          type: string
+          format: date
+        amendment_data:
+          type: object
+          additionalProperties: true
+    ContractAmendmentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendment:
+              $ref: '#/components/schemas/ContractAmendment'
+    ContractAmendment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - draft
+          - submitted
+          - review_started
+          - done
+          - canceled
+          - deleted
+        effective_date:
+          type: string
+          format: date
+        amendment_data:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+    ContractAmendmentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendments:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContractAmendment'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

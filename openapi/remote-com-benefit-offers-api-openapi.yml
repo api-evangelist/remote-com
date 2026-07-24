@@ -1,0 +1,189 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Benefit Offers
+  description: Country and employment benefit offers
+paths:
+  /benefit_offers:
+    get:
+      summary: List Benefit Offers
+      description: List benefit offers grouped by country.
+      operationId: listBenefitOffers
+      tags:
+      - Benefit Offers
+      parameters:
+      - name: country_code
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Benefit offers by country.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitOfferCountrySummary'
+  /benefit_offers/by_employment:
+    get:
+      summary: List Benefit Offers By Employment
+      operationId: listBenefitOffersByEmployment
+      tags:
+      - Benefit Offers
+      parameters:
+      - name: employment_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Benefit offers for the employment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitOfferList'
+  /benefit_offers/{employment_id}:
+    parameters:
+    - name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Get Employment Benefit Offers
+      operationId: getEmploymentBenefitOffers
+      tags:
+      - Benefit Offers
+      responses:
+        '200':
+          description: Benefit offers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitOfferList'
+    put:
+      summary: Upsert Employment Benefit Offers
+      operationId: upsertEmploymentBenefitOffers
+      tags:
+      - Benefit Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Upserted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitOfferList'
+  /benefit_offers/{employment_id}/schema:
+    parameters:
+    - name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Get Employment Benefit Offers JSON Schema
+      operationId: getEmploymentBenefitOffersSchema
+      tags:
+      - Benefit Offers
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    BenefitOffer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        country_code:
+          type: string
+        name:
+          type: string
+        provider:
+          type: string
+        tier:
+          type: string
+          enum:
+          - basic
+          - standard
+          - premium
+        monthly_cost:
+          type: integer
+          description: Cost in smallest currency unit.
+        currency:
+          type: string
+        coverage_summary:
+          type: string
+    BenefitOfferCountrySummary:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            countries:
+              type: array
+              items:
+                type: object
+                properties:
+                  country_code:
+                    type: string
+                  benefit_offers_count:
+                    type: integer
+                  has_health:
+                    type: boolean
+                  has_dental:
+                    type: boolean
+                  has_pension:
+                    type: boolean
+    BenefitOfferList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            benefit_offers:
+              type: array
+              items:
+                $ref: '#/components/schemas/BenefitOffer'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

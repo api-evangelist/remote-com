@@ -1,0 +1,163 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers OAuth API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: OAuth
+  description: OAuth 2.0 authorization endpoints
+paths:
+  /oauth/authorize:
+    get:
+      summary: Authorize A Company
+      description: 'Redirect the company admin to this endpoint to grant access. Remote
+
+        returns an authorization code to the partner''s `redirect_uri` that
+
+        can then be exchanged at `/oauth2/token` for a company-scoped
+
+        access token.
+
+        '
+      operationId: authorize
+      tags:
+      - OAuth
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: response_type
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - code
+      - name: redirect_uri
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+      - name: scope
+        in: query
+        schema:
+          type: string
+          description: Space-separated scope list.
+      - name: state
+        in: query
+        schema:
+          type: string
+      responses:
+        '302':
+          description: Redirect to the partner's `redirect_uri` with `code` and `state`.
+  /oauth2/token:
+    post:
+      summary: Exchange OAuth 2.0 Token
+      description: 'Exchange tokens for Authorization Code, Client Credentials,
+
+        Assertion, and Refresh Token flows.
+
+        '
+      operationId: exchangeOAuthToken
+      tags:
+      - OAuth
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - authorization_code
+                  - client_credentials
+                  - refresh_token
+                  - urn:ietf:params:oauth:grant-type:jwt-bearer
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                code:
+                  type: string
+                redirect_uri:
+                  type: string
+                  format: uri
+                refresh_token:
+                  type: string
+                assertion:
+                  type: string
+                  description: Signed JWT assertion.
+                scope:
+                  type: string
+      responses:
+        '200':
+          description: Access token.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - access_token
+                - token_type
+                - expires_in
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    enum:
+                    - bearer
+                  expires_in:
+                    type: integer
+                    description: Seconds until expiration.
+                  refresh_token:
+                    type: string
+                  scope:
+                    type: string
+                  company_id:
+                    type: string
+                    format: uuid
+                    description: Present on company-scoped tokens.
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

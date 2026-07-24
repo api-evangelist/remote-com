@@ -1,0 +1,402 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Companies API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Companies
+  description: Create, retrieve, and update company records
+paths:
+  /companies:
+    get:
+      summary: List Companies
+      description: List companies accessible to the current partner or customer access token.
+      operationId: listCompanies
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/PageQuery'
+      - $ref: '#/components/parameters/PageSizeQuery'
+      responses:
+        '200':
+          description: A page of companies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    post:
+      summary: Create A Company
+      description: 'Create a new company on Remote. Returns the company resource together
+
+        with a company-scoped access token that the partner/customer may use
+
+        to call subsequent endpoints on the new company''s behalf.
+
+        '
+      operationId: createCompany
+      tags:
+      - Companies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyCreateRequest'
+      responses:
+        '201':
+          description: Company created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /companies/{company_id}:
+    parameters:
+    - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: Show A Company
+      description: Retrieve a company by id.
+      operationId: showCompany
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: Company record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyEnvelope'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update A Company
+      description: Update fields on an existing company.
+      operationId: updateCompany
+      tags:
+      - Companies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyUpdateRequest'
+      responses:
+        '200':
+          description: Company updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies/{company_id}/legal_entities:
+    parameters:
+    - $ref: '#/components/parameters/CompanyIdPath'
+    get:
+      summary: List Company Legal Entities
+      description: List the legal entities under which the company hires.
+      operationId: listCompanyLegalEntities
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: Legal entities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalEntityList'
+  /forms/{form_type}:
+    parameters:
+    - name: form_type
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - company
+        - employment
+        - contract_amendment
+        - benefit_offer
+        - benefit_renewal_request
+        - offboarding
+        - expense
+    get:
+      summary: Show A JSON Schema Form
+      description: Returns the JSON Schema form definition used by Remote to collect localized data for the given resource type.
+      operationId: showSchemaForm
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: JSON Schema form.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    CompanyUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        external_id:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        tax_number:
+          type: string
+    CompanyCreateRequest:
+      type: object
+      required:
+      - name
+      - company_owner_email
+      properties:
+        name:
+          type: string
+        company_owner_email:
+          type: string
+          format: email
+        company_owner_name:
+          type: string
+        desired_currency:
+          type: string
+          default: USD
+        external_id:
+          type: string
+        terms_of_service_accepted_at:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        address:
+          type: string
+        address_line_2:
+          type: string
+        city:
+          type: string
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        local_details:
+          type: object
+          additionalProperties: true
+        postal_code:
+          type: string
+    CompanyEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Company'
+    LegalEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        country_code:
+          type: string
+        type:
+          type: string
+          enum:
+          - remote_entity
+          - partner_entity
+          - customer_entity
+    LegalEntityList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            legal_entities:
+              type: array
+              items:
+                $ref: '#/components/schemas/LegalEntity'
+    Company:
+      type: object
+      required:
+      - id
+      - name
+      - status
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        external_id:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum:
+          - created
+          - draft
+          - profile_completed
+          - activation_pending
+          - activated
+          - archived
+        company_owner_user_id:
+          type: string
+          format: uuid
+        primary_billing_contact:
+          type: string
+          nullable: true
+        bank_account_currency_code:
+          type: string
+        tax_number:
+          type: string
+          nullable: true
+        address:
+          $ref: '#/components/schemas/Address'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CompanyCreateResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Company'
+            access_token:
+              type: string
+              description: Company-scoped access token.
+            refresh_token:
+              type: string
+            expires_in:
+              type: integer
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+    CompanyList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            companies:
+              type: array
+              items:
+                $ref: '#/components/schemas/Company'
+            current_page:
+              type: integer
+            total_count:
+              type: integer
+            total_pages:
+              type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Too Many Requests
+      headers:
+        x-ratelimit-count:
+          schema:
+            type: integer
+          description: Requests made in the current 60-second window.
+        x-ratelimit-remaining:
+          schema:
+            type: integer
+          description: Requests remaining in the current window.
+        x-ratelimit-reset:
+          schema:
+            type: integer
+          description: Milliseconds until the rate limit resets.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    PageSizeQuery:
+      name: page_size
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    CompanyIdPath:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    PageQuery:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

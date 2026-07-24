@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Payslips API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Payslips
+  description: Released payslips for employees
+paths:
+  /payslips:
+    get:
+      summary: List Payslips
+      operationId: listPayslips
+      tags:
+      - Payslips
+      parameters:
+      - name: employment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: period
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Payslips.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayslipList'
+  /payslips/{payslip_id}:
+    parameters:
+    - name: payslip_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show A Payslip
+      operationId: showPayslip
+      tags:
+      - Payslips
+      responses:
+        '200':
+          description: Payslip.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayslipEnvelope'
+components:
+  schemas:
+    PayslipList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payslips:
+              type: array
+              items:
+                $ref: '#/components/schemas/Payslip'
+    PayslipEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payslip:
+              $ref: '#/components/schemas/Payslip'
+    Payslip:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        gross_amount:
+          type: integer
+        net_amount:
+          type: integer
+        currency:
+          type: string
+        released_at:
+          type: string
+          format: date-time
+        document_url:
+          type: string
+          format: uri
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

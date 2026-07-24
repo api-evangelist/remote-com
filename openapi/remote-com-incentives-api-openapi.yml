@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Incentives API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Incentives
+  description: One-time bonuses and recurring incentives
+paths:
+  /incentives:
+    get:
+      summary: List Incentives
+      operationId: listIncentives
+      tags:
+      - Incentives
+      parameters:
+      - name: employment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - bonus
+          - commission
+          - signing_bonus
+          - recurring_incentive
+      responses:
+        '200':
+          description: Incentives.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncentiveList'
+    post:
+      summary: Create An Incentive
+      operationId: createIncentive
+      tags:
+      - Incentives
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncentiveCreateRequest'
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncentiveEnvelope'
+  /incentives/{incentive_id}:
+    parameters:
+    - name: incentive_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Show An Incentive
+      operationId: showIncentive
+      tags:
+      - Incentives
+      responses:
+        '200':
+          description: Incentive.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncentiveEnvelope'
+    patch:
+      summary: Update An Incentive
+      operationId: updateIncentive
+      tags:
+      - Incentives
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncentiveCreateRequest'
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncentiveEnvelope'
+    delete:
+      summary: Delete An Incentive
+      operationId: deleteIncentive
+      tags:
+      - Incentives
+      responses:
+        '204':
+          description: Deleted.
+components:
+  schemas:
+    IncentiveEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentive:
+              $ref: '#/components/schemas/Incentive'
+    IncentiveList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentives:
+              type: array
+              items:
+                $ref: '#/components/schemas/Incentive'
+    Incentive:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+          - bonus
+          - commission
+          - signing_bonus
+          - recurring_incentive
+        amount:
+          type: integer
+        currency:
+          type: string
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - monthly
+          - quarterly
+          - yearly
+        effective_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - created
+          - processing_started
+          - paid
+          - canceled
+        note:
+          type: string
+    IncentiveCreateRequest:
+      type: object
+      required:
+      - employment_id
+      - type
+      - amount
+      - currency
+      - effective_date
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+          - bonus
+          - commission
+          - signing_bonus
+          - recurring_incentive
+        amount:
+          type: integer
+        currency:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - monthly
+          - quarterly
+          - yearly
+        note:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

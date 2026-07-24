@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Countries API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Countries
+  description: List of countries Remote supports
+paths:
+  /countries:
+    get:
+      summary: List Supported Countries
+      operationId: listCountries
+      tags:
+      - Countries
+      responses:
+        '200':
+          description: Countries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      countries:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Country'
+  /countries/{country_code}:
+    parameters:
+    - name: country_code
+      in: path
+      required: true
+      schema:
+        type: string
+        description: ISO 3166-1 alpha-3 country code.
+    get:
+      summary: Show A Country
+      operationId: showCountry
+      tags:
+      - Countries
+      responses:
+        '200':
+          description: Country.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      country:
+                        $ref: '#/components/schemas/Country'
+components:
+  schemas:
+    Country:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        name:
+          type: string
+        currency:
+          type: string
+        supported_employment_models:
+          type: array
+          items:
+            type: string
+            enum:
+            - global_payroll
+            - peo
+            - eor
+            - contractor
+        has_remote_entity:
+          type: boolean
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

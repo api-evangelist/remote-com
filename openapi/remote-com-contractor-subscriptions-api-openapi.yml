@@ -1,0 +1,188 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Contractor Subscriptions API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Contractor Subscriptions
+  description: Manage contractor plan subscriptions (Standard, Plus, COR)
+paths:
+  /contractors/subscriptions:
+    get:
+      summary: List Contractor Subscriptions
+      operationId: listContractorSubscriptions
+      tags:
+      - Contractor Subscriptions
+      parameters:
+      - name: employment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: plan
+        in: query
+        schema:
+          type: string
+          enum:
+          - standard
+          - plus
+          - cor
+      responses:
+        '200':
+          description: Subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionList'
+  /contractors/{employment_id}/subscriptions/plus:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Manage Contractor Plus Subscription
+      description: Subscribe, change, or cancel the Plus indemnity plan for a contractor.
+      operationId: manageContractorPlusSubscription
+      tags:
+      - Contractor Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionManageRequest'
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEnvelope'
+  /contractors/{employment_id}/subscriptions/cor:
+    parameters:
+    - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Manage Contractor Of Record Subscription
+      description: Subscribe, change, or cancel the Contractor-of-Record subscription.
+      operationId: manageCorSubscription
+      tags:
+      - Contractor Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionManageRequest'
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEnvelope'
+    delete:
+      summary: Delete Contractor Of Record Subscription
+      operationId: deleteCorSubscription
+      tags:
+      - Contractor Subscriptions
+      responses:
+        '204':
+          description: Subscription canceled.
+components:
+  schemas:
+    SubscriptionList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscriptions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Subscription'
+    SubscriptionManageRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - subscribe
+          - change
+          - cancel
+        plan:
+          type: string
+          enum:
+          - standard
+          - plus
+          - cor
+        starts_on:
+          type: string
+          format: date
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        plan:
+          type: string
+          enum:
+          - standard
+          - plus
+          - cor
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - canceled
+          - terminated
+        starts_on:
+          type: string
+          format: date
+        ends_on:
+          type: string
+          format: date
+          nullable: true
+    SubscriptionEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscription:
+              $ref: '#/components/schemas/Subscription'
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

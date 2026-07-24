@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Identity API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Identity
+  description: Inspect the identity of the current access token
+paths:
+  /identity:
+    get:
+      summary: Get Token Identity
+      description: Shows the entities controllable by the current access token.
+      operationId: getTokenIdentity
+      tags:
+      - Identity
+      responses:
+        '200':
+          description: Identity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Identity'
+components:
+  schemas:
+    Identity:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - company
+              - partner
+              - employment
+              - user
+            company_id:
+              type: string
+              format: uuid
+            partner_id:
+              type: string
+              format: uuid
+            employment_id:
+              type: string
+              format: uuid
+            user_id:
+              type: string
+              format: uuid
+            scopes:
+              type: array
+              items:
+                type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

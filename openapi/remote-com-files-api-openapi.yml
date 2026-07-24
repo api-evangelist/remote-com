@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Remote Benefits Benefit Offers Files API
+  description: 'List, select, and renew localized employee benefits across the countries
+
+    Remote supports. Benefit offers and renewal requests use JSON Schema
+
+    forms that vary per country and employment.
+
+    '
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+servers:
+- url: https://gateway.remote.com/v1
+  description: Production
+- url: https://gateway.remote-sandbox.com/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Files
+  description: Document upload and retrieval
+paths:
+  /files:
+    post:
+      summary: Upload A File
+      operationId: uploadFile
+      tags:
+      - Files
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              - attachable_id
+              - attachable_type
+              properties:
+                file:
+                  type: string
+                  format: binary
+                attachable_id:
+                  type: string
+                  format: uuid
+                attachable_type:
+                  type: string
+                  enum:
+                  - employment
+                  - company
+                  - expense
+                  - contract_document
+                category:
+                  type: string
+                  description: Optional file category tag.
+      responses:
+        '201':
+          description: Uploaded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileEnvelope'
+  /files/{file_id}:
+    parameters:
+    - name: file_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Download A File
+      operationId: downloadFile
+      tags:
+      - Files
+      responses:
+        '200':
+          description: File binary or signed URL.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      download_url:
+                        type: string
+                        format: uri
+                      expires_at:
+                        type: string
+                        format: date-time
+components:
+  schemas:
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type: string
+        content_type:
+          type: string
+        size:
+          type: integer
+        attachable_id:
+          type: string
+          format: uuid
+        attachable_type:
+          type: string
+          enum:
+          - employment
+          - company
+          - expense
+          - contract_document
+        category:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        download_url:
+          type: string
+          format: uri
+    FileEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            file:
+              $ref: '#/components/schemas/File'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
