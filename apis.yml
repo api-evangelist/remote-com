@@ -12,6 +12,19 @@ description: |
   on top of these services so customers and partners can fully automate
   hiring, onboarding, payroll, benefits, time off, expenses, and
   offboarding.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://remote.com/favicon.ico
 humanURL: https://remote.com
 baseURL: https://gateway.remote.com/v1
@@ -33,263 +46,2765 @@ tags:
 created: '2026-05-25'
 modified: '2026-06-20'
 apis:
-  - aid: remote-com:remote-companies-api
-    name: Remote Companies API
-    tags:
-      - Companies
-      - Compliance
-      - SSO
-      - Identity
-    humanURL: https://developer.remote.com/reference/welcome-to-remote-api
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      Create and manage companies on Remote. Entry point for every
-      Remote integration — partners use this API to provision new
-      customer companies and obtain company-scoped access tokens. Also
-      covers company managers, departments, legal entities, compliance
-      profile, hiring eligibility reserves, SSO configuration, token
-      identity, and magic-link generation.
-    properties:
-      - url: https://developer.remote.com/reference/welcome-to-remote-api
-        type: Documentation
-      - url: https://developer.remote.com/docs/creating-a-company
-        type: Documentation
-      - url: openapi/remote-companies-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-companies-api-overlay.yaml
-        type: Overlay
-      - url: json-schema/remote-company-schema.json
-        type: JSONSchema
-      - url: json-ld/remote-com-context.jsonld
-        type: JSONLD
-  - aid: remote-com:remote-employments-api
-    name: Remote Employments API
-    tags:
-      - Employments
-      - Onboarding
-      - Offboarding
-      - Contracts
-      - Travel Letters
-      - Work Authorization
-    humanURL: https://developer.remote.com/docs/create-new-employment
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      Manage employment records across EOR, Global Payroll, and PEO
-      models. Covers the full lifecycle — create, invite, onboard,
-      sign contracts, amend contracts, run identity verification,
-      file travel-letter and work-authorization requests, manage
-      company structure, and offboard. Authoritative source of truth
-      for every worker record on Remote.
-    properties:
-      - url: https://developer.remote.com/docs/create-new-employment
-        type: Documentation
-      - url: https://developer.remote.com/docs/employment-lifecycle-stages
-        type: Documentation
-      - url: https://developer.remote.com/docs/employment-statuses
-        type: Documentation
-      - url: openapi/remote-employments-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-employments-api-overlay.yaml
-        type: Overlay
-      - url: json-schema/remote-employment-schema.json
-        type: JSONSchema
-      - url: json-ld/remote-com-context.jsonld
-        type: JSONLD
-      - url: examples/remote-create-employment-example.json
-        type: Examples
-  - aid: remote-com:remote-contractors-api
-    name: Remote Contractors API
-    tags:
-      - Contractors
-      - COR
-      - Contractor of Record
-      - Invoices
-      - Misclassification
-    humanURL: https://developer.remote.com/reference/welcome-to-remote-api
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      Manage contractor subscriptions across the Standard, Plus
-      (indemnity), and Contractor-of-Record plans. Surfaces include
-      contractor invoices, scheduled-invoice automation,
-      contract-eligibility checks (powered by Remote's AI
-      misclassification tooling), COR termination requests, and
-      contractor currency catalogs.
-    properties:
-      - url: https://developer.remote.com/reference/welcome-to-remote-api
-        type: Documentation
-      - url: openapi/remote-contractors-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-contractors-api-overlay.yaml
-        type: Overlay
-  - aid: remote-com:remote-payroll-billing-api
-    name: Remote Payroll and Billing API
-    tags:
-      - Payroll
-      - Billing
-      - Incentives
-      - Expenses
-      - Payslips
-      - FinOps
-    humanURL: https://developer.remote.com/docs/quick-start-guide-2
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      Inspect payroll calendars, billing documents (with itemized
-      breakdowns and PDF download), incentives (one-time bonuses and
-      recurring incentives), expenses (with approve/decline/reimburse
-      flows), payslips, and company billing currencies. The financial
-      backbone of every Remote engagement.
-    properties:
-      - url: https://developer.remote.com/docs/quick-start-guide-2
-        type: Documentation
-      - url: https://developer.remote.com/docs/working-with-expenses
-        type: Documentation
-      - url: https://developer.remote.com/docs/working-with-incentives
-        type: Documentation
-      - url: openapi/remote-payroll-billing-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-payroll-billing-api-overlay.yaml
-        type: Overlay
-      - url: json-schema/remote-billing-document-schema.json
-        type: JSONSchema
-  - aid: remote-com:remote-time-attendance-api
-    name: Remote Time and Attendance API
-    tags:
-      - Time Off
-      - Leave
-      - Timesheets
-      - HRIS
-    humanURL: https://developer.remote.com/docs/working-with-time-off
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      Manage time-off requests, leave policies, leave balances, and
-      timesheets. Approve/decline/cancel flows for managers; submit
-      and self-serve flows for employees. Every state change is also
-      emitted via webhook events.
-    properties:
-      - url: https://developer.remote.com/docs/working-with-time-off
-        type: Documentation
-      - url: https://developer.remote.com/docs/leave-policies-summary
-        type: Documentation
-      - url: https://developer.remote.com/docs/working-with-timesheets
-        type: Documentation
-      - url: openapi/remote-time-attendance-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-time-attendance-api-overlay.yaml
-        type: Overlay
-      - url: json-schema/remote-time-off-schema.json
-        type: JSONSchema
-      - url: examples/remote-create-timeoff-example.json
-        type: Examples
-  - aid: remote-com:remote-benefits-api
-    name: Remote Benefits API
-    tags:
-      - Benefits
-      - Health
-      - Pension
-      - Renewals
-    humanURL: https://developer.remote.com/docs/benefits-renewal
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      List localized benefit offers by country, attach offers to
-      employments using JSON Schema forms, and respond to annual
-      benefit-renewal requests. Backed by Remote's in-country
-      benefits infrastructure.
-    properties:
-      - url: https://developer.remote.com/docs/benefits-renewal
-        type: Documentation
-      - url: openapi/remote-benefits-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-benefits-api-overlay.yaml
-        type: Overlay
-  - aid: remote-com:remote-files-and-custom-fields-api
-    name: Remote Files and Custom Fields API
-    tags:
-      - Files
-      - Documents
-      - Custom Fields
-      - Countries
-      - Cost Calculator
-    humanURL: https://developer.remote.com/docs/working-with-files
-    baseURL: https://gateway.remote.com/v1
-    description: |
-      Upload and download files attached to employments, companies,
-      and expenses. Define and set customer-managed custom fields on
-      companies and employments. List supported countries and their
-      employment models. Estimate the loaded annual cost of hiring an
-      employee in any country via the cost calculator.
-    properties:
-      - url: https://developer.remote.com/docs/working-with-files
-        type: Documentation
-      - url: https://developer.remote.com/docs/custom-fields
-        type: Documentation
-      - url: https://developer.remote.com/docs/working-with-countries
-        type: Documentation
-      - url: https://developer.remote.com/docs/employment-cost-estimation
-        type: Documentation
-      - url: openapi/remote-files-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-files-api-overlay.yaml
-        type: Overlay
-      - url: examples/remote-cost-estimate-example.json
-        type: Examples
-  - aid: remote-com:remote-oauth-api
-    name: Remote OAuth 2.0 API
-    tags:
-      - OAuth
-      - Authentication
-      - Authorization
-      - Partners
-    humanURL: https://developer.remote.com/docs/authentication
-    baseURL: https://gateway.remote.com
-    description: |
-      OAuth 2.0 endpoints used to obtain access tokens for the Remote
-      API. Four supported flows — authorization code (customer apps
-      and partners), client credentials (partners), JWT bearer
-      assertion (partners acting for a specific company), and refresh
-      token. Plus magic-link generation for passwordless employee
-      sign-in.
-    properties:
-      - url: https://developer.remote.com/docs/authentication
-        type: Documentation
-      - url: https://developer.remote.com/docs/authorization-for-customers
-        type: Documentation
-      - url: https://developer.remote.com/docs/client-credentials-flow-for-partners
-        type: Documentation
-      - url: https://developer.remote.com/docs/authorization-method-oauth-assertion
-        type: Documentation
-      - url: https://developer.remote.com/docs/refresh-token-flow
-        type: Documentation
-      - url: openapi/remote-oauth-api-openapi.yml
-        type: OpenAPI
-      - url: overlays/remote-com-oauth-api-overlay.yaml
-        type: Overlay
-      - url: examples/remote-oauth-token-exchange-example.json
-        type: Examples
-  - aid: remote-com:remote-webhooks
-    name: Remote Webhooks
-    tags:
-      - Webhooks
-      - Events
-      - AsyncAPI
-    humanURL: https://developer.remote.com/docs/available-webhooks
-    baseURL: https://gateway.remote.com
-    description: |
-      Remote emits webhook events for every meaningful state change
-      across companies, employments, contractors, payroll, billing,
-      time off, timesheets, benefits, identity verification, and SSO.
-      Webhooks are signed with `X-Remote-Signature` and delivered to a
-      customer-managed HTTPS endpoint. 90+ event types in total.
-    properties:
-      - url: https://developer.remote.com/docs/available-webhooks
-        type: Documentation
-      - url: https://developer.remote.com/docs/working-with-webhooks
-        type: Documentation
-      - url: https://developer.remote.com/docs/verifying-webhooks
-        type: Documentation
-      - url: asyncapi/remote-webhooks-asyncapi.yml
-        type: AsyncAPI
-      - url: examples/remote-employment-onboarding-completed-webhook-example.json
-        type: Examples
+- aid: remote-com:remote-webhooks
+  name: Remote Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - AsyncAPI
+  humanURL: https://developer.remote.com/docs/available-webhooks
+  baseURL: https://gateway.remote.com
+  description: >
+    Remote emits webhook events for every meaningful state change
+
+    across companies, employments, contractors, payroll, billing,
+
+    time off, timesheets, benefits, identity verification, and SSO.
+
+    Webhooks are signed with `X-Remote-Signature` and delivered to a
+
+    customer-managed HTTPS endpoint. 90+ event types in total.
+  properties:
+  - url: https://developer.remote.com/docs/available-webhooks
+    type: Documentation
+  - url: https://developer.remote.com/docs/working-with-webhooks
+    type: Documentation
+  - url: https://developer.remote.com/docs/verifying-webhooks
+    type: Documentation
+  - url: asyncapi/remote-webhooks-asyncapi.yml
+    type: AsyncAPI
+  - url: examples/remote-employment-onboarding-completed-webhook-example.json
+    type: Examples
+- aid: remote-com:remote-com-benefit-offers-api
+  name: Remote Benefit Offers API
+  description: Country and employment benefit offers
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Benefit Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-benefit-offers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-benefit-renewals-api
+  name: Remote Benefit Renewals API
+  description: Annual benefit-renewal requests
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Benefit Renewals
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-benefit-renewals-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-billing-documents-api
+  name: Remote Billing Documents API
+  description: Customer-facing invoices and statements
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Billing Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-billing-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-companies-api
+  name: Remote Companies API
+  description: Create, retrieve, and update company records
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-companies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-company-currencies-api
+  name: Remote Company Currencies API
+  description: List currencies a company can be billed in
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Company Currencies
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-company-currencies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-company-managers-api
+  name: Remote Company Managers API
+  description: Manage administrators and managers within a company
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Company Managers
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-company-managers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-company-structure-api
+  name: Remote Company Structure API
+  description: Reporting hierarchy and structure nodes for employees
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Company Structure
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-company-structure-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-compliance-api
+  name: Remote Compliance API
+  description: Read compliance profiles and supported jurisdictions
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Compliance
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-compliance-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-contract-amendments-api
+  name: Remote Contract Amendments API
+  description: Submit and track contract amendments
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Contract Amendments
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-contract-amendments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-contract-documents-api
+  name: Remote Contract Documents API
+  description: Sign, retrieve, and manage employment contract documents
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Contract Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-contract-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-contract-eligibility-api
+  name: Remote Contract Eligibility API
+  description: Verify contractor-vs-employee classification
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Contract Eligibility
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-contract-eligibility-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-contractor-currencies-api
+  name: Remote Contractor Currencies API
+  description: List currencies available for contractor payments
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Contractor Currencies
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-contractor-currencies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-contractor-invoices-api
+  name: Remote Contractor Invoices API
+  description: List and inspect contractor invoices
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Contractor Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-contractor-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-contractor-subscriptions-api
+  name: Remote Contractor Subscriptions API
+  description: Manage contractor plan subscriptions (Standard, Plus, COR)
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Contractor Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-contractor-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-cor-termination-api
+  name: Remote COR Termination API
+  description: Terminate Contractor-of-Record engagements
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - COR Termination
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-cor-termination-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-cost-calculator-api
+  name: Remote Cost Calculator API
+  description: Estimate the loaded cost of hiring in a given country
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Cost Calculator
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-cost-calculator-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-countries-api
+  name: Remote Countries API
+  description: List of countries Remote supports
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Countries
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-countries-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-custom-fields-api
+  name: Remote Custom Fields API
+  description: Customer-defined fields on companies and employments
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-custom-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-departments-api
+  name: Remote Departments API
+  description: Manage company-defined departments and org structure
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Departments
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-departments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-employment-contracts-api
+  name: Remote Employment Contracts API
+  description: View active and pending employment contracts
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Employment Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-employment-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-employments-api
+  name: Remote Employments API
+  description: Create, read, update, and invite employment records
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Employments
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-employments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-expenses-api
+  name: Remote Expenses API
+  description: Employee expense reimbursements
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Expenses
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-expenses-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-files-api
+  name: Remote Files API
+  description: Document upload and retrieval
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-files-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-identity-api
+  name: Remote Identity API
+  description: Inspect the identity of the current access token
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-identity-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-incentives-api
+  name: Remote Incentives API
+  description: One-time bonuses and recurring incentives
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Incentives
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-incentives-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-leave-balances-api
+  name: Remote Leave Balances API
+  description: Per-employee leave balances
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Leave Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-leave-balances-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-leave-policies-api
+  name: Remote Leave Policies API
+  description: Per-country leave policy definitions
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Leave Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-leave-policies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-magic-links-api
+  name: Remote Magic Links API
+  description: Generate passwordless magic links for users and employees
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Magic Links
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-magic-links-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-oauth-api
+  name: Remote OAuth API
+  description: OAuth 2.0 authorization endpoints
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-offboarding-api
+  name: Remote Offboarding API
+  description: Drive employee offboarding flows
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Offboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-offboarding-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-onboarding-api
+  name: Remote Onboarding API
+  description: Drive employee onboarding flows
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Onboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-onboarding-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-payroll-calendars-api
+  name: Remote Payroll Calendars API
+  description: Inspect payroll calendars for company, EOR, and Global Payroll
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Payroll Calendars
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-payroll-calendars-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-payslips-api
+  name: Remote Payslips API
+  description: Released payslips for employees
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Payslips
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-payslips-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-scheduled-invoices-api
+  name: Remote Scheduled Invoices API
+  description: Schedule recurring contractor invoices
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Scheduled Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-scheduled-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-sso-api
+  name: Remote SSO API
+  description: Configure SAML/OIDC single sign-on for a company
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - SSO
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-sso-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-time-off-api
+  name: Remote Time Off API
+  description: Time-off requests and approvals
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Time Off
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-time-off-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-timesheets-api
+  name: Remote Timesheets API
+  description: Hourly and salaried timesheets
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Timesheets
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-timesheets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-travel-letters-api
+  name: Remote Travel Letters API
+  description: Travel letter requests for employees moving across borders
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Travel Letters
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-travel-letters-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
+- aid: remote-com:remote-com-work-authorization-api
+  name: Remote Work Authorization API
+  description: Work authorization (visa / right to work) requests
+  humanURL: https://developer.remote.com/reference/welcome-to-remote-api
+  baseURL: https://gateway.remote.com/v1
+  tags:
+  - Work Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/remote-com-work-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://developer.remote.com/reference/welcome-to-remote-api
+  - type: Documentation
+    url: https://developer.remote.com/docs/creating-a-company
+  - type: JSONSchema
+    url: json-schema/remote-company-schema.json
+  - type: JSONLD
+    url: json-ld/remote-com-context.jsonld
+  - type: Documentation
+    url: https://developer.remote.com/docs/create-new-employment
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-lifecycle-stages
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-statuses
+  - type: JSONSchema
+    url: json-schema/remote-employment-schema.json
+  - type: Examples
+    url: examples/remote-create-employment-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/quick-start-guide-2
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-expenses
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-incentives
+  - type: JSONSchema
+    url: json-schema/remote-billing-document-schema.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-time-off
+  - type: Documentation
+    url: https://developer.remote.com/docs/leave-policies-summary
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-timesheets
+  - type: JSONSchema
+    url: json-schema/remote-time-off-schema.json
+  - type: Examples
+    url: examples/remote-create-timeoff-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/benefits-renewal
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-files
+  - type: Documentation
+    url: https://developer.remote.com/docs/custom-fields
+  - type: Documentation
+    url: https://developer.remote.com/docs/working-with-countries
+  - type: Documentation
+    url: https://developer.remote.com/docs/employment-cost-estimation
+  - type: Examples
+    url: examples/remote-cost-estimate-example.json
+  - type: Documentation
+    url: https://developer.remote.com/docs/authentication
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-for-customers
+  - type: Documentation
+    url: https://developer.remote.com/docs/client-credentials-flow-for-partners
+  - type: Documentation
+    url: https://developer.remote.com/docs/authorization-method-oauth-assertion
+  - type: Documentation
+    url: https://developer.remote.com/docs/refresh-token-flow
+  - type: Examples
+    url: examples/remote-oauth-token-exchange-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/remote-com-agentic-access.yml
