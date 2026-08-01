@@ -1,0 +1,492 @@
+openapi: 3.1.0
+info:
+  title: Remote Contractors API
+  description: |
+    Manage contractors and Contractor-of-Record (COR) subscriptions on
+    Remote.com. The API supports two contractor offerings:
+
+    - **Contractor Management** — Remote handles localized contracts,
+      invoice approval, and payments while the customer remains the
+      engaging party.
+    - **Contractor of Record (COR)** — Remote becomes the legal engaging
+      party, providing uncapped indemnity and IP-transfer protection.
+
+    This API also exposes scheduled-invoice automation, contractor
+    currency catalogs, contract-eligibility checks, and COR-termination
+    requests.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Contractor Subscriptions
+    description: Manage contractor plan subscriptions (Standard, Plus, COR)
+  - name: Contractor Invoices
+    description: List and inspect contractor invoices
+  - name: Scheduled Invoices
+    description: Schedule recurring contractor invoices
+  - name: Contract Eligibility
+    description: Verify contractor-vs-employee classification
+  - name: COR Termination
+    description: Terminate Contractor-of-Record engagements
+  - name: Contractor Currencies
+    description: List currencies available for contractor payments
+
+paths:
+  /contractors/subscriptions:
+    get:
+      summary: List Contractor Subscriptions
+      operationId: listContractorSubscriptions
+      tags: [Contractor Subscriptions]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: plan, in: query, schema: { type: string, enum: [standard, plus, cor] } }
+      responses:
+        '200':
+          description: Subscriptions.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SubscriptionList' }
+
+  /contractors/{employment_id}/subscriptions/plus:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Manage Contractor Plus Subscription
+      description: Subscribe, change, or cancel the Plus indemnity plan for a contractor.
+      operationId: manageContractorPlusSubscription
+      tags: [Contractor Subscriptions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SubscriptionManageRequest' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SubscriptionEnvelope' }
+
+  /contractors/{employment_id}/subscriptions/cor:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Manage Contractor Of Record Subscription
+      description: Subscribe, change, or cancel the Contractor-of-Record subscription.
+      operationId: manageCorSubscription
+      tags: [Contractor Subscriptions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SubscriptionManageRequest' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SubscriptionEnvelope' }
+    delete:
+      summary: Delete Contractor Of Record Subscription
+      operationId: deleteCorSubscription
+      tags: [Contractor Subscriptions]
+      responses:
+        '204': { description: Subscription canceled. }
+
+  /contractors/{employment_id}/cor_termination:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    get:
+      summary: Show COR Termination Request
+      operationId: showCorTerminationRequest
+      tags: [COR Termination]
+      responses:
+        '200':
+          description: Termination request.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CorTerminationRequestEnvelope' }
+    post:
+      summary: Create COR Termination Request
+      operationId: createCorTerminationRequest
+      tags: [COR Termination]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CorTerminationRequestCreate' }
+      responses:
+        '201':
+          description: Termination created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CorTerminationRequestEnvelope' }
+
+  /contractors/{employment_id}/terminate:
+    parameters:
+      - $ref: '#/components/parameters/EmploymentIdPath'
+    post:
+      summary: Terminate A Contractor Of Record Employment
+      operationId: terminateContractorOfRecordEmployment
+      tags: [COR Termination]
+      responses:
+        '202':
+          description: Termination submitted.
+
+  /contractor_invoices:
+    get:
+      summary: List Contractor Invoices
+      operationId: listContractorInvoices
+      tags: [Contractor Invoices]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: status, in: query, schema: { type: string, enum: [draft, submitted, approved, paid, rejected, void] } }
+      responses:
+        '200':
+          description: Invoices.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/InvoiceList' }
+
+  /contractor_invoices/{contractor_invoice_id}:
+    parameters:
+      - { name: contractor_invoice_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Contractor Invoice
+      operationId: showContractorInvoice
+      tags: [Contractor Invoices]
+      responses:
+        '200':
+          description: Invoice.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/InvoiceEnvelope' }
+
+  /scheduled_contractor_invoices:
+    get:
+      summary: List Scheduled Contractor Invoices
+      operationId: listScheduledContractorInvoices
+      tags: [Scheduled Invoices]
+      responses:
+        '200':
+          description: Scheduled invoices.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScheduledInvoiceList' }
+
+  /scheduled_contractor_invoices/bulk:
+    post:
+      summary: Bulk Create Scheduled Contractor Invoices
+      operationId: bulkCreateScheduledContractorInvoices
+      tags: [Scheduled Invoices]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scheduled_contractor_invoices:
+                  type: array
+                  items: { $ref: '#/components/schemas/ScheduledInvoiceCreate' }
+      responses:
+        '201':
+          description: Scheduled invoices created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScheduledInvoiceList' }
+
+  /scheduled_contractor_invoices/{scheduled_invoice_id}:
+    parameters:
+      - { name: scheduled_invoice_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Scheduled Contractor Invoice
+      operationId: showScheduledContractorInvoice
+      tags: [Scheduled Invoices]
+      responses:
+        '200':
+          description: Scheduled invoice.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScheduledInvoiceEnvelope' }
+    patch:
+      summary: Update A Scheduled Contractor Invoice
+      operationId: updateScheduledContractorInvoice
+      tags: [Scheduled Invoices]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ScheduledInvoiceCreate' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScheduledInvoiceEnvelope' }
+
+  /contract_eligibility:
+    post:
+      summary: Create A Contract Eligibility Check
+      description: |
+        Submit a contractor classification check that returns a misclassification
+        risk score and recommendations. Backed by Remote's AI misclassification tooling.
+      operationId: createContractEligibility
+      tags: [Contract Eligibility]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EligibilityCheckRequest' }
+      responses:
+        '201':
+          description: Eligibility result.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EligibilityCheckResult' }
+
+  /contract_eligibility/legal_entities:
+    get:
+      summary: List Contractor Eligibility Legal Entities
+      operationId: listContractorEligibilityLegalEntities
+      tags: [Contract Eligibility]
+      responses:
+        '200':
+          description: Legal entities.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /contractor_currencies:
+    get:
+      summary: List Contractor Currencies
+      operationId: listContractorCurrencies
+      tags: [Contractor Currencies]
+      responses:
+        '200':
+          description: Currencies.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CurrencyList' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        plan:
+          type: string
+          enum: [standard, plus, cor]
+        status:
+          type: string
+          enum: [pending, active, canceled, terminated]
+        starts_on: { type: string, format: date }
+        ends_on: { type: string, format: date, nullable: true }
+
+    SubscriptionEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscription: { $ref: '#/components/schemas/Subscription' }
+
+    SubscriptionList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscriptions:
+              type: array
+              items: { $ref: '#/components/schemas/Subscription' }
+
+    SubscriptionManageRequest:
+      type: object
+      required: [action]
+      properties:
+        action:
+          type: string
+          enum: [subscribe, change, cancel]
+        plan:
+          type: string
+          enum: [standard, plus, cor]
+        starts_on: { type: string, format: date }
+
+    Invoice:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        amount: { type: integer, description: Amount in smallest currency unit. }
+        currency: { type: string }
+        status:
+          type: string
+          enum: [draft, submitted, approved, paid, rejected, void]
+        period_start: { type: string, format: date }
+        period_end: { type: string, format: date }
+        issued_at: { type: string, format: date-time }
+
+    InvoiceList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contractor_invoices:
+              type: array
+              items: { $ref: '#/components/schemas/Invoice' }
+
+    InvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contractor_invoice: { $ref: '#/components/schemas/Invoice' }
+
+    ScheduledInvoice:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        amount: { type: integer }
+        currency: { type: string }
+        recurrence:
+          type: string
+          enum: [one_time, weekly, biweekly, monthly]
+        next_run_at: { type: string, format: date-time }
+
+    ScheduledInvoiceCreate:
+      type: object
+      required: [employment_id, amount, currency, recurrence]
+      properties:
+        employment_id: { type: string, format: uuid }
+        amount: { type: integer }
+        currency: { type: string }
+        recurrence:
+          type: string
+          enum: [one_time, weekly, biweekly, monthly]
+        starts_on: { type: string, format: date }
+        ends_on: { type: string, format: date }
+        description: { type: string }
+
+    ScheduledInvoiceList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            scheduled_contractor_invoices:
+              type: array
+              items: { $ref: '#/components/schemas/ScheduledInvoice' }
+
+    ScheduledInvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            scheduled_contractor_invoice: { $ref: '#/components/schemas/ScheduledInvoice' }
+
+    CorTerminationRequest:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        status:
+          type: string
+          enum: [submitted, review_started, completed, canceled]
+        last_day_of_engagement: { type: string, format: date }
+        reason: { type: string }
+
+    CorTerminationRequestEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            cor_termination_request: { $ref: '#/components/schemas/CorTerminationRequest' }
+
+    CorTerminationRequestCreate:
+      type: object
+      required: [employment_id, last_day_of_engagement, reason]
+      properties:
+        employment_id: { type: string, format: uuid }
+        last_day_of_engagement: { type: string, format: date }
+        reason: { type: string }
+        additional_information: { type: object, additionalProperties: true }
+
+    EligibilityCheckRequest:
+      type: object
+      required: [country_code, work_relationship]
+      properties:
+        country_code: { type: string }
+        work_relationship:
+          type: object
+          additionalProperties: true
+          description: Structured answers to the misclassification questionnaire.
+
+    EligibilityCheckResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            risk_level:
+              type: string
+              enum: [low, medium, high]
+            risk_score: { type: integer, minimum: 0, maximum: 100 }
+            recommendation:
+              type: string
+              enum: [proceed_as_contractor, switch_to_eor, request_review]
+            findings:
+              type: array
+              items: { type: string }
+
+    Currency:
+      type: object
+      properties:
+        code: { type: string }
+        name: { type: string }
+        symbol: { type: string }
+
+    CurrencyList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            currencies:
+              type: array
+              items: { $ref: '#/components/schemas/Currency' }

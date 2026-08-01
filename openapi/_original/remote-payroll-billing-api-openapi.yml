@@ -1,0 +1,556 @@
+openapi: 3.1.0
+info:
+  title: Remote Payroll and Billing API
+  description: |
+    Inspect payroll calendars, billing documents, incentives, expenses,
+    payslips, and timesheets across Remote's EOR, Global Payroll, PEO,
+    and Contractor offerings. All financial events are exposed both
+    via REST and via webhooks.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com/v1
+    description: Production
+  - url: https://gateway.remote-sandbox.com/v1
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Payroll Calendars
+    description: Inspect payroll calendars for company, EOR, and Global Payroll
+  - name: Billing Documents
+    description: Customer-facing invoices and statements
+  - name: Incentives
+    description: One-time bonuses and recurring incentives
+  - name: Expenses
+    description: Employee expense reimbursements
+  - name: Payslips
+    description: Released payslips for employees
+  - name: Company Currencies
+    description: List currencies a company can be billed in
+
+paths:
+  /payroll/calendars:
+    get:
+      summary: List Payroll Calendar
+      operationId: listPayrollCalendar
+      tags: [Payroll Calendars]
+      parameters:
+        - { name: starts_after, in: query, schema: { type: string, format: date } }
+        - { name: ends_before, in: query, schema: { type: string, format: date } }
+      responses:
+        '200':
+          description: Calendar entries.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PayrollCalendarList' }
+
+  /payroll/calendars/company:
+    get:
+      summary: List Company Payroll Calendar
+      operationId: listCompanyPayrollCalendar
+      tags: [Payroll Calendars]
+      responses:
+        '200':
+          description: Calendar entries.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PayrollCalendarList' }
+
+  /payroll/calendars/eor:
+    get:
+      summary: List EOR Payroll Calendar
+      operationId: listEorPayrollCalendar
+      tags: [Payroll Calendars]
+      responses:
+        '200':
+          description: Calendar entries.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PayrollCalendarList' }
+
+  /billing_documents:
+    get:
+      summary: List Billing Documents
+      operationId: listBillingDocuments
+      tags: [Billing Documents]
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [issued, paid, overdue, void] } }
+        - { name: period, in: query, schema: { type: string, description: "YYYY-MM" } }
+      responses:
+        '200':
+          description: Billing documents.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BillingDocumentList' }
+
+  /billing_documents/{billing_document_id}:
+    parameters:
+      - { name: billing_document_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Billing Document
+      operationId: showBillingDocument
+      tags: [Billing Documents]
+      responses:
+        '200':
+          description: Billing document.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BillingDocumentEnvelope' }
+
+  /billing_documents/{billing_document_id}/breakdown:
+    parameters:
+      - { name: billing_document_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Get Billing Document Breakdown
+      operationId: getBillingDocumentBreakdown
+      tags: [Billing Documents]
+      responses:
+        '200':
+          description: Line-item breakdown.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /billing_documents/{billing_document_id}/pdf:
+    parameters:
+      - { name: billing_document_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Download Billing Document PDF
+      operationId: downloadBillingDocumentPdf
+      tags: [Billing Documents]
+      responses:
+        '200':
+          description: PDF binary.
+          content:
+            application/pdf:
+              schema: { type: string, format: binary }
+
+  /incentives:
+    get:
+      summary: List Incentives
+      operationId: listIncentives
+      tags: [Incentives]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: type, in: query, schema: { type: string, enum: [bonus, commission, signing_bonus, recurring_incentive] } }
+      responses:
+        '200':
+          description: Incentives.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IncentiveList' }
+    post:
+      summary: Create An Incentive
+      operationId: createIncentive
+      tags: [Incentives]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IncentiveCreateRequest' }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IncentiveEnvelope' }
+
+  /incentives/{incentive_id}:
+    parameters:
+      - { name: incentive_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show An Incentive
+      operationId: showIncentive
+      tags: [Incentives]
+      responses:
+        '200':
+          description: Incentive.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IncentiveEnvelope' }
+    patch:
+      summary: Update An Incentive
+      operationId: updateIncentive
+      tags: [Incentives]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IncentiveCreateRequest' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IncentiveEnvelope' }
+    delete:
+      summary: Delete An Incentive
+      operationId: deleteIncentive
+      tags: [Incentives]
+      responses:
+        '204': { description: Deleted. }
+
+  /expenses:
+    get:
+      summary: List Expenses
+      operationId: listExpenses
+      tags: [Expenses]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: status, in: query, schema: { $ref: '#/components/schemas/ExpenseStatus' } }
+      responses:
+        '200':
+          description: Expenses.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExpenseList' }
+    post:
+      summary: Create An Expense
+      operationId: createExpense
+      tags: [Expenses]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ExpenseCreateRequest' }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExpenseEnvelope' }
+
+  /expenses/{expense_id}:
+    parameters:
+      - { name: expense_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show An Expense
+      operationId: showExpense
+      tags: [Expenses]
+      responses:
+        '200':
+          description: Expense.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExpenseEnvelope' }
+    patch:
+      summary: Update An Expense
+      operationId: updateExpense
+      tags: [Expenses]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ExpenseCreateRequest' }
+      responses:
+        '200':
+          description: Updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExpenseEnvelope' }
+    delete:
+      summary: Delete An Expense
+      operationId: deleteExpense
+      tags: [Expenses]
+      responses:
+        '204': { description: Deleted. }
+
+  /expenses/{expense_id}/approve:
+    parameters:
+      - { name: expense_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Approve An Expense
+      operationId: approveExpense
+      tags: [Expenses]
+      responses:
+        '200':
+          description: Approved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExpenseEnvelope' }
+
+  /expenses/{expense_id}/decline:
+    parameters:
+      - { name: expense_id, in: path, required: true, schema: { type: string, format: uuid } }
+    post:
+      summary: Decline An Expense
+      operationId: declineExpense
+      tags: [Expenses]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason: { type: string }
+      responses:
+        '200':
+          description: Declined.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExpenseEnvelope' }
+
+  /payslips:
+    get:
+      summary: List Payslips
+      operationId: listPayslips
+      tags: [Payslips]
+      parameters:
+        - { name: employment_id, in: query, schema: { type: string, format: uuid } }
+        - { name: period, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Payslips.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PayslipList' }
+
+  /payslips/{payslip_id}:
+    parameters:
+      - { name: payslip_id, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: Show A Payslip
+      operationId: showPayslip
+      tags: [Payslips]
+      responses:
+        '200':
+          description: Payslip.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PayslipEnvelope' }
+
+  /company_currencies:
+    get:
+      summary: List Company Currencies
+      operationId: listCompanyCurrencies
+      tags: [Company Currencies]
+      responses:
+        '200':
+          description: Currencies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      currencies:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code: { type: string }
+                            name: { type: string }
+                            symbol: { type: string }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    PayrollCalendarEntry:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        scope:
+          type: string
+          enum: [company, eor, global_payroll]
+        country_code: { type: string }
+        period_start: { type: string, format: date }
+        period_end: { type: string, format: date }
+        cutoff_date: { type: string, format: date }
+        payday: { type: string, format: date }
+        currency: { type: string }
+
+    PayrollCalendarList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payroll_calendars:
+              type: array
+              items: { $ref: '#/components/schemas/PayrollCalendarEntry' }
+
+    BillingDocument:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        number: { type: string }
+        status:
+          type: string
+          enum: [issued, paid, overdue, void]
+        amount: { type: integer, description: Amount in smallest currency unit. }
+        currency: { type: string }
+        issued_at: { type: string, format: date-time }
+        due_at: { type: string, format: date-time }
+        period_start: { type: string, format: date }
+        period_end: { type: string, format: date }
+        type:
+          type: string
+          enum: [eor_invoice, payroll_fee_invoice, contractor_invoice, reserve_invoice]
+
+    BillingDocumentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            billing_documents:
+              type: array
+              items: { $ref: '#/components/schemas/BillingDocument' }
+
+    BillingDocumentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            billing_document: { $ref: '#/components/schemas/BillingDocument' }
+
+    Incentive:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        type:
+          type: string
+          enum: [bonus, commission, signing_bonus, recurring_incentive]
+        amount: { type: integer }
+        currency: { type: string }
+        recurrence:
+          type: string
+          enum: [one_time, monthly, quarterly, yearly]
+        effective_date: { type: string, format: date }
+        status:
+          type: string
+          enum: [created, processing_started, paid, canceled]
+        note: { type: string }
+
+    IncentiveList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentives:
+              type: array
+              items: { $ref: '#/components/schemas/Incentive' }
+
+    IncentiveEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentive: { $ref: '#/components/schemas/Incentive' }
+
+    IncentiveCreateRequest:
+      type: object
+      required: [employment_id, type, amount, currency, effective_date]
+      properties:
+        employment_id: { type: string, format: uuid }
+        type:
+          type: string
+          enum: [bonus, commission, signing_bonus, recurring_incentive]
+        amount: { type: integer }
+        currency: { type: string }
+        effective_date: { type: string, format: date }
+        recurrence:
+          type: string
+          enum: [one_time, monthly, quarterly, yearly]
+        note: { type: string }
+
+    ExpenseStatus:
+      type: string
+      enum: [submitted, approved, declined, reimbursed, deleted]
+
+    Expense:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        category: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        status: { $ref: '#/components/schemas/ExpenseStatus' }
+        expense_date: { type: string, format: date }
+        description: { type: string }
+        receipt_url: { type: string, format: uri, nullable: true }
+
+    ExpenseList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            expenses:
+              type: array
+              items: { $ref: '#/components/schemas/Expense' }
+
+    ExpenseEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            expense: { $ref: '#/components/schemas/Expense' }
+
+    ExpenseCreateRequest:
+      type: object
+      required: [employment_id, category, amount, currency, expense_date]
+      properties:
+        employment_id: { type: string, format: uuid }
+        category: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        expense_date: { type: string, format: date }
+        description: { type: string }
+        receipt_url: { type: string, format: uri }
+
+    Payslip:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        employment_id: { type: string, format: uuid }
+        period_start: { type: string, format: date }
+        period_end: { type: string, format: date }
+        gross_amount: { type: integer }
+        net_amount: { type: integer }
+        currency: { type: string }
+        released_at: { type: string, format: date-time }
+        document_url: { type: string, format: uri }
+
+    PayslipList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payslips:
+              type: array
+              items: { $ref: '#/components/schemas/Payslip' }
+
+    PayslipEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payslip: { $ref: '#/components/schemas/Payslip' }

@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Remote OAuth 2.0 API
+  description: |
+    OAuth 2.0 endpoints used to obtain access tokens for the Remote API.
+    Remote supports four flows:
+
+    - **Authorization Code Flow** — partners and customer apps authorize
+      individual companies and exchange a code for a company-scoped token.
+    - **Client Credentials Flow** — partners obtain a partner-scoped token
+      and operate across all companies that have granted consent.
+    - **Assertion Flow** — partners present a signed JWT assertion when
+      acting on behalf of a specific company.
+    - **Refresh Token Flow** — exchange a long-lived refresh token for
+      a new access token.
+  version: '2026-05-22'
+  contact:
+    name: Remote API Support
+    url: https://support.remote.com/
+  x-logo:
+    url: https://remote.com/favicon.ico
+
+servers:
+  - url: https://gateway.remote.com
+    description: Production
+  - url: https://gateway.remote-sandbox.com
+    description: Sandbox
+
+tags:
+  - name: OAuth
+    description: OAuth 2.0 authorization endpoints
+
+paths:
+  /oauth/authorize:
+    get:
+      summary: Authorize A Company
+      description: |
+        Redirect the company admin to this endpoint to grant access. Remote
+        returns an authorization code to the partner's `redirect_uri` that
+        can then be exchanged at `/oauth2/token` for a company-scoped
+        access token.
+      operationId: authorize
+      tags: [OAuth]
+      parameters:
+        - { name: client_id, in: query, required: true, schema: { type: string } }
+        - { name: response_type, in: query, required: true, schema: { type: string, enum: [code] } }
+        - { name: redirect_uri, in: query, required: true, schema: { type: string, format: uri } }
+        - { name: scope, in: query, schema: { type: string, description: Space-separated scope list. } }
+        - { name: state, in: query, schema: { type: string } }
+      responses:
+        '302':
+          description: Redirect to the partner's `redirect_uri` with `code` and `state`.
+
+  /oauth2/token:
+    post:
+      summary: Exchange OAuth 2.0 Token
+      description: |
+        Exchange tokens for Authorization Code, Client Credentials,
+        Assertion, and Refresh Token flows.
+      operationId: exchangeOAuthToken
+      tags: [OAuth]
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [grant_type, client_id]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [authorization_code, client_credentials, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer]
+                client_id: { type: string }
+                client_secret: { type: string }
+                code: { type: string }
+                redirect_uri: { type: string, format: uri }
+                refresh_token: { type: string }
+                assertion: { type: string, description: Signed JWT assertion. }
+                scope: { type: string }
+      responses:
+        '200':
+          description: Access token.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [access_token, token_type, expires_in]
+                properties:
+                  access_token: { type: string }
+                  token_type: { type: string, enum: [bearer] }
+                  expires_in: { type: integer, description: Seconds until expiration. }
+                  refresh_token: { type: string }
+                  scope: { type: string }
+                  company_id: { type: string, format: uuid, description: Present on company-scoped tokens. }
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: { type: string }
+                  error_description: { type: string }
+
+components: {}
