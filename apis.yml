@@ -2960,7 +2960,7 @@ common:
     type: Integrations
     description: Official Remote-for-AI plugin marketplace (Claude Code, Cursor, Codex, Gemini CLI) shipping the Remote MCP server.
   - url: https://developer.remote.com/docs/introduction-to-remote-mcp
-    type: MCP
+    type: Documentation
     description: Remote.com MCP server for AI agents — OAuth 2.0, scoped capabilities, PII protections.
 integrations:
   - name: Workday
