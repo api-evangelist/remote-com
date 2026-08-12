@@ -2806,6 +2806,8 @@ apis:
   - type: Examples
     url: examples/remote-oauth-token-exchange-example.json
 common:
+  - type: Overlay
+    url: overlays/remote-com-benefits-api-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/remote-com-agentic-access.yml
   - type: Packages
