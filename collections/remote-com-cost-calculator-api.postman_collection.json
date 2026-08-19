@@ -1,0 +1,142 @@
+{
+  "item": [
+    {
+      "id": "eedc6d65-5be1-4dc1-921b-0b8fa5634c4d",
+      "name": "Cost Calculator",
+      "description": {
+        "content": "Estimate the loaded cost of hiring in a given country",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "af8293cb-7a50-46f7-96e6-cf521f513290",
+          "name": "Estimate Employment Cost",
+          "request": {
+            "name": "Estimate Employment Cost",
+            "description": {
+              "content": "Returns the loaded cost of hiring an employee under EOR or Global\nPayroll, including statutory contributions and Remote platform fees.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_calculator",
+                "estimate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"country_code\": \"<string>\",\n  \"employment_model\": \"<string>\",\n  \"annual_gross_salary\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"include_benefits\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b3f2a2b-8600-4a03-a53d-1b622c642523",
+              "name": "Cost estimate.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_calculator",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country_code\": \"<string>\",\n  \"employment_model\": \"<string>\",\n  \"annual_gross_salary\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"include_benefits\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"total_annual_cost\": 7398,\n    \"employer_contributions\": 9818,\n    \"remote_fee\": 1047,\n    \"currency\": \"string\",\n    \"breakdown\": [\n      {\n        \"label\": \"string\",\n        \"amount\": 4206,\n        \"recurrence\": \"monthly\"\n      },\n      {\n        \"label\": \"string\",\n        \"amount\": 1980,\n        \"recurrence\": \"one_time\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b6965b79-9329-4975-ba7d-ad254657e705",
+    "name": "Remote Benefits Benefit Offers Cost Calculator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Travel Letters API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Travel Letters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Travel Letter Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests"
+          },
+          "docs": "List Travel Letter Requests"
+        },
+        {
+          "info": {
+            "name": "Create A Travel Letter Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Travel Letter Request"
+        },
+        {
+          "info": {
+            "name": "Show A Travel Letter Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests/:travel_letter_request_id",
+            "params": [
+              {
+                "name": "travel_letter_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Travel Letter Request"
+        },
+        {
+          "info": {
+            "name": "Update A Travel Letter Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/travel_letter_requests/:travel_letter_request_id",
+            "params": [
+              {
+                "name": "travel_letter_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Travel Letter Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

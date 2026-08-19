@@ -1,0 +1,217 @@
+{
+  "item": [
+    {
+      "id": "1dfc06cb-5575-4040-8c98-bd8ec677e3b4",
+      "name": "Contract Eligibility",
+      "description": {
+        "content": "Verify contractor-vs-employee classification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dae9cb2-4a71-4c54-9e7f-25349ead5130",
+          "name": "Create A Contract Eligibility Check",
+          "request": {
+            "name": "Create A Contract Eligibility Check",
+            "description": {
+              "content": "Submit a contractor classification check that returns a misclassification\nrisk score and recommendations. Backed by Remote's AI misclassification tooling.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contract_eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"country_code\": \"<string>\",\n  \"work_relationship\": {\n    \"key_0\": 6634\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb41ba30-d3bc-49f2-8df4-687532faf916",
+              "name": "Eligibility result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country_code\": \"<string>\",\n  \"work_relationship\": {\n    \"key_0\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"risk_level\": \"low\",\n    \"risk_score\": 76,\n    \"recommendation\": \"proceed_as_contractor\",\n    \"findings\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d05e4aee-8f10-45d4-88b6-bbbe0bdeb580",
+          "name": "List Contractor Eligibility Legal Entities",
+          "request": {
+            "name": "List Contractor Eligibility Legal Entities",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_eligibility",
+                "legal_entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f41b4d6-3082-48ab-bf3a-b05ea085225b",
+              "name": "Legal entities.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_eligibility",
+                    "legal_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 6322\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1f90205a-e6b3-4619-8a8b-e5e6a2f58702",
+    "name": "Remote Benefits Benefit Offers Contract Eligibility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

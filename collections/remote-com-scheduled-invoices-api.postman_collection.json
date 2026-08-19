@@ -1,0 +1,421 @@
+{
+  "item": [
+    {
+      "id": "c02d98cc-1127-4869-978e-cd4bb680caa9",
+      "name": "Scheduled Invoices",
+      "description": {
+        "content": "Schedule recurring contractor invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d0582c52-afec-4def-aa89-bba5815d0c70",
+          "name": "List Scheduled Contractor Invoices",
+          "request": {
+            "name": "List Scheduled Contractor Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f66cbaac-9ef1-4501-b8bf-9aad40cc129b",
+              "name": "Scheduled invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoices\": [\n      {\n        \"id\": \"fde54ce1-6400-2c39-9bbe-7bbceec43e5a\",\n        \"employment_id\": \"2e878a68-281e-583b-ed37-168b1869ffe3\",\n        \"amount\": 5924,\n        \"currency\": \"string\",\n        \"recurrence\": \"monthly\",\n        \"next_run_at\": \"1967-04-10T10:02:11.635Z\"\n      },\n      {\n        \"id\": \"8ce777a3-6bdc-0a62-dc50-40595cd2fb7a\",\n        \"employment_id\": \"4ff65647-f38c-8666-b346-81cf8ea4fd5e\",\n        \"amount\": 7029,\n        \"currency\": \"string\",\n        \"recurrence\": \"monthly\",\n        \"next_run_at\": \"2011-02-26T10:46:19.872Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eab5aff9-68a9-4902-baa8-904b8e34a658",
+          "name": "Bulk Create Scheduled Contractor Invoices",
+          "request": {
+            "name": "Bulk Create Scheduled Contractor Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduled_contractor_invoices\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"<string>\",\n      \"starts_on\": \"<date>\",\n      \"ends_on\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"employment_id\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"recurrence\": \"<string>\",\n      \"starts_on\": \"<date>\",\n      \"ends_on\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8ee0403-357a-4947-bead-ad8e91c7c1d2",
+              "name": "Scheduled invoices created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_contractor_invoices\": [\n    {\n      \"employment_id\": \"98cc2021-0dfb-670e-0010-238aab5a1578\",\n      \"amount\": 4390,\n      \"currency\": \"string\",\n      \"recurrence\": \"monthly\",\n      \"starts_on\": \"1955-01-15\",\n      \"ends_on\": \"2008-01-06\",\n      \"description\": \"string\"\n    },\n    {\n      \"employment_id\": \"465fe8f5-f5df-7869-d849-5a417097db7c\",\n      \"amount\": 2754,\n      \"currency\": \"string\",\n      \"recurrence\": \"weekly\",\n      \"starts_on\": \"1961-12-06\",\n      \"ends_on\": \"1947-05-26\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoices\": [\n      {\n        \"id\": \"fde54ce1-6400-2c39-9bbe-7bbceec43e5a\",\n        \"employment_id\": \"2e878a68-281e-583b-ed37-168b1869ffe3\",\n        \"amount\": 5924,\n        \"currency\": \"string\",\n        \"recurrence\": \"monthly\",\n        \"next_run_at\": \"1967-04-10T10:02:11.635Z\"\n      },\n      {\n        \"id\": \"8ce777a3-6bdc-0a62-dc50-40595cd2fb7a\",\n        \"employment_id\": \"4ff65647-f38c-8666-b346-81cf8ea4fd5e\",\n        \"amount\": 7029,\n        \"currency\": \"string\",\n        \"recurrence\": \"monthly\",\n        \"next_run_at\": \"2011-02-26T10:46:19.872Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac2f41c-ff72-4209-9b24-df325ec40e63",
+          "name": "Show A Scheduled Contractor Invoice",
+          "request": {
+            "name": "Show A Scheduled Contractor Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices",
+                ":scheduled_invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "scheduled_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64daa946-dd6e-43fa-b00e-ed997292e774",
+              "name": "Scheduled invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices",
+                    ":scheduled_invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "scheduled_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoice\": {\n      \"id\": \"c57d9cd4-de01-265d-4e03-2e82e8a8a3ba\",\n      \"employment_id\": \"d2255271-9337-9ceb-9ac5-12d2172bcd61\",\n      \"amount\": 9528,\n      \"currency\": \"string\",\n      \"recurrence\": \"one_time\",\n      \"next_run_at\": \"1953-10-07T21:37:18.056Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "255b408a-fcac-4327-bfa8-b4bdcc526d45",
+          "name": "Update A Scheduled Contractor Invoice",
+          "request": {
+            "name": "Update A Scheduled Contractor Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled_contractor_invoices",
+                ":scheduled_invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "scheduled_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"recurrence\": \"<string>\",\n  \"starts_on\": \"<date>\",\n  \"ends_on\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a09d5ba-665b-434f-b3d8-4fa22eb33c3c",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled_contractor_invoices",
+                    ":scheduled_invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "scheduled_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"recurrence\": \"<string>\",\n  \"starts_on\": \"<date>\",\n  \"ends_on\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"scheduled_contractor_invoice\": {\n      \"id\": \"c57d9cd4-de01-265d-4e03-2e82e8a8a3ba\",\n      \"employment_id\": \"d2255271-9337-9ceb-9ac5-12d2172bcd61\",\n      \"amount\": 9528,\n      \"currency\": \"string\",\n      \"recurrence\": \"one_time\",\n      \"next_run_at\": \"1953-10-07T21:37:18.056Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ba4fe0b-d8a5-4652-a1f4-ab894e8a4b60",
+    "name": "Remote Benefits Benefit Offers Scheduled Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

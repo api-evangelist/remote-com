@@ -1,0 +1,127 @@
+{
+  "item": [
+    {
+      "id": "15749e32-83c5-4466-88f6-47d3bf494db4",
+      "name": "Company Structure",
+      "description": {
+        "content": "Reporting hierarchy and structure nodes for employees",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55e7b44d-01db-4f12-bd42-0b22a28a743a",
+          "name": "List Company Structure Nodes",
+          "request": {
+            "name": "List Company Structure Nodes",
+            "description": {},
+            "url": {
+              "path": [
+                "company_structure_nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0093b7ea-0a76-4023-b1c3-3764cada7fd0",
+              "name": "Structure nodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_structure_nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 5144.856539327252,\n  \"key_1\": 4330,\n  \"key_2\": true,\n  \"key_3\": true,\n  \"key_4\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b4f005f2-7a84-4800-8b12-add6b38e189f",
+    "name": "Remote Benefits Benefit Offers Company Structure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

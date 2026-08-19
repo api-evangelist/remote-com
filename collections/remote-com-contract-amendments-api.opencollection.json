@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Contract Amendments API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contract Amendments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Contract Amendments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_amendments",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Contract Amendments"
+        },
+        {
+          "info": {
+            "name": "Create A Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_amendments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Contract Amendment"
+        },
+        {
+          "info": {
+            "name": "Submit An Automatable Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_amendments/automatable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Automatable amendments use a structured payload that Remote can\napprove without manual review. Use the `/contract_amendments/schema`\nendpoint to learn the per-country form requirements.\n"
+        },
+        {
+          "info": {
+            "name": "Show A Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_amendments/:contract_amendment_id",
+            "params": [
+              {
+                "name": "contract_amendment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Contract Amendment"
+        },
+        {
+          "info": {
+            "name": "Show A Contract Amendment Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_amendments/schema",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the JSON Schema form definition for amendments in a given country and employment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

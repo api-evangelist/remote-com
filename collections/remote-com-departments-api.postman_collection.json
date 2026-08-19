@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "555bcbf4-6a0d-47be-b206-28cc139275f6",
+      "name": "Departments",
+      "description": {
+        "content": "Manage company-defined departments and org structure",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58a1abbe-3d1b-4854-b6ce-d22121fccfd7",
+          "name": "List Departments",
+          "request": {
+            "name": "List Departments",
+            "description": {},
+            "url": {
+              "path": [
+                "companies",
+                ":company_id",
+                "departments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8eda8250-fa35-4d0f-ba3f-5eca46100a22",
+              "name": "Departments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":company_id",
+                    "departments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"departments\": [\n      {\n        \"id\": \"5e48fc2d-4642-376a-154d-6dc63b597ccf\",\n        \"name\": \"string\",\n        \"parent_department_id\": \"21790b1b-57bf-f440-7cea-332554cb7027\"\n      },\n      {\n        \"id\": \"9e370ce5-3dca-1109-619c-3751f94d2392\",\n        \"name\": \"string\",\n        \"parent_department_id\": \"a5ed7250-fe6b-26ce-ee24-e15e2aef71f9\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf35f3f1-ccc8-4866-8666-2628aa2f1979",
+          "name": "Create A Department",
+          "request": {
+            "name": "Create A Department",
+            "description": {},
+            "url": {
+              "path": [
+                "companies",
+                ":company_id",
+                "departments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"parent_department_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4ad4d0f-de6a-499a-b8fd-928792bd7ad5",
+              "name": "Department created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":company_id",
+                    "departments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"parent_department_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"department\": {\n      \"id\": \"32847c0c-50fa-c240-061b-37d91d5a2a56\",\n      \"name\": \"string\",\n      \"parent_department_id\": \"50d0be39-5bbc-dc3b-d226-4d90c942eca6\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0da13be5-47c6-4968-8103-0e01dc68ccbd",
+    "name": "Remote Benefits Benefit Offers Departments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Work Authorization API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Work Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Work Authorization Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/work_authorization_requests"
+          },
+          "docs": "List Work Authorization Requests"
+        },
+        {
+          "info": {
+            "name": "Show A Work Authorization Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/work_authorization_requests/:work_authorization_request_id",
+            "params": [
+              {
+                "name": "work_authorization_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Work Authorization Request"
+        },
+        {
+          "info": {
+            "name": "Update A Work Authorization Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/work_authorization_requests/:work_authorization_request_id",
+            "params": [
+              {
+                "name": "work_authorization_request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Work Authorization Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

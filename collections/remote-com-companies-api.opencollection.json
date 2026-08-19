@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Companies API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List companies accessible to the current partner or customer access token."
+        },
+        {
+          "info": {
+            "name": "Create A Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new company on Remote. Returns the company resource together\nwith a company-scoped access token that the partner/customer may use\nto call subsequent endpoints on the new company's behalf.\n"
+        },
+        {
+          "info": {
+            "name": "Show A Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a company by id."
+        },
+        {
+          "info": {
+            "name": "Update A Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/companies/:company_id",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields on an existing company."
+        },
+        {
+          "info": {
+            "name": "List Company Legal Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal_entities",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the legal entities under which the company hires."
+        },
+        {
+          "info": {
+            "name": "Show A JSON Schema Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/forms/:form_type",
+            "params": [
+              {
+                "name": "form_type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the JSON Schema form definition used by Remote to collect localized data for the given resource type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

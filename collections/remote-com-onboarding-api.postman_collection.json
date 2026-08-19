@@ -1,0 +1,455 @@
+{
+  "item": [
+    {
+      "id": "c2266b58-2c15-43ac-bc3e-f60e01f04bf9",
+      "name": "Onboarding",
+      "description": {
+        "content": "Drive employee onboarding flows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2088a9e-c8a4-4e96-8a62-e4a489785d31",
+          "name": "Invite An Employment To Self-Serve Onboarding",
+          "request": {
+            "name": "Invite An Employment To Self-Serve Onboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "invite"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5b3fade-dcd9-4f88-93d0-4a94f314e784",
+              "name": "Invitation sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "invite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"d22ed1b2-e9df-b2dc-f93a-71d6afc9d704\",\n      \"status\": \"active\",\n      \"employment_type\": \"employee\",\n      \"company_id\": \"a260c23f-6a16-1b6d-98b3-1f2aa15f641c\",\n      \"external_id\": \"string\",\n      \"full_name\": \"string\",\n      \"personal_email\": \"fAPSpnNSqZ@NQbWIalvXrxCrnoDXvEI.ax\",\n      \"work_email\": \"bVz@cCLDXYl.kblb\",\n      \"country\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"employment_model\": \"peo\",\n      \"lifecycle_stage\": \"probation\",\n      \"job_title\": \"string\",\n      \"manager_id\": \"01a22468-4d78-37db-9144-794fef41ced3\",\n      \"department_id\": \"b1c1fc76-1234-7e8f-cc1f-fc78d9c06f8f\",\n      \"start_date\": \"2011-02-23\",\n      \"provisional_start_date\": \"1962-06-01\",\n      \"created_at\": \"1948-03-31T02:38:18.822Z\",\n      \"updated_at\": \"1987-01-28T05:41:32.208Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbf96cb6-ddeb-43de-9712-514e085d0626",
+          "name": "Create An Eligibility Questionnaire",
+          "request": {
+            "name": "Create An Eligibility Questionnaire",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 7059,\n  \"key_1\": 1394\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44670976-46ee-4884-9439-e9a0a8e5a9df",
+              "name": "Eligibility questionnaire created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7584.919945632596,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7584.919945632596,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bdfff21-44f3-47b6-b0eb-fb0a5d5dc55f",
+          "name": "Show An Eligibility Questionnaire",
+          "request": {
+            "name": "Show An Eligibility Questionnaire",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "eligibility",
+                ":questionnaire_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "questionnaire_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "000df136-cfd9-4f61-98a4-e777ac5ce651",
+              "name": "Questionnaire.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "eligibility",
+                    ":questionnaire_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "questionnaire_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7584.919945632596,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07e138b2-6667-48f4-b4b3-369d59492257",
+          "name": "Submit Risk Reserve Proof Of Payment",
+          "request": {
+            "name": "Submit Risk Reserve Proof Of Payment",
+            "description": {},
+            "url": {
+              "path": [
+                "eor_hiring",
+                "risk_reserve",
+                "proof_of_payment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 7059,\n  \"key_1\": 1394\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2301579a-5a31-49be-bb83-a7992055e629",
+              "name": "Accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eor_hiring",
+                    "risk_reserve",
+                    "proof_of_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7584.919945632596,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8b733465-b20b-4073-8478-9b2defbf92b7",
+    "name": "Remote Benefits Benefit Offers Onboarding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

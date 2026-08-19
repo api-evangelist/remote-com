@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Contract Documents API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contract Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Contract Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Contract Document"
+        },
+        {
+          "info": {
+            "name": "Show A Contract Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract_documents/:contract_document_id",
+            "params": [
+              {
+                "name": "contract_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Contract Document"
+        },
+        {
+          "info": {
+            "name": "Sign A Contract Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract_documents/:contract_document_id/sign",
+            "params": [
+              {
+                "name": "contract_document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sign A Contract Document"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

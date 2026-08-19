@@ -1,0 +1,337 @@
+{
+  "item": [
+    {
+      "id": "49912c6c-2c53-4d8b-a42f-298de70fbdcb",
+      "name": "COR Termination",
+      "description": {
+        "content": "Terminate Contractor-of-Record engagements",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8d23712-1c22-491a-9b8a-84d1765c7175",
+          "name": "Show COR Termination Request",
+          "request": {
+            "name": "Show COR Termination Request",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "cor_termination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e70324ca-a8fa-4a3a-ba14-b353b7f3c70c",
+              "name": "Termination request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "cor_termination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"cor_termination_request\": {\n      \"id\": \"5b19e311-2491-9543-9870-76df69c57149\",\n      \"employment_id\": \"f7102a21-cd29-ed72-29fb-4c686cc194fe\",\n      \"status\": \"submitted\",\n      \"last_day_of_engagement\": \"1996-11-21\",\n      \"reason\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6db9549d-ad18-42ff-9766-623e0653ad65",
+          "name": "Create COR Termination Request",
+          "request": {
+            "name": "Create COR Termination Request",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "cor_termination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"last_day_of_engagement\": \"<date>\",\n  \"reason\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": 2910.3690921782986,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "712220fa-13b1-4b84-ba2b-9d0c8727c526",
+              "name": "Termination created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "cor_termination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"last_day_of_engagement\": \"<date>\",\n  \"reason\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": 6940,\n    \"key_1\": 4626.968044574666\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"cor_termination_request\": {\n      \"id\": \"5b19e311-2491-9543-9870-76df69c57149\",\n      \"employment_id\": \"f7102a21-cd29-ed72-29fb-4c686cc194fe\",\n      \"status\": \"submitted\",\n      \"last_day_of_engagement\": \"1996-11-21\",\n      \"reason\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c588622a-d394-40f6-b54b-294e065e4671",
+          "name": "Terminate A Contractor Of Record Employment",
+          "request": {
+            "name": "Terminate A Contractor Of Record Employment",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "terminate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98f569d7-a646-4187-a038-38eabb1cf92d",
+              "name": "Termination submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21ecb06f-0f3f-4d4b-9e3d-08b579a03cab",
+    "name": "Remote Benefits Benefit Offers COR Termination API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

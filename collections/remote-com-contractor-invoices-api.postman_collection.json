@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "a03fc959-7189-4e63-a287-38a78f8ad92e",
+      "name": "Contractor Invoices",
+      "description": {
+        "content": "List and inspect contractor invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e148aa0a-adb6-4fb9-9a67-3f24649c7792",
+          "name": "List Contractor Invoices",
+          "request": {
+            "name": "List Contractor Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "contractor_invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bd4439c-2c2f-4b86-b56e-411a4d4bede3",
+              "name": "Invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractor_invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contractor_invoices\": [\n      {\n        \"id\": \"9f1511df-9bdb-1495-065f-1c377cce27d0\",\n        \"employment_id\": \"87e1353a-3382-15d7-f4f7-76bec575e4ba\",\n        \"amount\": 8015,\n        \"currency\": \"string\",\n        \"status\": \"void\",\n        \"period_start\": \"1995-11-06\",\n        \"period_end\": \"1974-07-08\",\n        \"issued_at\": \"1958-01-04T02:06:31.987Z\"\n      },\n      {\n        \"id\": \"45dcd1fd-9e01-cc77-5fad-354b3c35d93c\",\n        \"employment_id\": \"adce27f7-a38e-e4f6-5a2a-26333fecd5bf\",\n        \"amount\": 9020,\n        \"currency\": \"string\",\n        \"status\": \"paid\",\n        \"period_start\": \"1965-05-30\",\n        \"period_end\": \"1949-04-09\",\n        \"issued_at\": \"2013-10-07T21:17:31.888Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25d92972-40c3-4a61-9518-4b69a86c595f",
+          "name": "Show A Contractor Invoice",
+          "request": {
+            "name": "Show A Contractor Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "contractor_invoices",
+                ":contractor_invoice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contractor_invoice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14fbb2ce-6bbb-4e19-9ebb-3f893eb4e7e9",
+              "name": "Invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractor_invoices",
+                    ":contractor_invoice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contractor_invoice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contractor_invoice\": {\n      \"id\": \"e92ecf87-8bb2-64e6-4693-84e5756f03fd\",\n      \"employment_id\": \"447d190a-9f7c-02b2-89f6-922404a16128\",\n      \"amount\": 571,\n      \"currency\": \"string\",\n      \"status\": \"paid\",\n      \"period_start\": \"1997-12-26\",\n      \"period_end\": \"1984-02-07\",\n      \"issued_at\": \"2004-11-29T17:03:59.868Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e50d6f4b-63fc-453b-9380-122de3270831",
+    "name": "Remote Benefits Benefit Offers Contractor Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Expenses API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Expenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Expenses"
+        },
+        {
+          "info": {
+            "name": "Create An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create An Expense"
+        },
+        {
+          "info": {
+            "name": "Show An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Expense"
+        },
+        {
+          "info": {
+            "name": "Update An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update An Expense"
+        },
+        {
+          "info": {
+            "name": "Delete An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete An Expense"
+        },
+        {
+          "info": {
+            "name": "Approve An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/approve",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve An Expense"
+        },
+        {
+          "info": {
+            "name": "Decline An Expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/decline",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decline An Expense"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

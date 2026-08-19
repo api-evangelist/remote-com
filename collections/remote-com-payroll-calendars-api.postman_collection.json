@@ -1,0 +1,296 @@
+{
+  "item": [
+    {
+      "id": "29e63728-7f99-4b9c-99aa-1fbcd071c52c",
+      "name": "Payroll Calendars",
+      "description": {
+        "content": "Inspect payroll calendars for company, EOR, and Global Payroll",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "372af899-663b-4281-a90c-827929b09261",
+          "name": "List Payroll Calendar",
+          "request": {
+            "name": "List Payroll Calendar",
+            "description": {},
+            "url": {
+              "path": [
+                "payroll",
+                "calendars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "starts_after",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ends_before",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd57d7d7-53bd-4bcf-b860-7ebd7b3376b5",
+              "name": "Calendar entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll",
+                    "calendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "starts_after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "ends_before",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"payroll_calendars\": [\n      {\n        \"id\": \"5c525520-c356-c57d-80f4-6109d4a90eeb\",\n        \"scope\": \"global_payroll\",\n        \"country_code\": \"string\",\n        \"period_start\": \"1979-06-09\",\n        \"period_end\": \"2021-06-04\",\n        \"cutoff_date\": \"2012-05-01\",\n        \"payday\": \"2001-07-07\",\n        \"currency\": \"string\"\n      },\n      {\n        \"id\": \"709b33f6-4ad2-4953-fd1c-a7d312d5a2a4\",\n        \"scope\": \"company\",\n        \"country_code\": \"string\",\n        \"period_start\": \"1962-07-09\",\n        \"period_end\": \"1967-12-22\",\n        \"cutoff_date\": \"1985-04-27\",\n        \"payday\": \"1967-06-29\",\n        \"currency\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d084f6a9-ab66-46b4-917e-e0a242629559",
+          "name": "List Company Payroll Calendar",
+          "request": {
+            "name": "List Company Payroll Calendar",
+            "description": {},
+            "url": {
+              "path": [
+                "payroll",
+                "calendars",
+                "company"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fd1cfbb-013b-4604-872d-26c9df80fe98",
+              "name": "Calendar entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll",
+                    "calendars",
+                    "company"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"payroll_calendars\": [\n      {\n        \"id\": \"5c525520-c356-c57d-80f4-6109d4a90eeb\",\n        \"scope\": \"global_payroll\",\n        \"country_code\": \"string\",\n        \"period_start\": \"1979-06-09\",\n        \"period_end\": \"2021-06-04\",\n        \"cutoff_date\": \"2012-05-01\",\n        \"payday\": \"2001-07-07\",\n        \"currency\": \"string\"\n      },\n      {\n        \"id\": \"709b33f6-4ad2-4953-fd1c-a7d312d5a2a4\",\n        \"scope\": \"company\",\n        \"country_code\": \"string\",\n        \"period_start\": \"1962-07-09\",\n        \"period_end\": \"1967-12-22\",\n        \"cutoff_date\": \"1985-04-27\",\n        \"payday\": \"1967-06-29\",\n        \"currency\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9469fb2-fb1a-4c30-bc5f-ad226ed38a26",
+          "name": "List EOR Payroll Calendar",
+          "request": {
+            "name": "List EOR Payroll Calendar",
+            "description": {},
+            "url": {
+              "path": [
+                "payroll",
+                "calendars",
+                "eor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6c9ca84-d3b0-4fd4-8b42-864e82ccf07c",
+              "name": "Calendar entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll",
+                    "calendars",
+                    "eor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"payroll_calendars\": [\n      {\n        \"id\": \"5c525520-c356-c57d-80f4-6109d4a90eeb\",\n        \"scope\": \"global_payroll\",\n        \"country_code\": \"string\",\n        \"period_start\": \"1979-06-09\",\n        \"period_end\": \"2021-06-04\",\n        \"cutoff_date\": \"2012-05-01\",\n        \"payday\": \"2001-07-07\",\n        \"currency\": \"string\"\n      },\n      {\n        \"id\": \"709b33f6-4ad2-4953-fd1c-a7d312d5a2a4\",\n        \"scope\": \"company\",\n        \"country_code\": \"string\",\n        \"period_start\": \"1962-07-09\",\n        \"period_end\": \"1967-12-22\",\n        \"cutoff_date\": \"1985-04-27\",\n        \"payday\": \"1967-06-29\",\n        \"currency\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "29ed8014-cdb5-4c3c-a410-4964e65616f3",
+    "name": "Remote Benefits Benefit Offers Payroll Calendars API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

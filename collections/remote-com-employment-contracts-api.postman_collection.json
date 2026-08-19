@@ -1,0 +1,233 @@
+{
+  "item": [
+    {
+      "id": "849ab30c-86f8-4fc8-9be2-ef7aac065c32",
+      "name": "Employment Contracts",
+      "description": {
+        "content": "View active and pending employment contracts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a13f5a00-4cb5-4538-ab37-3cbafc05dc11",
+          "name": "List Employment Contracts",
+          "request": {
+            "name": "List Employment Contracts",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6c66781-ee31-4449-a770-56e5e577bc59",
+              "name": "Contracts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employment_contracts\": [\n      {\n        \"id\": \"5551e788-afbd-4bb1-d3e5-d1832c8c0c5f\",\n        \"employment_id\": \"f11bbbfb-cb7d-71d4-ff4d-e260546e6ba5\",\n        \"status\": \"active\",\n        \"contract_type\": \"fixed_term\",\n        \"currency_code\": \"string\",\n        \"annual_gross_salary\": 6677,\n        \"weekly_hours\": 983.4251075214506\n      },\n      {\n        \"id\": \"16b9daa1-3e76-2527-7cfb-e36b96ff5196\",\n        \"employment_id\": \"216feb7b-e20f-6629-d9d3-a0aee06de1f1\",\n        \"status\": \"active\",\n        \"contract_type\": \"indefinite\",\n        \"currency_code\": \"string\",\n        \"annual_gross_salary\": 6564,\n        \"weekly_hours\": 8718.096897587448\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed787c3b-4622-436e-be2d-5d740611af19",
+          "name": "Get Pending Contract Changes",
+          "request": {
+            "name": "Get Pending Contract Changes",
+            "description": {},
+            "url": {
+              "path": [
+                "employments",
+                ":employment_id",
+                "contracts",
+                "pending_changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53b78816-e2a4-4716-bfd3-767d6be48cd3",
+              "name": "Pending changes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments",
+                    ":employment_id",
+                    "contracts",
+                    "pending_changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f2a1dca5-958d-4e66-9402-7c6d8257f15a",
+    "name": "Remote Benefits Benefit Offers Employment Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

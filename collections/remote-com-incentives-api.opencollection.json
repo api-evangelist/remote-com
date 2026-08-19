@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Incentives API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incentives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Incentives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Incentives"
+        },
+        {
+          "info": {
+            "name": "Create An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/incentives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create An Incentive"
+        },
+        {
+          "info": {
+            "name": "Show An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives/:incentive_id",
+            "params": [
+              {
+                "name": "incentive_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Incentive"
+        },
+        {
+          "info": {
+            "name": "Update An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/incentives/:incentive_id",
+            "params": [
+              {
+                "name": "incentive_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update An Incentive"
+        },
+        {
+          "info": {
+            "name": "Delete An Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/incentives/:incentive_id",
+            "params": [
+              {
+                "name": "incentive_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete An Incentive"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,323 @@
+{
+  "item": [
+    {
+      "id": "094863cd-cc7c-4bf7-8bab-4b5c18ca0bf9",
+      "name": "Work Authorization",
+      "description": {
+        "content": "Work authorization (visa / right to work) requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "544e098b-df14-4fa7-a887-0834b7d67a82",
+          "name": "List Work Authorization Requests",
+          "request": {
+            "name": "List Work Authorization Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "work_authorization_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "226e1b2a-8857-4c32-a288-54cb798872fe",
+              "name": "Work authorization requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work_authorization_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"work_authorization_requests\": [\n      {\n        \"id\": \"109e8b25-2583-1422-f837-b24a853e43fe\",\n        \"employment_id\": \"a56fc4b7-c826-1104-4a6e-fc4b4fde727f\",\n        \"country_code\": \"string\",\n        \"status\": \"requested\",\n        \"visa_type\": \"string\",\n        \"target_start_date\": \"1984-05-18\"\n      },\n      {\n        \"id\": \"34768f9d-285b-2300-e05c-cd3f5a5d327d\",\n        \"employment_id\": \"36102bc7-e8ed-58bf-a413-8eedad3465c1\",\n        \"country_code\": \"string\",\n        \"status\": \"cancelled\",\n        \"visa_type\": \"string\",\n        \"target_start_date\": \"1993-07-04\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30d774f3-1993-4d87-8528-a4c1067409e2",
+          "name": "Show A Work Authorization Request",
+          "request": {
+            "name": "Show A Work Authorization Request",
+            "description": {},
+            "url": {
+              "path": [
+                "work_authorization_requests",
+                ":work_authorization_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "work_authorization_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d7c5f55-149e-43cc-bbe4-fd4b2bcdc6b7",
+              "name": "Work authorization request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work_authorization_requests",
+                    ":work_authorization_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "work_authorization_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"id\": \"9977f8fe-5c62-c4b3-d01b-5e85124983ec\",\n      \"employment_id\": \"1f8652b1-ed66-76cd-6586-0e26f8eea4a1\",\n      \"country_code\": \"string\",\n      \"status\": \"declined_by_remote\",\n      \"visa_type\": \"string\",\n      \"target_start_date\": \"2010-09-22\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9692013e-9152-4866-90ae-a7cfb89b8ee4",
+          "name": "Update A Work Authorization Request",
+          "request": {
+            "name": "Update A Work Authorization Request",
+            "description": {},
+            "url": {
+              "path": [
+                "work_authorization_requests",
+                ":work_authorization_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "work_authorization_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 3005,\n  \"key_1\": \"string\",\n  \"key_2\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58b2e548-beb1-41fa-88b5-98a4a68a43f8",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work_authorization_requests",
+                    ":work_authorization_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "work_authorization_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"id\": \"9977f8fe-5c62-c4b3-d01b-5e85124983ec\",\n      \"employment_id\": \"1f8652b1-ed66-76cd-6586-0e26f8eea4a1\",\n      \"country_code\": \"string\",\n      \"status\": \"declined_by_remote\",\n      \"visa_type\": \"string\",\n      \"target_start_date\": \"2010-09-22\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c4eab6c8-c23b-41b8-a814-b5db8d278dea",
+    "name": "Remote Benefits Benefit Offers Work Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

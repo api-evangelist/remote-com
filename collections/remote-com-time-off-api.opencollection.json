@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Time Off API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Off",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Time Off Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "starts_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ends_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Time Off Requests"
+        },
+        {
+          "info": {
+            "name": "Create A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Show A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Update A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Approve A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/approve",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Decline A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/decline",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decline A Time Off Request"
+        },
+        {
+          "info": {
+            "name": "Cancel A Time Off Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/cancel",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel A Time Off Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

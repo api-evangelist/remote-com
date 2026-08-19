@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "3f185b43-a3ca-44e3-8bfa-81175263534e",
+      "name": "Countries",
+      "description": {
+        "content": "List of countries Remote supports",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "efc6ae55-979f-4289-815f-637bfaf66b9e",
+          "name": "List Supported Countries",
+          "request": {
+            "name": "List Supported Countries",
+            "description": {},
+            "url": {
+              "path": [
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac0ff154-c012-4cd9-96bc-e88274a45d58",
+              "name": "Countries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"countries\": [\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"currency\": \"string\",\n        \"supported_employment_models\": [\n          \"global_payroll\",\n          \"peo\"\n        ],\n        \"has_remote_entity\": false\n      },\n      {\n        \"code\": \"string\",\n        \"name\": \"string\",\n        \"currency\": \"string\",\n        \"supported_employment_models\": [\n          \"eor\",\n          \"contractor\"\n        ],\n        \"has_remote_entity\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c621ea9-9a5c-41c9-853e-d99c42f0a24d",
+          "name": "Show A Country",
+          "request": {
+            "name": "Show A Country",
+            "description": {},
+            "url": {
+              "path": [
+                "countries",
+                ":country_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "country_code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f93634bd-2b84-42df-9499-df864e35c2d1",
+              "name": "Country.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries",
+                    ":country_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "country_code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"country\": {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"currency\": \"string\",\n      \"supported_employment_models\": [\n        \"global_payroll\",\n        \"eor\"\n      ],\n      \"has_remote_entity\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dc4d786e-b04c-483e-be98-c3315d34a9bc",
+    "name": "Remote Benefits Benefit Offers Countries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

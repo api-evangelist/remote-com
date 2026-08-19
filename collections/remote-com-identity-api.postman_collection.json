@@ -1,0 +1,119 @@
+{
+  "item": [
+    {
+      "id": "946007fa-04e2-49bb-bd37-7f37a920054d",
+      "name": "Identity",
+      "description": {
+        "content": "Inspect the identity of the current access token",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b209dfff-88ad-46ac-a2a0-2ababa8cf0f7",
+          "name": "Get Token Identity",
+          "request": {
+            "name": "Get Token Identity",
+            "description": {
+              "content": "Shows the entities controllable by the current access token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "858c5629-62b9-42a4-acba-39c7d0f5c7c7",
+              "name": "Identity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"company\",\n    \"company_id\": \"04b8d798-c7db-ef3f-4010-f67c3c801993\",\n    \"partner_id\": \"68d5cc87-2b80-9a89-1bd7-90625cf3c247\",\n    \"employment_id\": \"e5a820a7-e2cb-aeec-2749-a83fa4d29c49\",\n    \"user_id\": \"dfea1e6d-14e6-1083-89f8-696618bb1b7a\",\n    \"scopes\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "243f1f03-ac70-4098-9ba1-f1fbd7ef8caf",
+    "name": "Remote Benefits Benefit Offers Identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

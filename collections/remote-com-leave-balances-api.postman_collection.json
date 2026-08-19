@@ -1,0 +1,128 @@
+{
+  "item": [
+    {
+      "id": "7f2a7544-9ae4-4d8d-b7c7-a8b24e4bf011",
+      "name": "Leave Balances",
+      "description": {
+        "content": "Per-employee leave balances",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4ee46d5-4f60-4670-8c3c-a09f734b4acb",
+          "name": "List Leave Balances",
+          "request": {
+            "name": "List Leave Balances",
+            "description": {},
+            "url": {
+              "path": [
+                "leave_balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ab168ce-ddc7-42df-a62f-5dc06ef3c766",
+              "name": "Leave balances for the employment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leave_balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"leave_balances\": [\n      {\n        \"leave_type\": \"string\",\n        \"remaining_days\": 2460.3414630409293,\n        \"used_days\": 2074.9945968943016,\n        \"accrued_days\": 5114.824872339947,\n        \"unit\": \"hours\"\n      },\n      {\n        \"leave_type\": \"string\",\n        \"remaining_days\": 7482.52749983037,\n        \"used_days\": 1535.8977155317998,\n        \"accrued_days\": 242.83141242792183,\n        \"unit\": \"days\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2808fa73-63cd-4f46-ab32-02b1be00aa44",
+    "name": "Remote Benefits Benefit Offers Leave Balances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

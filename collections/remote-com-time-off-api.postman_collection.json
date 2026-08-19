@@ -1,0 +1,763 @@
+{
+  "item": [
+    {
+      "id": "b1f1c43e-a0b8-4c57-a6a1-dea2930409fd",
+      "name": "Time Off",
+      "description": {
+        "content": "Time-off requests and approvals",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c0d8270-b915-4935-b86d-d7c4b7e985b5",
+          "name": "List Time Off Requests",
+          "request": {
+            "name": "List Time Off Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "starts_after",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ends_before",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7963222a-f8a7-4a65-ba88-a06e20b5e2fa",
+              "name": "Time-off requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "approved"
+                    },
+                    {
+                      "key": "starts_after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "ends_before",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": [\n      {\n        \"id\": \"943ae5d2-effe-d9d5-d4b8-231fc5807a49\",\n        \"employment_id\": \"1dd38456-88c5-2ea0-4168-5a07513a3406\",\n        \"leave_type\": \"string\",\n        \"leave_policy_id\": \"678bf688-230a-f43a-6863-2e0a9d271faa\",\n        \"status\": \"requested\",\n        \"start_date\": \"1965-06-05\",\n        \"end_date\": \"1976-02-17\",\n        \"total_days\": 7211.496071063508,\n        \"note\": \"string\",\n        \"created_at\": \"2000-05-02T07:23:00.892Z\"\n      },\n      {\n        \"id\": \"0cf8390d-cb42-e673-e3a0-4ecc973a643e\",\n        \"employment_id\": \"8db675c7-9963-0440-f817-2b47a11a56c9\",\n        \"leave_type\": \"string\",\n        \"leave_policy_id\": \"6274c742-54a1-2eb4-9de6-b03dd9070228\",\n        \"status\": \"canceled\",\n        \"start_date\": \"1951-05-09\",\n        \"end_date\": \"1967-07-16\",\n        \"total_days\": 1415.9522493140587,\n        \"note\": \"string\",\n        \"created_at\": \"2024-10-18T12:46:36.553Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21b26d9c-9666-4773-856a-33db1172b787",
+          "name": "Create A Time Off Request",
+          "request": {
+            "name": "Create A Time Off Request",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"leave_type\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_id\": \"<uuid>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5edf446d-d179-490a-8fb0-25a99c8f20ea",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"leave_type\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_id\": \"<uuid>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"d13fabd4-8a4c-782d-0028-20a5c4431f7d\",\n      \"employment_id\": \"b93448d0-450e-e7e4-5c3b-ff03f8481218\",\n      \"leave_type\": \"string\",\n      \"leave_policy_id\": \"3a110b7c-3cc6-3a71-edf4-8ebd448e8d1a\",\n      \"status\": \"taken\",\n      \"start_date\": \"1951-12-10\",\n      \"end_date\": \"1954-02-27\",\n      \"total_days\": 3107.970426337533,\n      \"note\": \"string\",\n      \"created_at\": \"1973-05-21T08:09:44.937Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81e51ca9-5ceb-4d9d-90be-1d8319b7da21",
+          "name": "Show A Time Off Request",
+          "request": {
+            "name": "Show A Time Off Request",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff",
+                ":timeoff_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timeoff_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdb372ce-a196-4220-8cae-fa5b6b61936f",
+              "name": "Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff",
+                    ":timeoff_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timeoff_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"d13fabd4-8a4c-782d-0028-20a5c4431f7d\",\n      \"employment_id\": \"b93448d0-450e-e7e4-5c3b-ff03f8481218\",\n      \"leave_type\": \"string\",\n      \"leave_policy_id\": \"3a110b7c-3cc6-3a71-edf4-8ebd448e8d1a\",\n      \"status\": \"taken\",\n      \"start_date\": \"1951-12-10\",\n      \"end_date\": \"1954-02-27\",\n      \"total_days\": 3107.970426337533,\n      \"note\": \"string\",\n      \"created_at\": \"1973-05-21T08:09:44.937Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7914d0fa-109f-4d7c-8749-023da5f72fa9",
+          "name": "Update A Time Off Request",
+          "request": {
+            "name": "Update A Time Off Request",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff",
+                ":timeoff_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timeoff_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"leave_type\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_id\": \"<uuid>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab977b93-04d9-45ea-bdda-8692000387c6",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff",
+                    ":timeoff_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timeoff_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"leave_type\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_id\": \"<uuid>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"d13fabd4-8a4c-782d-0028-20a5c4431f7d\",\n      \"employment_id\": \"b93448d0-450e-e7e4-5c3b-ff03f8481218\",\n      \"leave_type\": \"string\",\n      \"leave_policy_id\": \"3a110b7c-3cc6-3a71-edf4-8ebd448e8d1a\",\n      \"status\": \"taken\",\n      \"start_date\": \"1951-12-10\",\n      \"end_date\": \"1954-02-27\",\n      \"total_days\": 3107.970426337533,\n      \"note\": \"string\",\n      \"created_at\": \"1973-05-21T08:09:44.937Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b2fb859-9c59-4370-9d2d-1b076a22d769",
+          "name": "Approve A Time Off Request",
+          "request": {
+            "name": "Approve A Time Off Request",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff",
+                ":timeoff_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timeoff_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3a3f7ef-a140-4d98-ab74-78ca48519641",
+              "name": "Approved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff",
+                    ":timeoff_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timeoff_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"d13fabd4-8a4c-782d-0028-20a5c4431f7d\",\n      \"employment_id\": \"b93448d0-450e-e7e4-5c3b-ff03f8481218\",\n      \"leave_type\": \"string\",\n      \"leave_policy_id\": \"3a110b7c-3cc6-3a71-edf4-8ebd448e8d1a\",\n      \"status\": \"taken\",\n      \"start_date\": \"1951-12-10\",\n      \"end_date\": \"1954-02-27\",\n      \"total_days\": 3107.970426337533,\n      \"note\": \"string\",\n      \"created_at\": \"1973-05-21T08:09:44.937Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cbf80ba-69fb-4626-beeb-be9e288bd894",
+          "name": "Decline A Time Off Request",
+          "request": {
+            "name": "Decline A Time Off Request",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff",
+                ":timeoff_id",
+                "decline"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timeoff_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5735cb65-582d-48c9-8059-66f93903cd22",
+              "name": "Declined.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff",
+                    ":timeoff_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timeoff_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"d13fabd4-8a4c-782d-0028-20a5c4431f7d\",\n      \"employment_id\": \"b93448d0-450e-e7e4-5c3b-ff03f8481218\",\n      \"leave_type\": \"string\",\n      \"leave_policy_id\": \"3a110b7c-3cc6-3a71-edf4-8ebd448e8d1a\",\n      \"status\": \"taken\",\n      \"start_date\": \"1951-12-10\",\n      \"end_date\": \"1954-02-27\",\n      \"total_days\": 3107.970426337533,\n      \"note\": \"string\",\n      \"created_at\": \"1973-05-21T08:09:44.937Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4db949d1-5e3a-4dac-b7b4-3abe74429fea",
+          "name": "Cancel A Time Off Request",
+          "request": {
+            "name": "Cancel A Time Off Request",
+            "description": {},
+            "url": {
+              "path": [
+                "timeoff",
+                ":timeoff_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timeoff_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a1071aa-3e9c-4f87-bafe-7f0771d75317",
+              "name": "Canceled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeoff",
+                    ":timeoff_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timeoff_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"d13fabd4-8a4c-782d-0028-20a5c4431f7d\",\n      \"employment_id\": \"b93448d0-450e-e7e4-5c3b-ff03f8481218\",\n      \"leave_type\": \"string\",\n      \"leave_policy_id\": \"3a110b7c-3cc6-3a71-edf4-8ebd448e8d1a\",\n      \"status\": \"taken\",\n      \"start_date\": \"1951-12-10\",\n      \"end_date\": \"1954-02-27\",\n      \"total_days\": 3107.970426337533,\n      \"note\": \"string\",\n      \"created_at\": \"1973-05-21T08:09:44.937Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41a79189-2faf-4eab-941d-53cbfc11b479",
+    "name": "Remote Benefits Benefit Offers Time Off API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

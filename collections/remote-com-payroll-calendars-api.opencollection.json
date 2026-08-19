@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Payroll Calendars API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payroll Calendars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll/calendars",
+            "params": [
+              {
+                "name": "starts_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ends_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Payroll Calendar"
+        },
+        {
+          "info": {
+            "name": "List Company Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll/calendars/company"
+          },
+          "docs": "List Company Payroll Calendar"
+        },
+        {
+          "info": {
+            "name": "List EOR Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll/calendars/eor"
+          },
+          "docs": "List EOR Payroll Calendar"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

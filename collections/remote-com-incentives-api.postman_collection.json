@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "09ea7a72-2440-4e84-bee1-b1a6e7b5dc40",
+      "name": "Incentives",
+      "description": {
+        "content": "One-time bonuses and recurring incentives",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "147a3318-9837-4d88-b98a-f22c31c10528",
+          "name": "List Incentives",
+          "request": {
+            "name": "List Incentives",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18564a7d-cfc6-4b5b-aff2-0c1ab351a512",
+              "name": "Incentives.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"incentives\": [\n      {\n        \"id\": \"03703cbf-c4a7-2c27-7937-8532af18986a\",\n        \"employment_id\": \"f87d0729-8719-50f3-6ca4-36a1e0534467\",\n        \"type\": \"signing_bonus\",\n        \"amount\": 5555,\n        \"currency\": \"string\",\n        \"recurrence\": \"yearly\",\n        \"effective_date\": \"1973-01-09\",\n        \"status\": \"canceled\",\n        \"note\": \"string\"\n      },\n      {\n        \"id\": \"2acae5c4-0535-7e97-a250-cf825bc717c7\",\n        \"employment_id\": \"ff4f4e5a-b723-b735-4a6e-3090af16130a\",\n        \"type\": \"bonus\",\n        \"amount\": 6317,\n        \"currency\": \"string\",\n        \"recurrence\": \"one_time\",\n        \"effective_date\": \"2025-06-24\",\n        \"status\": \"processing_started\",\n        \"note\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "366368ef-b51f-45ea-b688-5723a2b4b6b8",
+          "name": "Create An Incentive",
+          "request": {
+            "name": "Create An Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79dab93c-b5ba-41ff-9e57-956236c778e8",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"incentive\": {\n      \"id\": \"96d70490-2b5d-fa69-9152-6b78a21fba6a\",\n      \"employment_id\": \"f374b906-c570-ecac-e6b0-5813af2ffa0e\",\n      \"type\": \"bonus\",\n      \"amount\": 1467,\n      \"currency\": \"string\",\n      \"recurrence\": \"yearly\",\n      \"effective_date\": \"2021-05-07\",\n      \"status\": \"created\",\n      \"note\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d539e475-7854-4cce-9ec0-555e068c04c4",
+          "name": "Show An Incentive",
+          "request": {
+            "name": "Show An Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentive_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "incentive_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57e5013e-6790-4f8f-a7b0-156f7ee0e6f7",
+              "name": "Incentive.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentive_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "incentive_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"incentive\": {\n      \"id\": \"96d70490-2b5d-fa69-9152-6b78a21fba6a\",\n      \"employment_id\": \"f374b906-c570-ecac-e6b0-5813af2ffa0e\",\n      \"type\": \"bonus\",\n      \"amount\": 1467,\n      \"currency\": \"string\",\n      \"recurrence\": \"yearly\",\n      \"effective_date\": \"2021-05-07\",\n      \"status\": \"created\",\n      \"note\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52381646-1d67-4c18-a62a-58b0d13bc7ff",
+          "name": "Update An Incentive",
+          "request": {
+            "name": "Update An Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentive_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "incentive_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85706375-f297-4c53-83b9-5e84b0ead940",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentive_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "incentive_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"recurrence\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"incentive\": {\n      \"id\": \"96d70490-2b5d-fa69-9152-6b78a21fba6a\",\n      \"employment_id\": \"f374b906-c570-ecac-e6b0-5813af2ffa0e\",\n      \"type\": \"bonus\",\n      \"amount\": 1467,\n      \"currency\": \"string\",\n      \"recurrence\": \"yearly\",\n      \"effective_date\": \"2021-05-07\",\n      \"status\": \"created\",\n      \"note\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c121315a-1fa3-4702-8523-99c74cc31794",
+          "name": "Delete An Incentive",
+          "request": {
+            "name": "Delete An Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentive_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "incentive_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4f736a0-5c27-47de-a1c5-4a662b8e746a",
+              "name": "Deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentive_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "incentive_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b9d63a52-1bff-468a-9d00-a5db3dbdeee7",
+    "name": "Remote Benefits Benefit Offers Incentives API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

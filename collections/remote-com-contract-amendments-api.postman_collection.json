@@ -1,0 +1,518 @@
+{
+  "item": [
+    {
+      "id": "3966c49a-1eac-45d3-b60c-210585f5f35d",
+      "name": "Contract Amendments",
+      "description": {
+        "content": "Submit and track contract amendments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6f7c125-e326-40b8-bd52-72333519b0f5",
+          "name": "List Contract Amendments",
+          "request": {
+            "name": "List Contract Amendments",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_amendments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91e33bcb-3232-4768-b91b-21f71aee8544",
+              "name": "Contract amendments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendments\": [\n      {\n        \"id\": \"d976f7df-341a-98b4-5e6c-17decc6b2e70\",\n        \"employment_id\": \"1166a589-4c67-0e5b-6510-0193b49031e7\",\n        \"status\": \"draft\",\n        \"effective_date\": \"1969-12-05\",\n        \"amendment_data\": {\n          \"key_0\": \"string\"\n        },\n        \"created_at\": \"1959-01-11T01:43:06.789Z\"\n      },\n      {\n        \"id\": \"203bcb75-4f6e-d91c-9ae0-5010f8fbb681\",\n        \"employment_id\": \"8cd756ca-6edf-69ba-729e-5fbe6e9c6da0\",\n        \"status\": \"canceled\",\n        \"effective_date\": \"1947-04-02\",\n        \"amendment_data\": {\n          \"key_0\": 6895,\n          \"key_1\": 1678\n        },\n        \"created_at\": \"1973-10-08T05:32:10.362Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8d3478f-2707-466a-815e-217e1e15602c",
+          "name": "Create A Contract Amendment",
+          "request": {
+            "name": "Create A Contract Amendment",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_amendments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"effective_date\": \"<date>\",\n  \"amendment_data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7408.133002820042\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45dd014b-a0f4-45d6-83ce-8d2341f90d3e",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"effective_date\": \"<date>\",\n  \"amendment_data\": {\n    \"key_0\": 9156,\n    \"key_1\": 6195.704108440146,\n    \"key_2\": 1314\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendment\": {\n      \"id\": \"809a3926-90ce-da03-0efe-83e484a27ccd\",\n      \"employment_id\": \"c47651d8-4819-762c-753a-03fc0ea70777\",\n      \"status\": \"done\",\n      \"effective_date\": \"2012-12-31\",\n      \"amendment_data\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"1957-03-26T12:32:54.206Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53d82dfa-6395-4e9f-a0fd-ddb0240ad853",
+          "name": "Submit An Automatable Contract Amendment",
+          "request": {
+            "name": "Submit An Automatable Contract Amendment",
+            "description": {
+              "content": "Automatable amendments use a structured payload that Remote can\napprove without manual review. Use the `/contract_amendments/schema`\nendpoint to learn the per-country form requirements.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contract_amendments",
+                "automatable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62159003-b6b8-459e-a96d-41208e28111b",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments",
+                    "automatable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 9584.789256842867\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendment\": {\n      \"id\": \"809a3926-90ce-da03-0efe-83e484a27ccd\",\n      \"employment_id\": \"c47651d8-4819-762c-753a-03fc0ea70777\",\n      \"status\": \"done\",\n      \"effective_date\": \"2012-12-31\",\n      \"amendment_data\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"1957-03-26T12:32:54.206Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02b41583-ee47-4ac2-bbd2-ef102af90013",
+          "name": "Show A Contract Amendment",
+          "request": {
+            "name": "Show A Contract Amendment",
+            "description": {},
+            "url": {
+              "path": [
+                "contract_amendments",
+                ":contract_amendment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contract_amendment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "156b2107-e3bb-4ad0-ab16-7390dd61d36f",
+              "name": "Amendment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments",
+                    ":contract_amendment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contract_amendment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contract_amendment\": {\n      \"id\": \"809a3926-90ce-da03-0efe-83e484a27ccd\",\n      \"employment_id\": \"c47651d8-4819-762c-753a-03fc0ea70777\",\n      \"status\": \"done\",\n      \"effective_date\": \"2012-12-31\",\n      \"amendment_data\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"1957-03-26T12:32:54.206Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6ef2fa8-9df9-4ff2-83bc-d64ed279aba6",
+          "name": "Show A Contract Amendment Schema",
+          "request": {
+            "name": "Show A Contract Amendment Schema",
+            "description": {
+              "content": "Returns the JSON Schema form definition for amendments in a given country and employment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contract_amendments",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d186e734-f96a-4ce3-bd4b-4faaf410a390",
+              "name": "JSON Schema form.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contract_amendments",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 9584.789256842867\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3a3990e5-c0ed-4c29-8b50-96ac7ec34031",
+    "name": "Remote Benefits Benefit Offers Contract Amendments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

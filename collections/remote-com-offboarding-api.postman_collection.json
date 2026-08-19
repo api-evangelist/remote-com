@@ -1,0 +1,230 @@
+{
+  "item": [
+    {
+      "id": "15a5cd54-457f-4a69-bbbc-538b305b0e9d",
+      "name": "Offboarding",
+      "description": {
+        "content": "Drive employee offboarding flows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03d3e7f7-1f14-4f8c-a01d-bf9a3f546fd8",
+          "name": "Submit An Offboarding",
+          "request": {
+            "name": "Submit An Offboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "offboardings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"offboarding_type\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"reason_for_offboarding\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": 6516.627484060361,\n    \"key_1\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26340e42-541c-4471-9f77-6c1179f3e731",
+              "name": "Offboarding submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offboardings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<uuid>\",\n  \"offboarding_type\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"reason_for_offboarding\": \"<string>\",\n  \"additional_information\": {\n    \"key_0\": true,\n    \"key_1\": 6758\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"4fbc53f7-1926-3484-fa0f-6188c884975e\",\n      \"employment_id\": \"e118c529-0d24-8ec1-5dde-136447dcbe8b\",\n      \"status\": \"completed\",\n      \"offboarding_type\": \"end_of_contract\",\n      \"last_day_of_work\": \"1993-09-16\",\n      \"reason_for_offboarding\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3270d888-7ed6-42e3-be67-e347eb620cdc",
+          "name": "Show An Offboarding",
+          "request": {
+            "name": "Show An Offboarding",
+            "description": {},
+            "url": {
+              "path": [
+                "offboardings",
+                ":offboarding_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "offboarding_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2603d65-5f77-4299-ada0-d1e16d524ca4",
+              "name": "Offboarding.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offboardings",
+                    ":offboarding_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "offboarding_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"4fbc53f7-1926-3484-fa0f-6188c884975e\",\n      \"employment_id\": \"e118c529-0d24-8ec1-5dde-136447dcbe8b\",\n      \"status\": \"completed\",\n      \"offboarding_type\": \"end_of_contract\",\n      \"last_day_of_work\": \"1993-09-16\",\n      \"reason_for_offboarding\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5e1624bf-48bc-4eb8-a634-75ae2b403734",
+    "name": "Remote Benefits Benefit Offers Offboarding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

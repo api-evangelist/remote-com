@@ -1,0 +1,419 @@
+{
+  "item": [
+    {
+      "id": "9f48951e-ffee-4c33-b733-43795a35668b",
+      "name": "Travel Letters",
+      "description": {
+        "content": "Travel letter requests for employees moving across borders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce84d914-d94a-49c3-ac6d-a5797976a729",
+          "name": "List Travel Letter Requests",
+          "request": {
+            "name": "List Travel Letter Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9de865f-c922-42e9-bcfd-06d8d9baf769",
+              "name": "Travel letter requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_requests\": [\n      {\n        \"id\": \"5b81f249-8cf6-9a9e-3e0f-86021623477a\",\n        \"employment_id\": \"290e1d0c-d0ea-78d1-7280-24d03440e402\",\n        \"destination_country\": \"string\",\n        \"purpose\": \"string\",\n        \"status\": \"requested\",\n        \"travel_start_date\": \"1965-10-09\",\n        \"travel_end_date\": \"1948-05-31\"\n      },\n      {\n        \"id\": \"bc3e035c-752b-3839-b3f5-33484d19ff8a\",\n        \"employment_id\": \"fde79a24-59d4-2095-5a4d-a512420b3beb\",\n        \"destination_country\": \"string\",\n        \"purpose\": \"string\",\n        \"status\": \"approved_by_remote\",\n        \"travel_start_date\": \"1972-06-27\",\n        \"travel_end_date\": \"2009-08-08\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ed17871-0334-439e-8183-881a2c5d3e28",
+          "name": "Create A Travel Letter Request",
+          "request": {
+            "name": "Create A Travel Letter Request",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 8969.68695676015,\n  \"key_1\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e7d81f1-cd7c-42ee-87bd-5e513290df37",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"id\": \"259d1690-6ce5-bb5b-c0e4-77310061a210\",\n      \"employment_id\": \"67057bb6-6256-951e-8c90-3e263db683fa\",\n      \"destination_country\": \"string\",\n      \"purpose\": \"string\",\n      \"status\": \"requested\",\n      \"travel_start_date\": \"2020-03-31\",\n      \"travel_end_date\": \"2000-09-29\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b32c566c-b3d6-4044-9f25-50cd73af890a",
+          "name": "Show A Travel Letter Request",
+          "request": {
+            "name": "Show A Travel Letter Request",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests",
+                ":travel_letter_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "travel_letter_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7b690ea-dd5f-4a90-bade-74e7fe951d22",
+              "name": "Travel letter request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests",
+                    ":travel_letter_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "travel_letter_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"id\": \"259d1690-6ce5-bb5b-c0e4-77310061a210\",\n      \"employment_id\": \"67057bb6-6256-951e-8c90-3e263db683fa\",\n      \"destination_country\": \"string\",\n      \"purpose\": \"string\",\n      \"status\": \"requested\",\n      \"travel_start_date\": \"2020-03-31\",\n      \"travel_end_date\": \"2000-09-29\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bddf2f1f-5b7e-4828-adf2-265813c05035",
+          "name": "Update A Travel Letter Request",
+          "request": {
+            "name": "Update A Travel Letter Request",
+            "description": {},
+            "url": {
+              "path": [
+                "travel_letter_requests",
+                ":travel_letter_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "travel_letter_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 8969.68695676015,\n  \"key_1\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f52ad427-73fe-4ac2-ad84-cb550876b7ef",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "travel_letter_requests",
+                    ":travel_letter_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "travel_letter_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"id\": \"259d1690-6ce5-bb5b-c0e4-77310061a210\",\n      \"employment_id\": \"67057bb6-6256-951e-8c90-3e263db683fa\",\n      \"destination_country\": \"string\",\n      \"purpose\": \"string\",\n      \"status\": \"requested\",\n      \"travel_start_date\": \"2020-03-31\",\n      \"travel_end_date\": \"2000-09-29\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "17816a7c-da72-49a2-8de3-b2f78265604f",
+    "name": "Remote Benefits Benefit Offers Travel Letters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,449 @@
+{
+  "item": [
+    {
+      "id": "3bddea2b-3825-456c-aded-232e53a6457e",
+      "name": "Timesheets",
+      "description": {
+        "content": "Hourly and salaried timesheets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "befbe550-ed71-406e-a154-256fd6afbf39",
+          "name": "List Timesheets",
+          "request": {
+            "name": "List Timesheets",
+            "description": {},
+            "url": {
+              "path": [
+                "timesheets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "period_start",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df3655f6-cc90-4a7c-a737-bfa114e5466e",
+              "name": "Timesheets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timesheets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period_start",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timesheets\": [\n      {\n        \"id\": \"a3c937c6-be0b-090b-4b25-0965323437b6\",\n        \"employment_id\": \"92595f71-1bb5-0d18-5292-f0c5a461dd49\",\n        \"period_start\": \"2008-08-26\",\n        \"period_end\": \"1982-10-30\",\n        \"status\": \"sent_back\",\n        \"total_hours\": 6079.464585202706,\n        \"entries\": [\n          {\n            \"date\": \"1949-01-19\",\n            \"hours\": 3899.454061394764,\n            \"notes\": \"string\"\n          },\n          {\n            \"date\": \"2025-08-04\",\n            \"hours\": 2645.1326660629593,\n            \"notes\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": \"6f93f9da-ded4-b38b-9f5a-e13c2b2fd14f\",\n        \"employment_id\": \"c80d4b62-3ae3-b604-89b7-2d437754fda4\",\n        \"period_start\": \"2006-01-27\",\n        \"period_end\": \"1970-03-09\",\n        \"status\": \"sent_back\",\n        \"total_hours\": 9997.382625979542,\n        \"entries\": [\n          {\n            \"date\": \"1999-07-04\",\n            \"hours\": 9209.841661683045,\n            \"notes\": \"string\"\n          },\n          {\n            \"date\": \"2017-09-07\",\n            \"hours\": 9631.372180269098,\n            \"notes\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43fdecb1-84d8-49af-85a8-d64c723163b2",
+          "name": "Show A Timesheet",
+          "request": {
+            "name": "Show A Timesheet",
+            "description": {},
+            "url": {
+              "path": [
+                "timesheets",
+                ":timesheet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timesheet_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "013580b1-fb8d-442e-bc74-c8944f3de423",
+              "name": "Timesheet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timesheets",
+                    ":timesheet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timesheet_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"e94c408f-d71d-326c-8219-bb6ceffb812c\",\n      \"employment_id\": \"09af82fa-4b5a-5782-b08c-261db2e7445d\",\n      \"period_start\": \"2017-12-09\",\n      \"period_end\": \"2004-08-28\",\n      \"status\": \"sent_back\",\n      \"total_hours\": 8459.205616187855,\n      \"entries\": [\n        {\n          \"date\": \"1968-12-02\",\n          \"hours\": 3988.6556914425296,\n          \"notes\": \"string\"\n        },\n        {\n          \"date\": \"1957-10-13\",\n          \"hours\": 6887.582086129765,\n          \"notes\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5c7db65-01d7-44a7-9704-f035535f358a",
+          "name": "Approve A Timesheet",
+          "request": {
+            "name": "Approve A Timesheet",
+            "description": {},
+            "url": {
+              "path": [
+                "timesheets",
+                ":timesheet_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timesheet_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12594129-b293-4f54-a1ed-1f4499448245",
+              "name": "Approved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timesheets",
+                    ":timesheet_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timesheet_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"e94c408f-d71d-326c-8219-bb6ceffb812c\",\n      \"employment_id\": \"09af82fa-4b5a-5782-b08c-261db2e7445d\",\n      \"period_start\": \"2017-12-09\",\n      \"period_end\": \"2004-08-28\",\n      \"status\": \"sent_back\",\n      \"total_hours\": 8459.205616187855,\n      \"entries\": [\n        {\n          \"date\": \"1968-12-02\",\n          \"hours\": 3988.6556914425296,\n          \"notes\": \"string\"\n        },\n        {\n          \"date\": \"1957-10-13\",\n          \"hours\": 6887.582086129765,\n          \"notes\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfd322ad-0af9-44a0-b835-ec73dfd6c501",
+          "name": "Send A Timesheet Back For Revision",
+          "request": {
+            "name": "Send A Timesheet Back For Revision",
+            "description": {},
+            "url": {
+              "path": [
+                "timesheets",
+                ":timesheet_id",
+                "send_back"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "timesheet_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f2cc1892-6392-4359-a0af-a35565ed297a",
+              "name": "Sent back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timesheets",
+                    ":timesheet_id",
+                    "send_back"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "timesheet_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"e94c408f-d71d-326c-8219-bb6ceffb812c\",\n      \"employment_id\": \"09af82fa-4b5a-5782-b08c-261db2e7445d\",\n      \"period_start\": \"2017-12-09\",\n      \"period_end\": \"2004-08-28\",\n      \"status\": \"sent_back\",\n      \"total_hours\": 8459.205616187855,\n      \"entries\": [\n        {\n          \"date\": \"1968-12-02\",\n          \"hours\": 3988.6556914425296,\n          \"notes\": \"string\"\n        },\n        {\n          \"date\": \"1957-10-13\",\n          \"hours\": 6887.582086129765,\n          \"notes\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a30c0289-34fa-4ba7-8157-93cdb44f173f",
+    "name": "Remote Benefits Benefit Offers Timesheets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

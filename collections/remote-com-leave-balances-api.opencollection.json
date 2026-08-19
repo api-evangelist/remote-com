@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Leave Balances API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leave Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Leave Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/leave_balances",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Leave Balances"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

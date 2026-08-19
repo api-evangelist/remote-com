@@ -1,0 +1,467 @@
+{
+  "item": [
+    {
+      "id": "d245d555-41ab-460a-abcc-c378266538b3",
+      "name": "Contractor Subscriptions",
+      "description": {
+        "content": "Manage contractor plan subscriptions (Standard, Plus, COR)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e85b45d3-04af-4401-a107-f70b690303cb",
+          "name": "List Contractor Subscriptions",
+          "request": {
+            "name": "List Contractor Subscriptions",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "plan",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7df38650-5375-4dd5-8bec-ff220073260c",
+              "name": "Subscriptions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "plan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"subscriptions\": [\n      {\n        \"id\": \"38433106-458e-ca67-c6fd-33c7b9cad03c\",\n        \"employment_id\": \"68a96b78-43e3-c3a2-0ed6-a3c2301efa3e\",\n        \"plan\": \"cor\",\n        \"status\": \"canceled\",\n        \"starts_on\": \"2020-11-26\",\n        \"ends_on\": \"1967-01-07\"\n      },\n      {\n        \"id\": \"aeee0422-30eb-7aac-6631-9f303076454b\",\n        \"employment_id\": \"9c8fd91d-8e35-5fb3-8921-8e2eb74838b5\",\n        \"plan\": \"standard\",\n        \"status\": \"canceled\",\n        \"starts_on\": \"1969-12-04\",\n        \"ends_on\": \"1972-10-05\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "440eda45-f6ec-49ad-ba3a-eaace14fefda",
+          "name": "Manage Contractor Plus Subscription",
+          "request": {
+            "name": "Manage Contractor Plus Subscription",
+            "description": {
+              "content": "Subscribe, change, or cancel the Plus indemnity plan for a contractor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "subscriptions",
+                "plus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4fd31f32-5ffc-4d67-ace8-541bec9db3e2",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "subscriptions",
+                    "plus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"subscription\": {\n      \"id\": \"95b559af-fccd-c57b-ac17-5fad26ecfab1\",\n      \"employment_id\": \"a653486f-7cde-a8d3-2345-543e009961b8\",\n      \"plan\": \"plus\",\n      \"status\": \"terminated\",\n      \"starts_on\": \"1999-11-12\",\n      \"ends_on\": \"1967-02-21\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3881e62-2356-4175-bd9a-004f9c6eccf6",
+          "name": "Manage Contractor Of Record Subscription",
+          "request": {
+            "name": "Manage Contractor Of Record Subscription",
+            "description": {
+              "content": "Subscribe, change, or cancel the Contractor-of-Record subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "subscriptions",
+                "cor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f997fe93-c761-4065-93a3-8fdc3b1e99de",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "subscriptions",
+                    "cor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"starts_on\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"subscription\": {\n      \"id\": \"95b559af-fccd-c57b-ac17-5fad26ecfab1\",\n      \"employment_id\": \"a653486f-7cde-a8d3-2345-543e009961b8\",\n      \"plan\": \"plus\",\n      \"status\": \"terminated\",\n      \"starts_on\": \"1999-11-12\",\n      \"ends_on\": \"1967-02-21\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96e2f135-24ef-41c2-8599-b03e8183d5a0",
+          "name": "Delete Contractor Of Record Subscription",
+          "request": {
+            "name": "Delete Contractor Of Record Subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "contractors",
+                ":employment_id",
+                "subscriptions",
+                "cor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b20b0fe-8f63-459f-97e6-4d268df11a90",
+              "name": "Subscription canceled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contractors",
+                    ":employment_id",
+                    "subscriptions",
+                    "cor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5c1d80b0-b7a5-4d9c-a469-1eecfe50a325",
+    "name": "Remote Benefits Benefit Offers Contractor Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

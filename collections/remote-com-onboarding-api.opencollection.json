@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Onboarding API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Onboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Invite An Employment To Self-Serve Onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/invite",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Invite An Employment To Self-Serve Onboarding"
+        },
+        {
+          "info": {
+            "name": "Create An Eligibility Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/eligibility",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create An Eligibility Questionnaire"
+        },
+        {
+          "info": {
+            "name": "Show An Eligibility Questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/eligibility/:questionnaire_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "questionnaire_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show An Eligibility Questionnaire"
+        },
+        {
+          "info": {
+            "name": "Submit Risk Reserve Proof Of Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/eor_hiring/risk_reserve/proof_of_payment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit Risk Reserve Proof Of Payment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "811d73e3-788a-4c6c-8bf7-69c9382bdc79",
+      "name": "Leave Policies",
+      "description": {
+        "content": "Per-country leave policy definitions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "038286b1-310c-4b6c-9596-cb5c48e696c0",
+          "name": "List Leave Policies",
+          "request": {
+            "name": "List Leave Policies",
+            "description": {},
+            "url": {
+              "path": [
+                "leave_policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a0b146e-2f4c-400b-abb7-357503550017",
+              "name": "Leave policies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leave_policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"leave_policies\": [\n      {\n        \"id\": \"c308a1cf-3e37-963b-536f-c088cece88d9\",\n        \"country_code\": \"string\",\n        \"leave_type\": \"string\",\n        \"accrual_method\": \"annual\",\n        \"annual_allowance\": 5348.818931939422,\n        \"unit\": \"hours\"\n      },\n      {\n        \"id\": \"5199a7a6-5947-0f7b-fa42-435a2dbd0ede\",\n        \"country_code\": \"string\",\n        \"leave_type\": \"string\",\n        \"accrual_method\": \"statutory\",\n        \"annual_allowance\": 4670.437796147026,\n        \"unit\": \"hours\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac2c546-cb65-4d86-adc8-7af3a3aee5aa",
+          "name": "Show A Leave Policy",
+          "request": {
+            "name": "Show A Leave Policy",
+            "description": {},
+            "url": {
+              "path": [
+                "leave_policies",
+                ":leave_policy_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "leave_policy_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88706591-5880-4379-87d6-ac0bf50ce6b6",
+              "name": "Leave policy.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leave_policies",
+                    ":leave_policy_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "leave_policy_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"leave_policy\": {\n      \"id\": \"98aa3903-af1a-6682-afbf-e459487a039d\",\n      \"country_code\": \"string\",\n      \"leave_type\": \"string\",\n      \"accrual_method\": \"monthly\",\n      \"annual_allowance\": 3365.1546773722976,\n      \"unit\": \"days\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c50fe4c8-2138-4e4c-a054-f0714f6260cf",
+    "name": "Remote Benefits Benefit Offers Leave Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Benefits Benefit Offers Timesheets API",
+    "version": "2026-05-22"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Timesheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Timesheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timesheets",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "period_start",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Timesheets"
+        },
+        {
+          "info": {
+            "name": "Show A Timesheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timesheets/:timesheet_id",
+            "params": [
+              {
+                "name": "timesheet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show A Timesheet"
+        },
+        {
+          "info": {
+            "name": "Approve A Timesheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timesheets/:timesheet_id/approve",
+            "params": [
+              {
+                "name": "timesheet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve A Timesheet"
+        },
+        {
+          "info": {
+            "name": "Send A Timesheet Back For Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timesheets/:timesheet_id/send_back",
+            "params": [
+              {
+                "name": "timesheet_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send A Timesheet Back For Revision"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

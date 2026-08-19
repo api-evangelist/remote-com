@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "b07538ee-4797-4ce1-9c59-67cf137dd527",
+      "name": "Payslips",
+      "description": {
+        "content": "Released payslips for employees",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "afd3ea67-1c03-4004-ac59-38d38b48d805",
+          "name": "List Payslips",
+          "request": {
+            "name": "List Payslips",
+            "description": {},
+            "url": {
+              "path": [
+                "payslips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employment_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22c6fe55-56bc-4323-a2a1-8473fabbe1bf",
+              "name": "Payslips.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payslips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employment_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"payslips\": [\n      {\n        \"id\": \"9644f4c2-6ad8-990b-3529-9c9bced5d836\",\n        \"employment_id\": \"15ae8e65-f86e-b91e-9797-2e5b8ad174fe\",\n        \"period_start\": \"2019-11-25\",\n        \"period_end\": \"2019-01-13\",\n        \"gross_amount\": 9308,\n        \"net_amount\": 6040,\n        \"currency\": \"string\",\n        \"released_at\": \"1973-01-26T12:21:28.288Z\",\n        \"document_url\": \"http://pBUxtjyLhhLsKJYvspJNIdFzrYjjbUUu.obserEf6zBWOfsqxL+OC\"\n      },\n      {\n        \"id\": \"14653537-937f-dc18-d652-95f6e1b4c9f9\",\n        \"employment_id\": \"ff506598-8655-01ee-fa9f-9c646d79d7c1\",\n        \"period_start\": \"2019-02-14\",\n        \"period_end\": \"1980-05-25\",\n        \"gross_amount\": 9205,\n        \"net_amount\": 9915,\n        \"currency\": \"string\",\n        \"released_at\": \"1992-07-04T16:34:43.107Z\",\n        \"document_url\": \"http://gZoIGYzNiTZ.wfsWxEGzFumeexNieRiB5d0UvU6igHCz\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "602a68d1-b353-40f9-a77f-6000f11edaf9",
+          "name": "Show A Payslip",
+          "request": {
+            "name": "Show A Payslip",
+            "description": {},
+            "url": {
+              "path": [
+                "payslips",
+                ":payslip_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "payslip_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "683731e6-afba-4988-8df8-4b1c3b154854",
+              "name": "Payslip.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payslips",
+                    ":payslip_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "payslip_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"payslip\": {\n      \"id\": \"f7bf2a35-b278-edf4-f7d8-d5420bc6bc84\",\n      \"employment_id\": \"949a1b3a-614c-6f76-6024-429ae6c4ea55\",\n      \"period_start\": \"2010-08-11\",\n      \"period_end\": \"2020-04-26\",\n      \"gross_amount\": 2505,\n      \"net_amount\": 8606,\n      \"currency\": \"string\",\n      \"released_at\": \"1980-06-07T08:09:02.479Z\",\n      \"document_url\": \"https://eHzQJkvVXichDgEWQFRZvBWaTdztKxs.mnxUUkos+OpPIgCX7DkA7R,Fy1ffxnY81KWwsLOoQvn0lrcrnEwaEas\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aef6abf6-9d0c-4446-a425-e0a0205cfa93",
+    "name": "Remote Benefits Benefit Offers Payslips API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "List, select, and renew localized employee benefits across the countries\nRemote supports. Benefit offers and renewal requests use JSON Schema\nforms that vary per country and employment.\n\n\nContact Support:\n Name: Remote API Support",
+      "type": "text/plain"
+    }
+  }
+}
