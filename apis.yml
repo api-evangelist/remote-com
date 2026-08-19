@@ -12,6 +12,7 @@ description: |
   on top of these services so customers and partners can fully automate
   hiring, onboarding, payroll, benefits, time off, expenses, and
   offboarding.
+specificationVersion: '0.23'
 accessModel:
   pricing: freemium
   onboarding: self-serve
