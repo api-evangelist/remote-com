@@ -50,6 +50,10 @@ apis:
 - aid: remote-com:remote-webhooks
   name: Remote Webhooks
   tags:
+  - Webhook
+  - Event
+  - AsyncAPI
+  tags_raw:
   - Webhooks
   - Events
   - AsyncAPI
@@ -1622,6 +1626,8 @@ apis:
   humanURL: https://developer.remote.com/reference/welcome-to-remote-api
   baseURL: https://gateway.remote.com/v1
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -2042,6 +2048,8 @@ apis:
   humanURL: https://developer.remote.com/reference/welcome-to-remote-api
   baseURL: https://gateway.remote.com/v1
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
