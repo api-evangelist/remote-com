@@ -10,8 +10,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: payrollBillingApi
-  url: ../openapi/remote-payroll-billing-api-openapi.yml
+- name: incentivesApi
+  url: ../openapi/remote-com-incentives-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-incentive

@@ -11,8 +11,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: benefitsApi
-  url: ../openapi/remote-benefits-api-openapi.yml
+- name: benefitOffersApi
+  url: ../openapi/remote-com-benefit-offers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: enroll-employee-benefits

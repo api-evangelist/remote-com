@@ -13,8 +13,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: contractorsApi
-  url: ../openapi/remote-contractors-api-openapi.yml
+- name: contractEligibilityApi
+  url: ../openapi/remote-com-contract-eligibility-api-openapi.yml
+  type: openapi
+- name: contractorSubscriptionsApi
+  url: ../openapi/remote-com-contractor-subscriptions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: screen-contractor

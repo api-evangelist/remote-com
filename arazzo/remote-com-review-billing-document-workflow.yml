@@ -11,8 +11,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: payrollBillingApi
-  url: ../openapi/remote-payroll-billing-api-openapi.yml
+- name: billingDocumentsApi
+  url: ../openapi/remote-com-billing-documents-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: review-billing-document

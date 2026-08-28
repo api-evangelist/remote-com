@@ -11,8 +11,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: contractorsApi
-  url: ../openapi/remote-contractors-api-openapi.yml
+- name: corTerminationApi
+  url: ../openapi/remote-com-cor-termination-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: terminate-contractor

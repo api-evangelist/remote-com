@@ -10,8 +10,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: timeAttendanceApi
-  url: ../openapi/remote-time-attendance-api-openapi.yml
+- name: timeOffApi
+  url: ../openapi/remote-com-time-off-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: cancel-time-off

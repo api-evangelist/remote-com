@@ -11,8 +11,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: payrollBillingApi
-  url: ../openapi/remote-payroll-billing-api-openapi.yml
+- name: expensesApi
+  url: ../openapi/remote-com-expenses-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: submit-expense

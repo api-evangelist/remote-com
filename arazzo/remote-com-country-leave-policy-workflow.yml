@@ -10,11 +10,11 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: filesApi
-  url: ../openapi/remote-files-api-openapi.yml
+- name: countriesApi
+  url: ../openapi/remote-com-countries-api-openapi.yml
   type: openapi
-- name: timeAttendanceApi
-  url: ../openapi/remote-time-attendance-api-openapi.yml
+- name: leavePoliciesApi
+  url: ../openapi/remote-com-leave-policies-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: country-leave-policy

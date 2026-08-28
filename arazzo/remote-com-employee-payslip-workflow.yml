@@ -11,10 +11,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: employmentsApi
-  url: ../openapi/remote-employments-api-openapi.yml
+  url: ../openapi/remote-com-employments-api-openapi.yml
   type: openapi
-- name: payrollBillingApi
-  url: ../openapi/remote-payroll-billing-api-openapi.yml
+- name: payslipsApi
+  url: ../openapi/remote-com-payslips-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: employee-payslip

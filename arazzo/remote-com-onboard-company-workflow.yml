@@ -11,7 +11,13 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: companiesApi
-  url: ../openapi/remote-companies-api-openapi.yml
+  url: ../openapi/remote-com-companies-api-openapi.yml
+  type: openapi
+- name: companyManagersApi
+  url: ../openapi/remote-com-company-managers-api-openapi.yml
+  type: openapi
+- name: departmentsApi
+  url: ../openapi/remote-com-departments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboard-company

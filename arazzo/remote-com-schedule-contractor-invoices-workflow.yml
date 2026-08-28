@@ -10,8 +10,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: contractorsApi
-  url: ../openapi/remote-contractors-api-openapi.yml
+- name: scheduledInvoicesApi
+  url: ../openapi/remote-com-scheduled-invoices-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: schedule-contractor-invoices
