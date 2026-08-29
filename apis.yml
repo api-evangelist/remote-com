@@ -12,6 +12,18 @@ description: |
   on top of these services so customers and partners can fully automate
   hiring, onboarding, payroll, benefits, time off, expenses, and
   offboarding.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 accessModel:
   pricing: freemium
@@ -2815,6 +2827,9 @@ apis:
   - type: Examples
     url: examples/remote-oauth-token-exchange-example.json
 common:
+  - type: CapabilityMap
+    url: capabilities/remote-com-capability-edges.yml
+    name: Remote Business Capability Map
   - type: Overlay
     url: overlays/remote-com-benefits-api-overlay.yaml
   - type: AgenticAccess
