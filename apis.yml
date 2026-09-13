@@ -43,6 +43,21 @@ humanURL: https://remote.com
 baseURL: https://gateway.remote.com/v1
 tags:
   - Global Payroll
+  - Employer of Record
+  - Contractor Management
+  - Contractor of Record
+  - PEO
+  - HRIS
+  - Recruiting
+  - Benefits
+  - Employment
+  - HR
+  - Compliance
+  - Workforce
+  - MCP
+  - AI Agents
+tags_raw:
+  - Global Payroll
   - EOR
   - Contractor Management
   - Contractor of Record
