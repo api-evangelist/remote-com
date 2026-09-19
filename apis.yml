@@ -51,7 +51,7 @@ tags:
   - Recruiting
   - Benefits
   - Employment
-  - HR
+  - Human Resources
   - Compliance
   - Workforce
   - MCP
@@ -2775,6 +2775,8 @@ apis:
   humanURL: https://developer.remote.com/docs/available-webhooks
   baseURL: https://gateway.remote.com
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
