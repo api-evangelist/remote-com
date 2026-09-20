@@ -1,0 +1,141 @@
+slug: remote-com
+provider: Remote
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 13
+edges:
+- tag: Benefit Offers
+  spec_file: remote-com-benefit-offers-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.92
+  evidence: '"List, select, and renew localized employee benefits"; GET /benefit_offers/{employment_id}
+    "Get Employment Benefit Offers"'
+  reason: Operations select and manage localized employee benefit offers per employment — benefits administration
+    within the employee lifecycle.
+- tag: Benefit Renewals
+  spec_file: remote-com-benefit-renewals-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.9
+  evidence: GET /benefit_renewal_requests "List Benefit Renewal Requests"; schema BenefitRenewal
+  reason: Renewal of employee benefit elections is benefits administration, part of Compensation & Benefits
+    Management.
+- tag: Employments
+  spec_file: remote-com-employments-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: 'POST /employments createEmployment; POST /employments/{employment_id}/invite Invite An Employment
+    To Self-Serve Onboarding; schemas: EmploymentLifecycleStage, EmploymentStatus'
+  reason: Core employee record lifecycle — create, update, onboard, and maintain administrative details
+    of employments. Clearly HR operations / employee records; onboarding overlap with BC-300.10 but record
+    management dominates.
+- tag: Payslips
+  spec_file: remote-com-payslips-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: GET /payslips listPayslips; schema PayslipList, Payslip
+  reason: Payslip issuance and retrieval is core payroll administration within HR Operations Management.
+- tag: Payroll Calendars
+  spec_file: remote-com-payroll-calendars-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /payroll/calendars listPayrollCalendar; GET /payroll/calendars/eor listEorPayrollCalendar
+  reason: Payroll cycle calendars are payroll administration, an HR operations capability regardless of
+    buyer.
+- tag: Employment Contracts
+  spec_file: remote-com-employment-contracts-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /employments/{employment_id}/contracts listEmploymentContracts; GET /employments/{employment_id}/contracts/pending_changes
+  reason: Employment contract records and pending contract amendments for employees — employee records
+    administration within HR operations. Not generic BC-150.10 commercial contract lifecycle since these
+    are employment agreements.
+- tag: Onboarding
+  spec_file: remote-com-onboarding-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.75
+  evidence: POST /employments/{employment_id}/invite "Invite An Employment To Self-Serve Onboarding";
+    EmploymentLifecycleStage, EmploymentStatus
+  reason: Hiring and onboarding of new employments, including eligibility questionnaires, maps to talent
+    acquisition/onboarding within HCM.
+- tag: Timesheets
+  spec_file: remote-com-timesheets-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /timesheets listTimesheets; POST /timesheets/{timesheet_id}/approve approveTimesheet 'Approve
+    A Timesheet'; 'Send A Timesheet Back For Revision'
+  reason: Employee time capture and approval on a global employment/payroll platform is an employee-lifecycle
+    administrative process feeding payroll, i.e. HR operations. Operations (list/show/approve/send back
+    timesheets) are unambiguous despite the misleading 'Benefits' title, which belongs to another tag.
+- tag: Departments
+  spec_file: remote-com-departments-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: POST /companies/{company_id}/departments createDepartment Create A Department
+  reason: Maintains the company's departmental structure used to organise employees — organisational master
+    data within HR operations on an employment platform.
+- tag: Incentives
+  spec_file: remote-com-incentives-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.7
+  evidence: POST /incentives createIncentive "Create An Incentive"; schemas IncentiveList, IncentiveCreateRequest
+    on a global employment/payroll platform
+  reason: Remote is an employment platform; incentives here are employee variable pay items administered
+    alongside payroll, i.e. compensation administration. Sub-capability inferred, hence moderate confidence.
+- tag: Offboarding
+  spec_file: remote-com-offboarding-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: POST /offboardings submitOffboarding "Submit An Offboarding"; schema OffboardingCreateRequest
+  reason: Employee offboarding/termination processing on an employer-of-record platform is employee lifecycle
+    administration within HR operations; exact sub-capability is arguable.
+- tag: Time Off
+  spec_file: remote-com-time-off-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: POST /timeoff/{timeoff_id}/approve approveTimeOffRequest "Approve A Time Off Request"; schema
+    TimeOffStatus
+  reason: Time-off request submission and approval workflow is employee absence administration within
+    HR operations; sub-capability choice is the main uncertainty.
+- tag: Work Authorization
+  spec_file: remote-com-work-authorization-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.7
+  evidence: GET /work_authorization_requests listWorkAuthorizationRequests 'List Work Authorization Requests'
+  reason: Work-permit/visa authorisation requests for employees hired through the platform are part of
+    the employee lifecycle (immigration/mobility administration). Evidence supports the HCM L1 but does
+    not clearly name a single L2 (HR operations vs. talent acquisition/onboarding vs. employment law).
