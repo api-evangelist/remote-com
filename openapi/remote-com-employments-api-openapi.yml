@@ -1,13 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Remote Benefits Benefit Offers Employments API
-  description: 'List, select, and renew localized employee benefits across the countries
+  title: Remote Employments API
+  description: 'Create and manage employment records across the EOR, Global Payroll, and
 
-    Remote supports. Benefit offers and renewal requests use JSON Schema
+    PEO employment models on Remote.com. Endpoints cover the full employment
 
-    forms that vary per country and employment.
+    lifecycle — onboarding, contract management, contract amendments,
 
-    '
+    employment status transitions, identity verification, travel letters,
+
+    work-authorization requests, and offboarding.
+
+
+    Every Remote customer hiring through the platform owns one employment
+
+    record per worker. This API is the authoritative source for that record.'
   version: '2026-05-22'
   contact:
     name: Remote API Support
@@ -93,9 +100,7 @@ paths:
 
         model (EOR vs. Global Payroll vs. PEO) and the country. Use
 
-        `/forms/employment` to fetch the per-country JSON Schema form.
-
-        '
+        `/forms/employment` to fetch the per-country JSON Schema form.'
       operationId: createEmployment
       tags:
       - Employments
@@ -202,28 +207,6 @@ paths:
                 additionalProperties: true
 components:
   schemas:
-    EmploymentStatus:
-      type: string
-      enum:
-      - created
-      - invited
-      - initiated
-      - pending
-      - active
-      - probation
-      - offboarding_initiated
-      - offboarded
-      - archived
-    EmploymentLifecycleStage:
-      type: string
-      enum:
-      - employment_creation
-      - onboarding
-      - reserve_invoice
-      - probation
-      - active
-      - offboarding
-      - archived
     EmploymentUpdateRequest:
       type: object
       properties:
@@ -240,76 +223,18 @@ components:
           format: uuid
         job_title:
           type: string
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties: true
-        message:
-          type: string
-    EmploymentCreateRequest:
-      type: object
-      required:
-      - full_name
-      - country_code
-      - personal_email
-      - employment_type
-      properties:
-        full_name:
-          type: string
-        country_code:
-          type: string
-        personal_email:
-          type: string
-          format: email
-        employment_type:
-          type: string
-          enum:
-          - employee
-          - contractor
-          - director
-        employment_model:
-          type: string
-          enum:
-          - global_payroll
-          - peo
-          - eor
-          default: eor
-        provisional_start_date:
-          type: string
-          format: date
-        job_title:
-          type: string
-        external_id:
-          type: string
-        invite_user:
-          type: boolean
-          default: false
-    EmploymentList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            employments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Employment'
-            current_page:
-              type: integer
-            total_count:
-              type: integer
-            total_pages:
-              type: integer
-    EmploymentEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            employment:
-              $ref: '#/components/schemas/Employment'
+    EmploymentStatus:
+      type: string
+      enum:
+      - created
+      - invited
+      - initiated
+      - pending
+      - active
+      - probation
+      - offboarding_initiated
+      - offboarded
+      - archived
     Employment:
       type: object
       required:
@@ -381,9 +306,95 @@ components:
         updated_at:
           type: string
           format: date-time
+    EmploymentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Employment'
+            current_page:
+              type: integer
+            total_count:
+              type: integer
+            total_pages:
+              type: integer
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+      - employment_creation
+      - onboarding
+      - reserve_invoice
+      - probation
+      - active
+      - offboarding
+      - archived
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+    EmploymentCreateRequest:
+      type: object
+      required:
+      - full_name
+      - country_code
+      - personal_email
+      - employment_type
+      properties:
+        full_name:
+          type: string
+        country_code:
+          type: string
+        personal_email:
+          type: string
+          format: email
+        employment_type:
+          type: string
+          enum:
+          - employee
+          - contractor
+          - director
+        employment_model:
+          type: string
+          enum:
+          - global_payroll
+          - peo
+          - eor
+          default: eor
+        provisional_start_date:
+          type: string
+          format: date
+        job_title:
+          type: string
+        external_id:
+          type: string
+        invite_user:
+          type: boolean
+          default: false
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment:
+              $ref: '#/components/schemas/Employment'
   responses:
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
       content:
         application/json:
           schema:
@@ -394,14 +405,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:

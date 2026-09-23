@@ -1,13 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Remote Benefits Benefit Offers Contractor Subscriptions API
-  description: 'List, select, and renew localized employee benefits across the countries
+  title: Remote Contractors Contractor Subscriptions API
+  description: 'Manage contractors and Contractor-of-Record (COR) subscriptions on
 
-    Remote supports. Benefit offers and renewal requests use JSON Schema
-
-    forms that vary per country and employment.
-
-    '
+    Remote.com.'
   version: '2026-05-22'
   contact:
     name: Remote API Support
@@ -116,6 +112,14 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Subscription'
+    SubscriptionEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscription:
+              $ref: '#/components/schemas/Subscription'
     SubscriptionManageRequest:
       type: object
       required:
@@ -165,14 +169,6 @@ components:
           type: string
           format: date
           nullable: true
-    SubscriptionEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            subscription:
-              $ref: '#/components/schemas/Subscription'
   parameters:
     EmploymentIdPath:
       name: employment_id

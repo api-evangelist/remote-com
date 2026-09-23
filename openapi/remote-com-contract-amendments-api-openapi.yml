@@ -1,13 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Remote Benefits Benefit Offers Contract Amendments API
-  description: 'List, select, and renew localized employee benefits across the countries
+  title: Remote Employments Contract Amendments API
+  description: 'Create and manage employment records across the EOR, Global Payroll, and
 
-    Remote supports. Benefit offers and renewal requests use JSON Schema
+    PEO employment models on Remote.com. Endpoints cover the full employment
 
-    forms that vary per country and employment.
+    lifecycle — onboarding, contract management, contract amendments,
 
-    '
+    employment status transitions, identity verification, travel letters,
+
+    work-authorization requests, and offboarding.
+
+
+    Every Remote customer hiring through the platform owns one employment
+
+    record per worker. This API is the authoritative source for that record.'
   version: '2026-05-22'
   contact:
     name: Remote API Support
@@ -80,9 +87,7 @@ paths:
 
         approve without manual review. Use the `/contract_amendments/schema`
 
-        endpoint to learn the per-country form requirements.
-
-        '
+        endpoint to learn the per-country form requirements.'
       operationId: createAutomatableContractAmendment
       tags:
       - Contract Amendments
@@ -159,6 +164,16 @@ components:
         amendment_data:
           type: object
           additionalProperties: true
+    ContractAmendmentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendments:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContractAmendment'
     ContractAmendmentEnvelope:
       type: object
       properties:
@@ -194,16 +209,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ContractAmendmentList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            contract_amendments:
-              type: array
-              items:
-                $ref: '#/components/schemas/ContractAmendment'
   securitySchemes:
     BearerAuth:
       type: http

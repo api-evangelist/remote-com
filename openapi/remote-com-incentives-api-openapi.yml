@@ -1,13 +1,13 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Remote Benefits Benefit Offers Incentives API
-  description: 'List, select, and renew localized employee benefits across the countries
+  title: Remote Payroll and Billing Incentives API
+  description: 'Inspect payroll calendars, billing documents, incentives, expenses,
 
-    Remote supports. Benefit offers and renewal requests use JSON Schema
+    payslips, and timesheets across Remote''s EOR, Global Payroll, PEO,
 
-    forms that vary per country and employment.
+    and Contractor offerings. All financial events are exposed both
 
-    '
+    via REST and via webhooks.'
   version: '2026-05-22'
   contact:
     name: Remote API Support
@@ -127,16 +127,41 @@ components:
           properties:
             incentive:
               $ref: '#/components/schemas/Incentive'
-    IncentiveList:
+    IncentiveCreateRequest:
       type: object
+      required:
+      - employment_id
+      - type
+      - amount
+      - currency
+      - effective_date
       properties:
-        data:
-          type: object
-          properties:
-            incentives:
-              type: array
-              items:
-                $ref: '#/components/schemas/Incentive'
+        employment_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+          - bonus
+          - commission
+          - signing_bonus
+          - recurring_incentive
+        amount:
+          type: integer
+        currency:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - monthly
+          - quarterly
+          - yearly
+        note:
+          type: string
     Incentive:
       type: object
       properties:
@@ -176,41 +201,16 @@ components:
           - canceled
         note:
           type: string
-    IncentiveCreateRequest:
+    IncentiveList:
       type: object
-      required:
-      - employment_id
-      - type
-      - amount
-      - currency
-      - effective_date
       properties:
-        employment_id:
-          type: string
-          format: uuid
-        type:
-          type: string
-          enum:
-          - bonus
-          - commission
-          - signing_bonus
-          - recurring_incentive
-        amount:
-          type: integer
-        currency:
-          type: string
-        effective_date:
-          type: string
-          format: date
-        recurrence:
-          type: string
-          enum:
-          - one_time
-          - monthly
-          - quarterly
-          - yearly
-        note:
-          type: string
+        data:
+          type: object
+          properties:
+            incentives:
+              type: array
+              items:
+                $ref: '#/components/schemas/Incentive'
   securitySchemes:
     BearerAuth:
       type: http

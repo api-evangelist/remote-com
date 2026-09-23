@@ -1,13 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Remote Benefits Benefit Offers OAuth API
-  description: 'List, select, and renew localized employee benefits across the countries
-
-    Remote supports. Benefit offers and renewal requests use JSON Schema
-
-    forms that vary per country and employment.
-
-    '
+  title: Remote 2.0 O Auth API
+  description: OAuth 2.0 endpoints used to obtain access tokens for the Remote API.
   version: '2026-05-22'
   contact:
     name: Remote API Support
@@ -15,12 +9,10 @@ info:
   x-logo:
     url: https://remote.com/favicon.ico
 servers:
-- url: https://gateway.remote.com/v1
+- url: https://gateway.remote.com
   description: Production
-- url: https://gateway.remote-sandbox.com/v1
+- url: https://gateway.remote-sandbox.com
   description: Sandbox
-security:
-- BearerAuth: []
 tags:
 - name: OAuth
   description: OAuth 2.0 authorization endpoints
@@ -34,9 +26,7 @@ paths:
 
         can then be exchanged at `/oauth2/token` for a company-scoped
 
-        access token.
-
-        '
+        access token.'
       operationId: authorize
       tags:
       - OAuth
@@ -76,9 +66,7 @@ paths:
       summary: Exchange OAuth 2.0 Token
       description: 'Exchange tokens for Authorization Code, Client Credentials,
 
-        Assertion, and Refresh Token flows.
-
-        '
+        Assertion, and Refresh Token flows.'
       operationId: exchangeOAuthToken
       tags:
       - OAuth
@@ -155,9 +143,3 @@ paths:
                     type: string
                   error_description:
                     type: string
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
