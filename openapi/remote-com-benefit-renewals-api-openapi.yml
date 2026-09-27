@@ -144,14 +144,6 @@ components:
         response:
           type: object
           additionalProperties: true
-    BenefitRenewalEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            benefit_renewal_request:
-              $ref: '#/components/schemas/BenefitRenewal'
     BenefitRenewalList:
       type: object
       properties:
@@ -162,6 +154,14 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/BenefitRenewal'
+    BenefitRenewalEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            benefit_renewal_request:
+              $ref: '#/components/schemas/BenefitRenewal'
   securitySchemes:
     BearerAuth:
       type: http

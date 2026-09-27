@@ -73,14 +73,6 @@ paths:
                 $ref: '#/components/schemas/InvoiceEnvelope'
 components:
   schemas:
-    InvoiceEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            contractor_invoice:
-              $ref: '#/components/schemas/Invoice'
     Invoice:
       type: object
       properties:
@@ -123,6 +115,14 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Invoice'
+    InvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contractor_invoice:
+              $ref: '#/components/schemas/Invoice'
   securitySchemes:
     BearerAuth:
       type: http

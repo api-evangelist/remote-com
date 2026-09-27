@@ -98,6 +98,16 @@ paths:
                 $ref: '#/components/schemas/ScheduledInvoiceEnvelope'
 components:
   schemas:
+    ScheduledInvoiceList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            scheduled_contractor_invoices:
+              type: array
+              items:
+                $ref: '#/components/schemas/ScheduledInvoice'
     ScheduledInvoiceEnvelope:
       type: object
       properties:
@@ -159,16 +169,6 @@ components:
           format: date
         description:
           type: string
-    ScheduledInvoiceList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            scheduled_contractor_invoices:
-              type: array
-              items:
-                $ref: '#/components/schemas/ScheduledInvoice'
   securitySchemes:
     BearerAuth:
       type: http

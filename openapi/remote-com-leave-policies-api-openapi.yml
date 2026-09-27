@@ -67,16 +67,6 @@ paths:
                 $ref: '#/components/schemas/LeavePolicyEnvelope'
 components:
   schemas:
-    LeavePolicyList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            leave_policies:
-              type: array
-              items:
-                $ref: '#/components/schemas/LeavePolicy'
     LeavePolicyEnvelope:
       type: object
       properties:
@@ -109,6 +99,16 @@ components:
           enum:
           - days
           - hours
+    LeavePolicyList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            leave_policies:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeavePolicy'
   securitySchemes:
     BearerAuth:
       type: http

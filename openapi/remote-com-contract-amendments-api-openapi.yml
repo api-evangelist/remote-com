@@ -149,6 +149,14 @@ paths:
                 additionalProperties: true
 components:
   schemas:
+    ContractAmendmentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendment:
+              $ref: '#/components/schemas/ContractAmendment'
     ContractAmendmentCreateRequest:
       type: object
       required:
@@ -174,14 +182,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ContractAmendment'
-    ContractAmendmentEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            contract_amendment:
-              $ref: '#/components/schemas/ContractAmendment'
     ContractAmendment:
       type: object
       properties:

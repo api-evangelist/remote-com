@@ -67,27 +67,6 @@ paths:
           description: Termination submitted.
 components:
   schemas:
-    CorTerminationRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        employment_id:
-          type: string
-          format: uuid
-        status:
-          type: string
-          enum:
-          - submitted
-          - review_started
-          - completed
-          - canceled
-        last_day_of_engagement:
-          type: string
-          format: date
-        reason:
-          type: string
     CorTerminationRequestEnvelope:
       type: object
       properties:
@@ -114,6 +93,27 @@ components:
         additional_information:
           type: object
           additionalProperties: true
+    CorTerminationRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - submitted
+          - review_started
+          - completed
+          - canceled
+        last_day_of_engagement:
+          type: string
+          format: date
+        reason:
+          type: string
   parameters:
     EmploymentIdPath:
       name: employment_id

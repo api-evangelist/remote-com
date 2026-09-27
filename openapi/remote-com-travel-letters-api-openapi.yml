@@ -105,6 +105,14 @@ paths:
                 $ref: '#/components/schemas/TravelLetterRequestEnvelope'
 components:
   schemas:
+    TravelLetterRequestEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            travel_letter_request:
+              $ref: '#/components/schemas/TravelLetterRequest'
     TravelLetterRequest:
       type: object
       properties:
@@ -132,14 +140,6 @@ components:
         travel_end_date:
           type: string
           format: date
-    TravelLetterRequestEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            travel_letter_request:
-              $ref: '#/components/schemas/TravelLetterRequest'
     TravelLetterRequestList:
       type: object
       properties:

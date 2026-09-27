@@ -51,9 +51,7 @@
     "remote-com-time-off-api-openapi.yml",
     "remote-com-timesheets-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -66,8 +64,7 @@
     "remote-oauth-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "remote-payroll-billing-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "remote-time-attendance-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "superseded outputs removed: remote-com-o-auth-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 40 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "remote-com-benefit-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -98,7 +95,7 @@
     "remote-com-leave-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "remote-com-leave-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "remote-com-magic-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "remote-com-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "remote-com-oauth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "remote-com-offboarding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "remote-com-onboarding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "remote-com-payroll-calendars-api-openapi.yml: previously refined output, superseded by openapi/_original/",

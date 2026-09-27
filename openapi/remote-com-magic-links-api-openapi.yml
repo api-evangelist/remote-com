@@ -60,6 +60,18 @@ paths:
                 $ref: '#/components/schemas/MagicLinkResponse'
 components:
   schemas:
+    MagicLinkResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            magic_link:
+              type: string
+              format: uri
+            expires_at:
+              type: string
+              format: date-time
     MagicLinkRequest:
       type: object
       properties:
@@ -77,18 +89,6 @@ components:
         target_section:
           type: string
           description: Optional Remote UI section to deep-link to.
-    MagicLinkResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            magic_link:
-              type: string
-              format: uri
-            expires_at:
-              type: string
-              format: date-time
   securitySchemes:
     BearerAuth:
       type: http

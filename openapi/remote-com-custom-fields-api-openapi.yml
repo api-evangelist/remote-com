@@ -138,6 +138,29 @@ paths:
                         $ref: '#/components/schemas/CustomFieldValue'
 components:
   schemas:
+    CustomFieldValue:
+      type: object
+      required:
+      - subject_id
+      - value
+      properties:
+        id:
+          type: string
+          format: uuid
+        custom_field_id:
+          type: string
+          format: uuid
+        subject_id:
+          type: string
+          format: uuid
+        value:
+          oneOf:
+          - type: string
+          - type: number
+          - type: boolean
+          - type: array
+            items:
+              type: string
     CustomFieldDefinition:
       type: object
       required:
@@ -174,29 +197,6 @@ components:
           default: false
         description:
           type: string
-    CustomFieldValue:
-      type: object
-      required:
-      - subject_id
-      - value
-      properties:
-        id:
-          type: string
-          format: uuid
-        custom_field_id:
-          type: string
-          format: uuid
-        subject_id:
-          type: string
-          format: uuid
-        value:
-          oneOf:
-          - type: string
-          - type: number
-          - type: boolean
-          - type: array
-            items:
-              type: string
   securitySchemes:
     BearerAuth:
       type: http

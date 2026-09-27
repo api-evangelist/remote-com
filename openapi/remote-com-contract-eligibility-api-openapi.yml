@@ -59,6 +59,18 @@ paths:
                 additionalProperties: true
 components:
   schemas:
+    EligibilityCheckRequest:
+      type: object
+      required:
+      - country_code
+      - work_relationship
+      properties:
+        country_code:
+          type: string
+        work_relationship:
+          type: object
+          additionalProperties: true
+          description: Structured answers to the misclassification questionnaire.
     EligibilityCheckResult:
       type: object
       properties:
@@ -85,18 +97,6 @@ components:
               type: array
               items:
                 type: string
-    EligibilityCheckRequest:
-      type: object
-      required:
-      - country_code
-      - work_relationship
-      properties:
-        country_code:
-          type: string
-        work_relationship:
-          type: object
-          additionalProperties: true
-          description: Structured answers to the misclassification questionnaire.
   securitySchemes:
     BearerAuth:
       type: http

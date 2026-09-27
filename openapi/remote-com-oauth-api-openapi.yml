@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Remote 2.0 O Auth API
+  title: Remote 2.0 OAuth API
   description: OAuth 2.0 endpoints used to obtain access tokens for the Remote API.
   version: '2026-05-22'
   contact:

@@ -133,6 +133,14 @@ paths:
                 $ref: '#/components/schemas/TimesheetEnvelope'
 components:
   schemas:
+    TimesheetEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/Timesheet'
     Timesheet:
       type: object
       properties:
@@ -179,14 +187,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Timesheet'
-    TimesheetEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            timesheet:
-              $ref: '#/components/schemas/Timesheet'
   securitySchemes:
     BearerAuth:
       type: http

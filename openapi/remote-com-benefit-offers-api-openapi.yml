@@ -124,6 +124,16 @@ paths:
                 additionalProperties: true
 components:
   schemas:
+    BenefitOfferList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            benefit_offers:
+              type: array
+              items:
+                $ref: '#/components/schemas/BenefitOffer'
     BenefitOffer:
       type: object
       properties:
@@ -149,16 +159,6 @@ components:
           type: string
         coverage_summary:
           type: string
-    BenefitOfferList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            benefit_offers:
-              type: array
-              items:
-                $ref: '#/components/schemas/BenefitOffer'
     BenefitOfferCountrySummary:
       type: object
       properties:

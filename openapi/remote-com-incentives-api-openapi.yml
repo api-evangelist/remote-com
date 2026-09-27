@@ -127,41 +127,16 @@ components:
           properties:
             incentive:
               $ref: '#/components/schemas/Incentive'
-    IncentiveCreateRequest:
+    IncentiveList:
       type: object
-      required:
-      - employment_id
-      - type
-      - amount
-      - currency
-      - effective_date
       properties:
-        employment_id:
-          type: string
-          format: uuid
-        type:
-          type: string
-          enum:
-          - bonus
-          - commission
-          - signing_bonus
-          - recurring_incentive
-        amount:
-          type: integer
-        currency:
-          type: string
-        effective_date:
-          type: string
-          format: date
-        recurrence:
-          type: string
-          enum:
-          - one_time
-          - monthly
-          - quarterly
-          - yearly
-        note:
-          type: string
+        data:
+          type: object
+          properties:
+            incentives:
+              type: array
+              items:
+                $ref: '#/components/schemas/Incentive'
     Incentive:
       type: object
       properties:
@@ -201,16 +176,41 @@ components:
           - canceled
         note:
           type: string
-    IncentiveList:
+    IncentiveCreateRequest:
       type: object
+      required:
+      - employment_id
+      - type
+      - amount
+      - currency
+      - effective_date
       properties:
-        data:
-          type: object
-          properties:
-            incentives:
-              type: array
-              items:
-                $ref: '#/components/schemas/Incentive'
+        employment_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+          - bonus
+          - commission
+          - signing_bonus
+          - recurring_incentive
+        amount:
+          type: integer
+        currency:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - monthly
+          - quarterly
+          - yearly
+        note:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

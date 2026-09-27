@@ -175,40 +175,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Expense'
-    ExpenseStatus:
-      type: string
-      enum:
-      - submitted
-      - approved
-      - declined
-      - reimbursed
-      - deleted
-    Expense:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        employment_id:
-          type: string
-          format: uuid
-        category:
-          type: string
-        amount:
-          type: integer
-        currency:
-          type: string
-        status:
-          $ref: '#/components/schemas/ExpenseStatus'
-        expense_date:
-          type: string
-          format: date
-        description:
-          type: string
-        receipt_url:
-          type: string
-          format: uri
-          nullable: true
     ExpenseCreateRequest:
       type: object
       required:
@@ -235,6 +201,14 @@ components:
         receipt_url:
           type: string
           format: uri
+    ExpenseStatus:
+      type: string
+      enum:
+      - submitted
+      - approved
+      - declined
+      - reimbursed
+      - deleted
     ExpenseEnvelope:
       type: object
       properties:
@@ -243,6 +217,32 @@ components:
           properties:
             expense:
               $ref: '#/components/schemas/Expense'
+    Expense:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        employment_id:
+          type: string
+          format: uuid
+        category:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        status:
+          $ref: '#/components/schemas/ExpenseStatus'
+        expense_date:
+          type: string
+          format: date
+        description:
+          type: string
+        receipt_url:
+          type: string
+          format: uri
+          nullable: true
   securitySchemes:
     BearerAuth:
       type: http

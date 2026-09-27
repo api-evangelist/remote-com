@@ -174,14 +174,6 @@ paths:
                 additionalProperties: true
 components:
   schemas:
-    CompanyEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            company:
-              $ref: '#/components/schemas/Company'
     Address:
       type: object
       properties:
@@ -199,22 +191,14 @@ components:
           additionalProperties: true
         postal_code:
           type: string
-    LegalEntity:
+    CompanyEnvelope:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        country_code:
-          type: string
-        type:
-          type: string
-          enum:
-          - remote_entity
-          - partner_entity
-          - customer_entity
+        data:
+          type: object
+          properties:
+            company:
+              $ref: '#/components/schemas/Company'
     CompanyList:
       type: object
       properties:
@@ -231,6 +215,26 @@ components:
               type: integer
             total_pages:
               type: integer
+    LegalEntityList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            legal_entities:
+              type: array
+              items:
+                $ref: '#/components/schemas/LegalEntity'
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
     CompanyUpdateRequest:
       type: object
       properties:
@@ -263,6 +267,22 @@ components:
         terms_of_service_accepted_at:
           type: string
           format: date-time
+    LegalEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        country_code:
+          type: string
+        type:
+          type: string
+          enum:
+          - remote_entity
+          - partner_entity
+          - customer_entity
     CompanyCreateResponse:
       type: object
       properties:
@@ -278,26 +298,6 @@ components:
               type: string
             expires_in:
               type: integer
-    ErrorResponse:
-      type: object
-      required:
-      - errors
-      properties:
-        errors:
-          type: object
-          additionalProperties: true
-        message:
-          type: string
-    LegalEntityList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            legal_entities:
-              type: array
-              items:
-                $ref: '#/components/schemas/LegalEntity'
     Company:
       type: object
       required:
@@ -343,36 +343,7 @@ components:
         updated_at:
           type: string
           format: date-time
-  parameters:
-    CompanyIdPath:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    PageSizeQuery:
-      name: page_size
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    PageQuery:
-      name: page
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Not Found
       content:
@@ -398,12 +369,41 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    PageSizeQuery:
+      name: page_size
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    PageQuery:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    CompanyIdPath:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     BearerAuth:
       type: http

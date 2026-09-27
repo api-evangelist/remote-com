@@ -64,6 +64,14 @@ paths:
                 type: object
                 additionalProperties: true
 components:
+  parameters:
+    EmploymentIdPath:
+      name: employment_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
     EmploymentContractList:
       type: object
@@ -103,14 +111,6 @@ components:
           description: Amount in smallest currency unit.
         weekly_hours:
           type: number
-  parameters:
-    EmploymentIdPath:
-      name: employment_id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     BearerAuth:
       type: http

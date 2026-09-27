@@ -81,6 +81,30 @@ components:
           properties:
             offboarding:
               $ref: '#/components/schemas/Offboarding'
+    OffboardingCreateRequest:
+      type: object
+      required:
+      - employment_id
+      - offboarding_type
+      - last_day_of_work
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        offboarding_type:
+          type: string
+          enum:
+          - resignation
+          - termination
+          - end_of_contract
+        last_day_of_work:
+          type: string
+          format: date
+        reason_for_offboarding:
+          type: string
+        additional_information:
+          type: object
+          additionalProperties: true
     Offboarding:
       type: object
       properties:
@@ -109,30 +133,6 @@ components:
           format: date
         reason_for_offboarding:
           type: string
-    OffboardingCreateRequest:
-      type: object
-      required:
-      - employment_id
-      - offboarding_type
-      - last_day_of_work
-      properties:
-        employment_id:
-          type: string
-          format: uuid
-        offboarding_type:
-          type: string
-          enum:
-          - resignation
-          - termination
-          - end_of_contract
-        last_day_of_work:
-          type: string
-          format: date
-        reason_for_offboarding:
-          type: string
-        additional_information:
-          type: object
-          additionalProperties: true
   securitySchemes:
     BearerAuth:
       type: http

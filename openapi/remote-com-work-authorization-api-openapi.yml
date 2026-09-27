@@ -86,14 +86,16 @@ paths:
                 $ref: '#/components/schemas/WorkAuthorizationRequestEnvelope'
 components:
   schemas:
-    WorkAuthorizationRequestEnvelope:
+    WorkAuthorizationRequestList:
       type: object
       properties:
         data:
           type: object
           properties:
-            work_authorization_request:
-              $ref: '#/components/schemas/WorkAuthorizationRequest'
+            work_authorization_requests:
+              type: array
+              items:
+                $ref: '#/components/schemas/WorkAuthorizationRequest'
     WorkAuthorizationRequest:
       type: object
       properties:
@@ -119,16 +121,14 @@ components:
         target_start_date:
           type: string
           format: date
-    WorkAuthorizationRequestList:
+    WorkAuthorizationRequestEnvelope:
       type: object
       properties:
         data:
           type: object
           properties:
-            work_authorization_requests:
-              type: array
-              items:
-                $ref: '#/components/schemas/WorkAuthorizationRequest'
+            work_authorization_request:
+              $ref: '#/components/schemas/WorkAuthorizationRequest'
   securitySchemes:
     BearerAuth:
       type: http

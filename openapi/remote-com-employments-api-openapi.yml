@@ -207,22 +207,6 @@ paths:
                 additionalProperties: true
 components:
   schemas:
-    EmploymentUpdateRequest:
-      type: object
-      properties:
-        full_name:
-          type: string
-        work_email:
-          type: string
-          format: email
-        manager_id:
-          type: string
-          format: uuid
-        department_id:
-          type: string
-          format: uuid
-        job_title:
-          type: string
     EmploymentStatus:
       type: string
       enum:
@@ -235,6 +219,14 @@ components:
       - offboarding_initiated
       - offboarded
       - archived
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment:
+              $ref: '#/components/schemas/Employment'
     Employment:
       type: object
       required:
@@ -306,39 +298,21 @@ components:
         updated_at:
           type: string
           format: date-time
-    EmploymentList:
+    EmploymentUpdateRequest:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            employments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Employment'
-            current_page:
-              type: integer
-            total_count:
-              type: integer
-            total_pages:
-              type: integer
-    EmploymentLifecycleStage:
-      type: string
-      enum:
-      - employment_creation
-      - onboarding
-      - reserve_invoice
-      - probation
-      - active
-      - offboarding
-      - archived
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties: true
-        message:
+        full_name:
+          type: string
+        work_email:
+          type: string
+          format: email
+        manager_id:
+          type: string
+          format: uuid
+        department_id:
+          type: string
+          format: uuid
+        job_title:
           type: string
     EmploymentCreateRequest:
       type: object
@@ -378,21 +352,41 @@ components:
         invite_user:
           type: boolean
           default: false
-    EmploymentEnvelope:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+    EmploymentList:
       type: object
       properties:
         data:
           type: object
           properties:
-            employment:
-              $ref: '#/components/schemas/Employment'
+            employments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Employment'
+            current_page:
+              type: integer
+            total_count:
+              type: integer
+            total_pages:
+              type: integer
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+      - employment_creation
+      - onboarding
+      - reserve_invoice
+      - probation
+      - active
+      - offboarding
+      - archived
   responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Not Found
       content:
@@ -401,6 +395,12 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     TooManyRequests:
       description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:

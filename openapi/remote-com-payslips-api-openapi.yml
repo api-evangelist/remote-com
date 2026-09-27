@@ -70,6 +70,14 @@ paths:
                 $ref: '#/components/schemas/PayslipEnvelope'
 components:
   schemas:
+    PayslipEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payslip:
+              $ref: '#/components/schemas/Payslip'
     PayslipList:
       type: object
       properties:
@@ -80,14 +88,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Payslip'
-    PayslipEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            payslip:
-              $ref: '#/components/schemas/Payslip'
     Payslip:
       type: object
       properties:
