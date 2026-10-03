@@ -119,24 +119,41 @@ paths:
           description: Deleted.
 components:
   schemas:
-    IncentiveEnvelope:
+    IncentiveCreateRequest:
       type: object
+      required:
+      - employment_id
+      - type
+      - amount
+      - currency
+      - effective_date
       properties:
-        data:
-          type: object
-          properties:
-            incentive:
-              $ref: '#/components/schemas/Incentive'
-    IncentiveList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            incentives:
-              type: array
-              items:
-                $ref: '#/components/schemas/Incentive'
+        employment_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+          - bonus
+          - commission
+          - signing_bonus
+          - recurring_incentive
+        amount:
+          type: integer
+        currency:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        recurrence:
+          type: string
+          enum:
+          - one_time
+          - monthly
+          - quarterly
+          - yearly
+        note:
+          type: string
     Incentive:
       type: object
       properties:
@@ -176,41 +193,24 @@ components:
           - canceled
         note:
           type: string
-    IncentiveCreateRequest:
+    IncentiveEnvelope:
       type: object
-      required:
-      - employment_id
-      - type
-      - amount
-      - currency
-      - effective_date
       properties:
-        employment_id:
-          type: string
-          format: uuid
-        type:
-          type: string
-          enum:
-          - bonus
-          - commission
-          - signing_bonus
-          - recurring_incentive
-        amount:
-          type: integer
-        currency:
-          type: string
-        effective_date:
-          type: string
-          format: date
-        recurrence:
-          type: string
-          enum:
-          - one_time
-          - monthly
-          - quarterly
-          - yearly
-        note:
-          type: string
+        data:
+          type: object
+          properties:
+            incentive:
+              $ref: '#/components/schemas/Incentive'
+    IncentiveList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentives:
+              type: array
+              items:
+                $ref: '#/components/schemas/Incentive'
   securitySchemes:
     BearerAuth:
       type: http

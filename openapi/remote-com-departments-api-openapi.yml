@@ -71,16 +71,6 @@ paths:
                 $ref: '#/components/schemas/DepartmentEnvelope'
 components:
   schemas:
-    DepartmentList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            departments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Department'
     DepartmentEnvelope:
       type: object
       properties:
@@ -89,16 +79,6 @@ components:
           properties:
             department:
               $ref: '#/components/schemas/Department'
-    DepartmentCreateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        parent_department_id:
-          type: string
-          format: uuid
     Department:
       type: object
       properties:
@@ -111,6 +91,26 @@ components:
           type: string
           format: uuid
           nullable: true
+    DepartmentCreateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        parent_department_id:
+          type: string
+          format: uuid
+    DepartmentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            departments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Department'
   parameters:
     CompanyIdPath:
       name: company_id

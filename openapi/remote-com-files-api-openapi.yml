@@ -101,14 +101,6 @@ paths:
                         format: date-time
 components:
   schemas:
-    FileEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            file:
-              $ref: '#/components/schemas/File'
     File:
       type: object
       properties:
@@ -140,6 +132,14 @@ components:
         download_url:
           type: string
           format: uri
+    FileEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            file:
+              $ref: '#/components/schemas/File'
   securitySchemes:
     BearerAuth:
       type: http

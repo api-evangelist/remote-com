@@ -67,14 +67,6 @@ paths:
                 $ref: '#/components/schemas/LeavePolicyEnvelope'
 components:
   schemas:
-    LeavePolicyEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            leave_policy:
-              $ref: '#/components/schemas/LeavePolicy'
     LeavePolicy:
       type: object
       properties:
@@ -109,6 +101,14 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/LeavePolicy'
+    LeavePolicyEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            leave_policy:
+              $ref: '#/components/schemas/LeavePolicy'
   securitySchemes:
     BearerAuth:
       type: http

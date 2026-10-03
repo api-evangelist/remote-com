@@ -94,7 +94,30 @@ paths:
         '204':
           description: Manager deleted.
 components:
+  parameters:
+    CompanyIdPath:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ManagerIdPath:
+      name: manager_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
+    ManagerEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            manager:
+              $ref: '#/components/schemas/Manager'
     ManagerList:
       type: object
       properties:
@@ -105,32 +128,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Manager'
-    ManagerCreateRequest:
-      type: object
-      required:
-      - email
-      - role
-      properties:
-        email:
-          type: string
-          format: email
-        name:
-          type: string
-        role:
-          type: string
-          enum:
-          - admin
-          - manager
-          - people_manager
-          - finance_admin
-    ManagerEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            manager:
-              $ref: '#/components/schemas/Manager'
     Manager:
       type: object
       required:
@@ -160,21 +157,24 @@ components:
           - invited
           - active
           - deactivated
-  parameters:
-    CompanyIdPath:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    ManagerIdPath:
-      name: manager_id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
+    ManagerCreateRequest:
+      type: object
+      required:
+      - email
+      - role
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - manager
+          - people_manager
+          - finance_admin
   securitySchemes:
     BearerAuth:
       type: http

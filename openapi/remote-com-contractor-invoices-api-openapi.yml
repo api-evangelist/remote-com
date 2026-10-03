@@ -105,6 +105,14 @@ components:
         issued_at:
           type: string
           format: date-time
+    InvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contractor_invoice:
+              $ref: '#/components/schemas/Invoice'
     InvoiceList:
       type: object
       properties:
@@ -115,14 +123,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Invoice'
-    InvoiceEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            contractor_invoice:
-              $ref: '#/components/schemas/Invoice'
   securitySchemes:
     BearerAuth:
       type: http

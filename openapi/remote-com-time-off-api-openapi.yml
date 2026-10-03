@@ -189,6 +189,24 @@ paths:
                 $ref: '#/components/schemas/TimeOffEnvelope'
 components:
   schemas:
+    TimeOffStatus:
+      type: string
+      enum:
+      - requested
+      - approved
+      - declined
+      - cancellation_requested
+      - canceled
+      - started
+      - taken
+    TimeOffEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timeoff:
+              $ref: '#/components/schemas/TimeOff'
     TimeOff:
       type: object
       properties:
@@ -242,16 +260,6 @@ components:
           format: date
         note:
           type: string
-    TimeOffStatus:
-      type: string
-      enum:
-      - requested
-      - approved
-      - declined
-      - cancellation_requested
-      - canceled
-      - started
-      - taken
     TimeOffList:
       type: object
       properties:
@@ -262,14 +270,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/TimeOff'
-    TimeOffEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            timeoff:
-              $ref: '#/components/schemas/TimeOff'
   securitySchemes:
     BearerAuth:
       type: http

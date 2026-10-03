@@ -113,6 +113,16 @@ components:
           properties:
             travel_letter_request:
               $ref: '#/components/schemas/TravelLetterRequest'
+    TravelLetterRequestList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            travel_letter_requests:
+              type: array
+              items:
+                $ref: '#/components/schemas/TravelLetterRequest'
     TravelLetterRequest:
       type: object
       properties:
@@ -140,16 +150,6 @@ components:
         travel_end_date:
           type: string
           format: date
-    TravelLetterRequestList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            travel_letter_requests:
-              type: array
-              items:
-                $ref: '#/components/schemas/TravelLetterRequest'
   securitySchemes:
     BearerAuth:
       type: http

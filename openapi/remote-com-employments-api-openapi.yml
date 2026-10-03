@@ -207,26 +207,6 @@ paths:
                 additionalProperties: true
 components:
   schemas:
-    EmploymentStatus:
-      type: string
-      enum:
-      - created
-      - invited
-      - initiated
-      - pending
-      - active
-      - probation
-      - offboarding_initiated
-      - offboarded
-      - archived
-    EmploymentEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            employment:
-              $ref: '#/components/schemas/Employment'
     Employment:
       type: object
       required:
@@ -298,6 +278,50 @@ components:
         updated_at:
           type: string
           format: date-time
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment:
+              $ref: '#/components/schemas/Employment'
+    EmploymentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Employment'
+            current_page:
+              type: integer
+            total_count:
+              type: integer
+            total_pages:
+              type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+    EmploymentStatus:
+      type: string
+      enum:
+      - created
+      - invited
+      - initiated
+      - pending
+      - active
+      - probation
+      - offboarding_initiated
+      - offboarded
+      - archived
     EmploymentUpdateRequest:
       type: object
       properties:
@@ -314,6 +338,16 @@ components:
           format: uuid
         job_title:
           type: string
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+      - employment_creation
+      - onboarding
+      - reserve_invoice
+      - probation
+      - active
+      - offboarding
+      - archived
     EmploymentCreateRequest:
       type: object
       required:
@@ -352,43 +386,9 @@ components:
         invite_user:
           type: boolean
           default: false
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: object
-          additionalProperties: true
-        message:
-          type: string
-    EmploymentList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            employments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Employment'
-            current_page:
-              type: integer
-            total_count:
-              type: integer
-            total_pages:
-              type: integer
-    EmploymentLifecycleStage:
-      type: string
-      enum:
-      - employment_creation
-      - onboarding
-      - reserve_invoice
-      - probation
-      - active
-      - offboarding
-      - archived
   responses:
-    NotFound:
-      description: Not Found
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
@@ -399,8 +399,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad Request
+    NotFound:
+      description: Not Found
       content:
         application/json:
           schema:

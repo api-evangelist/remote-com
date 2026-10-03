@@ -70,14 +70,6 @@ paths:
                 $ref: '#/components/schemas/PayslipEnvelope'
 components:
   schemas:
-    PayslipEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            payslip:
-              $ref: '#/components/schemas/Payslip'
     PayslipList:
       type: object
       properties:
@@ -115,6 +107,14 @@ components:
         document_url:
           type: string
           format: uri
+    PayslipEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payslip:
+              $ref: '#/components/schemas/Payslip'
   securitySchemes:
     BearerAuth:
       type: http

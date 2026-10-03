@@ -141,6 +141,16 @@ components:
           properties:
             timesheet:
               $ref: '#/components/schemas/Timesheet'
+    TimesheetList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timesheets:
+              type: array
+              items:
+                $ref: '#/components/schemas/Timesheet'
     Timesheet:
       type: object
       properties:
@@ -177,16 +187,6 @@ components:
                 type: number
               notes:
                 type: string
-    TimesheetList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            timesheets:
-              type: array
-              items:
-                $ref: '#/components/schemas/Timesheet'
   securitySchemes:
     BearerAuth:
       type: http

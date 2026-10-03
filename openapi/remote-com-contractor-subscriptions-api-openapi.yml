@@ -102,6 +102,16 @@ paths:
           description: Subscription canceled.
 components:
   schemas:
+    SubscriptionList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscriptions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Subscription'
     SubscriptionManageRequest:
       type: object
       required:
@@ -122,16 +132,6 @@ components:
         starts_on:
           type: string
           format: date
-    SubscriptionList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            subscriptions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Subscription'
     SubscriptionEnvelope:
       type: object
       properties:
