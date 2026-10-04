@@ -119,6 +119,16 @@ paths:
           description: Deleted.
 components:
   schemas:
+    IncentiveList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentives:
+              type: array
+              items:
+                $ref: '#/components/schemas/Incentive'
     IncentiveCreateRequest:
       type: object
       required:
@@ -154,6 +164,14 @@ components:
           - yearly
         note:
           type: string
+    IncentiveEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            incentive:
+              $ref: '#/components/schemas/Incentive'
     Incentive:
       type: object
       properties:
@@ -193,24 +211,6 @@ components:
           - canceled
         note:
           type: string
-    IncentiveEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            incentive:
-              $ref: '#/components/schemas/Incentive'
-    IncentiveList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            incentives:
-              type: array
-              items:
-                $ref: '#/components/schemas/Incentive'
   securitySchemes:
     BearerAuth:
       type: http

@@ -183,32 +183,6 @@ components:
       - declined
       - reimbursed
       - deleted
-    ExpenseCreateRequest:
-      type: object
-      required:
-      - employment_id
-      - category
-      - amount
-      - currency
-      - expense_date
-      properties:
-        employment_id:
-          type: string
-          format: uuid
-        category:
-          type: string
-        amount:
-          type: integer
-        currency:
-          type: string
-        expense_date:
-          type: string
-          format: date
-        description:
-          type: string
-        receipt_url:
-          type: string
-          format: uri
     Expense:
       type: object
       properties:
@@ -243,6 +217,32 @@ components:
           properties:
             expense:
               $ref: '#/components/schemas/Expense'
+    ExpenseCreateRequest:
+      type: object
+      required:
+      - employment_id
+      - category
+      - amount
+      - currency
+      - expense_date
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        category:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        expense_date:
+          type: string
+          format: date
+        description:
+          type: string
+        receipt_url:
+          type: string
+          format: uri
   securitySchemes:
     BearerAuth:
       type: http

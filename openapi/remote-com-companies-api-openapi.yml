@@ -174,13 +174,6 @@ paths:
                 additionalProperties: true
 components:
   parameters:
-    CompanyIdPath:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
     PageSizeQuery:
       name: page_size
       in: query
@@ -196,24 +189,87 @@ components:
         type: integer
         minimum: 1
         default: 1
+    CompanyIdPath:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
-    Address:
+    CompanyCreateResponse:
       type: object
       properties:
-        address:
-          type: string
-        address_line_2:
-          type: string
-        city:
-          type: string
-        country_code:
-          type: string
-          description: ISO 3166-1 alpha-3 country code.
-        local_details:
+        data:
           type: object
-          additionalProperties: true
-        postal_code:
+          properties:
+            company:
+              $ref: '#/components/schemas/Company'
+            access_token:
+              type: string
+              description: Company-scoped access token.
+            refresh_token:
+              type: string
+            expires_in:
+              type: integer
+    LegalEntityList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            legal_entities:
+              type: array
+              items:
+                $ref: '#/components/schemas/LegalEntity'
+    CompanyUpdateRequest:
+      type: object
+      properties:
+        name:
           type: string
+        external_id:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        tax_number:
+          type: string
+    CompanyList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            companies:
+              type: array
+              items:
+                $ref: '#/components/schemas/Company'
+            current_page:
+              type: integer
+            total_count:
+              type: integer
+            total_pages:
+              type: integer
+    CompanyCreateRequest:
+      type: object
+      required:
+      - name
+      - company_owner_email
+      properties:
+        name:
+          type: string
+        company_owner_email:
+          type: string
+          format: email
+        company_owner_name:
+          type: string
+        desired_currency:
+          type: string
+          default: USD
+        external_id:
+          type: string
+        terms_of_service_accepted_at:
+          type: string
+          format: date-time
     Company:
       type: object
       required:
@@ -259,61 +315,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    CompanyList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            companies:
-              type: array
-              items:
-                $ref: '#/components/schemas/Company'
-            current_page:
-              type: integer
-            total_count:
-              type: integer
-            total_pages:
-              type: integer
-    CompanyEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            company:
-              $ref: '#/components/schemas/Company'
-    ErrorResponse:
-      type: object
-      required:
-      - errors
-      properties:
-        errors:
-          type: object
-          additionalProperties: true
-        message:
-          type: string
-    CompanyUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        external_id:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
-        tax_number:
-          type: string
-    LegalEntityList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            legal_entities:
-              type: array
-              items:
-                $ref: '#/components/schemas/LegalEntity'
     LegalEntity:
       type: object
       properties:
@@ -330,7 +331,34 @@ components:
           - remote_entity
           - partner_entity
           - customer_entity
-    CompanyCreateResponse:
+    ErrorResponse:
+      type: object
+      required:
+      - errors
+      properties:
+        errors:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+    Address:
+      type: object
+      properties:
+        address:
+          type: string
+        address_line_2:
+          type: string
+        city:
+          type: string
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        local_details:
+          type: object
+          additionalProperties: true
+        postal_code:
+          type: string
+    CompanyEnvelope:
       type: object
       properties:
         data:
@@ -338,37 +366,15 @@ components:
           properties:
             company:
               $ref: '#/components/schemas/Company'
-            access_token:
-              type: string
-              description: Company-scoped access token.
-            refresh_token:
-              type: string
-            expires_in:
-              type: integer
-    CompanyCreateRequest:
-      type: object
-      required:
-      - name
-      - company_owner_email
-      properties:
-        name:
-          type: string
-        company_owner_email:
-          type: string
-          format: email
-        company_owner_name:
-          type: string
-        desired_currency:
-          type: string
-          default: USD
-        external_id:
-          type: string
-        terms_of_service_accepted_at:
-          type: string
-          format: date-time
   responses:
     BadRequest:
       description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
       content:
         application/json:
           schema:
@@ -388,12 +394,6 @@ components:
           schema:
             type: integer
           description: Milliseconds until the rate limit resets.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found
       content:
         application/json:
           schema:

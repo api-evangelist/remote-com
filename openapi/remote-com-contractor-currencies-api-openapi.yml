@@ -36,15 +36,6 @@ paths:
                 $ref: '#/components/schemas/CurrencyList'
 components:
   schemas:
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-        name:
-          type: string
-        symbol:
-          type: string
     CurrencyList:
       type: object
       properties:
@@ -55,6 +46,15 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Currency'
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

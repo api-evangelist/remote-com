@@ -134,6 +134,27 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/BenefitOffer'
+    BenefitOfferCountrySummary:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            countries:
+              type: array
+              items:
+                type: object
+                properties:
+                  country_code:
+                    type: string
+                  benefit_offers_count:
+                    type: integer
+                  has_health:
+                    type: boolean
+                  has_dental:
+                    type: boolean
+                  has_pension:
+                    type: boolean
     BenefitOffer:
       type: object
       properties:
@@ -159,27 +180,6 @@ components:
           type: string
         coverage_summary:
           type: string
-    BenefitOfferCountrySummary:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            countries:
-              type: array
-              items:
-                type: object
-                properties:
-                  country_code:
-                    type: string
-                  benefit_offers_count:
-                    type: integer
-                  has_health:
-                    type: boolean
-                  has_dental:
-                    type: boolean
-                  has_pension:
-                    type: boolean
   securitySchemes:
     BearerAuth:
       type: http

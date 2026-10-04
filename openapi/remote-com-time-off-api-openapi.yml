@@ -189,6 +189,38 @@ paths:
                 $ref: '#/components/schemas/TimeOffEnvelope'
 components:
   schemas:
+    TimeOffCreateRequest:
+      type: object
+      required:
+      - employment_id
+      - leave_type
+      - start_date
+      - end_date
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        leave_type:
+          type: string
+        leave_policy_id:
+          type: string
+          format: uuid
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        note:
+          type: string
+    TimeOffEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            timeoff:
+              $ref: '#/components/schemas/TimeOff'
     TimeOffStatus:
       type: string
       enum:
@@ -199,14 +231,16 @@ components:
       - canceled
       - started
       - taken
-    TimeOffEnvelope:
+    TimeOffList:
       type: object
       properties:
         data:
           type: object
           properties:
             timeoff:
-              $ref: '#/components/schemas/TimeOff'
+              type: array
+              items:
+                $ref: '#/components/schemas/TimeOff'
     TimeOff:
       type: object
       properties:
@@ -236,40 +270,6 @@ components:
         created_at:
           type: string
           format: date-time
-    TimeOffCreateRequest:
-      type: object
-      required:
-      - employment_id
-      - leave_type
-      - start_date
-      - end_date
-      properties:
-        employment_id:
-          type: string
-          format: uuid
-        leave_type:
-          type: string
-        leave_policy_id:
-          type: string
-          format: uuid
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        note:
-          type: string
-    TimeOffList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            timeoff:
-              type: array
-              items:
-                $ref: '#/components/schemas/TimeOff'
   securitySchemes:
     BearerAuth:
       type: http

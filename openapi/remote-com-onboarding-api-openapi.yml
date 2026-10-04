@@ -110,6 +110,18 @@ paths:
           description: Accepted.
 components:
   schemas:
+    EmploymentStatus:
+      type: string
+      enum:
+      - created
+      - invited
+      - initiated
+      - pending
+      - active
+      - probation
+      - offboarding_initiated
+      - offboarded
+      - archived
     Employment:
       type: object
       required:
@@ -189,18 +201,6 @@ components:
           properties:
             employment:
               $ref: '#/components/schemas/Employment'
-    EmploymentStatus:
-      type: string
-      enum:
-      - created
-      - invited
-      - initiated
-      - pending
-      - active
-      - probation
-      - offboarding_initiated
-      - offboarded
-      - archived
     EmploymentLifecycleStage:
       type: string
       enum:

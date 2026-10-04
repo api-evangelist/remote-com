@@ -73,6 +73,14 @@ paths:
                 $ref: '#/components/schemas/InvoiceEnvelope'
 components:
   schemas:
+    InvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contractor_invoice:
+              $ref: '#/components/schemas/Invoice'
     Invoice:
       type: object
       properties:
@@ -105,14 +113,6 @@ components:
         issued_at:
           type: string
           format: date-time
-    InvoiceEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            contractor_invoice:
-              $ref: '#/components/schemas/Invoice'
     InvoiceList:
       type: object
       properties:

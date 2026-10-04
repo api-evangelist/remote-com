@@ -94,6 +94,16 @@ components:
           properties:
             work_authorization_request:
               $ref: '#/components/schemas/WorkAuthorizationRequest'
+    WorkAuthorizationRequestList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            work_authorization_requests:
+              type: array
+              items:
+                $ref: '#/components/schemas/WorkAuthorizationRequest'
     WorkAuthorizationRequest:
       type: object
       properties:
@@ -119,16 +129,6 @@ components:
         target_start_date:
           type: string
           format: date
-    WorkAuthorizationRequestList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            work_authorization_requests:
-              type: array
-              items:
-                $ref: '#/components/schemas/WorkAuthorizationRequest'
   securitySchemes:
     BearerAuth:
       type: http

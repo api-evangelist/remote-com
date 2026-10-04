@@ -102,44 +102,6 @@ paths:
           description: Subscription canceled.
 components:
   schemas:
-    SubscriptionList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            subscriptions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Subscription'
-    SubscriptionManageRequest:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          enum:
-          - subscribe
-          - change
-          - cancel
-        plan:
-          type: string
-          enum:
-          - standard
-          - plus
-          - cor
-        starts_on:
-          type: string
-          format: date
-    SubscriptionEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            subscription:
-              $ref: '#/components/schemas/Subscription'
     Subscription:
       type: object
       properties:
@@ -169,6 +131,44 @@ components:
           type: string
           format: date
           nullable: true
+    SubscriptionManageRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          enum:
+          - subscribe
+          - change
+          - cancel
+        plan:
+          type: string
+          enum:
+          - standard
+          - plus
+          - cor
+        starts_on:
+          type: string
+          format: date
+    SubscriptionEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscription:
+              $ref: '#/components/schemas/Subscription'
+    SubscriptionList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            subscriptions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Subscription'
   parameters:
     EmploymentIdPath:
       name: employment_id

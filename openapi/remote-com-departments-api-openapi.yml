@@ -79,6 +79,16 @@ components:
           properties:
             department:
               $ref: '#/components/schemas/Department'
+    DepartmentList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            departments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Department'
     Department:
       type: object
       properties:
@@ -101,16 +111,6 @@ components:
         parent_department_id:
           type: string
           format: uuid
-    DepartmentList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            departments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Department'
   parameters:
     CompanyIdPath:
       name: company_id

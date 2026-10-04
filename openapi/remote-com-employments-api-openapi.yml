@@ -207,6 +207,44 @@ paths:
                 additionalProperties: true
 components:
   schemas:
+    EmploymentUpdateRequest:
+      type: object
+      properties:
+        full_name:
+          type: string
+        work_email:
+          type: string
+          format: email
+        manager_id:
+          type: string
+          format: uuid
+        department_id:
+          type: string
+          format: uuid
+        job_title:
+          type: string
+    EmploymentStatus:
+      type: string
+      enum:
+      - created
+      - invited
+      - initiated
+      - pending
+      - active
+      - probation
+      - offboarding_initiated
+      - offboarded
+      - archived
+    EmploymentLifecycleStage:
+      type: string
+      enum:
+      - employment_creation
+      - onboarding
+      - reserve_invoice
+      - probation
+      - active
+      - offboarding
+      - archived
     Employment:
       type: object
       required:
@@ -278,14 +316,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    EmploymentEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            employment:
-              $ref: '#/components/schemas/Employment'
     EmploymentList:
       type: object
       properties:
@@ -302,6 +332,14 @@ components:
               type: integer
             total_pages:
               type: integer
+    EmploymentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            employment:
+              $ref: '#/components/schemas/Employment'
     ErrorResponse:
       type: object
       properties:
@@ -310,44 +348,6 @@ components:
           additionalProperties: true
         message:
           type: string
-    EmploymentStatus:
-      type: string
-      enum:
-      - created
-      - invited
-      - initiated
-      - pending
-      - active
-      - probation
-      - offboarding_initiated
-      - offboarded
-      - archived
-    EmploymentUpdateRequest:
-      type: object
-      properties:
-        full_name:
-          type: string
-        work_email:
-          type: string
-          format: email
-        manager_id:
-          type: string
-          format: uuid
-        department_id:
-          type: string
-          format: uuid
-        job_title:
-          type: string
-    EmploymentLifecycleStage:
-      type: string
-      enum:
-      - employment_creation
-      - onboarding
-      - reserve_invoice
-      - probation
-      - active
-      - offboarding
-      - archived
     EmploymentCreateRequest:
       type: object
       required:

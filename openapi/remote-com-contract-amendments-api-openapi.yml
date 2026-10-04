@@ -149,29 +149,6 @@ paths:
                 additionalProperties: true
 components:
   schemas:
-    ContractAmendmentEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            contract_amendment:
-              $ref: '#/components/schemas/ContractAmendment'
-    ContractAmendmentCreateRequest:
-      type: object
-      required:
-      - employment_id
-      - effective_date
-      properties:
-        employment_id:
-          type: string
-          format: uuid
-        effective_date:
-          type: string
-          format: date
-        amendment_data:
-          type: object
-          additionalProperties: true
     ContractAmendment:
       type: object
       properties:
@@ -199,6 +176,29 @@ components:
         created_at:
           type: string
           format: date-time
+    ContractAmendmentEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            contract_amendment:
+              $ref: '#/components/schemas/ContractAmendment'
+    ContractAmendmentCreateRequest:
+      type: object
+      required:
+      - employment_id
+      - effective_date
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        effective_date:
+          type: string
+          format: date
+        amendment_data:
+          type: object
+          additionalProperties: true
     ContractAmendmentList:
       type: object
       properties:

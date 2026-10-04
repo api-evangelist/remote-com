@@ -77,16 +77,6 @@ paths:
                 $ref: '#/components/schemas/PayrollCalendarList'
 components:
   schemas:
-    PayrollCalendarList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            payroll_calendars:
-              type: array
-              items:
-                $ref: '#/components/schemas/PayrollCalendarEntry'
     PayrollCalendarEntry:
       type: object
       properties:
@@ -115,6 +105,16 @@ components:
           format: date
         currency:
           type: string
+    PayrollCalendarList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            payroll_calendars:
+              type: array
+              items:
+                $ref: '#/components/schemas/PayrollCalendarEntry'
   securitySchemes:
     BearerAuth:
       type: http

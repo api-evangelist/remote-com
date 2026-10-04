@@ -121,6 +121,14 @@ components:
         next_run_at:
           type: string
           format: date-time
+    ScheduledInvoiceEnvelope:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            scheduled_contractor_invoice:
+              $ref: '#/components/schemas/ScheduledInvoice'
     ScheduledInvoiceList:
       type: object
       properties:
@@ -131,14 +139,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ScheduledInvoice'
-    ScheduledInvoiceEnvelope:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            scheduled_contractor_invoice:
-              $ref: '#/components/schemas/ScheduledInvoice'
     ScheduledInvoiceCreate:
       type: object
       required:

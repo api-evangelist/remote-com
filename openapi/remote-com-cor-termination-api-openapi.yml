@@ -67,6 +67,24 @@ paths:
           description: Termination submitted.
 components:
   schemas:
+    CorTerminationRequestCreate:
+      type: object
+      required:
+      - employment_id
+      - last_day_of_engagement
+      - reason
+      properties:
+        employment_id:
+          type: string
+          format: uuid
+        last_day_of_engagement:
+          type: string
+          format: date
+        reason:
+          type: string
+        additional_information:
+          type: object
+          additionalProperties: true
     CorTerminationRequest:
       type: object
       properties:
@@ -96,24 +114,6 @@ components:
           properties:
             cor_termination_request:
               $ref: '#/components/schemas/CorTerminationRequest'
-    CorTerminationRequestCreate:
-      type: object
-      required:
-      - employment_id
-      - last_day_of_engagement
-      - reason
-      properties:
-        employment_id:
-          type: string
-          format: uuid
-        last_day_of_engagement:
-          type: string
-          format: date
-        reason:
-          type: string
-        additional_information:
-          type: object
-          additionalProperties: true
   parameters:
     EmploymentIdPath:
       name: employment_id
