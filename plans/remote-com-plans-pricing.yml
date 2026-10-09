@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-25 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-25'
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
@@ -215,3 +220,102 @@ api:
     - PEO
   apiAccessCost: included
   notes: API access is included with every Remote plan; partner-grade access requires a partner agreement.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - seat
+  - subscription
+  units:
+  - seat
+  plans:
+  - name: Employer of Record (Monthly)
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Employer of Record (Annual)
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Global Payroll
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - other
+    - seat
+    periods:
+    - month
+    - other
+  - name: Contractor Management (Standard)
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Contractor Management (Plus)
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Contractor of Record
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: PEO (US)
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Recruit
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Equity
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: HR Management (HRIS) — Free
+    access: freemium
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: HR Management (HRIS) — Additional Features
+    access: other
+    model: seat
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
