@@ -1,12 +1,48 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- bamboohr/integrations/bamboohr-integration-edges.yml
+- greenhouse/integrations/greenhouse-integration-edges.yml
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
 - https://zapier.com/api/v4/apps/
 - okta/integrations/okta-integration-edges.yml
 source:
 - okta/integrations/okta-integration-edges.yml
 edges:
+- partner_name: BambooHR (own)
+  partner: bamboohr
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.bamboohr.com/integrations/listings/remote
+  mirror_of: bamboohr/integrations/bamboohr-integration-edges.yml
+  apps:
+  - Remote
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: Payroll, Global Payroll
+- partner_name: Greenhouse (own)
+  partner: greenhouse
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://integrations.greenhouse.com/partners/remote
+  mirror_of: greenhouse/integrations/greenhouse-integration-edges.yml
+  apps:
+  - Remote
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
 - partner_name: Okta (own)
   partner: okta
   partner_match: mirror
@@ -62,7 +98,7 @@ edges:
   channel: open-source-node
   relationship: ipaas-bridge
   direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/remote
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/remote
   category: null
   contract_reference:
     register: Pipedream components (PipedreamHQ/pipedream components/)
