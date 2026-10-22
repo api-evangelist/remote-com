@@ -13,6 +13,11 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+- https://www.bankofcanada.ca/rps-api/cif2/accounts/list
+- https://www.payments.ca/payment-resources/directories?field_directory_type=10
+- https://www.payments.ca/payment-resources/directories?field_directory_type=13
+- https://www.payments.ca/payment-resources/directories?field_directory_type=14
 source:
 - okta/integrations/okta-integration-edges.yml
 edges:
@@ -175,3 +180,40 @@ edges:
     sector: future-of-work
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Bank of Canada RPAA registry of payment service providers
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+  category: Canadian retail payment activities (RPAA) PSP registration
+  contract_reference:
+    register: Bank of Canada RPAA registry of payment service providers
+    spec_file: null
+    standard: null
+    role: registered-psp
+    registrations:
+    - registered_name: Remote Payments Services Canada Inc
+      register_status: registered
+      register_country: CA
+      register_id: 06f82e33-33a6-ef11-a72d-6045bd5de666
+      matched_domain: remote.com
+      matched_by: domain
+      evidence_url: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/psp-registry-details/?account_id=06f82e33-33a6-ef11-a72d-6045bd5de666
+      licences:
+      - RPAA registered PSP
+      brand: Remote Payments Services Canada Inc
+      registration_date: '2025-10-31'
+      head_office_country: Canada
+      trade_names:
+      - Remote
+      - Remote
+      has_violations: false
+    signal_note: 'participation only: a regulator registration / payment-system membership; no API conformance is
+      published by this register'
+    detected_by: sweep-canada-rpaa-psp-registry.py
+    detected: '2026-10-22'
+  detected_by: sweep-canada-rpaa-psp-registry.py
+  first_seen: '2026-10-22'
