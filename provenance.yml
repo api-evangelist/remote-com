@@ -7,56 +7,56 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   arazzo/remote-com-amend-contract-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-cancel-time-off-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-country-leave-policy-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-create-incentive-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-employee-payslip-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-enroll-employee-benefits-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-estimate-and-hire-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-hire-eor-employee-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-offboard-employee-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-onboard-company-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-request-time-off-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-review-billing-document-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-review-timesheet-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-schedule-contractor-invoices-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-screen-contractor-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-submit-expense-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/remote-com-terminate-contractor-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   asyncapi/remote-webhooks-asyncapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -385,11 +385,17 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   finops/remote-com-finops.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/remote-com-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/remote-com-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -405,127 +411,7 @@ artifacts:
   json-schema/remote-time-off-schema.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -607,6 +493,21 @@ artifacts:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-24T161608.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   lifecycle/remote-com-lifecycle.yml:
@@ -767,36 +668,153 @@ artifacts:
   openapi/remote-com-work-authorization-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  overlays/remote-com-benefit-offers-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-benefit-renewals-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
   overlays/remote-com-benefits-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-billing-documents-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-companies-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-companies-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-company-currencies-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-company-managers-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-company-structure-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-compliance-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-contract-amendments-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-contract-documents-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-contract-eligibility-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-contractor-currencies-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-contractor-invoices-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-contractor-subscriptions-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-contractors-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-cor-termination-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-cost-calculator-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-countries-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-custom-fields-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-departments-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-employment-contracts-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-employments-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-employments-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-expenses-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-files-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-files-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-identity-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-incentives-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-leave-balances-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-leave-policies-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-magic-links-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-oauth-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-oauth-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-offboarding-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-onboarding-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-payroll-billing-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-payroll-calendars-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-payslips-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-scheduled-invoices-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-sso-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   overlays/remote-com-time-attendance-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/remote-com-time-off-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-timesheets-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-travel-letters-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/remote-com-work-authorization-api-phrasing-overlay.yaml:
     method: generated
     evidence: declared in the artifact
   packages/remote-com-packages.yml:
     method: searched
     evidence: declared in the artifact
   plans/remote-com-plans-pricing.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   postman/remote-benefits-api.postman_collection.json:
     method: unknown
     evidence: no authorship recorded
@@ -822,8 +840,8 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   rate-limits/remote-com-rate-limits.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   rules/remote-com-asyncapi-spectral-rules.yml:
     method: generated
     evidence: declared in the artifact
